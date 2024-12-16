@@ -19,3 +19,25 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .nav-btn {
+    @apply flex flex-row items-center border-b border-gray-600 py-5 space-x-6 w-full hover:text-white hover:underline decoration-solid focus:text-white focus:underline text-gray-400 rounded;
+  }
+
+  .nav-text {
+    @apply text-base leading-4
+  }
+
+  .nav-menu {
+    @apply flex flex-col justify-items-start items-center border-b border-gray-600 w-full
+  }
+
+  .nav-menu-title {
+    @apply text-gray-400 flex space-x-6 items-center w-full py-5
+  }
+
+  .nav-menu-item {
+    @apply flex justify-items-start items-center hover:text-white focus:underline focus:text-white hover:underline decoration-solid text-gray-400 rounded px-16 py-2 w-full md:w-52
+  }
+}
