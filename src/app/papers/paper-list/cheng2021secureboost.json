@@ -1,0 +1,27 @@
+{
+  "title": "SecureBoost: A Lossless Federated Learning Framework",
+  "authors": [
+    "Kewei Cheng",
+    "Tao Fan",
+    "Yilun Jin",
+    "Yang Liu",
+    "Tianjian Chen",
+    "Dimitrios Papadopoulos",
+    "Qiang Yang"
+  ],
+  "year": "2021-05",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "efficiency"
+  ],
+  "summaries": [
+    "propose __a lossless gradient-tree boosting algorithm__, to preserve data privacy and maintain a high-quality model over vertically partitioned data in FL",
+    "SecureBoost contains [1] data alignment [2] the shared gradient-tree boosting model learning"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/MIS.2021.3082561",
+  "id": "cheng2021secureboost",
+  "bibtex": "@article{cheng2021secureboost, title={Secureboost: A lossless federated learning framework}, author={Cheng, Kewei and Fan, Tao and Jin, Yilun and Liu, Yang and Chen, Tianjian and Papadopoulos, Dimitrios and Yang, Qiang}, journal={IEEE Intelligent Systems}, volume={36}, number={6}, pages={87--98}, year={2021}, publisher={IEEE}}"
+}

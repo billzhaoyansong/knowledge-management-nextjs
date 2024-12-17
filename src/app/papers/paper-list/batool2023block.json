@@ -16,7 +16,7 @@
     "reverse auction"
   ],
   "summaries": [
-    "propose a mechanism named Block-RACS which incorporates a blockchain network between the server and clients, achieving [1] higher accuracy in the global model, [2] less number of FL rounds, compared to [1] Random FL selection [2] FL-MAB",
+    "propose __a blockchain network-based mechanism__ including client selection, contribution evaluation, and smart-contract based auction, to achieve [1] higher accuracy in the global model, [2] less number of FL rounds, compared to [1] Random FL selection [2] FL-MAB",
     "in the mechanism, where clients are selected based on [1] compute and network resources, and [2] quality of local data [3] bidding price [4] reputation",
     "contribution evaluated by the Shapley algorithm is used in reward allocation and reputation update",
     "Auction smart contract is deployed in the blockchain network to facilitate the auctioning process"

@@ -27,14 +27,17 @@ export default async function Papers() {
 
 
     return <div className="flex flex-row">
-        <div className="flex-1 min-h-screen flex flex-col">
+        <div className="flex-1 h-screen overflow-auto flex flex-col">
             <div className="bg-yellow-100 px-9 py-6 flex-initial">
                 <h2 className="text-2xl font-medium">Papers</h2>
+                <span className='text-xs italic'>showing {paperJsonList.length} papers</span>
             </div>
             <div className="bg-yellow-50 px-9 py-6 flex-1 flex flex-row flex-wrap">
                 {paperJsonList.map(p => <PaperCard key={p.id} paper={p}></PaperCard>)}
             </div>
         </div>
+
+        {/* right side filter */}
         <div className="flex-initial w-64"> right side filter</div>
     </div>
 }

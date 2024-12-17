@@ -1,0 +1,38 @@
+{
+  "title": "Client Selection in Federated Learning: Convergence Analysis and Power-of-Choice Selection Strategies",
+  "authors": [
+    "Yae Jee Cho",
+    "Jianyu Wang",
+    "Gauri Joshi"
+  ],
+  "year": "2020-10",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "convergence rate"
+  ],
+  "summaries": [
+    "[1] prove that __biasd selection policy leads to faster convergence rate__ at the risk of a larger non-vanishing term, [2] proposed __a client selection scheme__ borrowed from 'power of d choices load balancing strategy' in queueing theory to balance the trade-off between convergence speed, solution bias and communication/computation overhead achieving [1] faster convergence [2] higher test accuracy",
+    "at the beginning of each communication round, current global model is distributed to all sampled $d$ clients and clients send back local losses. This is an extra communication.",
+    "only $m$ clients with largest losses are selected for the subsequent local training"
+  ],
+  "systemModel": [
+    "a server and $K$ clients",
+    "selection process (1): sample the candidate set $\\mathcal{A}$ of $d$ ($m\\leq d\\leq K$) clients with the probability $p_k$, the fraction of data of the $k$-th client for $k=1,...,K$",
+    "selection process (2): server sends current global model $\\bar{\\mathbf{w}}^{(t)}$ to the clients in set $\\mathcal{A}$, each client compute and send back the local loss $F_k(\\bar{\\mathbf{w}}^{(t)})$",
+    "selection process (3): server selects a fraction $C$ of total clients $K$: $m=\\max(CK, 1)$ with the largest local loss [see 1. Convergence Analysis] for the next $\\tau$ local iterations"
+  ],
+  "questions": [
+    "most of the recent works assume full client participation",
+    "furthermore, adaptive client selection that is cognizant of the training progress at each client has not been understood yet"
+  ],
+  "techniques": [
+    "1. Convergence Analysis",
+    [
+      "Biased client selection can give faster convergence at the risk of having a larger non-vanishing bias term. (faster but higher opportunities to be inaccurate)"
+    ]
+  ],
+  "doi": "arXiv:2010.01243",
+  "id": "cho2020client",
+  "bibtex": "@article{cho2020client, title={Client selection in federated learning: Convergence analysis and power-of-choice selection strategies},author={Cho, Yae Jee and Wang, Jianyu and Joshi, Gauri},journal={arXiv preprint arXiv:2010.01243},year={2020}}"
+}

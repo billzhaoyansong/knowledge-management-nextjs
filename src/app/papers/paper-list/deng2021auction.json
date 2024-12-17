@@ -1,0 +1,84 @@
+{
+  "title": "AUCTION: Automated and Quality-Aware Client Selection Framework for Efficient Federated Learning",
+  "authors": [
+    "Yongheng Deng",
+    "Feng Lyu",
+    "Ju Ren",
+    "Huaqing Wu",
+    "Yuezhi Zhou",
+    "Yaoxue Zhang",
+    "Xuemin Shen"
+  ],
+  "year": "2021-03",
+  "labels": [
+    "federated learning",
+    "reverse auction",
+    "client selection",
+    "reinforcement learning",
+    "policy gradient",
+    "efficiency",
+    "robustness",
+    "scalability"
+  ],
+  "summaries": [
+    "propose __a client selection policy__ encoded in a neural network (NN), to achieve [1] efficiency (in characterizing data quality) [2] robustness (adapting to different learning tasks) [3] scalability (in that trained model performs will when the number of online candidate clients varies)",
+    "the client selection policy considers data size, data quality (labels and distributions), and learning budget",
+    "the NN is trained by reinforcement learning based on observed client status and feedback reward"
+  ],
+  "systemModel": [
+    "a typical FL services market, including a FL platform and a set of clients",
+    "a task bid by $N$ clients denoted by $\\mathcal{C}=\\{C_1,...,C_i,...,C_n\\}$ with a claimed price $b_i$ and private local data sample $\\mathcal{D}_i$ for $i$-th client",
+    "the training samples of some clients may be mislabeled or non-IID",
+    "system step (1): a task with budget $B$ is submitted to the FL platform",
+    "system step (2): interested clients report number of data samples, quality of data labels, quality of data distributions and payment",
+    "system step (3): select clients $\\mathcal{C}_s\\subseteq \\mathcal{C}$ to maximize the accuracy of the global model [see 1. Client Selection]",
+    "system step (4): local training",
+    "system step (5): global aggregation with FedAVG and proceed to step 4 for $R$ rounds",
+    "system step (6): learning finishes when hitting target test accuracy and clients receive claimed payments",
+    "system step (7): update the client selection policy network"
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "1.1 identify the influencing factors at participating clients in global model accuracy maximization",
+      [
+        "data size: data size of participating clients can affect the learning accuracy of the individual model and the global model significantly",
+        "data quality (mislabeled and non-IID): data quality of participating clients has a significant impact on the FL performance"
+      ],
+      "1.2 unquantifiable factor impacts",
+      [
+        "although data size and data quality are identified as the factors affecting local and global model performance, the degree of their influences on different models and data sets are hard to capture and quatified"
+      ],
+      "1.3 RL-based client selection scheme",
+      [
+        "(1) state: $x_i = \\{d_i, q_i^l, q_i^d, b_i \\}, \\forall i \\in \\{1,..,N\\}$",
+        [
+          "$d_i$: number of data samples",
+          "$q_i^l$: data quality in terms of data labels which is measured by using loss of the global model on local dataset",
+          "$q_i^d$: data quality in terms of data distribution which is measured by using loss of local model on global test dataset",
+          "$b_i$: required price"
+        ],
+        "(2) action: select a subset of clients without exceeding the budget $B$",
+        "(3) reward: $r=\\sum_{j=0}^R\\lambda^{acc^j}$",
+        [
+          "$R$: total number of communication rounds, $\\lambda=64$: a constant, $acc^j$: test accuracy achieved by the global model after round $j$"
+        ],
+        "(4) policy: a encoder-decoder neural network",
+        [
+          "the policy network contains a encoder network and a decoder network",
+          "the concatenation of the encoder and decoder parameters is the whole learnable parameters of the policy network $\\mathbf{\\theta}$",
+          "the policy network is learned by policy gradient method",
+          [
+            "$\\nabla_{\\mathbf{\\theta}}J(\\mathbf{\\theta}|s)=\\mathbb{E}[(r(\\mathbf{a}|s)-b(s))\\nabla_{\\mathbf{\\theta}}\\log\\pi_{\\theta}(a|s, B)]$",
+            [
+              "$b(s)$: reward of an action from a greedy rollout; a baseline function that is independent of aa to reduce the gradient variance and hence accelerate the training process."
+            ]
+          ]
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/TPDS.2021.3134647",
+  "id": "deng2021auction",
+  "bibtex": "@article{deng2021auction, title={Auction: Automated and quality-aware client selection framework for efficient federated learning}, author={Deng, Yongheng and Lyu, Feng and Ren, Ju and Wu, Huaqing and Zhou, Yuezhi and Zhang, Yaoxue and Shen, Xuemin},journal={IEEE Transactions on Parallel and Distributed Systems}, volume={33}, number={8}, pages={1996--2009}, year={2021}, publisher={IEEE}}"
+}

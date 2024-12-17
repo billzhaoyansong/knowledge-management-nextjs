@@ -1,0 +1,48 @@
+{
+  "title": "Bandit-based communication-efficient client selection strategies for federated learning",
+  "authors": [
+    "Yae Jee Cho",
+    "Samarth Gupta",
+    "Gauri Joshi",
+    "Osman Ya{\\u{g}}an"
+  ],
+  "year": "2020-12",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "multi-armed bandit",
+    "efficiency",
+    "convergence rate",
+    "fairness"
+  ],
+  "summaries": [
+    "propose __a biased client selection strategy__ achieving [1] communication-efficiency (no extra communication required) [2] faster convergence [3] fairness (Jain's index)",
+    "at the beginning of each communication round, clients are sorted based on a discounted UCB index, and only $m$ clients with largest discounted UCB values are selected for local training",
+    "the UCB index considers [1] discounted local loss values [2] discounted number of participating times"
+  ],
+  "systemModel": [
+    "$1$ server, $K$ clients with $D_k$ data samples",
+    "round step [1]: server selects $m$ clients as the active set $\\mathcal{S}_{(t)}$ based on discounted UCB (see 1. Client Selection)",
+    "round step [2]: selected clients do local training for $\\tau$ iterations",
+    "round step [3]: server does FedAvg aggregation: $\\mathbf{w}_k^{t+1}=\\frac{1}{m} \\sum_{j\\in\\mathcal{S}^{(t)}} \\left( \\mathbf{w}_j^{(t)} - \\eta_t g_j (\\mathbf{w}_j^{(t)}, \\xi_j^{(t)}) \\right)$"
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "$m$ clients with largest discounted UCB values $A_t(\\gamma, k)$ are selected for local training",
+      [
+        "$A_t(\\gamma, k)=p_k \\left(\\underbrace{\\frac{L_t(\\gamma,k)}{N_t(\\gamma, k)}}_{\\text{exploitation}} + \\underbrace{\\sqrt{2 \\sigma_t^2 \\frac{\\log{T_t(\\gamma)}}{N_t(\\gamma, k)}}}_{\\text{exploration}}\\right)$",
+        [
+          "$p_k=\\frac{D_k}{\\sum_{k=1}^K D_k}$: weight of client based on number of data samples",
+          "$L_t(\\gamma,k)=\\sum\\limits_{t'\\in\\mathcal{T}}\\gamma^{t-t'}\\mathbb{1}_{k\\in\\mathcal{S}^{(t'-1)}} \\frac{1}{\\tau} \\sum\\limits_{l=t'-\\tau+1}^{t'} \\sum\\limits_{\\epsilon\\in\\epsilon_k^{(l)}} \\frac{f(w_k^{(l)}, \\epsilon)}{b}$: discounted cumulative local loss",
+          "$N_t(\\gamma, k)=\\sum_{t'\\in\\mathcal{T}}\\gamma^{t-t'}\\mathbb{1}_{\\{k\\in\\mathcal{S}^{(t'-1)}\\}}$: discounted count of the number of sampled times",
+          "$T_t(\\gamma)=\\sum\\limits_{t'\\in\\mathcal{T}}\\gamma^{t-t'}$",
+          "$\\sigma_t$: maximum standard deviation in the local loss computed over the latest update of clients"
+        ]
+      ]
+    ]
+  ],
+  "id": "cho2020bandit",
+  "doi": "10.1109/IEEECONF51394.2020.9443523",
+  "bibtex": "@inproceedings{cho2020bandit, title={Bandit-based communication-efficient client selection strategies for federated learning}, author={Cho, Yae Jee and Gupta, Samarth and Joshi, Gauri and Ya{\\u{g}}an, Osman}, booktitle={2020 54th Asilomar Conference on Signals, Systems, and Computers}, pages={1066--1069}, year={2020}, organization={IEEE}}"
+}

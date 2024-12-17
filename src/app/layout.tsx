@@ -29,10 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className={`flex ${quicksand.className}`}>
+        <div className={`flex flex-row ${quicksand.className}  h-screen`}>
 
           {/* leftside navbar */}
-          <div className="flex-initial w-60 bg-black text-white flex flex-col justify-between min-h-screen">
+          <div className="flex-initial w-60 bg-black text-white flex flex-col justify-between">
 
             {/* icon and nav */}
             <div className="rounded-r transform  translate-x-0  ease-in-out transition duration-500 flex justify-start items-start h-full w-full flex-col">

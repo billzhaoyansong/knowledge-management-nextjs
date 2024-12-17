@@ -13,7 +13,7 @@
     "smart contract"
   ],
   "summaries": [
-    "leverage the smart contract on a blockchain to define incentivization rules, including rewarding and penalization",
+    "define __incentivization rules__, including rewarding and penalization, by leveraging the smart contract on a blockchain",
     "the incentivization rules are defined based on the federated contribution, which depicts the deviation, or divergence of two machine learning models."
   ],
   "systemModel": [],

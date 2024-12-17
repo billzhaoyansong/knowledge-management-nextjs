@@ -1,0 +1,24 @@
+{
+  "title": "DFedSN: Decentralized federated learning based on heterogeneous data in social networks",
+  "authors": [
+    "Yikuan Chen",
+    "Li Liang",
+    "Wei Gao"
+  ],
+  "year": "2022-08",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "social network",
+    "data heterogeneity"
+  ],
+  "summaries": [
+    "propose __an algorithm to tackle data heterogeneity in social network based FL__",
+    "first select online (literally, opposite to 'offline') neighbordhood users, then apply affine transformation to data of neighboring users, lastly do FL with those neighboring users"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1007/s11280-023-01152-4",
+  "id": "chen2023dfedsn",
+  "bibtex": "@article{chen2023dfedsn, title={DFedSN: Decentralized federated learning based on heterogeneous data in social networks}, author={Chen, Yikuan and Liang, Li and Gao, Wei}, journal={World Wide Web}, volume={26}, number={5}, pages={2545--2568}, year={2023}, publisher={Springer}}"
+}
