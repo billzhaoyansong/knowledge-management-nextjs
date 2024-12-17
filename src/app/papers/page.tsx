@@ -31,7 +31,7 @@ export default async function Papers() {
             <div className="bg-yellow-100 px-9 py-6 flex-initial">
                 <h2 className="text-2xl font-medium">Papers</h2>
             </div>
-            <div className="bg-yellow-50 px-9 py-6 flex-1 flex flex-row space-x-5">
+            <div className="bg-yellow-50 px-9 py-6 flex-1 flex flex-row flex-wrap">
                 {paperJsonList.map(p => <PaperCard key={p.id} paper={p}></PaperCard>)}
             </div>
         </div>

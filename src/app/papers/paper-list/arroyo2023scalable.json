@@ -1,0 +1,52 @@
+{
+  "title": "Scalable and Portable Federated Learning Simulation Engine",
+  "authors": [
+    "Borja Arroyo Galende",
+    "Juan Mata Naranjo",
+    "Silvia Uribe Mayoral"
+  ],
+  "year": "2023-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "FL simulation platform"
+  ],
+  "abstract": "Federated learning (FL) is one of the most promising approaches to ensure privacy in the application of data-driven techniques to sensitive information. However, the implementation of such approaches in a production environment is still an important challenge. In this paper, we present a scalable, portable, hardware-independent, model-agnostic FL Simulation Engine (FLSE) with the aim of easing the job of researchers who want to train FL models to be deployed in production environments. The FLSE offers a tool that can be used both standalone or embedded within a larger architecture, it can be deployed seamlessly and allows concurrent, scalable, and highly available V&V assessment support for FL models. The tool allows researchers to understand the behaviour, in terms of metric performance, of their proposed models in production scenarios, allowing a boost in trustworthiness towards ethical AI.",
+  "summaries": [
+    "_Problem_: training FL models is not a trivial task in a production environment",
+    "_Solution_: the authors present a scalable (executor cluster), portable (docker image), hardware-independent, model-agnostic FL simulation engine (FLSE)"
+  ],
+  "systemModel": [
+    "functionalities provided by FLSE",
+    [
+      "management of use cases",
+      [
+        "a use case: a collection of scenarios (paths to the datasets) + some metadata"
+      ],
+      "verification and validation on FL models",
+      [
+        "verify that the FL model is implemented correctly by performing error checks in model load, data load, local learning, global aggregation",
+        "validate that the FL model performs adequately in use cases by returning a set of metrics"
+      ]
+    ],
+    "components of FLSE",
+    [
+      "FL platform: interact with users and assign simulation tasks",
+      "Simulation engine: a wrapper to run simulations",
+      [
+        "entrypoint server: communicate with FL platform",
+        "storage server: store simulation data and results",
+        "executor cluster: execute simulations",
+        [
+          "executor: activate server and clients; verify and validate models"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1145/3624486.3624488",
+  "id": "arroyo2023scalable",
+  "bibtex": "@inproceedings{arroyo2023scalable, title={Scalable and Portable Federated Learning Simulation Engine}, author={Arroyo Galende, Borja and Mata Naranjo, Juan and Uribe Mayoral, Silvia}, booktitle={Proceedings of the 3rd Eclipse Security, AI, Architecture and Modelling Conference on Cloud to Edge Continuum}, pages={10--14}, year={2023}}"
+}

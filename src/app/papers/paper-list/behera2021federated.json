@@ -1,0 +1,24 @@
+{
+  "title": "Federated learning using smart contracts on blockchains, based on reward driven approach",
+  "authors": [
+    "Monik Raj Behera",
+    "Sudhir Upadhyay",
+    "Suresh Shetty"
+  ],
+  "year": "2021-07",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "smart contract"
+  ],
+  "summaries": [
+    "leverage the smart contract on a blockchain to define incentivization rules, including rewarding and penalization",
+    "the incentivization rules are defined based on the federated contribution, which depicts the deviation, or divergence of two machine learning models."
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "arXiv:2107.10243",
+  "id": "behera2021federated",
+  "bibtex": "@article{behera2021federated, title={Federated learning using smart contracts on blockchains, based on reward driven approach}, author={Behera, Monik Raj and Upadhyay, Sudhir and Shetty, Suresh}, journal={arXiv preprint arXiv:2107.10243}, year={2021}}"
+}

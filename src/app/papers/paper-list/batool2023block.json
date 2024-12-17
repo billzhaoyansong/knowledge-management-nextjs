@@ -1,0 +1,56 @@
+{
+  "title": "Block-RACS: Towards Reputation-Aware Client Selection and Monetization Mechanism for Federated Learning",
+  "authors": [
+    "Zahra Batool",
+    "Kaiwen Zhang",
+    "Matthew Toews"
+  ],
+  "year": "2023-09",
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "smart contract",
+    "incentive mechanism",
+    "reputation",
+    "client selection",
+    "reverse auction"
+  ],
+  "summaries": [
+    "propose a mechanism named Block-RACS which incorporates a blockchain network between the server and clients, achieving [1] higher accuracy in the global model, [2] less number of FL rounds, compared to [1] Random FL selection [2] FL-MAB",
+    "in the mechanism, where clients are selected based on [1] compute and network resources, and [2] quality of local data [3] bidding price [4] reputation",
+    "contribution evaluated by the Shapley algorithm is used in reward allocation and reputation update",
+    "Auction smart contract is deployed in the blockchain network to facilitate the auctioning process"
+  ],
+  "systemModel": [
+    "$1$ server $O$, a set $K=\\{1,2,..,n\\}$ of clients possessing local data of size $d=\\{d_1,...,d_n\\}$, $1$ blockchain network",
+    "process 1): the server $O$ deploys an FL smart contract and the Auction smart contract in the blockchain network",
+    "process 2): the blockchain network announces the scoring rule $S(r_1,\\dots, r_m, p)$ and sends to clients",
+    "process 3): clients send their sealed bid $S(r_i,p_i)$ with a deposited amount to the blockchain and wait for the bidding period over [see <u>1. Bidding Contents</u>]",
+    "process 4): the Auction smart contract returns the deposited amount and selects $50\\%$ of clients with the highest scores; if this is the first round, only $S(r_i,p_i)$ will be considered, if this is not the first round, both $S(r_i,p_i)$ and reputation $\\theta_i$ will be considered (details on how reputation is employed is not introduced in the article)",
+    "process 5): local training for this round",
+    "process 6): contribution evaluation based on Shapley algorithm and reward [see <u>2. Rewarding</u>]",
+    "process 7): reputations are updated [see <u>3. Reputation Update</u>]",
+    "process 2) - 7) continues for several iterations"
+  ],
+  "techniques": [
+    "<u>1. Bidding Contents</u>",
+    [
+      "total samples of local data, bandwidth, internet connectivity"
+    ],
+    "<u>2. Rewarding</u>",
+    [
+      "$reward=P_i \\cdot \\phi_i$",
+      [
+        "$P_i$: bidding price",
+        "$\\phi_i$: contribution"
+      ]
+    ],
+    "<u>3. Reputation Update</u>",
+    [
+      "$\\theta_i = \\sum_{t=0}^k\\lambda^t \\phi_i^t$"
+    ]
+  ],
+  "doi": "10.1145/3626307.3626311",
+  "id": "batool2023block",
+  "bibtex": "@article{batool2023block, title={Block-RACS: Towards Reputation-Aware Client Selection and Monetization Mechanism for Federated Learning}, author={Batool, Zahra and Zhang, Kaiwen and Toews, Matthew}, journal={ACM SIGAPP Applied Computing Review}, volume={23}, number={3}, pages={49--66}, year={2023}, publisher={ACM New York, NY, USA}}"
+}

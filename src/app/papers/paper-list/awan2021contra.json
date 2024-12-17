@@ -1,0 +1,40 @@
+{
+  "title": "CONTRA: Defending Against Poisoning Attacks in Federated Learning",
+  "authors": [
+    "Sana Awan",
+    "Bo Luo",
+    "Fengjun Li"
+  ],
+  "year": "2021-12",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "data heterogeneity",
+    "client selection"
+  ],
+  "abstract": "Federated learning (FL) is an emerging machine learning paradigm. With FL, distributed data owners aggregate their model updates to train a shared deep neural network collaboratively, while keeping the training data locally. However, FL has little control over the local data and the training process. Therefore, it is susceptible to poisoning attacks, in which malicious or compromised clients use malicious training data or local updates as the attack vector to poison the trained global model. Moreover, the performance of existing detection and defense mechanisms drops significantly in a scaled-up FL system with non-iid data distributions. In this paper, we propose a defense scheme named CONTRA to defend against poisoning attacks, e.g., label-flipping and backdoor attacks, in FL systems. CONTRA implements a cosine-similarity-based measure to determine the credibility of local model parameters in each round and a reputation scheme to dynamically promote or penalize individual clients based on their per-round and historical contributions to the global model. With extensive experiments, we show that CONTRA significantly reduces the attack success rate while achieving high accuracy with the global model. Compared with a state-of-the-art (SOTA) defense, CONTRA reduces the attack success rate by 70% and reduces the global model performance degradation by 50%.",
+  "summaries": [
+    "to solve non-iid data distribution and security concerns, a defense scheme is proposed to defend against poisoning attacks",
+    "many existing schemes cluster clients as honest and malicious. and $\\theta_i$s are similar to each other but different from $\\delta_j$s",
+    [
+      "$\\theta_i$: the angle between the directions of a honest client's gradient and global gradient",
+      "$\\delta_j$: the angle between the directions of a malicious client's gradient and global gradient",
+      "the assumption may not hold, especially under the non-iid scenario"
+    ],
+    "in non-iid scenario, the scheme is made under the assumption that malicious clients have the same poisoning objective, so the directions be more similar",
+    "process:",
+    [
+      "top-J reputable clients are selected to do local training<step-ol>",
+      "after local training, do gradient alignment among selected clients by computing selected client-pair cosine similarity between historical aggragates (higher similarity indicates higher possibility of malicious clients)",
+      "adjust reputations of selected clients according to the cosine similarity",
+      "adjust learning rate of all clients according to the cosine similarity (reduce the learning rates of suspicious clients)",
+      "reputation-based aggregation"
+    ]
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1007/978-3-030-88418-5_22",
+  "id": "awan2021contra",
+  "bibtex": "@inproceedings{awan2021contra, title={Contra: Defending against poisoning attacks in federated learning}, author={Awan, Sana and Luo, Bo and Li, Fengjun}, booktitle={Computer Security--ESORICS 2021: 26th European Symposium on Research in Computer Security, Darmstadt, Germany, October 4--8, 2021, Proceedings, Part I 26}, pages={455--475}, year={2021}, organization={Springer}}"
+}
