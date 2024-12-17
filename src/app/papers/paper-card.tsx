@@ -1,5 +1,7 @@
+import { remark } from 'remark';
+import html from 'remark-html';
 
-const PaperCard = ({
+const PaperCard = async ({
     paper
 }: {
     paper: {
@@ -9,14 +11,19 @@ const PaperCard = ({
         "editing": boolean,
         "labels": string[],
         "abstract": string,
-        "summaries": [],
-        "systemModel": [],
-        "techniques": [],
+        "summaries": any[],
+        "systemModel": any[],
+        "techniques": any[],
         "doi": string,
         "id": string,
         "bibtex": string
     }
 }) => {
+
+    // render the first line of the summary to show on the card
+    const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await remark()
+        .use(html)
+        .process(paper.summaries[0]) : "";
 
     return <div className="w-96 h-fit px-3 py-6 border border-1 rounded rounded-lg">
 
@@ -62,7 +69,8 @@ const PaperCard = ({
 
         {/* row 4 */}
         <div className="pt-2">
-            {paper.summaries && paper.summaries.length > 0 && paper.summaries[0]}
+            <div dangerouslySetInnerHTML={{ __html: _1stLineContent.toString()}}></div>
+            {/* {paper.summaries[0]} */}
         </div>
 
         {/* row 5 */}
