@@ -1,0 +1,27 @@
+{
+  "title": "Efficient Verifiable Protocol for Privacy-Preserving Aggregation in Federated Learning",
+  "authors": [
+    "Tamer Eltaras",
+    "Farida Sabry",
+    "Wadha Labda",
+    "Khawla Alzoubi",
+    "Qutaibah AHMEDELTARAS"
+  ],
+  "year": "2022-07",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "verification",
+    "secure aggregation"
+  ],
+  "summaries": [
+    "propose __a protocol for secure aggregation__ in an honest-but-curious environment, to prevent adversaries to track and deduce private information and preserve communication-efficiency",
+    "to ensure confidentiality of the user's local gradients, a single-masking protocol is used",
+    "to verify the aggregated results, a double aggregation technique is used instead of cryptographic primitives used in many literature work"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TIFS.2023.3273914",
+  "id": "eltaras2023efficient",
+  "bibtex": "@article{eltaras2023efficient, title={Efficient verifiable protocol for privacy-preserving aggregation in federated learning}, author={Eltaras, Tamer and Sabry, Farida and Labda, Wadha and Alzoubi, Khawla and Ahmedeltaras, Qutaibah}, journal={IEEE Transactions on Information Forensics and Security}, volume={18}, pages={2977--2990}, year={2023}, publisher={IEEE}}"
+}

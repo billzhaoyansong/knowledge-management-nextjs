@@ -1,0 +1,41 @@
+{
+  "title": "FLIP: A New Approach for Easing the Use of Federated Learning",
+  "authors": [
+    "Borja Arroyo Galende",
+    "Silvia Uribe Mayoral",
+    "Francisco Moreno García",
+    "Santiago Barrio Lottmann"
+  ],
+  "year": "2023-02",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "FL platform",
+    "user interface"
+  ],
+  "abstract": "Over the last few years, there have been several attempts to provide software tools for the development of federated learning (FL) models. However, both the complexity of the concept itself and the high entry barrier of these tools have meant that their adoption has been limited. Considering the related benefits, especially in terms of preserving data privacy, and the need for this type of solution in specific areas where data sharing is impossible, not only from a practical point of view but also from a legal and even ethical perspective, it is necessary to advance in solutions that allow its use to be democratised and its deployment to be extended. With this objective in mind, FLIP (Federated Learning Interactive Platform) has been developed as a comprehensive, easy-to-use fully functional web-based FL network management platform that eases and accelerates the usage of federated datasets by researchers in real scenarios. In this sense, FLIP has achieved a SUS score of 84.64, confirming a high level of perceived usability as expected. Taking this into account, FLIP can help increase the productivity and adoption of FL by a wider audience.",
+  "summaries": [
+    "develop __a platform__ with role management and capable of deploying a real multi-node network",
+    "_Problem_: the complexity of FL and high entry barrier of existing FL software tools prohibit the adoption of FL",
+    "_Solution_: the authors developed an easy-to-use and comprehensive platform called 'Federated Learning Interactive Platform'(FLIP) with role management and capable of deploying a real multi-node network"
+  ],
+  "systemModel": [
+    "roles in FLIP",
+    [
+      "administrator: deployment of federated nodes, management of FL network and access control",
+      "user(data scientist): development of FL algorithms"
+    ],
+    "architecture",
+    [
+      "server: manage FL tasks, provide a graphic user interface to facilitate the management of FL tasks",
+      "client: execute the task assigned by server",
+      "communication is realized via gRPC for model parameters, or REST API for state changes"
+    ]
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.3390/app13063446",
+  "id": "galende2023flip",
+  "bibtex": "@article{galende2023flip, title={FLIP: A New Approach for Easing the Use of Federated Learning}, author={Galende, Borja Arroyo and Mayoral, Silvia Uribe and Garc{\\'\\i}a, Francisco Moreno and Lottmann, Santiago Barrio}, journal={Applied Sciences}, volume={13}, number={6}, pages={3446}, year={2023}, publisher={MDPI}}"
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Secure and Privacy-Preserving Federated Learning via Co-Utility",
+  "authors": [
+    "Josep Domingo-Ferrer",
+    "Alberto Blanco-Justicia",
+    "Jesús Manjón",
+    "David Sánchez"
+  ],
+  "year": "2020-09",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "byzantine",
+    "privacy-preservation",
+    "reputation"
+  ],
+  "abstract": "The decentralized nature of federated learning, that often leverages the power of edge devices, makes it vulnerable to attacks against privacy and security. The privacy risk for a peer is that the model update she computes on her private data may, when sent to the model manager, leak information on those private data. Even more obvious are security attacks, whereby one or several malicious peers return wrong model updates in order to disrupt the learning process and lead to a wrong model being learned. In this article, we build a federated learning framework that offers privacy to the participating peers as well as security against the Byzantine and poisoning attacks. Our framework consists of several protocols that provide strong privacy to the participating peers via unlinkable anonymity and that are rationally sustainable based on the co-utility property. In other words, no rational party is interested in deviating from the proposed protocols. We leverage the notion of co-utility to build a decentralized co-utile reputation management system that provides incentives for parties to adhere to the protocols. Unlike privacy protection via differential privacy, our approach preserves the values of model updates and, hence, the accuracy of plain federated learning; unlike privacy protection via update aggregation, our approach preserves the ability to detect bad model updates while substantially reducing the computational overhead compared to methods based on homomorphic encryption.",
+  "summaries": [
+    "propose __a secure and privacy-preserving framework__ to offer privacy for FL participants and defend against the Byzantine and poisoning attacks",
+    "the privacy is preserved via unlinkable anonymity, while security is achieved via co-utility through which no individual is interested in playing maliciously",
+    "Unlinkable Anonymity: Peers contributing good updates must stay not only anonymous, but their successive updates must be unlinkable.",
+    "if a peer contributes a good update, her reputation must be increase for rewarding; otherwise, it will be decrease for punishment"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/JIOT.2021.3102155",
+  "id": "domingo2021secure",
+  "bibtex": "@article{domingo2021secure, title={Secure and privacy-preserving federated learning via co-utility}, author={Domingo-Ferrer, Josep and Blanco-Justicia, Alberto and Manj{\\'o}n, Jes{\\'u}s and S{\\'a}nchez, David}, journal={IEEE Internet of Things Journal}, volume={9}, number={5}, pages={3988--4000}, year={2021}, publisher={IEEE}}"
+}

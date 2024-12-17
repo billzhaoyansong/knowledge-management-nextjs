@@ -1,0 +1,106 @@
+{
+  "title": "A Selective Federated Reinforcement Learning Strategy for Autonomous Driving (SFRL)",
+  "authors": [
+    "Yuchuan Fu",
+    "Changle Li",
+    "F.Richard Yu",
+    "Tom H. Luan",
+    "Yao Zhan"
+  ],
+  "year": "2021-05",
+  "labels": [
+    "federated learning",
+    "reinforcement learning",
+    "client selection",
+    "reputation",
+    "convergence rate",
+    "efficiency"
+  ],
+  "summaries": [
+    "propose __a federated reinforcement learning framework for CAVs collision avoidance knowledge aggregation__, achieving [1] improved accuracy [2] higher learning efficiency (vehicle braking distance not too far) [3] reduced communication overhead, comparing DDPG by a single vehicle, full participation FedAvg, and CMFL",
+    "in this framework, CAVs train deep reinforcement learning model locally using DDPG while ",
+    "CAVs are selected based on reputation, convengence-tendency, and wall clock time for global FedAvg aggregation"
+  ],
+  "systemModel": [
+    "a FL server and $N$ connected autonomous vehicles (CAVs) denoted by $\\mathcal{V}=\\{v_1,...,v_i,...,v_N\\}$",
+    "each CAV performs collision avoidance tasks and trains local models",
+    "step (1): CAVs download global model",
+    "step (2): local training the deep reinforcement learning (DRL) vehicle automatic decision control model using DDPG [see 1. Local Training]",
+    "step (3): select a subset of all CAVs for model upload [see 2. Client Selection]",
+    "step (4): global aggregation using FedAvg: $w_{FA}^{\\theta}\\gets \\frac{1}{N_s}\\sum_{i=1}^{N_s}w_i^{\\theta}$"
+  ],
+  "motivation": [
+    "Although the application of FL to autonomous driving is very promising, the following issues are worthy of further consideration.",
+    "First, the quality of the local model may seriously affect the accuracy of the global model.",
+    "For CAVs, the collected data and the trained model will be affected by the external environment, performance, and reputation, usually with varying degrees of error.",
+    "If inappropriate local models are aggregated, the accuracy of the global model will also be severely reduced.",
+    "Second, when a large number of CAVs participating in FL, the communication burden will increase as the number of participants and iteration rounds increase.",
+    "Third, computing power and communication link quality will affect the efficiency of FL.",
+    "If the CAVs participating in FL have limited computing resources or are in poor wireless channel conditions, the model update time will be prolonged"
+  ],
+  "questions": [
+    "the complex traffic environment challenges the fast and accurate response of a connected autonomous vehicle (CAV).",
+    "More importantly, it is difficult for different CAVs to collaborate and share knowledge."
+  ],
+  "techniques": [
+    "1. Local Training",
+    [
+      "state: $s(t)=\\{v_{ov}(t),P_{ov}(t),a_{ov}(t),v_{op}(t),P_{op}(t),a_{op}(t)\\}$",
+      [
+        "$v_{ov}(t),P_{ov}(t),a_{ov}(t)$: object vehicle's speed, position, acceleration",
+        "$v_{op}(t),P_{op}(t),a_{op}(t)$: other participant's (leading vehicle or pedestrian) speed, position, acceleration"
+      ],
+      "action: $a{t}={a_{ov}(t)}, a_{ov}(t) \\in [-8,0]$",
+      [
+        "$-8$ is hard breaking and $0$ is driving at a constant speed"
+      ],
+      "reward: $r=r_s(t)+r_c(t)+r_e(t)$",
+      [
+        "$r_s(t)=-m[v_{ov}(t)^2+a]\\mathbb{1}\\{Collision\\}$: safety",
+        [
+          "$a,m$: weight parameters",
+          "$\\mathbb{1}\\{Collision\\}$: collision indicator"
+        ],
+        "$r_c(t)$: comfort (don't brake promptly)",
+        "$r_e(t)$: efficiency (don't brake too early)"
+      ],
+      "policy: deep deterministic policy gradient (DDPG)"
+    ],
+    "2. Client Selection",
+    [
+      "2.1 Reputation-Based CAVs Selection",
+      [
+        "$\\eta_i^{(r)}=\\begin{cases} \\eta_i^{(r-1)} + S_i^{(r-1)}(\\theta_t)+S_i^{(r-1)}(\\theta_q) & \\text{if upload in round r-1}\\\\  \\eta_i^{(r-1)} & \\text{if not upload in round r-1}\\\\ \\tilde{\\eta}^{(r-1)} & \\text{if first time participate} \\end{cases}$",
+        [
+          "$\\eta_i^{(r)}$: reputation of vehicle $i$ in the $r$th round",
+          "$\\tilde{\\eta}^{(r-1)}=\\frac{\\sum_{i=1}^{N_{r-1}} \\eta_i^{(r-1)}}{N_{r-1}}$: (1) average reputation of selected vehicles in the $r-1$th round (2) reputation threshold for $r$th round",
+          "$S_i^{(r-1)}(\\theta_t)=\\begin{cases} -\\epsilon\\tilde{\\eta}^{(r-1)} & {\\theta_t}_i^{(r-1)}<0 \\\\ 0 & {\\theta_t}_i^{(r-1)}=0 \\\\ \\epsilon\\tilde{\\eta}^{(r-1)} & {\\theta_t}_i^{(r-1)}>0 \\end{cases}$",
+          [
+            "${\\theta_t}_i^{(r-1)}=\\frac{\\bar{t}^{(r-1)}-t_i^{(r-1)}}{\\bar{t}^{(r-1)}}$"
+          ],
+          "$S_i^{(r-1)}(\\theta_q)=\\begin{cases} -\\epsilon\\tilde{\\eta}^{(r-1)} & -1\\leq{\\theta_q}_i^{(r-1)}<-\\frac{1}{3} \\\\ 0 & -\\frac{1}{3}\\leq{\\theta_q}_i^{(r-1)}<\\frac{1}{3} \\\\ \\epsilon\\tilde{\\eta}^{(r-1)} & \\frac{1}{3}\\leq{\\theta_q}_i^{(r-1)}\\leq1 \\end{cases}$",
+          [
+            "${\\theta_q}_i^{(r-1)}=sim({l_i}^{(r-1)}, g^{(r-1)})$",
+            [
+              "${l_i}^{(r-1)}, g^{(r-1)}$: local model and global model"
+            ]
+          ]
+        ]
+      ],
+      "2.2 Convergence-Based CAV Selection (select top $N_{ct}^{(r)}$ CAVs)",
+      [
+        "$sim(u_i^{(r)}, \\bar{u}^{(r-1)})=\\frac{u_i^{(r)}\\cdot \\bar{u}^{(r-1)}}{\\Vert u_i^{(r)} \\Vert\\Vert \\bar{u}^{(r-1)} \\Vert}$",
+        [
+          "$u_i^{(r)}, \\bar{u}^{(r-1)}$: local update and global update"
+        ]
+      ],
+      "2.3 Maximum Utilization-Based CAVs Selection",
+      [
+        "${t_i}_{comp}^{(r)} + {t_i}_{up}^{(r)} \\leq t_{\\max}^{(r)}$: a wall clock time constraint"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TITS.2022.3219644",
+  "id": "fu2022selective",
+  "bibtex": "@article{fu2022selective, title={A Selective Federated Reinforcement Learning Strategy for Autonomous Driving}, author={Fu, Yuchuan and Li, Changle and Yu, F Richard and Luan, Tom H and Zhang, Yao}, journal={IEEE Transactions on Intelligent Transportation Systems}, year={2022}, publisher={IEEE}}"
+}
