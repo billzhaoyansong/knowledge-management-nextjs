@@ -1,0 +1,46 @@
+{
+  "title": "A research agenda for the study of social norm change",
+  "authors": [
+    "Giulia Andrighetto",
+    "Eva Vriens"
+  ],
+  "year": "2021-07",
+  "editing": false,
+  "labels": [
+    "social science",
+    "social norm"
+  ],
+  "abstract": "Social norms have been investigated across many disciplines for many years, but until recently, studies mainly provided indirect, implicit and correlational support for the role of social norms in driving behaviour. To understand how social norms, and in particular social norm change, can generate a large-scale behavioural change to deal with some of the most pressing challenges of our current societies, such as climate change and vaccine hesitancy, we discuss and review several recent advances in social norm research that enable a more precise underpinning of the role of social norms: how to identify their existence, how to establish their causal effect on behaviour and when norm change may pass tipping points. We advocate future research on social norms to study norm change through a mechanism-based approach that integrates experimental and computational methods in theory-driven, empirically calibrated agent-based models. As such, social norm research may move beyond unequivocal praising of social norms as the missing link between self-interested behaviour and observed cooperation or as the explanation for (the lack of) social tipping. It provides the toolkit to understand explicitly where, when and how social norms can be a solution to solve large-scale problems, but also to recognize their limits.",
+  "summaries": [
+    "this article summarizes the explicit measurements for social norms, and rigorous assessments of mechanisms by which norms to cause behaviors",
+    "to identify the conditions under which norms emerge, develop, shift, and generate large-scale behavioral change, the integration of experimental and computational methods is studied",
+    [
+      "behavior experiments to test the causal effect of norms on individual behavior, and identify factors leading social norms to change",
+      "large-scale, agent-based simulations investigate the conditions for norm change from small groups to large groups"
+    ]
+  ],
+  "systemModel": [
+    "social norms as informal and shared behavioural rules that prescribe what one ought or ought not to do that people comply with because of social <u>expectations</u> and potential social sanctions.",
+    [
+      "<u>expectations</u>: empirical expectations & normative expectations",
+      [
+        "empirical expectations: the belief that a sufficiently large number of people in their community <u>conform to the rule</u>",
+        [
+          "empirical expectations may suffice in situations where individual and social interests align but a coordination problem needs to be solved"
+          
+        ],
+        "normative expectations: the belief that a sufficiently large number of people in their community <u>think that they ought to conform and may be willing to sanction transgressions</u>",
+        [
+          "when social norms prescribe behavior goes against self-interested motives, individuals may be uninterested in norm compliance regardless of empirical expectations (e.g. not smoking in buses)",
+          "in these situations, empirical expectations need to be complemented by normative expectations"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1098/rsta.2020.0411",
+  "id": "andrighetto2022research",
+  "bibtex": "@article{andrighetto2022research, title={A research agenda for the study of social norm change}, author={Andrighetto, Giulia and Vriens, Eva}, journal={Philosophical Transactions of the Royal Society A}, volume={380}, number={2227}, pages={20200411}, year={2022}, publisher={The Royal Society}}"
+}

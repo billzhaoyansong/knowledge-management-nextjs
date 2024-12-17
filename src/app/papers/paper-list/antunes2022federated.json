@@ -1,0 +1,116 @@
+{
+  "title": "Federated Learning for Healthcare: Systematic Review and Architecture Proposal",
+  "authors": [
+    "Rodolfo Stoffel Antunes",
+    "Cristiano André da Costa",
+    "Arne Küderle",
+    "Imrana Abdullahi Yari",
+    "Björn Eskofier"
+  ],
+  "year": "2021-03",
+  "editing": false,
+  "labels": [
+    "federated learning"
+  ],
+  "abstract": "The use of machine learning (ML) with electronic health records (EHR) is growing in popularity as a means to extract knowledge that can improve the decision-making process in healthcare. Such methods require training of high-quality learning models based on diverse and comprehensive datasets, which are hard to obtain due to the sensitive nature of medical data from patients. In this context, federated learning (FL) is a methodology that enables the distributed training of machine learning models with remotely hosted datasets without the need to accumulate data and, therefore, compromise it. FL is a promising solution to improve ML-based systems, better aligning them to regulatory requirements, improving trustworthiness and data sovereignty. However, many open questions must be addressed before the use of FL becomes widespread. This article aims at presenting a systematic literature review on current research about FL in the context of EHR data for healthcare applications. Our analysis highlights the main research topics, proposed solutions, case studies, and respective ML methods. Furthermore, the article discusses a general architecture for FL applied to healthcare data based on the main insights obtained from the literature review. The collected literature corpus indicates that there is extensive research on the privacy and confidentiality aspects of training data and model sharing, which is expected given the sensitive nature of medical data. Studies also explore improvements to the aggregation mechanisms required to generate the learning model from distributed contributions and case studies with different types of medical data.",
+  "summaries": [
+    "_Scenario_: use electronic health records (EHR) with FL",
+    "_Problem_: no existing work focuses on open questions in deployment of FL with EHR",
+    "_Solution_: the authors (1) provide a comprehensive review of current work on FL applied to EHR data; (2) deliver a general architecture to facilitate the use of FL"
+  ],
+  "systemModel": [
+    "methodology",
+    [
+      "define research questions and keywords to extract raw corpus from literature databases<ol>",
+      "analyze and filter the raw corpus to obtain final corpus (in last 5 years, title and abstract review, duplicate removal, quality assessment)",
+      "review systematically to generate the literature analysis",
+      [
+        "evolutions of studies on FL applied to healthcare [see 1. Evolution]<ol>",
+        "ML methods and applications [see 2. ML methods and Applications]"
+      ]
+    ],
+    "a general architecture for FL with EHR data [see 3. Architecture]"
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    "1. Evolution",
+    [
+      "case studies",
+      [
+        "first work on FL applied to EHR data focuses on exploring the viability of FL as a tool for training learning models over private medical data including EHR<ol>",
+        "more recent studies continue this exploration",
+        "in addition, another group of recent studies focuses on FL applied to data analysis from resource-constrained Internet of Health Things (IoHT)"
+      ],
+      "architectures",
+      [
+        "some have a greater focus on the combination of techniques and the overall distributed architecture",
+        "some focus on adapting well-known distributed architecture designs",
+        "a group of studies also explore the applicability of blockchain to FL"
+      ],
+      "aggragation methodologies",
+      [
+        "6 studies aim to improve performance by including metrics that classify local models before being combined",
+        "others focus on proposing alternatives to the traditional gradient descent",
+        "2 studies aim at modifying the local models to guarantee that dataset imbalances do not affect the global model",
+        "2 studies focus on improving the aggregation methodology to make it robust against malicious users"
+      ],
+      "confidentiality guarantees",
+      [
+        "current studies explore the assumptions of zero-trust models",
+        "3 studies look into the application of individual security techniques to guarantee the confidentiality",
+        "DP, DP-combined, homomorphic encryption-combined techniques are explored",
+        "learning model manipulation is studied to reduce the chance of leakage"
+      ],
+      "federated analysis",
+      [
+        "aim to perform an initial analysis of the distributed data to facilitate the distributed learning procedure",
+        "some studies aim to process datasets with sensitive information and create anonymous versions",
+        "the second group of studies aims to enable evaluation of distributed datasets to reduce data impurity"
+      ]
+    ],
+    "2. ML methods and Applications",
+    [
+      "ML methods: DL, SVM, Bayesian Networks, Regression, Clustering",
+      "Applications: EHR Data Classification, EHR Data Extraction, Outcome Prediction, Disease Diagnostics, Medical Image Analysis"
+    ],
+    "3. Architecture",
+    [
+      "Data Owner",
+      [
+        "Data confidentiality module: analyzes outgoing information to avoid privacy leakage",
+        "Dataset processing module: enables external learning algorithms to access and interpret the local data",
+        "Learning algorithm verification module: analyzes algorithms received from 3rd parties",
+        "Model training module: executes training algorithm",
+        "Federated data analysis module: handles private or remote requests for data analyses"
+      ],
+      "Communication infrastructure: enables secure exchange of learning models",
+      "FL Manager",
+      [
+        "Model aggregation: collects models from private entities and merges into a global model",
+        "Learning algorithm verification module: analyzes algorithms received from 3rd parties",
+        "Federated data analysis module: handles private or remote requests for data analyses"
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1145/3501813",
+  "id": "antunes2022federated",
+  "bibtex": "@article{antunes2022federated, title={Federated learning for healthcare: Systematic review and architecture proposal}, author={Antunes, Rodolfo Stoffel and Andr{\\'e} da Costa, Cristiano and K{\"u}derle, Arne and Yari, Imrana Abdullahi and Eskofier, Bj{\"o}rn},  journal={ACM Transactions on Intelligent Systems and Technology (TIST)}, volume={13}, number={4}, pages={1--23}, year={2022}, publisher={ACM New York, NY}}"
+}
