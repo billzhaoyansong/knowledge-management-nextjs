@@ -1,0 +1,29 @@
+{
+  "title": "An Effective Federated Learning Verification Strategy and Its Applications for Fault Diagnosis in Industrial IoT Systems",
+  "authors": [
+    "Yuanjiang Li",
+    "Yunfeng Chen",
+    "Kai Zhu",
+    "Cong Bai",
+    "Jinglin Zhang"
+  ],
+  "year": "2021-12",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "client selection"
+  ],
+  "summaries": [
+    "proposed __an FL framework__ using a stacking model to solve device heterogeneity, unbalanced data distribution, and contaminated data in industrial environment, specifically to diagnose interturn short circuit (ITSC) faults in permanent magnet synchronous motors (PMSMs)",
+    "in the framework, a clean verification data set on the server is used to select appropriate client models",
+    "an improved particle swarm optimization (PSO) is used to optimize the weight coefficients of clients for aggregation"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JIOT.2022.3153343",
+  "id": "li2022effective",
+  "bibtex": "@ARTICLE{9718548, author={Li, Yuanjiang and Chen, Yunfeng and Zhu, Kai and Bai, Cong and Zhang, Jinglin}, journal={IEEE Internet of Things Journal}, title={An Effective Federated Learning Verification Strategy and Its Applications for Fault Diagnosis in Industrial IoT Systems}, year={2022},volume={9},number={18},pages={16835-16849},keywords={Data models;Circuit faults;Fault diagnosis;Integrated circuit modeling;Computational modeling;Training;Manufacturing;Federated learning (FL);improved particle swarm optimization (PSO);permanent magnet synchronous motor (PMSM);verification strategy},doi={10.1109/JIOT.2022.3153343}}"
+}

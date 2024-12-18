@@ -1,0 +1,63 @@
+{
+  "title": "Siren: Byzantine-robust Federated Learning via Proactive Alarming",
+  "authors": [
+    "Hanxi Guo",
+    "Hao Wang",
+    "Tao Song",
+    "Yang Hua",
+    "Zhangcheng Lv",
+    "Xiulang Jin",
+    "Zhengui Xue",
+    "Ruhui Ma",
+    "Haibing Guan"
+  ],
+  "year": "2021-11",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "byzantine"
+  ],
+  "abstract": "With the popularity of machine learning on many applications, data privacy has become a severe issue when machine learning is applied in the real world. Federated learning (FL), an emerging paradigm in machine learning, aims to train a centralized model while distributing training data among a large number of clients in order to avoid data privacy leaking, which has attracted great attention recently. However, the distributed training scheme in FL is susceptible to different kinds of attacks. Existing defense systems mainly utilize model weight analysis to identify malicious clients with many limitations. For example, some defense systems must know the exact number of malicious clients beforehand, which can be easily bypassed by well-designed attack methods and become impractical for real-world scenarios. This paper presents Siren, a Byzantine-robust federated learning system via a proactive alarming mechanism. Compared with current Byzantine-robust aggregation rules, Siren can defend against attacks from a higher proportion of malicious clients in the system while keeping the global model performing normally. Extensive experiments against different attack methods are conducted under diverse settings on both independent and identically distributed (IID) and non-IID data. The experimental results illustrate the effectiveness of Siren comparing with several state-of-the-art defense methods.",
+  "summaries": [
+    "present __a proactive FL system__ to defend against Byzantine attacks via an alarming mechanism",
+    "from the client side",
+    [
+      "each client reserves a small partition of the local dataset to test the global model accuracy and trigger alarm",
+      "upon receving global model $g_t$, it compares accuracies of this global model $\\omega_t$ and local model $\\omega_t^{(i)}$",
+      "if $\\omega_t-\\omega_t^{i}\\geq C_c$: set alarm status $A_t^{(i)}=0$ and begin local training with $g_t$",
+      "otherwise: set alarm status $A_t^{(i)}=1$ and begin local training with $g_t^{(i)}$",
+      "after all, send $A_t^{(i)}$ to server through a secure tunnel and send new model $g_{t+1}^{(i)}$"
+    ],
+    "from server side",
+    [
+      "if no client triggers alarm: do aggregation directly",
+      "if any client triggers alarm and accuracies are similar among alarming clients",
+      [
+        "if best model from silent clients performs similar or better than the best model from alarming clients => false alarm, someone in the alarming system plays evil",
+        [
+          "do weight analysis on silent clients and select benign clients to aggregate from $g_t$"
+        ],
+        "otherwise => all updates from silent clients are poisoned",
+        [
+          "using updates from all alarming clients to aggregate from $g_{t-1}$"
+        ]
+      ],
+      "otherwise => both benign and malicious clients are alarming",
+      [
+        "do weight analysis on alarming clients and select benign clients to aggregate from $g_{t-1}$"
+      ]
+    ],
+    "weight analysis",
+    [
+      "including accuracy comparison and angle comparison",
+      "if a client fails the analysis, the penality count of this client will increase; otherwise it will decrease",
+      "if the penality count is over a threshold, the client will be excluded from aggregation as a penalty"
+    ]
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1145/3472883.3486990",
+  "id": "guo2021siren",
+  "bibtex": "@inproceedings{guo2021siren, title={Siren: Byzantine-robust federated learning via proactive alarming}, author={Guo, Hanxi and Wang, Hao and Song, Tao and Hua, Yang and Lv, Zhangcheng and Jin, Xiulang and Xue, Zhengui and Ma, Ruhui and Guan, Haibing}, booktitle={Proceedings of the ACM Symposium on Cloud Computing}, pages={47--60}, year={2021}}"
+}

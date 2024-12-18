@@ -1,0 +1,70 @@
+{
+  "title": "A reliable and fair federated learning mechanism for mobile edge computing",
+  "authors": [
+    "Xiaohong Huang",
+    "Lu Han",
+    "Dandan Li",
+    "Kun Xie",
+    "Yong Zhang"
+  ],
+  "year": "2022-08",
+  "labels": [
+    "federated learning",
+    "architecture",
+    "blockchain",
+    "client selection",
+    "reputation",
+    "reliability",
+    "security",
+    "fairness"
+  ],
+  "summaries": [
+    "propose __an FL mechanism for mobile edge computing__ to solve [1] variability and [2] dishonesty of end nodes, achieving [1] fairness (reward-penalty) [2] reliability (reputation-based client selection) [3] security (secure aggregation)",
+    "the client selection process includes [1] initial selection (meet the data type requirements and meet a threshold for the gap between the provided data and required data), [2] reputation-based (direct + recommendation) client sorting, [3] selecting with the probability propotional to the number of points in wallet",
+    "during aggregation period, the best parameter is used for global model update (kinda greedy)",
+    "rewards and penalty are given based on contribution"
+  ],
+  "questions": [
+    "mobile end devices have high mobility and are vulnerable to be corrupted due to exposuring to an open network environment",
+    "correputed devices not only affect the performance of federated learning models but also bring serious security issues"
+  ],
+  "systemModel": [
+    "workflow of proposed FL mechanism",
+    "step 1: Workers and task publishers register blockchain accounts",
+    "step 2: When a task publisher has a model requirement, 𝑢 first searches the blockchain to confirm whether the model has been trained before. If there is no record, publisher will launch an FL training task in the form of smart contract.",
+    "step 3: the task publisher broadcasts a smart contract containing the requirements of the FL task. The requirements include data types, data attributes, data size , worker selection time, data providers’ total points expected to participate in the training and rewards",
+    "step 4: intereseted workers send requests to the publisher with kind and attributes of data",
+    "step 5: worker selection [see 1. client selection]",
+    "step 6: selected workers deposit a certain amount of points",
+    "step 7: FL training and aggregation [see 2. Aggregation]",
+    "step 8: reward workers according to contributions [see 3. Reward]"
+  ],
+  "motivation": [
+    "While FL brings many benefits to mobile edge computing, it still faces critical challenges",
+    "On one hand, the variability in data volume, data quality and communication capabilities of end nodes will inevitably affect the reliability of FL model training.",
+    "On the other hand, dishonest end nodes may send malicious update parameters to pollute the global model or leave halfway with malicious intent, thus affecting the reliability and fairness of model training.",
+    "Therefore, it is of vital importance to achieve reliable, fair and highly accurate FL model training for mobile edge computing."
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "preliminary selection criteria: (1) match data type (2) threshold on attributes gap between workers and requirements (3) reputation from direct and indirect opinions",
+      "the final set of selected workers will be determined using cryptographic sortition from clients who survive the preliminary selection process.",
+      "In finalization process, the probability of a worker being selected is proportional to the number of points it has in wallet.",
+      "to effectively hiding of the selected workers, verifiable random functions are utilized to let workers check if they are selected or not.",
+      "a simple and effective aggregation strategy is that server will select the parameters with the best performance in the test set to update the model"
+    ],
+    "2. Aggregation",
+    [
+      "a simple and effective aggregation strategy is that server will select the parameters with the best performance in the test set to update the model"
+    ],
+    "3. Reward",
+    [
+      "To ensure fairness, we propose a reward-penalty scheme.",
+      "Through contribution measurement, end nodes that behave honestly are rewarded with honoraria commensurate with their contributions, while those with malicious behavior are punished."
+    ]
+  ],
+  "doi": "10.1016/j.comnet.2023.109678",
+  "id": "huang2023reliable",
+  "bibtex": "@article{huang2023reliable,title={A reliable and fair federated learning mechanism for mobile edge computing},author={Huang, Xiaohong and Han, Lu and Li, Dandan and Xie, Kun and Zhang, Yong},journal={Computer Networks},volume={226},pages={109678},year={2023},publisher={Elsevier}}"
+}

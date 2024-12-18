@@ -1,0 +1,91 @@
+{
+  "title": "An Incentive Mechanism for Federated Learning in Wireless Cellular Networks: An Auction Approach",
+  "authors": [
+    "Tra Huong Thi Le",
+    "Nguyen H. Tran",
+    "Yan Kyaw Tun",
+    "Minh N. H. Nguyen",
+    "Shashi Raj Pandey",
+    "Zhu Han",
+    "Choong Seon Hong"
+  ],
+  "year": "2020-04",
+  "labels": [
+    "federated learning",
+    "wireless",
+    "reverse auction",
+    "resource allocation",
+    "client selection",
+    "incentive mechanism",
+    "social welfare"
+  ],
+  "summaries": [
+    "propose __an incentive mechanism__ via auction in which devices are selected to maximize social welfare and payment is paid based on local accuracies",
+    "in the auction game, mobile devices bid with the information after optimizing local resources by jointly minimizing total completion time and total energy consumption after setting a time deadline in constraint",
+    "the client selection problem is formulated by maximizing social welfare which considers local accuracy and claimed cost after setting resources constraints",
+    "payments are based on local accuracies, local provided resources, and the highest normalized value of losing mobile users"
+  ],
+  "systemModel": [
+    "$1$ base station (BS) and a set $\\mathcal{N}$ of $N$ users",
+    "auction process (1): BS initializes the global network model",
+    "auction process (2): BS announces the auction rule and advertises the FL task to the mobile users",
+    "auction process (3): mobile users submit a set of $I_n$ of bids to the BS, each bid $\\Delta_{ni}={b_{ni}, A_{ni}, \\epsilon_{ni}, v_{ni}}$ where $b_{ni}$ is sub-channel number, $A_{ni}$ is antenna number, $\\epsilon_{ni}$ is local accuracy, $v_{ni}$ is claimed cost (bid price)[see 1. Bid Decision]",
+    "auction process (4): BS selects clients using the indicator $x_{ni}$ [see 2. Client Selection]",
+    "auction process (5): the winning mobile users join the FL and receive the payment after finishing the training model [see 3. Incentive Mechanism]"
+  ],
+  "motivation": [
+    "In spite of the above mentioned benefits of FL, there are remaining two key challenges of having an efficient FL framework.",
+    "The first challenge is the economic challenge.",
+    "Data samples per mobile device are small to train a high-quality learning model so a large number of mobile users are needed to ensure cooperation.",
+    "In addition, the mobile users who join the learning process are independent and uncontrollable.",
+    "Here, mobile users may not be willing to participate in the learning due to the energy cost incurred by model training.",
+    "In other words, the base station (BS), which generates the global model, has to stimulate the mobile users for participation.",
+    "The second challenge is the technical challenge.",
+    "On the one hand, we need users to collectively provide a large number of data samples to enable FL without sharing their private data.",
+    "On the other hand, we need to protect model from imperfect updates.",
+    "The global loss minimization problem should enable in (a) proper assessment of the quality of the local solution to improve personalization and fairness amongst the participating clients while training a global model, (b) effective decoupling of the local solvers, thereby balancing communication and computation in the distributed setting.",
+    "Moreover, we need to consider wireless resource limitations (such as time, antenna number and bandwidth) affecting the performance of FL.",
+    "Besides, the limited energy of wireless devices is a crucial challenge for deploying FL.",
+    "Indeed, it is necessary to optimize the energy efficiency for FL implementation because of these resource constraints."
+  ],
+  "questions": [
+    "it is impractical that all users will sacrifice their resources to join the FL algorithm."
+  ],
+  "techniques": [
+    "1. Bid Decision",
+    [
+      "maximum number of antennas and sub-channels are always energy efficient, i.e. $A_n=A_n^{max}, b_n=b_n^{max}$",
+      "$\\begin{array}{ll} \\underset{f_n, p_n,\\epsilon_n}{\\operatorname{minimize}} & I_0^n\\left(E_n^{tol}(f_n, p_n,\\epsilon_n) + \\rho T_n^{tol}(f_n, p_n,\\epsilon_n)\\right) \\\\  \\text { subject to } & I_0^n T_n^{tol}(f_n, p_n,\\epsilon_n) \\leq T_{max}, \\\\ & f_n \\in [f_n^{\\min } f_n^{\\max }], \\\\ & \\epsilon_n \\in (0,1], \\\\ & p_n \\in (0, p_n^{max}]. \\end{array}$",
+      [
+        "$f_n$: computation resource of user $n$",
+        "$p_n$: transmission power of $n$",
+        "$\\epsilon_n$: local accuracy",
+        "$I_0^n=\\frac{C_1 \\log(1/\\gamma)}{1-\\epsilon_n}$: lower bound of number of global iterations corresponding to local accuracy",
+        "original problem is challenging to solve due to the non-convexity. So an iterative algorithm is proposed",
+        "step 1: fix $\\epsilon_n$ then solve $f_n,p_n$",
+        "step 2: given the obtained $f_n,p_n$ in last step update $\\epsilon_n$"
+      ]
+    ],
+    "2. client selection",
+    [
+      "aiming to maximize social welfare: collective sum of the difference of accuracy and true cost",
+      "$\\begin{array}{ll} \\underset{\\mathbf{x}}{\\operatorname{maximize}} & \\sum\\limits_{n,i}(\\frac{\\tau}{\\epsilon_{ni}}-v_{ni})x_{ni} \\\\  \\text { subject to } & \\sum\\limits_{n}x_{ni}b_{ni} \\leq B_{max}, \\\\ & \\sum\\limits_{n}x_{ni} A_{ni} \\leq A_{max}, \\\\ & \\sum\\limits_{i}x_{ni} \\leq 1, \\\\ & x_{ni}\\in\\{0,1\\}. \\end{array}$",
+      [
+        "it is notable that a client can only be selected once in the whole training process",
+        "<span style='text-decoration: line-through;'>why in the objective accuracy is in the denominator while it is a maximization problem</span>"
+      ]
+    ],
+    "3. incentive mechanism",
+    [
+      "the critical value which is the minimum value a bidder has to bid to win",
+      "$g_{ni_{n}}=\\frac{\\tau}{\\epsilon_{ni}}-\\frac{q_{mi_{m}}}{s_{mi_{m}}}s_{ni_{n}}$",
+      [
+        "after analysis, this is guaranteed to reward clients higher than their cost, therefore, positive utilities in clients"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TWC.2021.3062708",
+  "id": "le2021incentive",
+  "bibtex": "@article{le2021incentive, title={An incentive mechanism for federated learning in wireless cellular networks: An auction approach}, author={Le, Tra Huong Thi and Tran, Nguyen H and Tun, Yan Kyaw and Nguyen, Minh NH and Pandey, Shashi Raj and Han, Zhu and Hong, Choong Seon}, journal={IEEE Transactions on Wireless Communications}, volume={20}, number={8}, pages={4874--4887}, year={2021}, publisher={IEEE}}",
+  "editing": false
+}

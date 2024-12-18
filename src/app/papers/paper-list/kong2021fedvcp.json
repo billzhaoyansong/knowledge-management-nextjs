@@ -1,0 +1,58 @@
+{
+  "title": "FedVCP: A Federated-Learning-Based Cooperative Positioning Scheme for Social Internet of Vehicles",
+  "authors": [
+    "Xiangjie Kong",
+    "Haoran Gao",
+    "Guojiang Shen",
+    "Gaohui Duan",
+    "Sajal K. Das"
+  ],
+  "year": "2020-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "transfer learning"
+  ],
+  "abstract": "Intelligent vehicle applications, such as autonomous driving and collision avoidance, put forward a higher demand for precise positioning of vehicles. The current widely used global navigation satellite systems (GNSS) cannot meet the precision requirements of the submeter level. Due to the development of sensing techniques and vehicle-to-infrastructure (V2I) communications, some vehicles can interact with surrounding landmarks to achieve precise positioning. Existing work aims to realize the positioning correction of common vehicles by sharing the positioning data of sensor-rich vehicles. However, the privacy of trajectory data makes it difficult to collect and train data centrally. Moreover, uploading vehicle location data wastes network resources. To fill these gaps, this article proposes a vehicle cooperative positioning (CP) system based on federated learning (FedVCP), which makes full use of the potential of social Internet of Things (IoT) and collaborative edge computing (CEC) to provide high-precision positioning correction while ensuring user privacy. To the best of our knowledge, this article is the first attempt to solve the privacy of CP from a perspective of federated learning. In addition, we take the advantages of local cooperation through vehicle-to-vehicle (V2V) communications in data augmentation. For individual differences in vehicle positioning, we utilize transfer learning to eliminate the impact of such differences. Extensive experiments on real data demonstrate that our proposed model is superior to the baseline method in terms of effectiveness and convergence speed.",
+  "summaries": [
+    "propose __a cooperative FL positioning system__ for intelligent vehicle applications to precisely position vehicles",
+    "_Scenario_: In intelligent vehicle applications (autonomous driving and collision avoidance), precise positioning is in high demand and can be achieved by interacting with surrounding landmarks",
+    "_Problem_: in existing work, precise positioning is achieved by sharing positioning data directly, while trajectory data are private and uploading vehicle location data wastes network resources",
+    "_Solution_: a cooperative positioning system is proposed based on FL, exploiting social IoT and collaborative edge computing",
+    "_What's more_: 1) data augmentation is achieved by using local cooperation through vehicle-to-vehicle communications; 2) individual difference is achieved by using transfer learning",
+    "NO SOCIAL RELATION EXPLOITED"
+  ],
+  "systemModel": [
+    "sensor-rich vehicles (SRVs) $\\mathcal{V}_s=\\{v_j\\}_{j=1,...,M}$",
+    [
+      "known for vehicle $v_s$ at time $t$: (1) a true geographic location $P^{st}=[P^{st}_e \\quad P^{st}_n]$ (eastern and northern) and (2) a GPS location $P_{gps}$"
+    ],
+    "common vehicles (CoVs) $\\mathcal{V}_c=\\{v_i\\}_{i=1,...,N}$",
+    [
+      "known: $P_{gps}$",
+      "unknown: $P^{ct}=[P^{ct}_e \\quad P^{ct}_n]$"
+    ],
+    "Problem: use $\\{P_{gps}\\}$ and $\\{P^{st}\\}$ to approximate $\\{P^{ct}\\}$ while keeping data private",
+    "Solution: a FL framework for SRVs and some CoVs to collaboratively train a NN to predict GPS errors",
+    [
+      "local training",
+      [
+        "the input is $P_{gps}$ and output is $[E_n \\quad E_e]$ (eastern and northern errors) to train regional error model",
+        "$[E_n \\quad E_e]$ concatenating with vehicle (1) velocity, (2) accelerated velocity, (3) direction become new input and accuracy errors as output to train individual error model (transfer learning)"
+      ],
+      "data augmentation",
+      [
+        "when a CoV approaches an SRV, the SRV measures the relative position and send information to the CoV to enable it to conduct local training"
+      ],
+      "globle training",
+      [
+        "SRVs and those CoVs upload regional error models to mobile edge computing node (MECN) to aggregate into a new global model",
+        "MECN distributes new global model to all vehicles"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/TCSS.2021.3062053",
+  "id": "kong2021fedvcp",
+  "bibtex": "@article{kong2021fedvcp, title={Fedvcp: A federated-learning-based cooperative positioning scheme for social internet of vehicles}, author={Kong, Xiangjie and Gao, Haoran and Shen, Guojiang and Duan, Gaohui and Das, Sajal K}, journal={IEEE Transactions on Computational Social Systems}, volume={9}, number={1}, pages={197--206}, year={2021}, publisher={IEEE}}"
+}

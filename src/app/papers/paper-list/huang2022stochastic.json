@@ -1,0 +1,97 @@
+{
+  "title": "Stochastic client selection for federated learning with volatile clients (E3CS)",
+  "authors": [
+    "Tiansheng Huang",
+    "Weiwei Lin",
+    "Li Shen",
+    "Keqin Li",
+    "Albert Y Zomaya"
+  ],
+  "year": "2020-11",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "multi-armed bandit",
+    "fairness",
+    "convergence rate"
+  ],
+  "summaries": [
+    "propose __a client selection scheme under a volatile context__ (clients are likely to fail), achieving [1] fairness (setting lower bound of selection probability), [2] faster convergence rate comparing FedAvg and FedProx",
+    "the client selection process starts from allocating sampling probabilities to all clients using adversarial bandit to maximize expected cumulative participation and guarantee fairness by giving a minimum probability",
+    "global model aggregation is implemented by using weighted FedAvg and unsuccessful participations are also considered"
+  ],
+  "systemModel": [
+    "$1$ server, $\\mathcal{K}\\triangleq \\{1,2,...,K\\}$ clients, $t\\in\\mathcal{T}\\triangleq\\{1,...,T\\}$",
+    "round step (1): probability allocation, client selection [see 1. Client Selection] and model distribution",
+    "round step (2): local training",
+    "round step (3): model uploading",
+    "round step (4): deadline-based aggregation [see 2. Aggregation]"
+  ],
+  "motivation": [
+    "In the client selection stage, due to the limited bandwidth as well as the budget issue, not all the clients in the system are selected for training.",
+    "Empirical observations agree that increasing the number of participants (equivalently, enlarging the number of posttrained models to aggregate, if no training failure presents) in each round may boost the convergence speed.",
+    "consider a more realistic volatile training context,in which the selected client may not successfully return their models for aggregation in each round.",
+    "These failures could be as a result of various kinds of reasons, e.g., insufficient computing resources, user abort, network failure, etc.",
+    "Under this more realistic consideration, we may derive a rather heuristic rule of making client selection for this context: to maximize the effective participation in each round."
+  ],
+  "questions": [
+    "selection decision might have a significant effect on the training efficiency, as well as the final model performance."
+  ],
+  "techniques": [
+    "1. Client Selection: use multinomial sampling to stochastically determine the selection combination",
+    [
+      "1.1 Assumption",
+      [
+        "1.1.1 $A_t \\sim multinomialNR(\\mathbf{p_t}/k,k), \\forall t \\in \\mathcal{T}$",
+        "1.1.2 $\\sum_{i=1}^K p_{i,t} = k$",
+        "1.1.3 $0\\leq p_{i,t} \\leq 1$",
+        [
+          "$p_{i,t}$: the probability that a client being selected"
+        ],
+        "the original client selection problem has been transformed to the probability allocation",
+        "but, it is complicated to derive a uniform solution"
+      ],
+      "1.2 Problem Relaxation: stable clients should be more welcome but fairness should be considered, too",
+      [
+        "$\\begin{array}{ll} \\underset{\\{\\mathbf{p}_t\\}}{\\operatorname{max}} & \\sum\\limits_{t \\in \\mathcal{T}} \\sum\\limits_{i \\in \\mathcal{K}} p_{i,t} x_{i, k} \\\\  \\text { s.t. } & \\sum\\limits_{i \\in \\mathcal{K}} p_{i,t}=k \\\\ & \\sigma_t \\leq p_{i,t} \\leq1 \\end{array}$",
+        [
+          "$\\mathbf{p}_t$: probability allocation",
+          "$k$: number of selected clients each round due to bandwidth limits",
+          "$\\sigma_t$: minimum sampling probability: considering fairness"
+        ]
+      ],
+      "1.3 Solution: adversarial bandit",
+      [
+        "(1) allocate $\\sigma_t$ probability to each client to accommodate the fairness constraint",
+        "(2) further allocate the residual amount of probabilities $k-K \\sigma_t$",
+        [
+          "$p_{i,t}=\\sigma_t + (k-K\\sigma_t)\\frac{w'_{i,t}}{\\sum_{j\\in\\mathcal{K}} w'_{j,t}}$",
+          [
+            "$w'_{i,t}=\\min\\{w_{i,t}, (1-\\sigma_t)\\alpha_t\\}$",
+            [
+              "$w_{i,t+1}=w_{i,t}\\exp(\\eta \\hat{x}_{i,t})$",
+              [
+                "$\\hat{x}_{i,t}=\\frac{\\mathbb{I}_{i\\in A_t}}{p_{i,t}} x_{i,t}$: unbiased estimator of the real outcome of arms"
+              ]
+            ],
+            "$\\frac{\\alpha_t}{\\sum_{j \\in \\mathcal{K}} w'_{j,t}}=\\frac{1}{k-K\\sigma_t}$"
+          ]
+        ],
+        "(3) if any of the allocated probabilities is larger than 1"
+      ]
+    ],
+    "2. Aggregation",
+    [
+      "$\\mathbf{\\Theta}_{t+1}=\\sum\\limits_{i\\in A_t \\text{ and }x_{i,t}=1}\\omega_i \\mathbf{\\Theta}_{i,t}+\\sum\\limits_{i \\notin A_t \\text{ and }x_{i,t}=0}\\omega_i \\mathbf{\\Theta}_{t}$",
+      [
+        "$\\mathbf{\\Theta}_{t+1}$: global model weights after $t+1$ rounds",
+        "$\\mathbf{\\Theta}_{i,t}$: local model weights after $t$ rounds",
+        "$\\omega_i=|D_i|/\\sum_{i\\in [K]} |D_i|$"
+      ],
+      "to accommodate the volatile training context, the aggregation operation is modified from FedAvg by replacing the updates from unsuccessful participation by the current global weight"
+    ]
+  ],
+  "doi": "10.1109/JIOT.2022.3172113",
+  "id": "huang2022stochastic",
+  "bibtex": "@article{huang2022stochastic, title={Stochastic client selection for federated learning with volatile clients}, author={Huang, Tiansheng and Lin, Weiwei and Shen, Li and Li, Keqin and Zomaya, Albert Y}, journal={IEEE Internet of Things Journal}, volume={9}, number={20}, pages={20055--20070}, year={2022}, publisher={IEEE}}"
+}

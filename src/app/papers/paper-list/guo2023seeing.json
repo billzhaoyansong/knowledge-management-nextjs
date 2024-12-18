@@ -1,0 +1,60 @@
+{
+  "title": "Seeing is believing: Towards interactive visual exploration of data privacy in federated learning",
+  "authors": [
+    "Yeting Guo",
+    "Fang Liu",
+    "Tongqing Zhou",
+    "Zhiping Cai",
+    "Nong Xiao"
+  ],
+  "year": "2022-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "user interface",
+    "privacy-preservation"
+  ],
+  "abstract": "Federated learning (FL), as a popular distributed machine learning paradigm, has driven the integration of knowledge in ubiquitous data owners under one roof. Although designed for privacy-preservation by nature, the supposed well-sanitized parameters still convey sensitive information (e.g., reconstruction attack), while existing technical countermeasures provide weak explainability for privacy understanding and protection practices of general users. This work investigates these privacy concerns with an exploratory study and elaborates on data owners’ expectations in FL. Based on the analysis, we design the first interactive visualization system for FL privacy that supports intelligible privacy inspection and adjustment for data owners. Specifically, our proposal facilitates sample recommendation for joint privacy–performance training at cold start. Then it provides visual interpretation and attention rendering of privacy risks in view of multiple attacking channels and a holistic view. Further it supports interactive privacy enhancement involving both user initiative and differential privacy technique, and iterative trade-off with real-time inference accuracy estimation. We evaluate the effectiveness of the system and collect qualitative feedbacks from users. The results demonstrate that 96.7% of users acknowledge the benefits to privacy inspection and adjustment and 90.3% are willing to use our system. More importantly, 87.1% increase the willingness of contributing data for FL.",
+  "summaries": [
+    "provide __a visualization tool for data owners__, including [1] a sample recommendation mechanism at cold start; [2] an interface for the worth-attention images and regions, etc, [3] a model unlearning mechanism to guide data owners to the desired privacy and performance trade-off",
+    "_Scenario_: data owners should have a interactive visualization tool to explore privacy of different data samples. (model parameters and encrypted model parameters cannot accomplish this task)",
+    "_Problem_: there is no such a work focusing on visualization from the perspective of data owners. (existing works all focus on using visualization tools to identify abnormal parameters from the perspective of cloud servers)",
+    "_Solution_: the authors 1) propose a sample recommendation mechanism at cold start; 2) provide a visual interface for the worth-attention images and regions, etc, based on attacking simulation results; 3) propose a model unlearning mechanism to provide real-time feedbacks for each user intervention behavior to guide data owners to the desired privacy and performance trade-off"
+  ],
+  "systemModel": [
+    "steps:",
+    [
+      "data owner $i$ selects data samples with the recommendation system at cold start to form a local training data set $D_i$ [see 1. Recommendation with contribution analysis]<ol>",
+      "data owner initiates local model $W_i$ with downloaded global model $W_s$ and conducts local training with $D_i$",
+      "data owner analyzes the probability of information leakage through attack models and visualizes the worth-attention images [see 2. attack models and visualization]",
+      "data owner retrains local model if necessary by deleting vulnerable data with model unlearning [see 3. model unlearning]",
+      "data owner enhances privacy with Differential Privacy(e.g. Gaussian DP) before sending to the server"
+    ]
+  ],
+  "techniques": [
+    "1. Recommendation with contribution analysis",
+    [
+      "the Gradient Shapley value method is used to estimate of contribution of each data sample<ol>",
+      "rank data samples by contribution values for the data owner to select"
+    ],
+    "2. attack models and visualization",
+    [
+      "the attack models include reconstruction, membership inference, property inference",
+      "the user interface shows details for these attack models and the data samples being attacked"
+    ],
+    "3. model unlearning",
+    [
+      "divide $D_i$ into several shards<ol>",
+      "train a model for each shard",
+      [
+        "divide each shard into several slides and perform incremental training in these slides"
+      ],
+      "aggregate these models as the local model",
+      "when data needs to be unlearned, remove the model containing the data from the aggregated local model, and retrain the removed model"
+    ]
+
+  ],
+  "doi": "10.1016/j.ipm.2022.103162",
+  "id": "guo2023seeing",
+  "bibtex": "@article{guo2023seeing, title={Seeing is believing: Towards interactive visual exploration of data privacy in federated learning}, author={Guo, Yeting and Liu, Fang and Zhou, Tongqing and Cai, Zhiping and Xiao, Nong}, journal={Information Processing \\& Management}, volume={60}, number={2}, pages={103162}, year={2023}, publisher={Elsevier}}"
+}

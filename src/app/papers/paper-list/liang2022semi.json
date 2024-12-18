@@ -1,0 +1,26 @@
+{
+  "title": "Semi-Synchronous Federated Learning Protocol With Dynamic Aggregation in Internet of Vehicles",
+  "authors": [
+    "Feiyuan Liang",
+    "Qinglin Yang",
+    "Ruiqi Liu",
+    "Junbo Wang",
+    "Kento Sato",
+    "Jian Guo"
+  ],
+  "year": "2021-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "client selection"
+  ],
+  "summaries": [
+    "propose __a semi-synchronous FL protocol__ to improve the performance in IoV",
+    "the protocol specifically includes [1] a vehicle selection scheme based on local computing capacity, network capacity and learning value of training samples [2] a dynamic waiting time adjustment technique [3] a dynamic asynchromous aggregation scheme"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TVT.2022.3148872",
+  "id": "liang2022semi",
+  "bibtex": "@article{liang2022semi, title={Semi-synchronous federated learning protocol with dynamic aggregation in internet of vehicles}, author={Liang, Feiyuan and Yang, Qinglin and Liu, Ruiqi and Wang, Junbo and Sato, Kento and Guo, Jian}, journal={IEEE Transactions on Vehicular Technology}, volume={71}, number={5}, pages={4677--4691}, year={2022}, publisher={IEEE}}"
+}

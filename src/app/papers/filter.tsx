@@ -89,7 +89,7 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
         <div className="flex-initial flex flex-row flex-wrap pt-6">
             {Array.from(labelsToShow).sort().map(l =>
                 <div key={l}>
-                    <button key={l} className='text-sm underline mx-1'
+                    <button key={l} className={`text-sm underline mx-1 ${filterLabels.has(l) ? 'font-bold':'font-light'}`}
                         onClick={() => updateFilterLabels(l)}
                     >{filterLabels.has(l) ? `${l}(x)` : l}</button><span className='text-slate-400'>|</span>
                 </div>)

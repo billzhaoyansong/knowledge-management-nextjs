@@ -1,0 +1,108 @@
+{
+  "title": "An efficiency-boosting client selection scheme for federated learning with fairness guarantee (RBCS-F)",
+  "authors": [
+    "Tiansheng Huang",
+    "Weiwei Lin",
+    "Wentai Wu",
+    "Ligang He",
+    "Keqin Li",
+    "Albert Y. Zomaya"
+  ],
+  "year": "2021-05",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "Lyapunov",
+    "multi-armed bandit",
+    "reputation",
+    "fairness"
+  ],
+  "summaries": [
+    "propose __a client selection policy__ to strike the balance between efficiency and fairness, in the meantime the model accuracy is improved comparing to random selection and FedCS",
+    "the CS policy aims to minimize the difference of model exchange time and fairness",
+    "model exchange time is modeled by C2MAB in which linear contextual bandits are considered to estimate the real model exchange time",
+    "reputation is regarded as historical performance in model exchange time"
+  ],
+  "systemModel": [
+    "$1$ edge server, multiple clients (mostly mobile devices)",
+    "round stage (1): interested clients report a few client-side information",
+    "round stage (2): server selects clients [see 1. Client Selection]",
+    "round stage (3): selected clients download global model, train models locally, and upload trained models to the server. The time span in this stage is model exchange time",
+    "round stage (4): server performs model aggregation"
+  ],
+  "motivation": [
+    "Within such a novel paradigm, new challenges co-exist with opportunities.",
+    "Owing to the limited bandwidth and the dynamic status of the training clients, only a fraction of them could be picked to perform training on behalf of the model owner.",
+    "From the perspective of a model owner, the selection decision in each round could have a profound impact on the model’s training time, convergence speed, training stability, as well as the final achieved accuracy.",
+    "Some studies in the literature have made iconic contributions to this problem.",
+    "However, the current line of research evades two important factors.",
+    "For one thing, both of them assume a pre-known local training time to the scheduler, which may not be realistic in all circumstances.",
+    "For another, devices with higher performance are more favored by their proposed methods.",
+    "Indeed, always selecting the “fast” devices somehow boost the training process.",
+    "But clients with low priority are simply being deprived of chances to participate at the same time, which we refer to it as an unfair selection among clients.",
+    "Conceivably, with a smaller amount of data involved, data diversity can not be guaranteed, thereby hurting the performance of model training to some extent.",
+    "This motivates us to develop an algorithm that strikes a good balance between training efficiency and fairness.",
+    "Also, the algorithm is supposed to be intelligent enough to predict the training time of the clients based on their reputation (or their historical performance), rather than assuming it to be known a priori."
+  ],
+  "questions": [
+    "In FL, the number of clients could be sufficiently large, but the bandwidth available for model distribution and re-upload is quite limited, making it sensible to only involve part of the volunteers to participate in the training process",
+    "The client selection policy is critical to an FL process in terms of training efficiency, the final model’s quality as well as fairness"
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "1.1 Offline Long-Term Optimization Problem",
+      [
+        "$\\begin{array}{ll}  \\underset{\\{\\mathcal{S_1,...,S_{\\infty}}\\}}{\\operatorname{min}} & \\lim_{T \\to \\infty} \\frac{1}{T} \\sum_{t=1}^T \\max_{n \\in \\mathcal{S}_t} \\{\\tau_{t,n}\\} \\\\  \\text { s.t. } & \\lim_{T \\to \\infty} \\frac{1}{T} \\sum_{t=1}^T \\mathbb{E}[x_{t,n}]\\geq \\beta, \\forall n \\in \\mathcal{N} \\\\  & I_{t,n}=1, \\forall n \\in \\mathcal{S}_{t} \\\\  & |\\mathcal{S}_{t}|=\\min\\{m, \\sum_{n\\in \\mathcal{N}} I_{t,n} \\} \\\\ \\end{array}$",
+        [
+          "$\\mathcal{S_t}$: the set of selected clients in round $t$",
+          "$\\tau_{t,n}$: time span between the beginning of model distribution and the instant when the model from $n$ being gathered",
+          "$x_{t,n}$: indicator of whether client $n$ is involved in the round $t$",
+          "$\\beta$: expected guaranteed chosen rate of clients",
+          "$I_{t,n}$: willingness to engage in training",
+          "$m$: maximum number of clients"
+        ],
+        "this problem is impossible to solve due to:",
+        [
+          "(1) random events (e.g. clients' availability) are unknow at the beginning of each round",
+          "(2) time-coupling objective and 1st constraint",
+          "(3) lack of information on model exchange time"
+        ]
+      ],
+      "1.2 Transform to Online Lyapunov Optimization Problem",
+      [
+        "$\\begin{array}{ll}  \\underset{\\mathbf{x}_t}{\\operatorname{min}} & V\\max_{n\\in\\mathcal{N}} \\{x_{t,n} \\tau_{t,n}\\} - \\sum_{n \\in \\mathcal{N}} Z_{t,n}x_{t,n} \\\\  \\text { s.t. } & \\sum_{n \\in \\mathcal{N}} x_{t,n} = \\min\\{m, \\sum_{n\\in \\mathcal{N}} I_{t,n} \\} \\\\  & x_{t,n} \\leq I_{t,n} \\\\ & x_{t,n} \\in \\{0,1\\} \\end{array}$",
+        [
+          "$Z_{t+1, n} = \\max\\{Z_{t,n} + \\beta - x_{t,n} \\}$"
+        ]
+      ],
+      "1.3 Estimation of Model Exchange Time with Contentual Combinatorial Multi Arm Bandit (C2MAB)",
+      [
+        "each round selection in C2MAB is characterized by $(\\mathcal{N}, \\mathcal{S_t}, \\{\\theta_n^*\\}_{n\\in\\mathcal{N}}, \\{\\mathbf{c}_{t,n}\\}_{n\\in\\mathcal{N}}, \\{\\epsilon^*\\}_{n\\in\\mathcal{N}}, f(\\cdot))$",
+        [
+          "$\\mathcal{N}$: the set of arms, i.e. all clients",
+          "$\\mathcal{S_t}$: set of all possible combinations of arms",
+          "$\\{\\mathbf{c}_{t,n}\\}_{n\\in\\mathcal{N}}\\triangleq [1/\\mu_{t,n}, s_{t,n}, M/B_{t,n}]^T$: contextual vector (known before each round but dynamic) ",
+          [
+            "$\\mu_{t,n}$: ratio of available computation capacity of client $n$ over round $t$",
+            "$s_{t,n}$: a binary indicator indicates if client $n$ participated training in the last round",
+            "$M, B_{t,n}$: size of model parameters, allocated bandwidth"
+          ],
+          "$\\{\\theta_n^*\\}_{n\\in\\mathcal{N}} \\triangleq [\\tau_n^b,\\tau_n^s,1/\\eta]^T$: coefficient vector (unknown but stationary)",
+          [
+            "$\\tau_n^b$: training time for 100% computation capacity",
+            "$\\tau_n^s$: the cold start time",
+            "$\\eta \\triangleq \\log(1+SNR)$: uploading data rate (SNR: signal-to-noise ratio)"
+          ],
+          "$\\epsilon_{t,n}$: a noise factor that allowing deviation",
+          "$f(x_{t,n}, \\tau_{t,n})=\\max_{n\\in\\mathcal{N}} \\{x_{t,n} \\tau_{t,n}\\}$"
+        ],
+        "$\\tau_{t,n}=c_{t,n}^T \\theta_n^* + \\epsilon_{t,n}$",
+        "The C2MAB problem can be solved by the UCB algorithm"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TPDS.2020.3040887",
+  "id": "huang2020efficiency",
+  "bibtex": "@article{huang2020efficiency,title={An efficiency-boosting client selection scheme for federated learning with fairness guarantee},author={Huang, Tiansheng and Lin, Weiwei and Wu, Wentai and He, Ligang and Li, Keqin and Zomaya, Albert Y},journal={IEEE Transactions on Parallel and Distributed Systems},volume={32},number={7},pages={1552--1564}, year={2020}, publisher={IEEE}}"
+}

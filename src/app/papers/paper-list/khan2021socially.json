@@ -1,0 +1,38 @@
+{
+  "title": "Socially-Aware-Clustering-Enabled Federated Learning for Edge Networks (DDFL)",
+  "authors": [
+    "Latif U. Khan",
+    "Zhu Han",
+    "Dusit Niyato",
+    "Choong Seon Hong"
+  ],
+  "year": "2020-11",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "clustering",
+    "social network",
+    "edge computing"
+  ],
+  "summaries": [
+    "propose __a socially-aware framework for edge networks__ in which [1] devices are clustered by considering edge betweenness, social similarity, and physical distance, and [2] loss function is minimized by optimizing clustering, resource allocation, and relative local accuracy",
+    "the framework includes clustering, in which heads are chosen considering edge betweenness, social similarity, and physical distance between devices)",
+    "in this framework, an optimization problem is formulated for minimizing the customized loss function by optimizing clustering, resource allocation, and relative local accuracy",
+    "the problem is decomposed into 3 sub-problems which are solved iteratively"
+  ],
+  "systemModel": [],
+  "motivation": [
+    "In conventional FL, a malicious aggregation server can use devices local learning models for inferring their private information, thus causing privacy leakage",
+    "FL will generally suffer from high convergence time if the number of end devices increases under wireless resources constraints.",
+    "The centralized aggregation server in FL might stop working due to physical damage or security attack"
+  ],
+  "questions": [
+    "solve the centralized server problem in conventional FL, more specifically the problems of malicious aggregation server, external attack, physical damage, communication efficiency"
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/TNSM.2021.3090446",
+  "id": "khan2021socially",
+  "bibtex": "@article{khan2021socially, title={Socially-aware-clustering-enabled federated learning for edge networks}, author={Khan, Latif U and Han, Zhu and Niyato, Dusit and Hong, Choong Seon}, journal={IEEE Transactions on Network and Service Management}, volume={18}, number={3}, pages={2641--2658}, year={2021}, publisher={IEEE}}"
+}

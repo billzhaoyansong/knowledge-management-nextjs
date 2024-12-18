@@ -1,0 +1,66 @@
+{
+  "title": "Incentive-boosted Federated Crowdsourcing (iFedCrowd)",
+  "authors": [
+    "Xiangping Kang",
+    "Guoxian Yu",
+    "Jun Wang",
+    "Wei Guo",
+    "Carlotta Domeniconi",
+    "Jinglin Zhang"
+  ],
+  "year": "2022-11",
+  "labels": [
+    "federated learning",
+    "stackelberg game",
+    "incentive mechanism",
+    "crowdsourcing",
+    "security"
+  ],
+  "summaries": [
+    "develop __an incentive mechanism__ by stackelberg game for federated crowdsourcing in which [1] data is constantly collected [2] model upload time varies significantly [3] data might be noisy",
+    "model the interaction between the crowdsourcing platform and participating workers as a stackelberg game to achieve [1] high-quality server model",
+    "in the stackelberg game, server determines optimal reward rates, and clients decide response to server's reward rates, such as (1) local optimal accuracy level to achieve, (2) local optimal data freshness, and (3) local optimal completion time"
+  ],
+  "systemModel": [
+    "step (1): server firstly announces uniform reward rates for the participating clients",
+    "step (2): each worker provide response to server's reward rates [see 1. lower-level subgame]",
+    "step (3): the task publisher determine the optimal reward rates to maximize profit after knowing the response of workers [see 2. high-level subgame]"
+  ],
+  "motivation": [
+    "Although FL has shown great advantages in privacypreserving crowdsourcing, it still faces an open challenge that how to incentive clients to participate in the FL by contributing their computational/communication resource and data",
+    "Clients may be reluctant to perform local training and share their model updates without sufficient compensation.",
+    "Moreover, although FL does not require participants to upload their raw data to the remote server, the malicious attackers and the curious server may still infer the private information of training data from the intermediate model parameters and gradients",
+    "Such security risks and potential threats aggravate the reluctance of client participation",
+    "On the other hand, sufficient rewards can motivate them to tolerate these risks and make contributions.",
+    "In addition, the clients in FL are independent, and only their owners can determine the participating strategy (i.e., when, where and how to participate in FL)",
+    "Hence, the rewards can affect the clients’ decisions and training strategies, and the final model performance.",
+    "Unfortunately, contemporary incentive techniques for FL cannot be directly applied to federated crowdsourcing.",
+    "This is because: (i) The crowd workers in federated crowdsourcing continuously collect new data during the training process to perform model updating.",
+    "(ii) As the edge devices of crowd workers feature highly heterogeneous resources (e.g., computing power, bandwidth, or memory), the required time to upload model updates may vary significantly, thus leading to a long completion time of the training task.",
+    "(iii) The collected training samples on workers’ devices are annotated by themselves, some of which may be error-prone and noisy.",
+    "(iv) In federated crowdsourcing, many data owners may not actively participate in the federated learning process, especially when the data owners are individual workers rather than enterprises."
+  ],
+  "questions": [
+    "how to encourages workers to constantly collect fresh data in a FL crowdsourcing platform"
+  ],
+  "techniques": [
+    "1. lower-level subgame",
+    [
+      "$v_k=r_1\\cdot \\frac{A_k}{T_k}+r_2\\cdot F_k - C_k$: profit to worker $k$",
+      [
+        "$r_1, r_2$: reward rates from the task publisher",
+        "$A_k$: accuracy level",
+        "$T_k$: completion time of training and uploading",
+        "$F_k=t-g_k(t)$: data freshness",
+        "$C_k=c_k^{cal}+c_k^{col}+c_k^{com}$: cost"
+      ]
+    ],
+    "2. high-level subgame",
+    [
+      "$U=\\frac{1}{n}\\sum\\limits_{k=1}^n\\left(\\alpha \\cdot A_k + \\beta \\cdot F_k\\right) - \\max\\limits_{1\\leq k\\leq n} T_k-\\sum\\limits_{k=1}^n \\left(r_1\\cdot \\frac{A_k}{T_k} + r_2 \\cdot F_k\\right)$: utility of server"
+    ]
+  ],
+  "doi": "arXiv:2211.14439",
+  "id": "kang2022incentive",
+  "bibtex": "@article{kang2022incentive,title={Incentive-boosted Federated Crowdsourcing},author={Kang, Xiangping and Yu, Guoxian and Wang, Jun and Guo, Wei and Domeniconi, Carlotta and Zhang, Jinglin},journal={arXiv preprint arXiv:2211.14439},year={2022}}"
+}

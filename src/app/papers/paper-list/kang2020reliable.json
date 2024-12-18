@@ -1,0 +1,82 @@
+{
+  "title": "Reliable federated learning for mobile networks",
+  "authors": [
+    "Jiawen Kang",
+    "Zehui Xiong",
+    "Dusit Niyato",
+    "Yuze Zou",
+    "Yang Zhang",
+    "Mohsen Guizani"
+  ],
+  "year": "2020-04",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "client selection",
+    "blockchain",
+    "security"
+  ],
+  "summaries": [
+    "propose __a client selection scheme__ to defend against intentionally and unintentionally unreliable local model updates",
+    "a reputation threshold is set to filter out unreliable workers",
+    "multi-weight subjective logic is used in the reputation calculation, and reputations are stored in a reputation blockchain"
+  ],
+  "systemModel": [
+    "a set of task publishers, a set of workers, a reputation blockchain",
+    "step 1): a task publisher publishes a task with specific data requirements (data sizes, types, and time span)",
+    "step 2): the task publisher downloads recommended reputation opinions from the reputation blockchain, and calculates composite reputations [see <u>1. Composite Reputation Calculation</u>], and selects workers with a reputation threshold",
+    "step 3): federated learning and the task publisher carries out poisoning attack detection schemes (ROIN, FoolsGold) to detect poisoning attacks and unreliable workers",
+    "step 4): reputation update [see <u>2. Direct Subjective Opinions and Reputation Update</u>]"
+  ],
+  "motivation": [
+    "during a federated learning process, data owners may mislead a global model by intentional or unintentional behaviors [5].",
+    "For intentional behaviors, an attacker can send malicious updates, that is, the poisoning attack, to affect the global model parameters resulting in the failure of current collaborative learning.",
+    "In addition, much more dynamic mobile networking environments indirectly result in some unintentional behaviors of data owners.",
+    "The data owners may also indeliberately update low-quality models caused by high-speed mobility or energy limitation, thus adversely affecting federated learning.",
+    "Therefore, it is of paramount importance for federated learning to defend against such intentionally and unintentionally unreliable local model updates."
+  ],
+  "questions": [
+    "unreliable data and unreliable updates from workers intentionally and unintentionally"
+  ],
+  "techniques": [
+    "<u>1. Composite Reputation Calculation</u>",
+    [
+      "$T_{i \\to j}^{final}=b_{i \\to j}^{final} + \\gamma u_{i \\to j}^{final}$: final reputation opinion from task publisher $i$ to worker $j$",
+      [
+        "$b_{i \\to j}^{final}=\\frac{b_{i \\to j} u_{x \\to j}^{rec} + b_{x \\to j}^{rec}u_{i \\to j}}{u_{i \\to j} + u_{x \\to j}^{rec} - u_{i \\to j}u_{x \\to j}^{rec} }$: final/composite belief",
+        "$u_{i \\to j}^{final}=\\frac{u_{i \\to j}u_{x \\to j}^{rec}}{u_{i \\to j} + u_{x \\to j}^{rec} - u_{i \\to j}u_{x \\to j}^{rec} }$: final/composite uncertainty",
+        [
+          "$b_{i \\to j}$: direct belief",
+          "$b_{x \\to j}^{rec}=\\frac{1}{\\sum\\limits_{x\\in X} \\delta_{x \\to j}}\\delta_{x \\to j} b_{x \\to j}$: belief  from other task publishers $x$ to worker $j$",
+          "$u_{i \\to j}$: direct uncertainty",
+          "$u_{x \\to j}^{rec}=\\frac{1}{\\sum\\limits_{x\\in X} \\delta_{x \\to j}}\\delta_{x \\to j} u_{x \\to j}$: uncertainty from other task publishers $x$ to worker $j$",
+          [
+            "$\\delta_{x \\to j}=\\rho_x \\cdot IF_{x \\to j}$",
+            [
+              "$\\rho_x\\in[0,1]$: a predefined parameter",
+              "$IF_{x \\to j}=\\frac{N_{x \\to j}}{\\bar{N_x}}=\\frac{\\theta(\\zeta \\alpha_1^{x \\to j} + \\sigma \\alpha_2^{x \\to j}) + \\tau (\\zeta \\beta_1^{x \\to j} + \\sigma \\beta_2^{x \\to j})}{\\frac{1}{|S|}\\sum\\limits_{s \\in S} N_{x \\to s}}$: interaction frequency between a task publisher $x$ to worker $j$",
+              [
+                "$\\alpha_1^{x \\to j}\\backslash \\alpha_2^{x \\to j}$: positive interaction between $x$ and $j$ if $t\\leq t_{recent}$\\$t > t_{recent}$",
+                "$\\beta_1^{x \\to j}\\backslash \\beta_2^{x \\to j}$: negative interaction between $x$ and $j$ if $t\\leq t_{recent}$\\$t > t_{recent}$",
+                "$\\theta+\\tau=1, \\theta < \\tau$: weight on positive and negative interactions (effects) with a higher weight on negative ones",
+                "$\\zeta+\\sigma=1, \\zeta < \\sigma$: weight on interaction timeliness with a higher weight on more recent ones"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "<u>2. Direct Subjective Opinions and Reputation Update</u>",
+    [
+      "$b_{i \\to j}=(1-u_{i \\to j})\\frac{\\alpha}{\\alpha+\\beta}$",
+      "$u_{i \\to j}=1-s_{i \\to j}$",
+      [
+        "$s_{i \\to j}$: successful transmission probability of dta packets"
+      ],
+      "$T_{i \\to j}=b_{i \\to j} + \\gamma u_{i \\to j}$"
+    ]
+  ],
+  "doi": "10.1109/MWC.001.1900119",
+  "id": "kang2020reliable",
+  "bibtex": "@article{kang2020reliable, title={Reliable federated learning for mobile networks}, author={Kang, Jiawen and Xiong, Zehui and Niyato, Dusit and Zou, Yuze and Zhang, Yang and Guizani, Mohsen}, journal={IEEE Wireless Communications}, volume={27}, number={2}, pages={72--80}, year={2020}, publisher={IEEE}}"
+}

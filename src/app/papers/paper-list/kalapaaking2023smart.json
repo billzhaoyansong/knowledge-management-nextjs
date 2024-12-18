@@ -1,0 +1,43 @@
+{
+  "title": "Smart Policy Control for Securing Federated Learning Management System",
+  "authors": [
+    "Aditya Pribadi Kalapaaking",
+    "Ibrahim Khalil",
+    "Mohammed Atiquzzaman"
+  ],
+  "year": "2022-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "smart contract",
+    "blockchain",
+    "verification"
+  ],
+  "summaries": [
+    "propose __policy controls__ using smart contracts to audit local training and manage global aggregation, securing the FL system and guaranteeing integrity of models",
+    "a smart contract-based local training policy control on the FL participants' side to verify the local training process",
+    "a smart contract-based aggregation policy to manage the global model aggregation process",
+    "Upon completion, the aggregated model and policy are stored on blockchain-based storage to allow participants of FL"
+  ],
+  "systemModel": [
+    "Architecture",
+    [
+      "Policy Control Management System (PCM): manages and sends smart contracts to factories for local training and Aggrgegation Manager (BAM) for aggregation",
+      "$P$ number of smart factories, each factory is equipped with",
+      [
+        "an edge server $E_n$ connected to the Ethereum to do local training according to the smart contract local learning policy from Policy Control Managenement System",
+        "several IoT sensors $Z_n$, which generate data $L_n$ and send them to local datasets as the source of the edge server $E_n$"
+      ],
+      "Blockchain Aggregation Manager (BAM): executes smart contract aggregation policy (PGM)",
+      "Blockchain Database Manager (BDM): stores global models and smart contract aggregation policies"
+    ]
+  ],
+  "questions": [
+    "not allow for an audit of the training process",
+    "no global model verifiability available"
+  ],
+  "techniques": [],
+  "doi": "10.1109/TNSM.2023.3276594",
+  "id": "kalapaaking2023smart",
+  "bibtex": "@article{kalapaaking2023smart, title={Smart Policy Control for Securing Federated Learning Management System}, author={Kalapaaking, Aditya Pribadi and Khalil, Ibrahim and Atiquzzaman, Mohammed}, journal={IEEE Transactions on Network and Service Management}, year={2023}, publisher={IEEE}}"
+}

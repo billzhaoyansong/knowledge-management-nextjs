@@ -1,0 +1,134 @@
+{
+  "title": "Incentive mechanism for reliable federated learning: A joint optimization approach to combining reputation and contract theory",
+  "authors": [
+    "Jiawen Kang",
+    "Zehui Xiong",
+    "Dusit Niyato",
+    "Shengli Xie",
+    "Junshan Zhang"
+  ],
+  "year": "2019-09",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "incentive mechanism",
+    "client selection",
+    "reputation",
+    "contract theory",
+    "blockchain"
+  ],
+  "summaries": [
+    "propose __a smart contract-based incentive mechanism__ to maximize the profit of task publishers and reward data owners according to data qualities",
+    "_Problem_: in FL it is challenging to design incentive mechanisms due to information asymmetry issues. Specifically, these issues include (1) willingness of clients to join, (2) reputations of clients, (3) amount of data size and computational resources, (4) local data quality",
+    "_Solution_: the authors proposed a smart contract-based incentive mechanism (IM) and reliable client selection scheme, achieving [1] higher performance under attacks",
+    "clients are selected by a reputation threshold",
+    "the task publisher design a smart contract which divides clients into different types according to data quality, to maximize the profit of the task publisher and reward clients based on their quality",
+    "clients choose different contract item to maximize self-utility (minimize energy consumption)"
+  ],
+  "systemModel": [
+    "task publishers, wireless communication infrastructures, mobile devices, a reputation blockchain",
+    [
+      "each task publisher interacts with mobile devices through wireless communication infrastructures",
+      "$\\text{each task publisher} \\xleftrightarrow{\\text{wireless communication infrastructures}} \\text{mobile devices}$",
+      "wireless communication infrastructures can be roadside units in vehicular networks or base stations in cellular networks",
+      "mobile devices can be vehicles or mobile phones"
+    ],
+    "processes:",
+    [
+      "a task publisher designs contract items, and broadcasts the contract and resource requirements (data type, data sizes, accuracy, time range, and CPU cycles) to mobile devices [see <u>1. Smart Contract</u>]<ol>",
+      "interested mobile devices give responses including resource information back to the task publisher",
+      "the task publisher downloads recommended reputations from the reputation blockchain, and combines them with direct reputation opinion to generate a compositive reputation value [see <u>2. Reputation Calculation</u>]",
+      "the task publisher selects workers with reputations larger than a threshold",
+      "selected workers choose a contract item according to the accuracy of local dataset and resource conditions to minimize energy consumption [see 3. <u>Utility Function of a type-$n$ worker</u>]",
+      "federated learning in which local model updates are evaluated, and degrading updates are rejected in the aggregation",
+      "Workers obtain rewards from the task publisher according to the pre-set rewards in the contact items.",
+      "Update reputation opinions to the reputation blockchain"
+    ]
+  ],
+  "motivation": [
+    "federated learning is still facing with critical challenges",
+    "On the one hand, existing studies have an optimistic assumption that all the mobile devices contribute their resource unconditionally [4], [5], which is not practical in the real world due to resource cost incurred by model training [6]",
+    "Without well-designed economic compensation, the self-interested mobile devices are reluctant to participate in model training",
+    "Therefore, it is necessary to design an effective incentive mechanism for stimulating mobile devices to become workers for federated learning tasks",
+    "On the other hand, an unreliable worker may perform intentionally or unintentionally undesirable behaviours to mislead a global model training of a federated learning task",
+    "For the intentional behaviors, the worker may launch a poisoning attack that sends malicious updates to influence the global model parameters leading to the failure of current collaborative learning mechanism",
+    "Moreover, much more dynamic mobile networking environments indirectly cause some unintentional behaviors of mobile devices",
+    "Due to the high mobility or energy constraints, the worker may indeliberately update some low-quality parameters that adversely affect federated learning tasks",
+    "Thus it is of vital importance to develop efficient schemes to select workers without unreliable local model updates for the federated learning",
+    "Furthermore, these two challenges cannot be solved separately due to their couplings"
+  ],
+  "questions": [
+    "incentive mechanism and client selection with smart contract in FL"
+  ],
+  "techniques": [
+    "<u>1. Smart Contract</u>",
+    [
+      "the task publisher divides workers into $N$ types, which are sorted in an ascending order $\\theta_1<\\cdots<\\theta_n<\\cdots<\\theta_N, \\forall n\\in\\{1,...,N\\}$",
+      [
+        "$\\theta_n=\\frac{\\psi}{\\log(\\frac{1}{\\epsilon_n})}$: data quality",
+        [
+          "$\\psi$: the coefficient about the number of local model iterations affected by the local data accuracy",
+          "$\\epsilon_n$: local accuracy"
+        ]
+      ],
+      "the task publisher obtains the distribution of worker types $p_n$ from observations, $\\sum_{n=1}^N p_n=1$",
+      "the task publisher aims to maximize the profit while designing the smart contract:",
+      "$\\begin{aligned}\\max_{R_n,f_n}&~U_{TP}=\\sum_{n=1}^N\\left(Np_n\\underbrace{\\omega\\ln(T_{\\max}-T_n^t)}_{\\text{satisfaction from total time of 1 global iteration}}-\\underbrace{lR_n}_{\\text{reward cost}}\\right)\\\\\\text{s.t.}&~R_n-(\\frac{\\psi}{\\theta_n}E_n^{cmp}+E_n^{com})\\geq0,\\forall n\\in\\{1,\\dots,N\\}\\\\&~R_n-(\\frac{\\psi}{\\theta_n}E_n^{cmp}+E_n^{com})\\geq R_m-(\\frac{\\psi}{\\theta_n}E_m^{cmp}+E_m^{com}),n\\neq m,\\forall n,m\\in\\{1,\\dots,N\\}\\\\&~\\frac{c_ns_n}{f_n}\\leq T_{max}, \\forall n\\in\\{1,\\dots,N\\}\\\\&~\\sum_{n=1}^N N\\cdot p_n\\cdot R_n\\leq R_{\\max}, \\forall n\\in\\{1,\\dots,N\\}\\end{aligned}$",
+      [
+        "$f_n$: CPU cycle frequency",
+        "$\\omega>0$: satisfaction degree parameter of task publisher",
+        "$T_{\\max}$: task publisher's maximum tolerance time of FL",
+        "$T_n^t=\\log(\\frac{1}{\\epsilon_n})T_n^{cmp}+T_n^{com}$: total time of one global iteration for the worker $n$",
+        "$T_n^{com}$: transmission time of a local model update",
+        "$T_n^{cmp}$: computation time of a local model update",
+        "$l$: unit cost about the rewards for the workers",
+        "$R_n$: reward for the worker $n$"
+      ]
+    ],
+    "<u>2. Reputation Calculation</u>",
+    [
+      "$T_{i \\to j}^{final}=b_{i \\to j}^{final} + a u_{i \\to j}^{final}$: final reputation opinion from task publisher $i$ to worker $j$",
+      [
+        "$b_{i \\to j}^{final}=\\frac{b_{i \\to j} u_{x \\to j}^{rec} + b_{x \\to j}^{rec}u_{i \\to j}}{u_{i \\to j} + u_{x \\to j}^{rec} - u_{i \\to j}u_{x \\to j}^{rec} }$: final belief",
+        "$u_{i \\to j}^{final}=\\frac{u_{i \\to j}u_{x \\to j}^{rec}}{u_{i \\to j} + u_{x \\to j}^{rec} - u_{i \\to j}u_{x \\to j}^{rec} }$: final uncertainty",
+        [
+          "$b_{i \\to j}$: direct belief",
+          "$b_{x \\to j}^{rec}=\\frac{1}{\\sum\\limits_{x\\in X} \\omega_{i \\to x}} \\omega_{i \\to x} b_{x \\to j}$: belief  from other task publishers $x$ to worker $j$",
+          "$u_{i \\to j}$: direct uncertainty",
+          "$u_{x \\to j}^{rec}=\\frac{1}{\\sum\\limits_{x\\in X} \\omega_{i \\to x}} \\omega_{i \\to x} u_{x \\to j}$: uncertainty from other task publishers $x$ to worker $j$",
+          [
+            "$\\omega_{i \\to x}=\\delta_{i \\to x} \\times Sim(i,x)$",
+            [
+              "$\\delta_{i \\to x}\\in [0,1]$: a predefined parameter",
+              "$Sim(i,x)=\\frac{\\sum_{j\\in\\mathbb{C}}(D_{i\\to j}-\\bar{D}_i)(D_{x\\to j}-\\bar{D}_x)}{\\sqrt{\\sum_{j\\in\\mathbb{I}}(D_{i\\to j}-\\bar{D}_i)^2}\\sqrt{\\sum_{j\\in\\mathbb{X}}(D_{x\\to j}-\\bar{D}_x)^2}}$: similarity factor between $i$ and $x$ by using a cosine function",
+              [
+                "$\\mathbb{I}, \\mathbb{X}$: the set of workers have interacted with the task publisher $i$ and task publisher $x$",
+                "$\\mathbb{C}=\\mathbb{I}\\bigcap\\mathbb{X}$",
+                "$\\bar{D}_i, \\bar{D}_x$: average values of direct reputation opinions for workers in $\\mathbb{C}$ from $i$ and $x$",
+                "$\\bar{\\omega}_{i\\to x}=\\delta_{i\\to x}\\times\\text{Sim}(i,x)$"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "<u>Utility Function of a type-$n$ worker</u>",
+    [
+      "$\\max\\limits_{R_n, fn} U_D = R_n-\\mu\\left[\\frac{\\psi}{\\theta_n}\\zeta c_n s_n f_n^2 + \\frac{\\sigma\\rho_n}{B\\ln(1+\\frac{\\rho_n h_n}{N_0})}\\right]$",
+      [
+        "$f_n$: contributed computation resources for local model training",
+        "$\\zeta$: effective capacitance parameter of computing chipset for worker $n$",
+        "$c_n$: number of CPU cycles for a worker $n$ to perform one sample of data in local model training",
+        "$s_n$: size of local training data samples",
+        "$B$: the trasmission bandwidth",
+        "$\\rho_n$: transmission power of worker $n$",
+        "$h_n$: channel gain of peer-to-peer link between the worker $n$ and task publisher",
+        "$N_0$: background noise",
+        "$\\sigma$: data size"
+      ]
+    ]
+  ],
+  "doi": "10.1109/JIOT.2019.2940820",
+  "id": "kang2019incentive",
+  "bibtex": "@article{kang2019incentive, title={Incentive mechanism for reliable federated learning: A joint optimization approach to combining reputation and contract theory}, author={Kang, Jiawen and Xiong, Zehui and Niyato, Dusit and Xie, Shengli and Zhang, Junshan}, journal={IEEE Internet of Things Journal}, volume={6}, number={6}, pages={10700--10714}, year={2019}, publisher={IEEE}}"
+}

@@ -1,0 +1,55 @@
+{
+  "title": "PRoT-FL: A Privacy-preserving and Robust Training manager for Federated Learning",
+  "authors": [
+    "Idoia Gamiz",
+    "Cristina Regueiro",
+    "Eduardo Jacob",
+    "Oscar Lage",
+    "Marivi Higuero"
+  ],
+  "year": "2023-05",
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "smart contract",
+    "multi-job",
+    "security",
+    "privacy",
+    "robustness"
+  ],
+  "summaries": [
+    "proposed __an FL training framework__ to solve the conflict between privacy and security, achieving [1] privacy-preserving and [2] robust training",
+    "a public blockchain is used for validating information provided in the system",
+    "smart contract over blockchain potentially brings transparency, fairness and efficiency",
+    "between the server and clients there is a training manager which enables multiple FL training sessions (training jobs)",
+    "to disassociate local model from its generator, a random ordered and sequential local training method is adopted"
+  ],
+  "systemModel": [
+    "$1$ Training Manager, a set of clients $\\{C_1,...,C_n\\}$, and 1 server $S$ who creates multiple training sessions (jobs)",
+    "all information provided will be recorded in all nodes of blockchain",
+    "the use of smart contract over blockchain potentially brings transparency, fairness and efficiency",
+    "phase 0): $S$ publishes a new training and askes Training Manager to initialize an FL training session with the information of [1] typeofData, [2] algorithmInfo, [3] globalHash, [4] hashAlgorithm, [5] public key encryption (PKE) algorithm",
+    "phase 1): the clients register participation with the information of datasize, then training starts with [1] participants addresses and [2] participantDataSizes",
+    "phase 2): private local training and deliver the local models to $S$ [see 1. private local training]",
+    "phase 3): validation",
+    "phase 4): accurate aggregation by letting $S$ check if local hashes match with the hashes during the local training phase",
+    "phase 5): $S$ indicates if the training has finished or if a new iteration begins"
+  ],
+  "motivation": [
+    "there is a fundamental conflict between privacy and robustness: safeguarding against security attacks often means having full control over the training process or accessing the training data [13], [14], which is not compatible with most cryptographic techniques that are commonly used to preserve privacy"
+  ],
+  "questions": [
+    "FL is vulnerable to data privacy and model security attacks"
+  ],
+  "techniques": [
+    "1. private local training",
+    [
+      "$S$ sends $w^t$ and list of participants $L=L\\backslash \\{IDC_1\\}$ to a randomly chosen client $C_1$",
+      "$C_1$ validates $w^t$ and sends $w^t$, $[Enc(w_1^t)]$ and randomly reordered list of participants $L=L\\backslash \\{IDC_1, IDC_2\\}$ to a randomly chosen client $C_2$",
+      "finally, $C_n$ sends all the local models $[Enc(w_1^t),\\dots,Enc(w_n^t)]$ to $S$"
+    ]
+  ],
+  "doi": "10.1016/j.ipm.2024.103929",
+  "id": "gamiz2023privacy",
+  "bibtex": "@article{gamiz2025prot, title={PRoT-FL: A privacy-preserving and robust Training Manager for Federated Learning}, author={Gamiz, Idoia and Regueiro, Cristina and Jacob, Eduardo and Lage, Oscar and Higuero, Marivi}, journal={Information Processing \\& Management}, volume={62}, number={1}, pages={103929}, year={2025}, publisher={Elsevier}}"
+}

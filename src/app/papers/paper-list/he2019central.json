@@ -1,0 +1,53 @@
+{
+  "title": "Central server free federated learning over single-sided trust social networks",
+  "authors": [
+    "Chaoyang He",
+    "Conghui Tan",
+    "Hanlin Tang",
+    "Shuang Qiu",
+    "Ji Liu"
+  ],
+  "year": "2019-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "social network"
+  ],
+  "summaries": [
+    "proposed __an online distributed learning algorithm__ in a social network scenario by pushing local model to trusted neighbors and aggregating locally",
+    "this algorithm borrows a 2-step idea: local train and push local model to trusted neighbors, then each node aggregate into a new model"
+  ],
+  "systemModel": [
+    "$n$ clients (nodes), a directed graph $\\mathcal{G}=(\\text{nodes}: [n], \\text{edges}: E)$ with vertex set $[n]=\\{1,2,...,n\\}$ and edge set $E\\subset [n] \\times [n]$  <u>[see 1. Global Structure]</u>",
+    "propose an online push-sum (OPS) distributed learning algorithm",
+    "initialize local model $\\mathbf{x}_0^{(i)} = 0$, weight $\\omega_0^{(i)}=1$, then for each timestamp $t$",
+    "step 1): apply local learning $\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}=\\mathbf{z}_{t}^{(i)}-\\gamma \\ f_{i,t}\\left(\\mathbf{x}_t^{(i)};\\mathbf{\\xi}_t^{(i)}\\right)$",
+    "step 2): (PUSH) send out weighted models $\\left(W_{ij}\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}, W_{ij}\\omega_t^{(i)}\\right)$ to $j\\in \\mathcal{N}_i^{(out)}$",
+    "step 3): (SUM) update local models using inbound models $\\mathbf{z}_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\mathbf{z}_{t+\\frac{1}{2}}^{(k)}$, $\\omega_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\omega_t^{(k)}$, $\\mathbf{x}_{t+1}^{(i)}=\\frac{\\mathbf{z}_{t+1}^{(i)}}{\\omega_{t+1}^{(i)}}$",
+    "$\\omega$ is used to normalize $\\mathbf{z}$ and from my calculation it never changes after 1 iteration"
+  ],
+  "motivation": [
+    "Existing federated learning primarily adopts the central server-based network topology.",
+    "mutual trusts are assumed in the state-of-the-art decentralized FL methods"
+  ],
+  "questions": [
+    "consider a social network scenario of FL, assuming trusts are single-sided and data comes in a streaming fashion"
+  ],
+  "techniques": [
+    "<u>1. Global Structure</u>",
+    [
+      "Data Samples Distributions",
+      [
+        "$\\Xi_{n, T}$ and $\\mathcal{D}_{n,T}$ are random variables and distributions where $\\Xi_{n,T}=\\{\\xi_t^{(i)}\\}_{1\\leq i \\leq n, 1\\leq t \\leq T}$, $\\mathcal{D}_{n,T}=\\{D_t^{(i)}\\}_{1\\leq i \\leq n, 1\\leq t \\leq T}$, and $\\Xi_{n,T} \\sim \\mathcal{D}_{n,T}$"
+      ],
+      "Trust (used in the original artical is 'Confusion') Matrix",
+      [
+        "$\\mathbf{W} \\in \\mathbb{R}^{n \\times n}$ where $W_{ij}\\geq 0$ is the weight (trust index) from node $i$ to node $j$. $\\mathcal{N}_i^{\\text{out}}=\\{j \\in [n]: W_{ij} > 0 \\}, \\mathcal{N}_i^{\\text{in}}=\\{k \\in [n]: W_{ki} > 0 \\}$ are the sets of in neighbors and out neighbors of node $i$",
+        "Assumption: $\\mathbf{W}$: row stochastic matrix (non-negative and row summation is 1: $\\sum_{j}W_{ij}=1$), different from typical symmetric and doubly stochastic assumption (both row and column summation is 1)"
+      ]
+    ]
+  ],
+  "doi": "arXiv:1910.04956",
+  "id": "he2019central",
+  "bibtex": "@article{he2019central, title={Central server free federated learning over single-sided trust social networks}, author={He, Chaoyang and Tan, Conghui and Tang, Hanlin and Qiu, Shuang and Liu, Ji}, journal={arXiv preprint arXiv:1910.04956}, year={2019}}"
+}

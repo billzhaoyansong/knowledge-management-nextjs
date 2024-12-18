@@ -1,0 +1,51 @@
+{
+  "title": "Toward an Automated Auction Framework for Wireless Federated Learning Services Market",
+  "authors": [
+    "Yutao Jiao",
+    "Ping Wang",
+    "Dusit Niyato",
+    "Bin Lin",
+    "Dong In Kim"
+  ],
+  "year": "2020-03",
+  "labels": [
+    "federated learning",
+    "reverse auction",
+    "client selection",
+    "incentive mechanism",
+    "reinforcement learning",
+    "GNN",
+    "social welfare"
+  ],
+  "summaries": [
+    "propose __2 auction mechanisms__ to commercialize FL services, achieving [1] maximization of social welfare (sum of platform's utility and the data owners utility)",
+    "data owners report their type profile including the bid price, data size, and the earth mover's distance (EMD) metric (the lower the better), and channel profile",
+    "in reverse multi-dimensional auction (RMA) mechanism, workers are are selected by grouping and sorting workers by the EMD value, then sorting and selecting workers by marginal virtual social welfare density in non-increasing order",
+    "in RMA mechanism, workers are rewarded (1) the bid price if he is the first one that has a non-negative marginal density and channel conflict (2) a price lower than his bid price",
+    "in deep reinforcement learning based auction (DRLA) mechanism, a spectrum conflict graph (GNN) is used to represent the channel conflicting relationship among the data owners",
+    "in DRLA mechanism, the DL model is trained based on the increase social welfare contributed by selection action and the payment is set to the worker's critical bid, i.e., the maximum bid that keeps Q function as a winning score. "
+  ],
+  "motivation": [
+    "As implied by the first characteristic above, an important prerequisite for a successful FL task is the participation of a large base of data owners that contribute sufficient training data.",
+    "Therefore, establishing an FL services market is necessary for the sustainable development of the FL community.",
+    "We propose an auction based market model to facilitate commercializing federated learning services among different entities."
+  ],
+  "questions": [
+    "The success of federated learning requires sufficient data owners to jointly utilize their data, computing and communication resources for model training."
+  ],
+  "systemModel": [
+    "step 1: FL platform initiates and announces an FL task",
+    "step 2: interested data owners report their bid prices, data size, earth mover's distance(EMD) value (a smaller EMD value is better), requested channel to communicate with FL platform",
+    "step 3: FL platform conducts worker selection and decide the payments [see 1. Client Selection]",
+    "step 4: FL platform conducts model training"
+  ],
+  "techniques": [
+    "in step 3, worker selection problem is formulated to maximize the social welfare, which is the sum of platform's utility (platform's data utility - computational cost for model averaging - communication cost for global model transmission - total payments to data owners) and data owners' utility (payment - cost)",
+    "the first mechanism to solve the utility maximization problem is call the Reverse Multi-dimensional auction (RMA) mechanism, which follows a randomied and greedy way",
+    "RMA mechanism (1) divides workers according to the EMD metric, (2) in a randomly selected group excludes workers having channel conflict with currently selected workers, (3) sort workers by non-increasing order of marginal virtual social welfare density and select those with positive density, (4) payment is devided according to marginal virtual social welfare density",
+    "the second mechanism to solve the utility maximization problem is deep reinforcement learning based and use the graph neural network (GNN) to exploit the conflict relationships and generate effective embeddings."
+  ],
+  "doi": "10.1109/TMC.2020.2994639",
+  "id": "jiao2020toward",
+  "bibtex": "@article{jiao2020toward, title={Toward an automated auction framework for wireless federated learning services market}, author={Jiao, Yutao and Wang, Ping and Niyato, Dusit and Lin, Bin and Kim, Dong In}, journal={IEEE Transactions on Mobile Computing}, volume={20}, number={10}, pages={3034--3048}, year={2020}, publisher={IEEE}}"
+}
