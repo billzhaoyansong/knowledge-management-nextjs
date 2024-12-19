@@ -1,6 +1,10 @@
-import { remark } from 'remark';
-import html from 'remark-html';
 import PaperDetail from './paper-detail';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkMath from 'remark-math';
+import remarkRehype from 'remark-rehype';
+import rehypeKatex from 'rehype-katex';
+import rehypeStringify from 'rehype-stringify'
 
 const abbrevName = function (fullname: string) {
     var split_names = fullname.trim().split(" ");
@@ -35,8 +39,12 @@ const PaperCard = async ({
 }) => {
 
     // render the first line of the summary to show on the card
-    const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await remark()
-        .use(html)
+    const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await unified()
+        .use(remarkParse)
+        .use(remarkMath)
+        .use(remarkRehype)
+        .use(rehypeKatex)
+        .use(rehypeStringify)
         .process(paper.summaries[0]) : "";
 
     return <div className="lg:basis-1/4 md:basis-full">

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+
+@layer components {
+
+    ul,
+    ol {
+        @apply pl-6;
+    }
+
+    ol>li {
+        @apply list-decimal;
+
+    }
+
+    ul>li {
+        @apply list-disc list-inside;
+    }
+
+    li:has(ol:first-child) {
+        @apply list-none;
+    }
+
+    p {
+        @apply inline;
+    }
+}
