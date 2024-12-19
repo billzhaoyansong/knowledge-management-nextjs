@@ -14,6 +14,7 @@ import rehypeKatex from "rehype-katex";
 
 import './paper-detail.css'
 import 'katex/dist/katex.min.css'
+import PdfViewer from "../components/pdf-viewer";
 
 
 function isString(content: any): boolean {
@@ -118,10 +119,10 @@ export default function PaperDetail(
             onClose={() => { setIsOpen(false) }}
             size="lg"
             title={paperContent.title}>
-            <div className="flex flex-row">
+            <div className="flex flex-row h-full">
 
-                {/* left details abstract by myself */}
-                <div className="w-1/2 h-full bg-yellow-100 mx-2">
+                {/* ============= left details abstract by myself */}
+                <div className="w-1/2 h-full overflow-y-scroll mx-2 border bg-yellow-50">
                     {[
                         { 'title': 'summary', content: paperContent.summaries },
                         { 'title': 'systemModel', content: paperContent.systemModel },
@@ -138,9 +139,9 @@ export default function PaperDetail(
 
                 </div>
 
-                {/* right original PDF */}
-                <div className="w-1/2 h-full bg-yellow-100">
-
+                {/* ============= right original PDF */}
+                <div className="w-1/2 h-full bg-yellow-100 border">
+                    <PdfViewer url={`/papers/${paperContent.id}/article.pdf`} />
                 </div>
             </div>
         </Modal>

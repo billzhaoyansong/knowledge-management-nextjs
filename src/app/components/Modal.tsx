@@ -21,12 +21,12 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, size, title, children }) => {
                         &times;
                     </button>
                 </div>
-                <div className="p-4 flex-1 overflow-scroll">{children}</div>
-                <div className="flex-initial flex justify-end p-4 border-t">
+                <div className="p-4 flex-1">{children}</div>
+                {/* <div className="flex-initial flex justify-end p-4 border-t">
                     <button onClick={onClose} className="bg-blue-500 text-white px-4 py-2 rounded">
                         Close
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
