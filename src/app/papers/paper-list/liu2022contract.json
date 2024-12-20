@@ -1,0 +1,44 @@
+{
+  "title": "A Contract Theory Based Incentive Mechanism for Federated Learning",
+  "authors": [
+    "Yuan Liu",
+    "Mengmeng Tian",
+    "Yuxin Chen",
+    "Zehui Xiong",
+    "Cyril Leung",
+    "Chunyan Miao"
+  ],
+  "year": "2021-08",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "contract theory",
+    "incentive mechanism"
+  ],
+  "abstract": "Federated learning (FL) serves as a data privacy-preserved machine learning paradigm, and realizes the collaborative model trained by distributed clients. To accomplish an FL task, the task publisher needs to pay financial incentives to the FL server offloads the task to the contributing FL clients. However, it is challenging to design proper incentives for FL clients because the task is privately trained by the clients. This paper proposes a contract theory-based FL task training model toward minimizing the incentive budget subject to clients being individually rational and incentive compatible in each FL training round. We design a two-dimensional contract model by formally defining two private types of clients, namely data quality and computation effort. To effectively aggregate the trained models, a contract-based aggregator is proposed. We analyze the feasible and optimal contract solutions for the proposed contract model. The experimental results demonstrate that the proposed framework and contract model can effectively improve the generation accuracy of FL tasks. Moreover, the generalization accuracy of the FL tasks can be improved by the proposed incentive mechanism, the contract-based aggregation is applied.",
+  "summaries": [
+    "propose __a contract theory-based FL framework__ including [1] an incentive mechanism aiming to minimize budget, and [2] an aggregator",
+    "_Problem_: in FL, proper financial incentives are challenging to design as tasks are trained privately by the clients. Specifically, those private information includes local data and local computational behavior"
+  ],
+  "systemModel": [
+    "a task requester, a FL server, several FL clients",
+    "processes",
+    [
+      "the task requester publishes a task to the FL server<ol>",
+      "FL iterations:",
+      [
+        "the FL server sets the contracts for a task<ol>",
+        "the FL server publishes a task with contracts, and each client signs corresponding contract with the server",
+        "each client trains a task model locally",
+        "each client submits a trained model",
+        "the FL server aggregates the submitted model",
+        "the FL server pays rewards accordingly"
+      ],
+      "the FL server deliver the final model to the task requester"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1007/978-3-031-11748-0_6",
+  "id": "liu2022contract",
+  "bibtex": "@incollection{liu2022contract, title={A contract theory based incentive mechanism for federated learning}, author={Liu, Yuan and Tian, Mengmeng and Chen, Yuxin and Xiong, Zehui and Leung, Cyril and Miao, Chunyan}, booktitle={Federated and Transfer Learning}, pages={117--137}, year={2022}, publisher={Springer}}"
+}

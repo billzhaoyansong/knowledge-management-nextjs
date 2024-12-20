@@ -1,0 +1,57 @@
+{
+  "title": "Accelerating Federated Learning via Parallel Servers: A Theoretically Guaranteed Approach (P-FedAvg)",
+  "authors": [
+    "Xuezheng Liu",
+    "Zhicong Zhong",
+    "Yipeng Zhou",
+    "Di Wu",
+    "Xu Chen",
+    "Min Chen",
+    "Quan Z. Sheng"
+  ],
+  "year": "2021-08",
+  "labels": [
+    "federated learning",
+    "parallelism",
+    "convergence rate",
+    "architecture",
+    "aggregation",
+    "clustering"
+  ],
+  "summaries": [
+    "propose __a parallelizable FL algorithm__ by allowing multiple parameter server (PSes) to cooperate and train a model, achieving (1) higher global accuracy (2) faster convergence rate (3) faster time cost per global iteration, comparing (1) FedAvg (2) HierFAVG (3) DPSGD",
+    "in this framework, each PS is only responsible for a fraction of total clients, but PSes can mix model parameters in a designed way that guarantees convergence"
+  ],
+  "systemModel": [
+    "$M$ connected PSes with inner topology captured by a $M\\times M$ matrix $\\mathbf{L}$: [1] for connected PSes $i$ and $i'$, $L_{ii'}=1$, [2] otherwise $L_{ii'}=0$. [3] $L_{ii'}=L_{i'i}$",
+    "$N$ clients denoted by $\\mathcal{N}$, each PS $i$ covers a $N_i$ set of clients $\\mathcal{N}_i$: [1] $\\mathcal{N}=\\bigcup_{i=1}^M \\mathcal{N}_i$; [2] $\\mathcal{N}_i\\bigcap \\mathcal{N}_{i'}=\\emptyset$",
+    "workflow (1): each PS $i$ distributes the set of model parameters $\\mathbf{x}$ to randomly selected set of clients $\\mathcal{K}_i$ in $\\mathcal{N}_i$",
+    "workflow (2): each client conducts $E$ rounds of local iterations",
+    "workflow (3): client $j$ upload parameters $\\mathbf{x}_j$ to PS $i$",
+    "workflow (4): PS $i$ generates intermediate parameter vector $\\mathbf{v}_i=\\frac{1}{K_i}\\sum\\limits_{j\\in\\mathcal{K}_i} \\mathbf{x}_j$",
+    "workflow (5): PS $i$ mix intermediate parameters with neighboring PSes to get final model $\\mathbf{x}_i=\\mathbf{Vw}_i$ [see 1. mixing topology]"
+  ],
+  "motivation": [
+    "In vanilla FL, a single centralized PS is responsible for coordinating clients.",
+    "For a large-scale FL system, it turns out that the communication between multiple decentralized clients and the single PS would be the bottleneck and the learning process can be retarded considerably due to the following two reasons",
+    "Firstly, for clients located in different geographic areas, it is difficult to establish a fast network to connect all of them with a single PS.",
+    "Secondly, the communication capacity of a single PS is limited while the client population can be a huge number",
+    "Thereby, the single PS can only interact with a small portion of all clients in each global iteration, and hence the overall learning efficiency can be low."
+  ],
+  "questions": [
+    "a single centralized parameter server (PS) will seriously limit the scale and efficiency of Federated Learning (FL)",
+    "A straightforward approach to scale up the FL system is to construct a Parallel FL (PFL) system with multiple parallel PSes.",
+    "However, it is unclear whether PFL can really accelerate FL or reduce the training time of FL"
+  ],
+  "techniques": [
+    "1. mixing topology",
+    [
+      "when designing the mixing strategy, following factors should be considered and well balanced: (1) convergence rate, (2) communication traffic, (3) communication time and (4) robustness",
+      "after comparing with complete topology, balanced tree topology, ring topology, and barbell topology, it is proved that 2d-torus is the best topology for implementing the PFL system",
+      "(involves many assumptions and proof, so the process is omited)"
+    ]
+  ],
+  "doi": "10.1109/TNET.2022.3168939",
+  "id": "liu2022accelerating",
+  "bibtex": "@article{liu2022accelerating, title={Accelerating Federated Learning via Parallel Servers: A Theoretically Guaranteed Approach}, author={Liu, Xuezheng and Zhong, Zhicong and Zhou, Yipeng and Wu, Di and Chen, Xu and Chen, Min and Sheng, Quan Z}, journal={IEEE/ACM Transactions on Networking}, volume={30}, number={5}, pages={2201--2215}, year={2022}, publisher={IEEE}}"
+}

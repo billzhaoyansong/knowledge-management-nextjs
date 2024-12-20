@@ -1,0 +1,87 @@
+{
+  "title": "Automatic Double-Auction Mechanism for Federated Learning Service Market in Internet of Things",
+  "authors": [
+    "Tianle Mai",
+    "Haipeng Yao",
+    "Jiaqi Xu",
+    "Ni Zhang",
+    "Qifeng Liu",
+    "Song Guo"
+  ],
+  "year": "2022-04",
+  "labels": [
+    "federated learning",
+    "multi-job",
+    "double auction",
+    "incentive mechanism",
+    "reinforcement learning",
+    "social welfare"
+  ],
+  "summaries": [
+    "design __2 double auction mechanisms__ to solve multi-job assignment problem at the same time by maximizing social welfare",
+    "social welfare is the difference of accuracy-based tasks utility and accuracy-based data owners' costs",
+    "in iterative double auction (IDA), a central broker facilitates multiple task owners and data owners to iteratively adjust their pricing for each others",
+    "RL based double auction employed the experience-weighted attraction learning"
+  ],
+  "systemModel": [
+    "$N$ FL tasks indexed by $i$, $M$ data owners (DO) indexed by $j$",
+    "$\\theta_{j}^{wo}$ is a $1\\times N$ vector meaning the accuracy willing to be provideded by $j^{th}$ DO to all tasks",
+    "$\\theta_{i}^{ag}$ is a $1\\times M$ vector meaning the accuracy requested by $i^{th}$ task to all DOs",
+    "IDA assumes monotonicity and concave-convex requirement, and uses a central broker to facilitate multiple task owners and data owners to iteratively adjust their pricing for each others [see 1. IDA]",
+    "RL based double auction assumes (1) one FL task sets the same demand accuracy and pricing for all data owner, and (2) one data owner provides the same accuracy and pricing for all task owners [see 2. RL-based double auction]"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "Incentivizing Data Owners"
+    ],
+    [
+      "FL",
+      "Multi-Job"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "Incentive Mechanism"
+    ]
+  ],
+  "motivation": [
+    "However, there are still some challenges when implementing the FL framework over massive AIoT devices.",
+    "Compared to centralized architecture, the FL participants are independent, uncontrollable, and self-interested.",
+    "Because of the energy costs suffered from model training, AIoT devices are unwilling to participate in FL tasks or provide the redundant or low-quality local model.",
+    "Therefore, designing an effective incentive scheme to simulate the data owner to actively participate in FL tasks is thus a priority problem."
+  ],
+  "questions": [
+    "Designing effective incentive schemes to stimulate the distributed devices to actively participate in training tasks and contribute high-quality training models is the priority question"
+  ],
+  "techniques": [
+    "1. IDA",
+    [
+      "1.1 modeling",
+      [
+        "$\\begin{array}{ll} \\underset{\\theta_i^{ag},\\theta_j^{wo}}{\\operatorname{max}} & \\left\\{\\sum\\limits_{i=1}^N\\sum\\limits_{j=1}^M \\omega_{i,j} \\log\\theta_{i,j}^{ag}-\\frac{1}{2}g_{j,i}\\theta_{j,i}^2\\right\\} \\\\      \\text { s.t. } & \\sum\\limits_{j=1}^M\\theta_{i,j}^{ag}\\leq\\theta_i^{\\max}, \\quad i\\in\\{1,...,N\\} \\\\    & \\sum\\limits_{i=1}^M\\theta_{j,i}^{wo}\\leq\\theta_j^{\\max}, \\quad j\\in\\{1,...,M\\} \\\\    & \\theta_{i,j}^{ag}=\\theta_{j,i}^{wo}   \\end{array}$",
+        [
+          "$\\omega_{i,j}$: pricing from task owner to data owner",
+          "$g_{j,i}$: pricing from data owner to task owner"
+        ],
+        "(is this modeling oversimplified in the context of FL? how can a data owner assure that he can provide the accuracy exactly as he stated before task starts? besides,accuracy contributions are highly related to the participating sequence)"
+      ],
+      "1.2 iterative algorithm",
+      [
+        "step 1): broker compute $\\theta_i^{ag},\\theta_j^{wo}$ and Lagrange multipliers",
+        "step 2): broker announce $\\theta_i^{ag},\\theta_j^{wo}$ to the market",
+        "step 3): each task owner and data owner compute self pricing by maximizing self utility",
+        "step 4): back to step 1) unless pricing are stable"
+      ]
+    ],
+    "2. RL-based double auction",
+    [
+      "for each data owner and task owner, there is an attraction value corresponding to their pricing and accuracy.",
+      "in reverse, the allover attraction values in the double auction mechanism affect the individual pricing and accuracy decisions"
+    ]
+  ],
+  "doi": "10.1109/TNSE.2022.3170336",
+  "id": "mai2022automatic",
+  "bibtex": "@article{mai2022automatic, title={Automatic double-auction mechanism for federated learning service market in internet of things}, author={Mai, Tianle and Yao, Haipeng and Xu, Jiaqi and Zhang, Ni and Liu, Qifeng and Guo, Song}, journal={IEEE Transactions on Network Science and Engineering}, volume={9},number={5}, pages={3123--3135}, year={2022}, publisher={IEEE}}"
+}

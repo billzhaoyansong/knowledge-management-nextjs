@@ -1,0 +1,28 @@
+{
+  "title": "Friend-as-Learner: Socially-Driven Trustworthy and Efficient Wireless Federated Edge Learning",
+  "authors": [
+    "Xi Lin",
+    "Jun Wu",
+    "Jianhua Li",
+    "Xi Zheng",
+    "Gaolei Li"
+  ],
+  "year": "2020-11",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "social network",
+    "stackelberg game",
+    "social welfare"
+  ],
+  "summaries": [
+    "propose __a framework to recruit trustworthy social friends__, achieving higher social welfare and utility of service requester",
+    "first a social graph model is built considering mutual trust and learning task similarity",
+    "then a Stackelberg game based social incentive mechanism with both complete and incomplete information to encourage better personal learning behaviors"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TMC.2021.3074816",
+  "id": "lin2021friend",
+  "bibtex": "@article{lin2021friend, title={Friend-as-learner: Socially-driven trustworthy and efficient wireless federated edge learning}, author={Lin, Xi and Wu, Jun and Li, Jianhua and Zheng, Xi and Li, Gaolei}, journal={IEEE Transactions on Mobile Computing}, volume={22}, number={1}, pages={269--283}, year={2021}, publisher={IEEE}}"
+}

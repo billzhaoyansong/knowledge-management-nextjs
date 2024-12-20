@@ -1,0 +1,72 @@
+{
+  "title": "Joint Client Selection and Resource Allocation for Federated Learning in Mobile Edge Networks (CEEFL)",
+  "authors": [
+    "Long Luo",
+    "Qingqing Cai",
+    "Zonghang Li",
+    "Hongfang Yu"
+  ],
+  "year": "2022-04",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "resource allocation",
+    "multi-job"
+  ],
+  "summaries": [
+    "propose __a FL paradigm__ which optimizes the client selection and resource allocation for multiple concurrent FL jobs, achieving 1) faster learning time and 2) lower energy consumption, comparing 1) FEDL+Random, 2) FEDL+GreedyEnergy, and 3) FEDL+GreedyTime",
+    "the multi-job client selection problem is formulated to minimize training time and energy consumption"
+  ],
+  "systemModel": [
+    "$1$ cloud server, a set of jobs $\\mathcal{J}=\\{1,...,J\\}$, a set of base stations (BSs) $\\mathcal{M}=\\{1,2,...,M\\}$, a set of user equipments (UEs) $\\{1,...i...,N\\}$",
+    "training procedure 1) UEs download the global model from the cloud server via BSs [see 1. client selection and resource allocation]",
+    "training procedure 2) UEs train ML model through $\\kappa$ local rounds",
+    "training procedure 3) UEs upload local model and gradients to the cloud server via BSs"
+  ],
+  "motivation": [
+    "However, HFLMEN is both time and energy consuming due to the following reasons.",
+    "First, to ensure model convergence, FL typically requires a large number of clients to perform an iterative and long-term on-device model training, which incurs significant energy consumption on low-power devices.",
+    "Second, given the very limited computing capacities and communication resources of UEs, how clients use computing and communication resources to perform on-device training also impacts learning time of FL jobs and energy consumption of devices a lot.",
+    "Despite many efforts on resource management for FL, existing research is insufficient in optimizing the learning time and energy consumption, especially when multiple FL jobs coexist in the HFLMEN system.",
+    "As a result, concurrent multiple FL jobs is very common in the HFLMEN system.",
+    "Recent work [3]–[5] focuses on optimizing client selection for single FL job, which is difficult to obtain the optimal performance due to the inability to handle the resource competition among multiple FL jobs.",
+    "Other work on resource allocation [6][9] assumes that the clients participating in each FL job are always available throughout training process.",
+    "However, this assumption is unrealistic.",
+    "Because of UE mobility and unreliable 5G wireless channel, clients who are previously available may be disconnected and become unavailable at a later time before training completes."
+  ],
+  "questions": [
+    "Constrained by the instability and limited resources of clients in MENs, it is challenging to optimize both learning time and energy consumption for FL"
+  ],
+  "techniques": [
+    "1. client selection and resource allocation",
+    [
+      "$\\begin{array}{ll} \\underset{x_{i,j,k}, y_{i,m,k}, p_{i,k}, f_{i,k}}{\\operatorname{min}} & \\left(\\sum\\limits_j T_{j, K_j}, \\sum\\limits_j \\sum\\limits_{k\\leq K_j}E_{j,k} \\right) \\\\      \\text { s.t. } & T_{j,k}\\leq \\max\\limits_j T_{j,k-1} + \\left(T_{i,j,k}^{cp}+2V_j \\sum\\limits_m E^{cm}_{i,m,k}\\cdot y_{i,m,k} \\right)x_{i,j,k},\\quad \\forall i\\in\\mathcal{U}_k, j\\in\\mathcal{J}, k\\leq K_j \\\\    & E_{j,k}=\\sum\\limits_i \\left(E_{i,j,k}^{cp} +2V_j \\sum\\limits_m E_{i,m,k}^{cm}\\cdot y_{i,m,k} \\right) x_{i,j,k}, \\quad \\forall j\\in\\mathcal{J}, k\\in K_j \\\\    & \\sum\\limits_{i \\in \\mathcal{A}_{j,k}} x_{i,j,k}=W_j, \\quad \\forall j\\in\\mathcal{J}, k\\in K_j \\\\    & \\sum\\limits_{j} x_{i,j,k} \\leq 1, \\quad \\forall i\\in\\mathcal{U}_k, k\\in K_j \\\\    & \\sum\\limits_{i \\in \\mathcal{B}_{m,k}} y_{i,m,k}\\leq B, \\quad \\forall m\\in\\mathcal{M}, k\\in K_j \\\\    & \\sum\\limits_{m} y_{i,m,k}= \\sum\\limits_j x_{i,j,k}, \\quad \\forall i\\in\\mathcal{U}_k, k\\in K_j \\\\    & x_{i,j,k} \\in \\{0,1\\},\\quad \\forall i\\in\\mathcal{U}_k, j\\in\\mathcal{J}, k\\leq K_j \\\\    & y_{i,m,k} \\in \\{0,1\\},\\quad \\forall i\\in\\mathcal{U}_k, m\\in\\mathcal{M}, k\\leq K_j \\\\    & p_{i}^{\\min}\\leq p_{i,k} \\leq p_i^{\\max}, \\quad \\forall i\\in\\mathcal{U}_k, k\\in K_j \\\\    & f_{i}^{\\min}\\leq f_{i,k} \\leq f_i^{\\max}, \\quad \\forall i\\in\\mathcal{U}_k, k\\in K_j  \\end{array}$",
+      [
+        "$x_{i,j,k}$: whether UE $i$ is selected to job $j$ in round $k$",
+        "$y_{i,m,k}$: whether UE $i$ is connected to BS $m$ in round $k$",
+        "$p_{i,k}$: transmission power of UE $i$ in round $k$",
+        "$f_{i,k}$: number of CPU cycles of UE $i$ in round $k$",
+        "$T_{j,k}$: learning time in the round $k$ for job $j$",
+        "$E_{j,k}$: energy consumption in the round $k$ for job $j$",
+        "$\\mathcal{U}_k$: set of available UEs at global round $k$",
+        "$\\mathcal{A}_{j,k}$: set of UEs that have training data for job $j$ in the round $k$",
+        "$\\mathcal{B}_{m,k}$: set of UEs in the coverage range of BS $m$ in the round $k$"
+      ],
+      "to solve the problem, a greedy two-step approach based on the slowest job first (SJF) is proposed.",
+      [
+        "step 1): optimizing learning time",
+        [
+          "1. compute $T_{i,m,j}$ for all $i\\in\\mathcal{U}_k$ with the max CPU frequency $f_i^{\\max}$ and transmission power $p_i^{\\max}$",
+          "2. compute $t_j^{avg}=\\frac{\\sum_{i,m} T_{i,m,j}}{\\sum_m |\\mathcal{B}_{m,k} \\bigcap \\mathcal{A}_{j,k}|}$",
+          "3. sort FL jobs in descending order of $\\{t_j^{avg}, \\forall j\\in \\mathcal{J}_k\\}$",
+          "4. based on othe sorted jobs greedily assign clients for job $j$ and compute $T_{j,k}$",
+          "5. for each round $k$ get the slowest learning time $T_{k}$"
+        ],
+        "step 2): optimizing energy consumption by client selection, BS connection, and resource allocation"
+      ]
+    ]
+  ],
+  "doi": "10.1109/WCNC51071.2022.9771771",
+  "id": "luo2022joint",
+  "bibtex": "@inproceedings{luo2022joint, title={Joint Client Selection and Resource Allocation for Federated Learning in Mobile Edge Networks}, author={Luo, Long and Cai, Qingqing and Li, Zonghang and Yu, Hongfang}, booktitle={2022 IEEE Wireless Communications and Networking Conference (WCNC)}, pages={1218--1223}, year={2022}, organization={IEEE}}"
+}

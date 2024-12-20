@@ -1,0 +1,40 @@
+{
+  "title": "POSTER: Attacks to Federated Learning: Responsive Web User Interface to Recover Training Data from User Gradients",
+  "authors": [
+    "Hans Albert Lianto",
+    "Yang Zhao",
+    "Jun Zhao"
+  ],
+  "year": "2020-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "user interface",
+    "privacy"
+  ],
+  "abstract": "Local differential privacy (LDP) is an emerging privacy standard to protect individual user data. One scenario where LDP can be applied is federated learning, where each user sends in his/her user gradients to an aggregator who uses these gradients to perform stochastic gradient descent. In a case where the aggregator is untrusted and LDP is not applied to each user gradient, the aggregator can recover sensitive user data from these gradients. In this paper, we present a new interactive web demo showcasing the power of local differential privacy by visualizing federated learning with local differential privacy. Moreover, the live demo shows how LDP can prevent untrusted aggregators from recovering sensitive training data. A measure called the exp-hamming recovery is also created to show the extent of how much data the aggregator can recover.",
+  "summaries": [
+    "present __a web demo__ showcasing the power of local differential privacy",
+    "_Scenario_: in FL, the untrusted aggregator can recover sensitive user data from gradients. With Local differential privacy (LDP), user's sensitive information will be protected by perturbing the user's data",
+    "_Problem_: the power of LDP hasn't been fully revealed yet",
+    "_Solution_: the authors present an interactive web demo showcasing the power of local differential privacy"
+  ],
+  "systemModel": [
+    "workflow of the UI:",
+    [
+      "define configurations, including ML algorithm, LDP algorithm, and LDP parameter(eps)<ol>",
+      "add users",
+      "client 'Train' button to let all users go through one epoch of stochastic gradient descent",
+      "client 'Recover' button to try to recover sensitive data; and to measure the recovery degree, a number called 'exp-hamming recovery' is printed on the UI",
+      [
+        "the exp-hamming recovery: $E=\\exp(-k\\Vert\\vec{x}-\\vec{x_r}\\Vert_1)$",
+        "$E=\\begin{cases} 1, \\vec{x}=\\vec{x_r}\\text{,fully recovered} \\\\ 0, \\text{no info} \\end{cases}$",
+        "if $k=5$, a critical value $E=0.368$ can be used to gauge the recovery degree"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1145/3320269.3405438",
+  "id": "lianto2020poster",
+  "bibtex": "@inproceedings{lianto2020poster, title={POSTER: Attacks to federated learning: Responsive web user interface to recover training data from user gradients}, author={Lianto, Hans Albert and Zhao, Yang and Zhao, Jun}, booktitle={Proceedings of the 15th ACM Asia Conference on Computer and Communications Security}, pages={901--903}, year={2020}}"
+}

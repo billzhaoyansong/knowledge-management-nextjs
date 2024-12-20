@@ -9,7 +9,7 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "FL simulation platform"
+    "FL platform"
   ],
   "abstract": "Federated learning (FL) is one of the most promising approaches to ensure privacy in the application of data-driven techniques to sensitive information. However, the implementation of such approaches in a production environment is still an important challenge. In this paper, we present a scalable, portable, hardware-independent, model-agnostic FL Simulation Engine (FLSE) with the aim of easing the job of researchers who want to train FL models to be deployed in production environments. The FLSE offers a tool that can be used both standalone or embedded within a larger architecture, it can be deployed seamlessly and allows concurrent, scalable, and highly available V&V assessment support for FL models. The tool allows researchers to understand the behaviour, in terms of metric performance, of their proposed models in production scenarios, allowing a boost in trustworthiness towards ethical AI.",
   "summaries": [
@@ -43,7 +43,6 @@
     ]
   ],
   "techniques": [
-    ""
   ],
   "doi": "10.1145/3624486.3624488",
   "id": "arroyo2023scalable",

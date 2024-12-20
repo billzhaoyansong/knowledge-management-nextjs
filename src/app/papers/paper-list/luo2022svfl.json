@@ -1,0 +1,24 @@
+{
+  "title": "SVFL: Efficient Secure Aggregation and Verification for Cross-Silo Federated Learning",
+  "authors": [
+    "Fucai Luo",
+    "Saif Al-Kuwari",
+    "Yong Ding"
+  ],
+  "year": "2022-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "verification",
+    "security"
+  ],
+  "summaries": [
+    "propose __a protocol__ for secure gradient aggregation and verification to solve security (privacy of local gradient and trained model, correctness of aggregated gradient) problem",
+    "firstly this protocol masks local gradients with a simple masking technique (Motp), then verify the correctness of the aggregated gradient using an efficient homomorphic network coding signature scheme"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TMC.2022.3219485",
+  "id": "luo2022svfl",
+  "bibtex": "@article{luo2022svfl,title={SVFL: Efficient secure aggregation and verification for cross-silo federated learning},  author={Luo, Fucai and Al-Kuwari, Saif and Ding, Yong},  journal={IEEE Transactions on Mobile Computing},  year={2022},  publisher={IEEE}}"
+}

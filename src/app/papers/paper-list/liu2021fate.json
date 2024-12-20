@@ -1,0 +1,33 @@
+{
+  "title": "FATE: An Industrial Grade Platform for Collaborative Learning With Data Protection",
+  "authors": [
+    "Yang Liu",
+    "Tao Fan",
+    "Tianjian Chen",
+    "Qian Xu",
+    "Qiang Yang"
+  ],
+  "year": "2020-07",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "FL platform",
+    "user interface"
+  ],
+  "abstract": "Collaborative and federated learning has become an emerging solution to many industrial applications where data values from different sites are exploit jointly with privacy protection. We introduce FATE, an industrial-grade project that supports enterprises and institutions to build machine learning models collaboratively at large-scale in a distributed manner. FATE supports a variety of secure computation protocols and machine learning algorithms, and features out-of-box usability with end-to-end building modules and visualization tools. Documentations are available at https://github.com/FederatedAI/FATE. Case studies and other information are available at https://www.fedai.org.",
+  "summaries": [
+    "introduce __an industrial-grade FL platform__ to enable enterprises and institutions to build ML models at large-scale"
+  ],
+  "systemModel": [
+    "Main components:",
+    [
+      "FATE-FLow: a scheduling system that coordinates algorithmic execution",
+      "FATE-Board: a visualization tool",
+      "FATE-Serving: a high-performance inference platform "
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.5555/3546258.3546484",
+  "id": "liu2021fate",
+  "bibtex": "@article{liu2021fate, title={Fate: An industrial grade platform for collaborative learning with data protection}, author={Liu, Yang and Fan, Tao and Chen, Tianjian and Xu, Qian and Yang, Qiang}, journal={Journal of Machine Learning Research}, volume={22}, number={226}, pages={1--6}, year={2021}}"
+}

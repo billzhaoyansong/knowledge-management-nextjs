@@ -1,0 +1,68 @@
+{
+  "title": "Blockchain-based trustworthy federated learning architecture",
+  "authors": [
+    "Sin Kit Lo",
+    "Yue Liu",
+    "Qinghua Lu",
+    "Chen Wang",
+    "Xiwei Xu",
+    "Hye-Young Paik",
+    "Liming Zhu"
+  ],
+  "year": "2021-08",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "architecture",
+    "blockchain",
+    "smart contract",
+    "trustworthy",
+    "fairness"
+  ],
+  "summaries": [
+    "propose __an FL architecture__, where a smart contract deployed in the blockchain is used to track and record local data usage, to enhence accountability and fairness",
+    "as a result of the deployment of smart contract, accountability problem is solved",
+    "to solve the fairness problem, a weighted fair training dataset sampler is proposed"
+  ],
+  "systemModel": [
+    "1 central server, several clients (3 in experiment), one blockchain, one smart contract",
+    "the smart contract is to solve accountability by managing local models and global models on the chain [see 1. Accountability and Smart Contract]",
+    "a weighted training dataset sampler is proposed to solve fairness problem [see 2. Fairness and Weighted Dataset Sampler]"
+  ],
+  "questions": [
+    "accountability and fairness challenges facing FL"
+  ],
+  "techniques": [
+    "1. Accountability and Smart Contract",
+    [
+      "Accountability",
+      [
+        "local data are undisclosed; the data and local models trained are not tracked or mapped to the formed global models",
+        "model user (task publisher) cannot determine which local models are poisoning the global model performance",
+        "which party should be held accountable if the model is not performing properly,"
+      ],
+      "Smart Contract",
+      [
+        "in each local iteration, clients upload the encrypted (with private key) and hash value of their local model parameters and corresponding data version to the data-model registry smart contract.",
+        "after each global aggregation, the central server sends the hash value of the global model parameters to the smart contract"
+      ]
+    ],
+    "2. Fairness and Weighted Dataset Sampler",
+    [
+      "Fairness",
+      [
+        "A model is fair when it is trained with balanced and unbiased data",
+        "enhance the fairness of the federated models by improving the fairness of the training data."
+      ],
+      "Weighted Dataset Sampler",
+      [
+        "1) suppose a test dataset $D_{test}$ with classes $C\\{c_1,...,c_n\\}$ and samples $S_c\\{s_{c_1},...,s_{c_n}\\}$ exists",
+        "2) calculate weight of each class $W$ by $w_k=\\frac{\\sum_{k=1}^n s_{c_k}}{s_{c_k}}$ (implies the less the samples, the more important the class)",
+        "3) specify clients to sample according to $W$"
+      ]
+    ]
+  ],
+  "doi": "arXiv:2108.06912",
+  "id": "lo2021blockchain",
+  "bibtex": "@article{lo2021blockchain, title={Blockchain-based trustworthy federated learning architecture}, author={Lo, Sin Kit and Liu, Yue and Lu, Qinghua and Wang, Chen and Xu, Xiwei and Paik, Hye-Young and Zhu, Liming}, journal={arXiv preprint arXiv:2108.06912}, year={2021}}"
+}

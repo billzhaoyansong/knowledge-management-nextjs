@@ -1,0 +1,35 @@
+{
+  "title": "FabricFL: Blockchain-in-the-Loop Federated Learning for Trusted Decentralized Systems",
+  "authors": [
+    "Viraaji Mothukuri",
+    "Reza M. Parizi",
+    "Seyedamin Pouriyeh",
+    "Ali Dehghantanha",
+    "Kim-Kwang Raymond Choo"
+  ],
+  "year": "2021-01",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "blockchain"
+  ],
+  "abstract": "Federated learning (FL) enables collaborative training of machine learning (ML) models while preserving user data privacy. Existing FL approaches can potentially facilitate collaborative ML, but ensuring secure trading/sharing of training data is challenging in practice, particularly in the presence of adversarial FL clients. The ongoing security concerns around FL and strict laws on personally identifiable information necessitate the design of a robust and trusted FL framework, for example, using blockchain. Existing blockchain-based solutions are generally not of industrial strength, where limitations include scalability and lack of engagement by participating clients. In this article, blockchain-in-the-loop FL is our proposed approach of intertwining classic FL and Hyperledger Fabric with a gamification component. Our proposed approach is a fusion of secure application integrated to seal and sign-off asynchronous and synchronous collaborative tasks of FL. The enterprise-level blockchain network provides an immutable ledger that can be leveraged at different FL layers to ensure auditable tracing and level-up security in industrial settings. We evaluate our proposed approach with three different datasets to demonstrate the security enhancements that improve the FL process, resulting in a more accurate global ML model to converge with the possible best performance.",
+  "summaries": [
+    "propose __a secure FL framework__ to address that existing blockchain-based solutions generally lack scalability and engagement by participating clients in industrial environment",
+    "important components:",
+    [
+      "Product Owners(POs): who owns FL solutions",
+      "Auditors: consist of internal teams from all POs, to [1] exclude FL clients [2] review FL solutions [3] review enrollment requests from FL clients",
+      "Orchestrators: consist of internal teams from all POs, to [1] manage FL process by including or excluding FL clients during training [2] asynchronously updates ledger with the information from the local model weights",
+      "Orderer(in blockchain): manages [1] the list of POs, [2] the list of FL solutions, [3] approving authorities",
+      "Ledger(in blockchain): holds the world state and transaction logs",
+      "FL clients"
+    ]
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/JSYST.2021.3124513",
+  "id": "mothukuri2021fabricfl",
+  "bibtex": "@ARTICLE{mothukuri2021fabricfl, author={Mothukuri, Viraaji and Parizi, Reza M. and Pouriyeh, Seyedamin and Dehghantanha, Ali and Choo, Kim-Kwang Raymond}, journal={IEEE Systems Journal},  title={FabricFL: Blockchain-in-the-Loop Federated Learning for Trusted Decentralized Systems},  year={2022}, volume={16}, number={3}, pages={3711-3722}, keywords={Blockchains;Training;Data models;Computational modeling;Task analysis;Security;Organizations;Blockchain;decentralized artificial intelligence;federated learning (FL);hyperledger fabric (HLF);privacy-preserving machine learning (ML);security}, doi={10.1109/JSYST.2021.3124513}}"
+}

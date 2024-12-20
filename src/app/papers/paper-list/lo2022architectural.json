@@ -1,0 +1,65 @@
+{
+  "title": "Architectural patterns for the design of federated learning systems",
+  "authors": [
+    "Sin Kit Lo",
+    "Qinghua Lu",
+    "Liming Zhu",
+    "Hye-Young Paik",
+    "Xiwei Xu",
+    "Chen Wang"
+  ],
+  "year": "2021-01",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "architecture"
+  ],
+  "abstract": "Federated learning has received fast-growing interests from academia and industry to tackle the challenges of data hungriness and privacy in machine learning. A federated learning system can be viewed as a large-scale distributed system with different components and stakeholders as numerous client devices participate in federated learning. Designing a federated learning system requires software system design thinking apart from the machine learning knowledge. Although much effort has been put into federated learning from the machine learning technique aspects, the software architecture design concerns in building federated learning systems have been largely ignored. Therefore, in this paper, we present a collection of architectural patterns to deal with the design challenges of federated learning systems. Architectural patterns present reusable solutions to a commonly occurring problem within a given context during software architecture design. The presented patterns are based on the results of a systematic literature review and include three client management patterns, four model management patterns, three model training patterns, four model aggregation patterns, and one configuration pattern. The patterns are associated to the particular state transitions in a federated learning model lifecycle, serving as a guidance for effective use of the patterns in the design of federated learning systems.",
+  "summaries": [
+    "present __a collection of architectural patterns__ in FL",
+    "_Problem_: software architecture design concerns in building FL systems have been largely ignored"
+  ],
+  "systemModel": [
+    "lifecycle of a model in a FL system:",
+    [
+      "Initialized<ol>",
+      [
+        "Client registry: manages the information of all the participating client devices",
+        "Client selector: selects client devices for a specific training task",
+        "Client cluster: increases the model performance and training efficiency through grouping client devices based on the similarity of certain characteristics (e.g., available resources, data distribution)"
+      ],
+      "Broadcast",
+      [
+        "Multi-task model trainer",
+        "Heterogeneous data handler"
+      ],
+      "Trained",
+      [
+        "Message compressor"
+      ],
+      "Transmitted",
+      [
+        "Asynchronous aggregator",
+        "Decentralized aggregator",
+        "Hierarchical aggregator",
+        "Secure aggregator"
+      ],
+      "Aggregated",
+      "Evaluated",
+      [
+        "Deployment selector",
+        "Incentive registry",
+        "Model conversioning registry"
+      ],
+      "Deployed",
+      [
+        "Model replacement trigger"
+      ],
+      "Monitored"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1016/j.jss.2022.111357",
+  "id": "lo2022architectural",
+  "bibtex": "@article{lo2022architectural,  title={Architectural patterns for the design of federated learning systems}, author={Lo, Sin Kit and Lu, Qinghua and Zhu, Liming and Paik, Hye-Young and Xu, Xiwei and Wang, Chen}, journal={Journal of Systems and Software},  volume={191}, pages={111357}, year={2022},publisher={Elsevier}}"
+}

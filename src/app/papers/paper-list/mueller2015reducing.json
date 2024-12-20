@@ -1,0 +1,25 @@
+{
+  "title": "Reducing Hazards in Multiagent Task Delegation",
+  "authors": [
+    "Marcus Mueller"
+  ],
+  "year": "2015-03",
+  "editing": false,
+  "labels": [
+    "task delegation"
+  ],
+  "abstract": "Delegation of tasks is a basic pattern of numerous interactions within multiagent systems. Since agents are selfish and exploit local knowledge about their actions as well as the environment, delegators face the hazard of losing outcome due to self-serving behavior of the 'employed' agent. This research work adopts the economic theory of agency to study delegation relationships in multiagent systems and to design a mechanism for task delegation that prevents delegators from losing outcomes in such relationships. The contribution of this work is a mechanism for task delegation considering the economic situation of agents. The paper proposes the results of a simulation study to demonstrate the usefulness and efficacy of the provided artifact.",
+  "summaries": [
+    "[1] study __delegation relationships__ in multiagent systems and [2] design __a mechanism for task delegation__ that prevents delegators from losing outcomes in such relationships",
+    "_Scenario_: in MAS, the problem of whether to delegate a task and delegate to whom, is a recent research interest",
+    "_Problem_: in a MAS, managers (who delegete) sometimes cannot monitor contractors (who adopt) and outcomes are influenced by unpredictable external factors, contractors may minimize their effort and attribute poor results to these disturbances. This lack of oversight prevents managers from holding contractors accountable for low performance, risking unfavorable outcomes.",
+    "_Solution_: the author adopted the economic agentcy theory (EAT) and designed a mechanism to address this problem in task delegation, in such a manner that the manager's outcomes are maximzied"
+  ],
+  "systemModel": [],
+ 
+  "techniques": [
+  ],
+  "doi": "",
+  "id": "mueller2015reducing",
+  "bibtex": "@article{mueller2015reducing, title={Reducing hazards in multiagent task delegation}, author={Mueller, Marcus}, year={2015}}"
+}

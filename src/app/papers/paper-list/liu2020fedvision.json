@@ -1,0 +1,48 @@
+{
+  "title": "FedVision: An Online Visual Object Detection Platform Powered by Federated Learning",
+  "authors": [
+    "Yang Liu",
+    "Anbu Huang",
+    "Yun Luo",
+    "He Huang",
+    "Youzhi Liu",
+    "Yuanyuan Chen",
+    "Lican Feng",
+    "Tianjian Chen",
+    "Han Yu",
+    "Qiang Yang"
+  ],
+  "year": "2020-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "FL platform"
+  ],
+  "abstract": "Visual object detection is a computer vision-based artificial intelligence (AI) technique which has many practical applications (e.g., fire hazard monitoring). However, due to privacy concerns and the high cost of transmitting video data, it is highly challenging to build object detection models on centrally stored large training datasets following the current approach. Federated learning (FL) is a promising approach to resolve this challenge. Nevertheless, there currently lacks an easy to use tool to enable computer vision application developers who are not experts in federated learning to conveniently leverage this technology and apply it in their systems. In this paper, we report FedVision - a machine learning engineering platform to support the development of federated learning powered computer vision applications. The platform has been deployed through a collaboration between WeBank and Extreme Vision to help customers develop computer vision-based safety monitoring solutions in smart city applications. Over four months of usage, it has achieved significant efficiency improvement and cost reduction while removing the need to transmit sensitive data for three major corporate customers. To the best of our knowledge, this is the first real application of FL in computer vision-based tasks.",
+  "summaries": [
+    "develop __a ML engineering platform__ called FedVision to support the development of FL powered CV applications",
+    "_Problem_: no existing easy tool to facilitate FL training for CV developers"
+  ],
+  "systemModel": [
+    "workflow for training a CV task under FedVision:",
+    [
+      "crowdsourced image annotation<ol>",
+      "federated model training (Components:)",
+      [
+        "Configuration",
+        "FL Server: for parameter uploading and aggregation",
+        "Task Scheduler: residing between FL server and clients, performs global dispatch scheduling to coordinate communications between FL server and clients by jointly considering clients' local model quality and the current load on their computational resources",
+        "FL Clients",
+        [
+          "Task Manager: residing in clients, to coordinate concurrent federated model training processes in clients",
+          "Explorer: residing in clients, to monitor resource utilizations on clients to inform Task Scheduler"
+        ]
+      ],
+      "federated model update"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1609/aaai.v34i08.7021",
+  "id": "liu2020fedvision",
+  "bibtex": "@inproceedings{liu2020fedvision, title={Fedvision: An online visual object detection platform powered by federated learning}, author={Liu, Yang and Huang, Anbu and Luo, Yun and Huang, He and Liu, Youzhi and Chen, Yuanyuan and Feng, Lican and Chen, Tianjian and Yu, Han and Yang, Qiang}, booktitle={Proceedings of the AAAI conference on artificial intelligence}, volume={34}, number={08}, pages={13172--13179}, year={2020}}"
+}
