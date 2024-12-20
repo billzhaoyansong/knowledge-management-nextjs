@@ -5,7 +5,7 @@ import { useResizeObserver } from '@wojtekmaj/react-hooks';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -22,6 +22,18 @@ export default function PdfViewer({ url }: { url: string }) {
     const [containerWidth, setContainerWidth] = useState<number>();
     const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
 
+    const [isUrlValid, setIsUrlValid] = useState(false)
+
+    useEffect(() => {
+        fetch(url).then((r) => {
+            if (r.status !== 404) {
+                setIsUrlValid(true);
+            }
+        }).catch(e => {
+            console.log('Pdf access error: ' + e)
+        })
+    }, [])
+
     const onResize = useCallback<ResizeObserverCallback>((entries) => {
         const [entry] = entries;
 
@@ -37,17 +49,19 @@ export default function PdfViewer({ url }: { url: string }) {
     }
 
     return <div className="w-full h-full overflow-y-scroll" ref={setContainerRef}>
-        <Document className='w-full' file={url} onLoadSuccess={onDocumentLoadSuccess} onLoadError={(e) => {
-            console.log(e)
-        }}>
-            {Array.from(new Array(numPages), (_el, index) => (
-                <Page
-                    // width={100}
-                    key={`page_${index + 1}`}
-                    pageNumber={index + 1}
-                    width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
-                />
-            ))}
-        </Document>
+        {isUrlValid ?
+            <Document className='w-full' file={url} onLoadSuccess={onDocumentLoadSuccess}>
+                {Array.from(new Array(numPages), (_el, index) => (
+                    <Page
+                        // width={100}
+                        key={`page_${index + 1}`}
+                        pageNumber={index + 1}
+                        width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
+                    />
+                ))}
+            </Document> :
+            <div>invalid pdf url
+            </div>
+        }
     </div>
 }

@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from "react";
-import Modal from "../components/Modal";
+import { useEffect, useState } from "react";
+import Modal from "../components/modal";
 import { PaperContent } from "./paper-card";
 import React from "react";
 
@@ -122,7 +122,7 @@ export default function PaperDetail(
             <div className="flex flex-row h-full">
 
                 {/* ============= left details abstract by myself */}
-                <div className="w-1/2 h-full overflow-y-scroll mx-2 border bg-yellow-50">
+                <div className="w-1/2 overflow-y-scroll mx-2 border bg-yellow-50" style={{height: '90%'}}>
                     {[
                         { 'title': 'summary', content: paperContent.summaries },
                         { 'title': 'systemModel', content: paperContent.systemModel },
@@ -140,7 +140,7 @@ export default function PaperDetail(
                 </div>
 
                 {/* ============= right original PDF */}
-                <div className="w-1/2 h-full bg-yellow-100 border">
+                <div className="w-1/2 bg-yellow-100 border" style={{height: '90%'}}>
                     <PdfViewer url={`/papers/${paperContent.id}/article.pdf`} />
                 </div>
             </div>
