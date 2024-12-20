@@ -7,6 +7,7 @@ import path from 'path';
 import PaperCard from './paper-card';
 import { redirect } from 'next/navigation'
 import Filter from './filter';
+import PageLayout from '../components/page-layout';
 
 export default async function Papers({
     searchParams,
@@ -83,13 +84,8 @@ export default async function Papers({
                 b.year.localeCompare(a.year)
     )
 
-    return <div className="flex flex-col h-screen overflow-auto">
-        {/* <div className="flex-1 h-screen overflow-auto flex flex-col"> */}
-        <div className="bg-yellow-100 px-9 py-6 flex-initial">
-            <h2 className="text-2xl font-medium">Papers</h2>
-        </div>
-
-        <div className='flex flex-row bg-yellow-50 '>
+    return <PageLayout title='Papers'>
+        <div className='flex flex-row'>
 
             {/* left filters */}
             <div className="w-64 pl-9 pr-6 mt-6 h-screen border-r">
@@ -104,5 +100,5 @@ export default async function Papers({
                 {_papersToShow.map(p => <PaperCard key={p.id} paper={p}></PaperCard>)}
             </div>
         </div>
-    </div>
+    </PageLayout>
 }
