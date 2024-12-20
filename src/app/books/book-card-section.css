@@ -1,0 +1,23 @@
+@tailwind components;
+
+@layer components {
+
+    .book-content {
+
+        ul li {
+            @apply no-underline hover:cursor-default text-sm !important;
+        }
+
+        h1{
+            @apply text-xl pb-1
+        }
+
+        table th, table td{
+            @apply border text-sm text-left align-top;
+        }
+
+        table td ul{
+            @apply pl-6;
+        }
+    }
+}

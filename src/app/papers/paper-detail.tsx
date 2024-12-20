@@ -119,7 +119,7 @@ export default function PaperDetail(
             onClose={() => { setIsOpen(false) }}
             size="lg"
             title={paperContent.title}>
-            <div className="flex flex-row h-full">
+            <div className="flex flex-row h-full paper-detail">
 
                 {/* ============= left details abstract by myself */}
                 <div className="w-1/2 overflow-y-scroll mx-2 border bg-yellow-50" style={{height: '90%'}}>

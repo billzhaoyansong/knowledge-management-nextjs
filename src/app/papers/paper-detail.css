@@ -3,25 +3,28 @@
 
 @layer components {
 
-    ul,
-    ol {
-        @apply pl-6;
-    }
+    .paper-detail {
 
-    ol>li {
-        @apply list-decimal;
+        ul,
+        ol {
+            @apply pl-6;
+        }
 
-    }
+        ol>li {
+            @apply list-decimal;
 
-    ul>li {
-        @apply list-disc list-inside;
-    }
+        }
 
-    li:has(ol:first-child) {
-        @apply list-none;
-    }
+        ul>li {
+            @apply list-disc list-inside;
+        }
 
-    p {
-        @apply inline;
+        li:has(ol:first-child) {
+            @apply list-none;
+        }
+
+        p {
+            @apply inline;
+        }
     }
 }
