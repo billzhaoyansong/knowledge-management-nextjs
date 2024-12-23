@@ -122,7 +122,7 @@ export default function PaperDetail(
             <div className="flex flex-row h-full paper-detail">
 
                 {/* ============= left details abstract by myself */}
-                <div className="w-1/2 overflow-y-scroll mx-2 border bg-yellow-50" style={{height: '90%'}}>
+                <div className="basis-1/2 flex-1 overflow-y-scroll mx-2 border bg-yellow-50" style={{ height: '90%' }}>
                     {[
                         { 'title': 'summary', content: paperContent.summaries },
                         { 'title': 'systemModel', content: paperContent.systemModel },
@@ -140,9 +140,10 @@ export default function PaperDetail(
                 </div>
 
                 {/* ============= right original PDF */}
-                <div className="w-1/2 bg-yellow-100 border" style={{height: '90%'}}>
-                    <PdfViewer url={`/papers/${paperContent.id}/article.pdf`} />
-                </div>
+                <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
+                    containerClassName="bg-yellow-100 border basis-1/2"
+                    containerStyle={{ height: '90%' }} />
+
             </div>
         </Modal>
     </>

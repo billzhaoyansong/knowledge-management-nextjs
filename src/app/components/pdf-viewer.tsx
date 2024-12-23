@@ -15,7 +15,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const resizeObserverOptions = {};
 const maxWidth = 800;
 
-export default function PdfViewer({ url }: { url: string }) {
+export default function PdfViewer({ url, containerClassName, containerStyle }:
+    {
+        url: string, containerClassName?: string, containerStyle?: {}
+    }) {
 
     const [numPages, setNumPages] = useState<number>();
     // const [pageNumber, setPageNumber] = useState<number>(1);
@@ -48,8 +51,8 @@ export default function PdfViewer({ url }: { url: string }) {
         setNumPages(numPages);
     }
 
-    return <div className="w-full h-full overflow-y-scroll" ref={setContainerRef}>
-        {isUrlValid ?
+    return isUrlValid && <div className={containerClassName} style={containerStyle}>
+        <div className="w-full h-full overflow-y-scroll" ref={setContainerRef}>
             <Document className='w-full' file={url} onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (_el, index) => (
                     <Page
@@ -59,9 +62,7 @@ export default function PdfViewer({ url }: { url: string }) {
                         width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
                     />
                 ))}
-            </Document> :
-            <div>invalid pdf url
-            </div>
-        }
+            </Document>
+        </div>
     </div>
 }

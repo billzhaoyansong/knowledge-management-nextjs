@@ -1,0 +1,116 @@
+{
+  "title": "Reputation-Based Federated Learning for Secure Wireless Networks (RBFF)",
+  "authors": [
+    "Zhendong Song",
+    "Hongguang Sun",
+    "HowardH.Yang",
+    "Xijun Wang",
+    "Yan Zhang",
+    "Tony Q. S. Quek"
+  ],
+  "year": "2020-12",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "fairness",
+    "reputation",
+    "aggregation"
+  ],
+  "summaries": [
+    "propose __a client selection policy__ for wireless network environment where channel resources are limited, to balance accuracy and efficiency, achieving [1] counter-attack [2] better convergence performance, compared to [1] random scheduling [2] round robin [3] proportional fair",
+    "clients are selected to maximize the difference between reputations and the number of successful transmissions (to hire reputable clients while maintaining fairness among clients)",
+    "reputations are maintained based on the loss difference on data samples from the test set of uploaded models and last-round global model",
+    "reputation-based aggregation is exerted to defend against attacks"
+  ],
+  "systemModel": [
+    "$1$ base station (BS), a set of $K$ user equipments (UEs)",
+    "process 1): BS sends the same global model to UEs",
+    "process 2): UEs do local training",
+    "process 3): BS selects UEs for model upload [see 1. Client Selection for Uploading], evaluates contributions [see 2. Contribution Evaluation], and conducts aggregation [see 3. Global Model Aggregation] due to limited wireless channel resources",
+    "process 4): UEs' reputations are maintained [see 4. Reputation Update]"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "limited resource"
+    ],
+    [
+      "FL",
+      "malicious clients"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "client selection"
+    ]
+  ],
+  "motivation": [
+    "since the BS has no knowledge about the local training process, it is vulnerable to various adversarial attacks from malicious UEs.",
+    "In addition, due to the unreliability of wireless communication and some unintentional behaviors of data owners, it is easy to cause deviations in some updates"
+  ],
+  "questions": [
+    "solve the client selection problem for the wireless environment with limited channel resources while maintaining robustness towards attacks"
+  ],
+  "techniques": [
+    "1. Client Selection for Uploading",
+    [
+      "$\\begin{array}{ll}  \\underset{\\mathbf{S}^t}{\\operatorname{max}} & \\sum\\limits_{k=1}^K S_k^t\\left[\\beta m M_k^t-(1-\\beta)C_k^t\\right]\\\\ & \\beta\\in[0,1] \\\\ & S_k^t\\in \\{0,1\\} \\\\ & \\sum\\limits_{k=1}^K S_k^t\\leq N \\\\ & M_k \\geq M_{\\min} \\end{array}$",
+      [
+        "$S_k^t$: selection indicator",
+        "$M_k^t$: reputation"
+      ]
+    ],
+    "2. Contribution Evaluation",
+    [
+      "$e_k^{(t+1)}=\\frac{E\\left[f(\\omega^t,x_{ij},y_{ij})-f(\\omega_k^{t+1},x_{ij},y_{ij})\\right]}{E\\left[f(\\omega^t,x_{ij},y_{ij})\\right]}$",
+      [
+        "$e_k^{(t+1)}$: contribution of UE $k$ in the round of $t+1$",
+        [
+          "$e_k^{(t+1)}\\geq0$: positive contribution",
+          "$e_k^{(t+1)}<0$: attack, $\\left\\vert e_k^{(t+1)}\\right\\vert$: intensity of attack"
+        ],
+        "$(x_{ij},y_{ij})$: a data sample from test set on BS"
+      ]
+    ],
+    "3. Global Model Aggregation",
+    [
+      "$\\omega^{t+1}=\\sum\\limits_{k\\in G_a^{t+1}}\\left(\\mu_k^{t+1}\\omega_k^{t+1}\\right)$",
+      [
+        "$e_k^{(t+1)}\\geq e_{\\min} \\Rightarrow k\\in G_a^{t+1}$",
+        "$\\mu_k^{t+1}=\\frac{M_k^{t+1}}{\\sum_{i\\in G_a^{t+1}}M_i^{t+1}}$"
+      ]
+    ],
+    "4. Reputation Update",
+    [
+      "$M_k^{t+1}=\\frac{a_k^{t+1}+1}{a_k^{t+1}+b_k^{t+1}+2}$",
+      [
+        "$M_k^{t+1}$: reputation of $k$ in the round of $t+1$",
+        "positive reputation",
+        [
+          "$a_k^{t+1}=w_a \\cdot a_k^t+r^* \\cdot u\\left(e_k^{(t+1)}\\right)$",
+          [
+            "$a_k^{t+1}$: positive reputation of UE $k$ at the round $t+1$, updated only if $e_k^{(t+1)}\\geq0$",
+            "$w_a$: aging weight of positive reputation, hyperparameter",
+            "$a_k^{t}$: positive reputation of UE $k$ at the round $t$",
+            "$r^{*}$: weight of positive contribution, hyperparameter"
+          ]
+        ],
+        "negative reputation",
+        [
+          "$b_k^{t+1}=w_b \\cdot b_k^t-s^* \\cdot u\\left(e_k^{(t+1)}\\right)$",
+          [
+            "$b_k^{t+1}$: negative reputation of UE $k$ at the round $t+1$, updated only if $e_k^{(t+1)}<0$",
+            "$w_b$: aging weight of negative reputation, hyperparameter",
+            "$b_k^{t}$: negative reputation of UE $k$ at the round $t$",
+            "$s^{*}$: weight of negative contribution, hyperparameter"
+          ]
+        ],
+        "$u(x)=\\tanh (\\kappa x)=\\frac{e^{\\kappa x}-e^{-\\kappa x}}{e^{\\kappa x}+e^{\\kappa x}}\\in(-1,1)$"
+      ]
+    ]
+  ],
+  "doi": "10.1109/JIOT.2021.3079104",
+  "id": "song2021reputation",
+  "bibtex": "@article{song2021reputation,  title={Reputation-based federated learning for secure wireless networks},  author={Song, Zhendong and Sun, Hongguang and Yang, Howard H and Wang, Xijun and Zhang, Yan and Quek, Tony QS},  journal={IEEE Internet of Things Journal},  volume={9},  number={2}, pages={1212--1226},  year={2021},  publisher={IEEE}}"
+}
