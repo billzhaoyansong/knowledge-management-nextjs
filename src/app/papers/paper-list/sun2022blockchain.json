@@ -1,0 +1,44 @@
+{
+  "title": "A blockchain-based audit approach for encrypted data in federated learning",
+  "authors": [
+    "Zhe Sun",
+    "Junping Wan",
+    "Lihua Yin",
+    "Zhiqiang Cao",
+    "Tianjie Luo",
+    "Bin Wang"
+  ],
+  "year": "2021-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "privacy-preservation",
+    "security",
+    "blockchain",
+    "verification"
+  ],
+  "abstract": "The development of data-driven artificial intelligence technology has given birth to a variety of big data applications. Data has become an essential factor to improve these applications. Federated learning, a privacy-preserving machine learning method, is proposed to leverage data from different data owners. It is typically used in conjunction with cryptographic methods, in which data owners train the global model by sharing encrypted model updates. However, data encryption makes it difficult to identify the quality of these model updates. Malicious data owners may launch attacks such as data poisoning and free-riding. To defend against such attacks, it is necessary to find an approach to audit encrypted model updates. In this paper, we propose a blockchain-based audit approach for encrypted gradients. It uses a behavior chain to record the encrypted gradients from data owners, and an audit chain to evaluate the gradients’ quality. Specifically, we propose a privacy-preserving homomorphic noise mechanism in which the noise of each gradient sums to zero after aggregation, ensuring the availability of aggregated gradient. In addition, we design a joint audit algorithm that can locate malicious data owners without decrypting individual gradients. Through security analysis and experimental evaluation, we demonstrate that our approach can defend against malicious gradient attacks in federated learning.",
+  "summaries": [
+    "propose __a blockchain-based audit approach__ for encrypted data to tackle that the quality of encrypted updates is difficult to identify",
+    "a BCP-based ((Bresson-Catalano-Pointcheval) noise mechanism is adopted to encrypt local gradients",
+    "without decrypting the gradients, a behavior chain is used to record data owners' gradients and an audit chain to record data owners' contributions"
+  ],
+  "systemModel": [
+    "$1$ service provider (SP), $1$ audit chain (AC), $1$ behavior chain (BC), multiple physical devices (PD)",
+    "process",
+    [
+      "SP provides AC with model parameter and a public test dataset<step-ol>",
+      "AC distributes the model to PDs and provides BC the test dataset",
+      "PDs update the local model and call smart contract to calculate loss on the test dataset",
+      "PDs submit the encrypted gradient and loss to BC",
+      "BC generates a new block to store all gradients and the transaction and add noise by using BCP algorithm to each gradient and send to AC",
+      "AC aggregates into new global model and audits the qualities by comparing the global model loss with local model losses. If inconsistency occur, malicious gradients are detected",
+      "AC sends thte agggregation to SP",
+      "SP uses the gradient to update global model. if not converge, the updated model and another test dataset are sent to AC for the next iteration"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1016/j.dcan.2022.05.006",
+  "id": "sun2022blockchain",
+  "bibtex": "@article{sun2022blockchain, title = {A blockchain-based audit approach for encrypted data in federated learning}, journal = {Digital Communications and Networks}, volume = {8}, number = {5}, pages = {614-624}, year = {2022}, issn = {2352-8648}, doi = {https://doi.org/10.1016/j.dcan.2022.05.006}, url = {https://www.sciencedirect.com/science/article/pii/S2352864822000979}, author = {Zhe Sun and Junping Wan and Lihua Yin and Zhiqiang Cao and Tianjie Luo and Bin Wang}, keywords = {Audit, Data quality, Blockchain, Secure aggregation, Federated learning}, abstract = {The development of data-driven artificial intelligence technology has given birth to a variety of big data applications. Data has become an essential factor to improve these applications. Federated learning, a privacy-preserving machine learning method, is proposed to leverage data from different data owners. It is typically used in conjunction with cryptographic methods, in which data owners train the global model by sharing encrypted model updates. However, data encryption makes it difficult to identify the quality of these model updates. Malicious data owners may launch attacks such as data poisoning and free-riding. To defend against such attacks, it is necessary to find an approach to audit encrypted model updates. In this paper, we propose a blockchain-based audit approach for encrypted gradients. It uses a behavior chain to record the encrypted gradients from data owners, and an audit chain to evaluate the gradients’ quality. Specifically, we propose a privacy-preserving homomorphic noise mechanism in which the noise of each gradient sums to zero after aggregation, ensuring the availability of aggregated gradient. In addition, we design a joint audit algorithm that can locate malicious data owners without decrypting individual gradients. Through security analysis and experimental evaluation, we demonstrate that our approach can defend against malicious gradient attacks in federated learning.}}"
+}

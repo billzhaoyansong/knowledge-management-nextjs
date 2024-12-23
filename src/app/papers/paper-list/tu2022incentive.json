@@ -1,0 +1,48 @@
+{
+  "title": "Incentive Mechanisms for Federated Learning: From Economic and Game Theoretic Perspective",
+  "authors": [
+    "Xuezhen Tu",
+    "Kun Zhu",
+    "Nguyen Cong Luong",
+    "Dusit Niyato",
+    "Yang Zhang",
+    "Juan Li"
+  ],
+  "year": "2021-11",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "survey",
+    "game theory",
+    "auction"
+  ],
+  "abstract": "Federated learning (FL) becomes popular and has shown great potentials in training large-scale machine learning (ML) models without exposing the owners’ raw data. In FL, the data owners can train ML models based on their local data and only send the model updates rather than raw data to the model owner for aggregation. To improve learning performance in terms of model accuracy and training completion time, it is essential to recruit sufficient participants. Meanwhile, the data owners are rational and may be unwilling to participate in the collaborative learning process due to the resource consumption. To address the issues, there have been various works recently proposed to motivate the data owners to contribute their resources. In this paper, we provide a comprehensive review for the economic and game theoretic approaches proposed in the literature to design various schemes for incentivizing data owners to participate in FL training process. In particular, we first present the fundamentals and background of FL, economic theories commonly used in incentive mechanism design. Then, we review applications of game theory and economic approaches applied for incentive mechanisms design of FL. Finally, we highlight some open issues and future research directions concerning incentive mechanism design of FL.",
+  "summaries": [
+    "provide __a comprehensive review for the economic and game theoretic approaches__ for incentivizing data owners to participate"
+  ],
+  "systemModel": [
+    "taxonomy",
+    [
+      "game theory based incentive",
+      [
+        "non-cooperative game",
+        "stackelberg game",
+        "coalitional game"
+      ],
+      "auction based incentive",
+      [
+        "sealed-bid auction",
+        "forward auction",
+        "reverse auction",
+        "double auction",
+        "combinatorial auction"
+      ],
+      "contract theory based incentive",
+      "matching theory based incentive"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/TCCN.2022.3177522",
+  "id": "tu2022incentive",
+  "bibtex": "@article{tu2022incentive, title={Incentive mechanisms for federated learning: From economic and game theoretic perspective}, author={Tu, Xuezhen and Zhu, Kun and Luong, Nguyen Cong and Niyato, Dusit and Zhang, Yang and Li, Juan}, journal={IEEE transactions on cognitive communications and networking}, volume={8}, number={3}, pages={1566--1593}, year={2022}, publisher={IEEE}}"
+}

@@ -1,0 +1,95 @@
+{
+  "title": "Trustworthy Federated Learning: A Survey",
+  "authors": [
+    "Asadullah Tariq",
+    "Mohamed Adel Serhani",
+    "Farag Sallabi",
+    "Tariq Qayyum",
+    "Ezedin S. Barka",
+    "Khaled A. Shuaib"
+  ],
+  "year": "2023-05",
+  "labels": [
+    "federated learning",
+    "survey",
+    "trustworthy",
+    "reputation"
+  ],
+  "summaries": [
+    "define __[1] trust and trustworthiness__, __[2] discuss the crucial aspects of trust evaluation methods__",
+    "propose a taxonomy that encompasses three main pillars of trust: (1) Interpretability, (2) Fairness, (3) Security & Privacy"
+  ],
+  "systemModel": [
+    "define trust and trustworthiness [see 1. define trust and trustworthiness]",
+    "discussed the crucial aspects of trust evaluation methods [see 2. crucial parts of trust evaluation methods]",
+    "trustworthy FL phase (1): interpretability at the local node (data selection, data quality/feature selection, model selection) [see 3. interpretability]",
+    "trustworthy FL phase (2): fairness at the server-side (contribution evaluation, incentive mechanism) [see 4. fairness]",
+    "trustworthy FL phase (3): security and privacy (validation of local models, local data, client and server interactions) [see 5. security and privacy]"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "trustworthiness"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "survey"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    "As the importance of FL increases, addressing trustworthiness issues in its various aspects becomes crucial.",
+    "Despite the growth in literature on trustworthy centralized Machine Learning (ML)/Deep Learning (DL), further efforts are necessary to identify trustworthiness pillars and evaluation metrics specific to FL models, as well as to develop solutions for computing trustworthiness levels."
+  ],
+  "techniques": [
+    "1. define trust and trustworthiness",
+    [
+      "trust is the assurance one node has in another's ability to execute specific tasks and serve as a reliable partner",
+      "trustworthiness is a quantitative expression of an entity's trust level and can be built through cryptographic techniques or distributed reputation systems considering factors such as data security, authenticity, accuracy, service and processing capability, and the reliability and real-time performance of connections"
+    ],
+    "2. crucial aspects of trust evaluation methods",
+    [
+      "<font style='text-decoration: underline'>effectiveness</font>: precise and reliable evaluation results by metrics like accuracy, precision, recall, and F-score",
+      "<font style='text-decoration: underline'>data and algorithm selection</font>",
+      "<font style='text-decoration: underline'>robustness</font>: addressing attacks",
+      "<font style='text-decoration: underline'>privacy protection</font>: protecting trust evaluation data from unauthorized disclosure",
+      "<font style='text-decoration: underline'>context-awareness</font>: adaptable to changes in scenarios or environments",
+      "<font style='text-decoration: underline'>subjectivity</font>: capturing trust's subjective nature",
+      "<font style='text-decoration: underline'>distributed learning</font>: compatible with decentralized nature",
+      "<font style='text-decoration: underline'>local model quality</font>: considering local model quality while evaluating trust",
+      "<font style='text-decoration: underline'>incentive mechanism</font>",
+      "<font style='text-decoration: underline'>contribution evaluation</font>: considering data quality and data diversity",
+      "<font style='text-decoration: underline'>client selection</font>",
+      "<font style='text-decoration: underline'>verificable and auditibility</font>: verifying the accuracy of both local models and the global model"
+    ],
+    "3. interpretability",
+    [
+      "feature and sample selection",
+      "data sharing",
+      "model selection"
+    ],
+    "4. fairness",
+    [
+      "client selection: (1) trust and reputation based; (2) blockchain based; (3) contextual optimization based",
+      "contribution evaluation: (1) smart contract based; (2) shapley value and consensus based; (3) privacy preserving",
+      "incentive mechanism: (1) game theory based; (2) reputation based; (3) contribution based; (4) security and privacy based",
+      "accountability and auditibility: (1) start contract based; (2) committee selection based;"
+    ],
+    "5. security and privacy",
+    [
+      "verifiability: (1) consensus and smart contract based; (2) homomorphic encryption and hash function based; (3) secret sharing and multi-party computation based;",
+      "secure aggregation: (1) consensus based; (2) blockchain and smart contract based; (3) privacy based; (4) gradient based; (5) data aggregation",
+      "privacy preserving: (1) blockchain and smart contract based; (2) cryptography and encryption based; (3) statistical based; (4) trust and reputation management based"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "arXiv:2305.11537",
+  "id": "tariq2023trustworthy",
+  "bibtex": "@article{tariq2023trustworthy, title={Trustworthy Federated Learning: A Survey}, author={Tariq, Asadullah and Serhani, Mohamed Adel and Sallabi, Farag and Qayyum, Tariq and Barka, Ezedin S and Shuaib, Khaled A}, journal={arXiv preprint arXiv:2305.11537}, year={2023}}"
+}

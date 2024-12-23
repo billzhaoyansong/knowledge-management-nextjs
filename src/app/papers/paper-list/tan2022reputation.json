@@ -1,0 +1,57 @@
+{
+  "title": "Reputation-Aware Federated Learning Client Selection based on Stochastic Integer Programming (SCS)",
+  "authors": [
+    "Xavier Tan",
+    "Wei Chong Ng",
+    "Wei Yang Bryan Lim",
+    "Zehui Xiong",
+    "Dusit Niyato",
+    "Han Yu"
+  ],
+  "year": "2022-01",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "client selection",
+    "multi-job"
+  ],
+  "summaries": [
+    "propose __a client selection algorithm__ when the reputations of clients are not fully reliable, achieving [1] most advantageous performance-cost trade-off, compared to [1] FedAvg [2] FedAvg50 [3] NRACS [4] RRAFL",
+    "in the proposed 2-stage client selection algorithm, the clients are divided into 3 groups based on reputation values, aiming to (1) minimize hiring costs for all servers and avoid herding in the first stage, and (2) maintain the performance in the global model in the second stage"
+  ],
+  "systemModel": [
+    "a set $\\mathcal{M}=\\{1, ..., M\\}$ of master nodes (servers), a set $\\mathcal{N}=\\{1, ..., N\\}$ of worker nodes (clients)",
+    "each worker node has a reputation value $Q_n \\in [0,1]$ and based on $Q_n$ the worker set $\\mathcal{N}$ is divided into $3$ sub-groups: 1) $i \\in \\mathcal{N}_{hi}$, 2) $j \\in \\mathcal{N}_{mi}$, 3) $k \\in \\mathcal{N}_{lo}$",
+    "the problem is formulated as a stochastic integer programming (SIP) problem [see <u>1. Problem Formulation</u>]",
+    "stage I (deployment stage) 1): client selection",
+    "stage I (deployment stage) 2): local training",
+    "stage I (deployment stage) 3): model aggregation and adversarial behaviors detection",
+    "stage I (deployment stage) 4): model distribution",
+    "stage I 2)-4) continue for $T$ rounds",
+    "stage II (recourse stage) 1): hire high reputation workers only",
+    "stage II (recourse stage) 2): local training",
+    "stage II (recourse stage) 3): model aggregation",
+    "stage II (recourse stage) 4): model distribution",
+    "stage II 2)-4) continues after stage I for $\\theta_S$ rounds to recover the performance in global model"
+  ],
+  "motivation": [
+    "There is an uptrend in research [8], [9], [10], of using reputation values to hire worker nodes.",
+    "However, reputation value only indirectly measures the quality and trustworthiness of the worker nodes.",
+    "For an instance, one worker labelled with relatively higher reputation may still unintentionally misbehave.",
+    "Such indirect approach introduces uncertainty to the accuracy of behaviour the worker node might reflect in practice.",
+    "Over reliance on the same pool of high reputation workers could be detrimental as well",
+    "It could lead to the problem of herding."
+  ],
+  "questions": [
+    "select clients for improving model accuracy and considering potential misbehavior and the cost of hiring"
+  ],
+  "techniques": [
+    "<u>1. Problem Formulation</u>",
+    [
+      "$\\begin{array}{ll}  \\underset{x_{i,m}^1,y_{j,m}^1,z_{k,m}^1,\\beta_i^2(\\mathcal{A}(\\mathcal{S}_m))}{\\operatorname{min}} & \\sum\\limits_{m=\\mathcal{M}} \\left(\\sum\\limits_{i\\in\\mathcal{N}_{hi}}(C_{hi,m}x_{i,m}^1)+\\sum\\limits_{j\\in\\mathcal{N}_{mi}}(C_{mi,m}y_{j,m}^1)+\\sum\\limits_{k\\in\\mathcal{N}_{lo}}(C_{lo,m}z_{k,m}^1)\\right)+\\mathbb{E}\\left[W(C_{mi,m}y^1_{j,m}(\\mathcal{S}_m),C_{lo,m}z^1_{k,m}(\\mathcal{S}_m))\\right] \\\\& \\sum\\limits_{m=\\mathcal{M}} \\left(\\sum\\limits_{i\\in\\mathcal{N}_{hi}}x_{i,m}^1+\\sum\\limits_{j\\in\\mathcal{N}_{mi}}y_{j,m}^1+\\sum\\limits_{k\\in\\mathcal{N}_{lo}}z_{k,m}^1\\right)\\leq m_{cap} \\\\& \\sum\\limits_{m=\\mathcal{M}} \\left(\\sum\\limits_{i\\in\\mathcal{N}_{hi}}x_{i,m}^1\\right)\\geq \\sum\\limits_{m=\\mathcal{M}} \\left(\\sum\\limits_{j\\in\\mathcal{N}_{mi}}y_{j,m}^1+\\sum\\limits_{k\\in\\mathcal{N}_{lo}}z_{k,m}^1\\right)\\\\& \\bar{x}_{i,m}\\leq d_i \\\\& \\bar{y}_{j,m}\\leq d_j \\\\& \\bar{z}_{k,m}\\leq d_k \\\\& \\bar{x}_{i,m}\\leq \\varphi x_{i,m}^1 \\\\& \\bar{y}_{j,m}\\leq \\varphi y_{j,m}^1 \\\\& \\bar{z}_{k,m}\\leq \\varphi z_{k,m}^1 \\\\& \\bar{\\beta_i}(\\mathcal{A}(\\mathcal{S}_m)) \\leq d_i \\\\& \\bar{\\beta_i}(\\mathcal{A}(\\mathcal{S}_m)) \\leq \\varphi \\beta_i^2(\\mathcal{A}(\\mathcal{S}_m)) \\\\& \\sum\\limits_{i\\in\\mathcal{N}_{hi}}\\bar{x}_{i,m}+\\sum\\limits_{j\\in\\mathcal{N}_{mi}}\\bar{y}_{j,m}+\\sum\\limits_{k\\in\\mathcal{N}_{lo}}\\bar{z}_{k,m} \\geq \\varphi(\\lambda) \\\\& \\sum\\limits_{m\\in\\mathcal{M}}\\sum\\limits_{\\mathcal{S}_m\\in\\mathbb{S}}\\sum\\limits_{i\\in\\mathcal{N}_{hi}} \\beta_i^2(\\mathcal{A}(\\mathcal{S}_m))+\\sum\\limits_{m \\in\\mathcal{M}}\\sum\\limits_{i\\in\\mathcal{N}_{hi}}x^1_{i,m}\\leq m_{cap} \\\\& \\mathcal{A}(\\mathcal{S}_m)\\left(\\sum\\limits_{i\\in\\mathcal{N}_{hi}}\\bar{x}_{i,m}+\\sum\\limits_{j\\in\\mathcal{N}_{mi}}\\bar{y}_{j,m}+\\sum\\limits_{k\\in\\mathcal{N}_{lo}}\\bar{z}_{k,m}\\right) + \\sum\\limits_{i\\in\\mathcal{N}_{hi}}\\bar{\\beta}_i(\\mathcal{A}(\\mathcal{S}_m)) \\geq \\varphi(\\lambda)\\end{array}$"
+    ]
+  ],
+  "doi": "10.1109/TBDATA.2022.3191332",
+  "id": "tan2022reputation",
+  "bibtex": "@article{tan2022reputation, title={Reputation-Aware Federated Learning Client Selection based on Stochastic Integer Programming}, author={Tan, Xavier and Ng, Wei Chong and Lim, Wei Yang Bryan and Xiong, Zehui and Niyato, Dusit and Yu, Han}, journal={IEEE Transactions on Big Data}, year={2022}, publisher={IEEE}}"
+}

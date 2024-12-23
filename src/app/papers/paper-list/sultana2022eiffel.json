@@ -1,0 +1,56 @@
+{
+    "title": "Eiffel: Efficient and Fair Scheduling in Adaptive Federated Learning",
+    "authors": [
+        "Abeda Sultana",
+        "Md. Mainul Haque",
+        "Li Chen",
+        "Fei Xu",
+        "Xu Yuan"
+    ],
+    "year": "2022-06",
+    "labels": [
+        "federated learning",
+        "client selection",
+        "efficiency",
+        "fairness",
+        "adaptive aggregation"
+    ],
+    "summaries": [
+        "propose __a framework__ including client selection and adaptive aggregation to achieve [1] higher fairness [2] higher efficiency (reducing communication overhead) and [3] maintaining accuracy, comparing with [1] full participation [2] adaptive FL [3] centralized training [4] q-FFL [5] least loss based selection",
+        "the client selection method selects from the group of selected clients last round and the group of unselected clients from last round to collectively consume resources",
+        "the selection inside each group is based on a prioirity index, which incorporating [1] accuracy of local model, [2] amount of local data, [3] local resource efficiency (computation power to resource demand), and [4] age of update (last communication round when the UE participated in global aggregation)",
+        "the adaptive aggregation is based on finding the upper bound of $F(\\theta^f)-F(\\theta^*)$, $\\theta^f$ is the final model parameter, $\\theta^*$ is the optimal model parameter"
+    ],
+    "systemModel": [
+        "$1$ server with resource constraint (e.g. power condition, bandwidth, etc.), $N$ users with local dataset $D_n$",
+        "implicit assumptions include server knowing [1] local data size [2] local resource demand [3] local computaion power",
+        "process 1): server selects a portion of clients who are <b>in</b> the selected list last round to consume $\\kappa R$ resource, while select another portion of clients who are <b>not in</b> the selected list last round to consume $(1-\\kappa) R$ [see 1. sorting priority]",
+        "process 2): server sends the global model $\\theta$ and local steps $\\tau$ [see 2. adaptive aggregation]",
+        "process 3): server maintains the age of update (AOU) for all clients, specifically $t_i=1$ if selected, otherwise $t_i=t_i+1$",
+        "process 4): clients conduct local training",
+        "process 5): server conducts aggregation and goes back to 1)"
+    ],
+    "questions": [
+        "to select mobile devices fairly for aggregation to address computationally extensive model training and data heterogenity"
+    ],
+    "techniques": [
+        "1. sorting priority",
+        [
+            "$\\frac{\\omega}{f_i(\\theta)}+\\rho d_i + + \\gamma \\frac{c_i}{r_i} + \\phi t_i$",
+            [
+                "$f_i(\\theta)$: loss value of UE $i$",
+                "$d_i$: local data size",
+                "$c_i$: computation power",
+                "$r_i$: resource demand",
+                "$t_i$: age of update"
+            ]
+        ],
+        "2. adaptive local steps determination",
+        [
+            "not clearly stated in the paper"
+        ]
+    ],
+    "doi": "10.1109/TPDS.2022.3187365",
+    "id": "sultana2022eiffel",
+    "bibtex": "@article{sultana2022eiffel, title={Eiffel: Efficient and fair scheduling in adaptive federated learning}, author={Sultana, Abeda and Haque, Md Mainul and Chen, Li and Xu, Fei and Yuan, Xu}, journal={IEEE Transactions on Parallel and Distributed Systems}, volume={33}, number={12}, pages={4282--4294}, year={2022}, publisher={IEEE}}"
+}

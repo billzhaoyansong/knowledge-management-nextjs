@@ -1,0 +1,84 @@
+{
+  "title": "Fairness-Aware Reverse Auction-based Federated Learning",
+  "authors": [
+    "Xiaoli Tang",
+    "Han Yu"
+  ],
+  "year": "2023-10",
+  "labels": [
+    "federated learning",
+    "fairness",
+    "reverse auction",
+    "client selection",
+    "incentive mechanism",
+    "Lyapunov",
+    "reputation"
+  ],
+  "summaries": [
+    "propose __an reverse auction FL framework__ to jointly consider fairness, costs and reputations, achieving [1] higher test accuracy [2] reduced cost [3] improved fairness [4] root mean square error (quantify the difference between real labels and predicted labels, reflecting on well the model performs in regression tasks), compared with [1] random selection [2] greedy selection [3] reputation-based party selection [4] reputation-based party selection with fairness [5] RRAFL [6] FAIR",
+    "clients are selected and paid to minimize the objective considering drift, payment and reputations by optimizing the winning set and payment scheme"
+  ],
+  "systemModel": [
+    "$1$ model user (MU) with a set $\\mathcal{T}=\\{\\tau_1,\\tau_2,...,\\tau_{|\\mathcal{T}|},\\}$ of tasks, a set $\\mathcal{W}=\\{w_1,w_2,...,w_{|\\mathcal{W}|}\\}$ of data owners (DOs), ",
+    "step 1): the MU broadcasts data quantity requirements for all FL tasks $\\{k_j(t)\\}_{\\tau_j \\in \\mathcal{T}}$",
+    "step 2): each DO determines asking profile $A_i(t)=\\{Y_i(t), a_i(t)\\}$, where $Y_i(t)=\\{y_{ij}\\}$ is the amount of contributing data samples and $a_i(t)$ is the price, based on available data and cost $c_i(t)$ and submits to the MU",
+    "step 3): the MU selects winners $S(t)$ and determines payment $p_i(t)$ [see <u>1. Client Selection and Incentive Mechanism</u>]",
+    "step 4): the MU and selected winners conduct FL",
+    "step 5): the MU pays the customized price $p_i(t)$ to each winner in $S(t)$"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "fairness"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "fairness"
+    ]
+  ],
+  "motivation": [
+    "In this work, our central focus is on addressing the model user side problem within the AFL framework",
+    "Nevertheless, these approaches often overlook the interests of data owners, such as their opportunities for active participation in the FL process. ",
+    "This neglect can lead certain data owners to perceive unfair treatment within the AFL ecosystem.",
+    "Failing to ensure fair treatment for FL data owners may result in data owner attrition, a development that can have adverse consequences for the long-term sustainability of AFL systems",
+    "Consequently, the challenge of helping the model user recruit data owners in a manner that balances FL model performance and fair treatment within the AFL ecosystem remains an open question"
+  ],
+  "questions": [
+    "fairness in recruiting data owners in reverse auction"
+  ],
+  "techniques": [
+    "<u>1. Client Selection and Incentive Mechanism</u>",
+    [
+      "$\\Delta(\\mathbb{\\Theta}(t)) + \\lambda \\mathbb{E}[p_i(t)x_i(t)-r_i(t)x_i(t)]$",
+      [
+        "$\\Delta(\\mathbb{\\Theta}(t))=-Q_i(t)x_i(t)$: drift",
+        [
+          "$Q_i(t+1)=\\max\\left\\{0, Q_i(t)-x_i(t)+\\epsilon_i(t)r_i(t)\\mathcal{I}_{[x_i(t)=0]}\\right\\}$",
+          [
+            "$\\epsilon_i(t)=\\frac{1}{\\mathcal{T}}\\sum_{\\tau_j}\\mathbb{I}_{[y_{ij}>0]}$"
+          ]
+        ],
+        "$\\mathbb{E}[p_i(t)x_i(t)-r_i(t)x_i(t)]$: penalty",
+        "$\\lambda$: hyper parameter ($55$)"
+      ],
+      "after simplification:",
+      "$\\begin{array}{ll}  \\underset{p_i(t), x_i(t)}{\\operatorname{min}} & \\frac{1}{T}\\sum\\limits_{t\\in [0,T]}\\sum\\limits_{w_i\\in \\mathcal{W}}  [\\lambda p_i(t) - \\lambda r_i(t)  - Q_i(t)]x_i(t)\\\\\\text{s.t.} & \\sum\\limits_{w_i\\in \\mathcal{W}} x_i(t) y_{ij} \\geq k_j(t) \\\\& x_i(t)\\in\\{0,1\\}, \\quad p_i(t)\\in[0,+\\infty)\\end{array}$",
+      [
+        "$p_i(t)$: payment to worker",
+        "$x_i(t)$: selection indicator",
+        "$r_i(t)$: reputation",
+        "$y_{ij}$: the contributing data quantity of worker $i$ to task $j$"
+      ],
+      "online algorithm",
+      [
+        "$l=\\arg\\min_{w_l\\in\\mathcal{W}} \\frac{a_i(t)-\\frac{Q_i(t)}{\\lambda}} {\\sum_{y_{ij}\\in Y_i} \\min\\{y_{ij(t)},k'_j(t)\\} r_i(t)}$",
+        "$p_i(t)=\\max\\left\\{0, \\frac{\\sum_{y_{ij}\\in Y_i(t)} \\min\\{y_{ij}(t), k'_j(t)\\} r_i(t)}{\\sum_{y_{nj}\\in Y_i(t)} \\min\\{y_{nj}(t), k'_j(t)\\} r_n(t)} \\left(a_n(t)-\\frac{Q_n(t)}{\\lambda}\\right) +\\frac{Q_i(t)}{\\lambda} \\right\\}$"
+      ]
+    ]
+  ],
+  "doi": "10.1109/JIOT.2024.3504548",
+  "id": "tang2023fairness",
+  "bibtex": "@article{tang2024fairness, title={Fairness-Aware Reverse Auction-Based Federated Learning}, author={Tang, Xiaoli and Yu, Han}, journal={IEEE Internet of Things Journal}, year={2024}, publisher={IEEE}}"
+}

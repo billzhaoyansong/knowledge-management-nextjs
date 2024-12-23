@@ -1,0 +1,62 @@
+{
+    "title": "Federated Noisy Client Learning (Fed-NCL)",
+    "authors": [
+        "Kahou Tam",
+        "Li Li",
+        "Bo Han",
+        "Chengzhong Xu",
+        "Huazhu Fu"
+    ],
+    "year": "2021-06",
+    "labels": [
+        "federated learning",
+        "effectiveness",
+        "robustness",
+        "security"
+    ],
+    "summaries": [
+        "propose __an FL framework__ including a [1] a data quality measurement (DQM) component and [2] a noise robust aggregation (NRA) component, for noisy clients environment to achieve [1] boosting accuracy, and [2] robustness in comparison with [1] FedAvg and [2] Trimmed mean"
+    ],
+    "systemModel": [
+        "$1$ central server, $C$ clients per round with $K$-class dataset",
+        "process 1): server sends global model to clients",
+        "process 2): clients measure local data quality [see 1. Data Quality Measurement] and do local training",
+        "process 3): clients send [1] data quality (${Q_t^{c}}^{CE}$ and ${Q_t^{c}}^{Dis}$) [2] data quantity ($N^c$) [3] trained local model ($\\Theta_t^c$) to server",
+        "process 4): server does robust aggregation [see 2. Noise Robust Aggregation]"
+    ],
+    "questions": [
+        "standard FL methods ignore the noisy client issue"
+    ],
+    "techniques": [
+        "1. Data Quality Measurement (DQM)",
+        [
+            "1.1 Cross-Entropy based DQM",
+            [
+                "${Q_t^{c}}^{CE}(\\Theta_t^G)=\\frac{1}{N}\\sum\\limits_{i=1}^{N}\\sum\\limits_{j=1}^{k}\\tilde{y}_{ij}\\log f_j(x,i;\\Theta_t^G)$",
+                [
+                    "$\\Theta_t^G$: global model from server",
+                    "$N$: size of validation dataset"
+                ]
+            ],
+            "1.2 Model Distance based DQM",
+            [
+                "${Q_t^{c}}^{Dis}(\\Theta_t^G)=\\sqrt{\\left\\vert \\Theta_t^G - \\Theta_t^C \\right\\vert}$"
+            ]
+        ],
+        "2. Noise Robust Aggregation",
+        [
+            "$\\Theta_{t+1}^G \\gets \\sum\\limits_{c=1}^C w^c \\Theta_t^c$",
+            [
+                "$w^c=\\frac{e^{h^c}}{\\sum_{c=1}^C e^{h^c}}$, with $h^c=D_S^c+\\alpha\\cdot{D_N^c}^{CE}+\\beta\\cdot{D_N^c}^{Dis}$",
+                [
+                    "$D_S^c=\\frac{N^c}{\\sum_{c=1}^C N_c}$",
+                    "${D_N^c}^{Dis}=\\frac{{Q_t^c}^{Dis}}{\\sum_{c=1}^C {Q_t^c}^{Dis}}$",
+                    "${D_N^c}^{CE}=\\frac{{Q_t^c}^{CE}}{\\sum_{c=1}^C {Q_t^c}^{CE}}$"
+                ]
+            ]
+        ]
+    ],
+    "doi": "arXiv:2106.13239",
+    "id": "tam2021federated",
+    "bibtex": "@article{tam2021federated, title={Federated noisy client learning}, author={Tam, Kahou and Li, Li and Han, Bo and Xu, Chengzhong and Fu, Huazhu}, journal={arXiv preprint arXiv:2106.13239}, year={2021}}"
+}

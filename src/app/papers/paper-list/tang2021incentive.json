@@ -1,0 +1,72 @@
+{
+    "title": "An incentive mechanism for cross-silo federated learning: A public goods perspective",
+    "authors": [
+        "Ming Tang",
+        "Vincent W.S. Wong"
+    ],
+    "year": "2021-05",
+    "labels": [
+        "federated learning",
+        "social welfare",
+        "incentive mechanism",
+        "non-cooperative game"
+    ],
+    "summaries": [
+        "propose __an incentive mechanism__ for FL when the outcome is a public goods (each client is both data owner and model owner) to achieve [1] faster convergence rate comparing with [1] 'Lagrangian' method",
+        "the mechanism aims to maximize social welfare (sum of utilities - sum of costs) and is modeled as a non-cooperative game with perfect information to solve the problem",
+        "in this mechanism, some organizations may need to pay other organizations to compensate the cost of the latter ones"
+    ],
+    "systemModel": [
+        "a central server, a set of organizations denoted by $\\mathcal{N}$ with $S_n$ (the number of data units), and $D_n$ (the number of CPU cycles to process one data unit)",
+        "the objective is to maximize social welfare by optimizing the processing capacity of each $n$ [1. Social Welfare Maximization]",
+        "due to non-convexity of the original problem, it is tranformed and modeled as a non-cooperative game with perfect information",
+        "process 1): each organization submits [1] $\\gamma_n\\in[0,\\tilde{r}]$ (number of training rounds), and [2] $\\pi_n$ (unit monetary transfer per training round) to the central server",
+        "process 2): central server sends to all organizations all the $\\gamma_n, \\pi_n$",
+        "process 3): each organization adjusts self $\\gamma_n, \\pi_n$ [see 2. Non-cooperative Game with Perfect Information]",
+        "process 4): if adjusted $\\gamma_n$ is stable for all the organizations, then the central server announces the result [see 3. Announcement of Results]; else goes back to 1)"
+    ],
+    "questions": [
+        "incentive mechanism problem in public goods sector (e.g. radio broadcast) which are are both non-excludable (i.e., individuals cannot be excluded from using them) and non-rivalrous (i.e., there is no competition in terms of using them)"
+    ],
+    "techniques": [
+        "1. Social Welfare Maximization",
+        [
+            "$\\begin{array}{ll} \\underset{\\bm{f}}{\\operatorname{max}} & \\sum\\limits_{n\\in\\mathcal{N}} \\underbrace{u_n(\\epsilon(0)-\\epsilon(r(\\bm{f})))}_{U_n \\text{ utility}} - \\underbrace{\\left((C_n^{UL}+C_n^{DL})r(\\bm{f})+C_n^{invt}f_n+C_n^{comp}(f_n)^2S_nD_nKr(\\bm{f})\\right)}_{C_n \\text{ cost}} \\\\  \\text { s.t. } & f_n\\geq 0,\\quad \\forall n\\in\\mathcal{N} \\end{array}$",
+            [
+                "$\\bm{f}=(f_n,\\forall n\\in\\mathcal{N})$: the vector of processing capacity",
+                "$u_n$: unit revenue that organization $n$ can earn from market (in dollars per unit of loss)",
+                "$r(\\bm{f})=T/\\tau(\\bm{f})=T/\\left(\\max\\limits_{n\\in\\mathcal{N}} \\frac{S_nD_nK}{f_n}+T_n^{UL}+T_n^{DL}\\right)$: number of global rounds",
+                [
+                    "$T$: fixed total training time"
+                ],
+                "$\\epsilon(0), \\epsilon(r(\\bm{f}))$: loss in global model at the initial, after $r(\\bm{f})$ global rounds",
+                "$C_n^{UL}, C_n^{DL}$: operating costs for uploading and downloading the model updates in each global round",
+                "$C_n^{invt}$: investment cost per processing capacity",
+                "$C_n^{comp}$:operating cost for performing one CPU cycle",
+                "$K$: local updates"
+            ]
+        ],
+        "2. Non-cooperative Game with Perfect Information",
+        [
+            "player: all organizations $n\\in\\mathcal{N}$",
+            "strategy: message profile $\\gamma_n\\in[0,\\tilde{r}]$ and $\\pi_n\\in\\mathbb{R}$",
+            "payoff function: $V_n(f_n(\\gamma), \\tilde{r}(\\gamma),m_n(\\bm{\\gamma,\\bm{\\pi}}))=U_n-C_n+m_n$"
+        ],
+        "3. Announcement of Results",
+        [
+            "$\\tilde{r}(\\bm{\\gamma})=\\frac{\\sum_{n\\in\\mathcal{N}} \\gamma_n}{N}$",
+            [
+                "$\\gamma_n$: number of training rounds submitted by $n$"
+            ],
+            "$f_n(\\bm{\\gamma})\\triangleq\\frac{S_n D_n K}{\\frac{T}{\\tilde{r}(\\bm{\\gamma})} - T^{UL}_n - T^{DL}_n}, n \\in \\mathcal{N}$",
+            "$\\bm{m}(\\bm{\\gamma}, \\mathbf{\\pi})=\\tilde{r}(\\bm{\\gamma})\\left(\\pi_{\\mu(n+1)}-\\pi_{\\mu(n+2)}\\right)$",
+            [
+                "$\\mu(n+1)$ equals $n+1$ modulo $N$",
+                "the payoff of organization n [1] does not rely on the choice of $\\pi_n$ and [2] is linear in the number of training rounds."
+            ]
+        ]
+    ],
+    "doi": "10.1109/INFOCOM42981.2021.9488705",
+    "id": "tang2021incentive",
+    "bibtex": "@inproceedings{tang2021incentive, title={An incentive mechanism for cross-silo federated learning: A public goods perspective}, author={Tang, Ming and Wong, Vincent WS}, booktitle={IEEE INFOCOM 2021-IEEE Conference on Computer Communications}, pages={1--10}, year={2021}, organization={IEEE}}"
+}
