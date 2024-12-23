@@ -1,0 +1,76 @@
+{
+  "title": "Fairness-Aware Client Selection For Federated Learning (FairFedCS)",
+  "authors": [
+    "Yuxin Shi",
+    "Zelei Liu",
+    "Zhuan Shi",
+    "Han Yu"
+  ],
+  "year": "2023-07",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "Lyapunov",
+    "fairness",
+    "reputation"
+  ],
+  "summaries": [
+    "propose __a client selection approach__ to balance performance and fairness in FL, achieving [1] higher fairness [2] higher test accuracy, compared to [1] random [2] greedy (reputable clients first) [3] RBFF [4] RBCS-F",
+    "the Lyapunov-based client selection approach considers reputation and fairness jointly"
+  ],
+  "systemModel": [
+    "$1$ server and $N$ clients",
+    "the server maintains a reputation table [see 1. Reputation]",
+    "clients are selected to maximize the weighted difference of reputation and unfairness [see 2. Client Selection]"
+  ],
+  "motivation": [
+    "One category of FL client selection approaches focuses on fulfilling the goals of the FL servers.",
+    "However, such an approach disregards the FL clients' interest (e.g., opportunities to participate in FL) and may cause some of them to perceive that they are not fairly treated by the FL system.",
+    "Fairness-aware FL client selection approaches started to emerge in recent years.",
+    "Some focus on ensuring that data owners have guaranteed rates to be selected to join FL.",
+    "Others attempt to give more preference to high-performing FL clients while offering equitable opportunities for others to be selected to join FL.",
+    "Nevertheless, the problem of balancing performance and fairness considerations when selecting FL clients remains open."
+  ],
+  "questions": [
+    "balancing performance and fairness considerations during client selection"
+  ],
+  "techniques": [
+    "1. Reputation",
+    [
+      "in each round, the contribution from each client is evaluated by GTG-Shapley method",
+      "accumulated number of positive contributions $a_i$ and negative contributions $b_i$ are leveraged to generate the reputation of each client: $r_i=\\frac{a_i}{a_i+b_i+2}$"
+    ],
+    "2. Client Selection",
+    [
+      "$\\sigma U(t)-\\Delta(\\Theta(t))$",
+      [
+        "$\\sigma>0$: a control parameter to indicate relative preferences between objectives, hyperparameter",
+        "$U(t)=\\sum_{i=1}^Nr_i(t)x_i(t)$: reputation sum, utility of strategy",
+        [
+          "$x_i(t)\\in\\{0,1\\}$: indicator whether $i$ has been selected for current round $t$"
+        ],
+        "$\\Delta(\\Theta(t))=\\mathbb{E}\\left[L(\\Theta(t+1))-L(\\Theta(t))\\vert\\Theta(t)\\right]$ Lyapunov drift",
+        [
+          "$L(\\Theta(t))=\\frac{1}{2}\\sum_{i+1}^N Q^2_i(t)$: quadratic Lyapunov function",
+          [
+            "$Q_i(t+1)=\\max\\left[0,Q_i(t)+c_i(t)-x_i(t)\\right]$: virtual queue",
+            [
+              "$c_i=\\epsilon r_i(t)1_{\\left[x_i(x)=0\\right]}$: extra increment to express unfairness against $i$",
+              [
+                "$\\epsilon=\\frac{m}{n}\\in[0,1]$ discount factor",
+                [
+                  "$m$: number of clients required to join each round",
+                  "$n$: total number of clients available"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      "$\\begin{array}{ll} \\max\\limits_{X_t} & \\frac{1}{T}\\sum_{t=0}^{T-1} \\sum_{i=1}^{N} x_i(t)\\left(\\sigma r_i(t) + Q_i(t)\\right) \\\\ s.t. &  x_i(t)\\in\\{0,1\\}\\end{array}$"
+    ]
+  ],
+  "doi": "10.1109/ICME55011.2023.00063",
+  "id": "shi2023fairness",
+  "bibtex": "@inproceedings{shi2023fairness, title={Fairness-Aware Client Selection for Federated Learning}, author={Shi, Yuxin and Liu, Zelei and Shi, Zhuan and Yu, Han}, booktitle={2023 IEEE International Conference on Multimedia and Expo (ICME)}, pages={324--329}, year={2023}, organization={IEEE}}"
+}

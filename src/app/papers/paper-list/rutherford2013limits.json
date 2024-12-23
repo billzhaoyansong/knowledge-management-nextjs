@@ -1,0 +1,130 @@
+{
+  "title": "Limits of social mobilization",
+  "authors": [
+    "Alex Rutherford",
+    "Manuel Cebrian",
+    "Sohan Dsouza",
+    "Iyad Rahwan"
+  ],
+  "year": "2013-04",
+  "labels": [
+    "referral",
+    "crowdsourcing",
+    "social mobility"
+  ],
+  "summaries": [
+    "__study the limits of social mobility__ to avoid inflated expectations",
+    "in particular, high-resolution simulations of the DARPA Network Challenge are conducted, considering [1] recruitment [2] response time [3] geography of ties [4] passive recruitment [5] individual mobility"
+  ],
+  "systemModel": [
+    "to understand social mobility, the following dynamics are considered (1) branching dynamics of recruitment (2) temporal dynamics of message propagation (3) the geographical spread of social networks (4) the scales and aspects of human mobility [see <u>1. Dynamics of Social Mobility</u>]"
+  ],
+  "problemCategory": [
+    [
+      "Crowdsourcing"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "Crowdsourcing"
+    ]
+  ],
+  "motivation": [
+    "Despite these numerous successes, we still have limited understanding of the limits of technology-mediated mobilization",
+    "If we are to rely on social media to react to time-critical emergencies, it is important to understand the conditions under which they can be successful and the risks of failure associated with them",
+    "A particular case, of highly practical importance, is to understand the extent to which we can expect to cover a certain geographical area in a given amount of time",
+    "For this, we must understand the complete statistical characterization of the population recruited, geographical area covered, and completion time it takes for social mobilization to succeed in a particular task, as well as to quantify the likelihood of failure.",
+    "This lack of understanding is especially prone to selection bias over few successful social mobilization strategies and may lead to inflated expectations of the reliability and efficacy of these techniques (11, 12)",
+    "However, it is beyond experimental capabilities to perform randomized experimentation with large crowdsourcing challenges [with notable exceptions emerging recently"
+  ],
+  "questions": [
+    "what are the limits of time-critical social mobility"
+  ],
+  "techniques": [
+    "<u>1. Dynamics of Social Mobility</u>",
+    [
+      "1.1 branching dynamics of recruitment",
+      [
+        "to describe the typical branching recruitment process, in which many subtrees steadily die out, we use a power law distribution with a mean $\\langle R_o\\rangle=0.89$"
+      ],
+      "1.2 response time",
+      [
+        "in a study of a viral e-mail campaign, the time to forward a message was found to be log-normally distributed with a mean of $1.5$d with an SD of $5.5$d",
+        "the waiting time distribution in a time-critical campaign might differ fundamentally because it necessarily must end by a fixed deadline",
+        "use iribarren2009impact as an approximation"
+      ],
+      "1.3 geography ties",
+      [
+        "friends could be classified into two distinct types: [1] geographically dependent friends, and [2] geographically independent friends",
+        [
+          "geographically dependent friends: friendship correlates more strongly with a person's rank than simply with the distance between people",
+          [
+            "$P_{ij}\\propto\\frac{1}{\\sum_{k:r_{ik}<r_{ij}} p_k}$",
+            [
+              "$P_{ij}$: the probability of friendship between agents in 2 distinct grid cells $i$ and $j$",
+              "$p_k$: the population in cell $k$",
+              "$r_{ik}$: distance from cell $i$ to cell $k$"
+            ]
+          ],
+          "geographically independent friends: random friendship regardless of distance",
+          "out of user average of 8 friends, 5.5 are geographically dependent friends and 2.5 are geographically independent friends based on consensus data"
+        ]
+      ],
+      "1.4 passive recruitment",
+      [
+        "some individuals are not part of any recruitment tree/chain (no upstream and downstream) yet participate in the challenge",
+        "This may be the result of low affinity with the potential parent node",
+        "use a typical number of friends of a user on Facebook to model to measure this number (400)"
+      ],
+      "1.5 mobility",
+      [
+        "a fixed radius of gyration $r_{mob}=(1,2)km$ is defined allowing agents to local ballons in nearby cells"
+      ]
+    ],
+    "<u>2. Experiment Settings and Results</u>",
+    [
+      "Settings",
+      [
+        "$500$ individual DARPA Network Challenge experiments",
+        "$n_{pass}=400, r_{mob}=2$"
+      ],
+      "Results",
+      [
+        "$89%$ experiments are marked as success with a median completion of $2.3d$",
+        "minimum values for mobility radius and passive recruits of 2 km and 200, respectively, are required for a reasonable level of success.",
+        "balloons in sparsely populated areas both require significantly more people to find and are less likely to be found at all, compared with those in well-populated areas.",
+        "searchability, blendability and findability over $N=10000$ searches",
+        [
+          "searchability: the cases with which each cell may be searched throughout different searches",
+          [
+            "$s_i=\\frac{n_i^{searched}}{N}$",
+            "adding more people to a cell located in a small town increases the searchability a great deal",
+            "the payoff for adding more people to a cell in a large city is negligible"
+          ],
+          "blendability: the difficulty to locate a target at a given place",
+          [
+            "$\\hat{b}_i=\\frac{p_i^{\\beta}}{p_i}=p_i^{\\beta-1}$",
+            [
+              "$p_i$: population of a cell $i$",
+              "$\\beta=1.25$",
+              "$\\hat{b}_i$ rescaled to $[0,1]$",
+              "an added difficulty can be found in blendability in a highly populated area due to",
+              [
+                "1. increased complexity of the physical urban environment, providing more possibilities for a target to be concealed",
+                "2. sensory overload in busy places, leading to inattentional blindness, diminished feelings of individual responsibility to report sightings in large crowds, and/or reduced cognitive processing ability due to stress"
+              ]
+            ]
+          ],
+          "findability: the tension between searchability and blendability",
+          [
+            "$f_i=\\frac{s_i}{\\hat{b}_i}$",
+            "higher population leads to a higher findability"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1073/pnas.1216338110",
+  "id": "rutherford2013limits",
+  "bibtex": "@article{rutherford2013limits, title={Limits of social mobilization}, author={Rutherford, Alex and Cebrian, Manuel and Dsouza, Sohan and Moro, Esteban and Pentland, Alex and Rahwan, Iyad}, journal={Proceedings of the National Academy of Sciences}, volume={110}, number={16}, pages={6281--6286}, year={2013}, publisher={National Acad Sciences}}"
+}

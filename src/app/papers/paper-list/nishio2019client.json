@@ -1,0 +1,62 @@
+{
+  "title": "Client Selection for Federated Learning with Heterogeneous Resources in Mobile Edge (FedCS)",
+  "authors": [
+    "Takayuki Nishio",
+    "Ryo Yonetani"
+  ],
+  "year": "2018-04",
+  "labels": [
+    "federated learning",
+    "client selection"
+  ],
+  "summaries": [
+    "proposed __a client selection method__ to achieve shorter training time comparing to the original FL protocol by selecting as much clients as possible as long as the constraint of training time (client selection time + aggregation time + model update time + model upload time) is not violated",
+    "the local model update time and upload time are calculated by their hardward conditions"
+  ],
+  "systemModel": [
+    "$1$ MEC platform, $K$ clients denoted by $\\mathbb{K}$",
+    "process (1): MEC sends resource requests to randomly selected clients $\\mathbb{K}'\\subseteq \\mathbb{K}$",
+    "process (2): selected clients send back resource information to MEC",
+    "process (3): based on the resource information, MEC selects the set of clients $\\mathbb{S}\\subseteq \\mathbb{K}'$ for FL training [see 1. client selection]",
+    "process (4): model distribution, local training, model uploading, and aggregation"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "Data&System Heterogeneity"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "Client Selection"
+    ]
+  ],
+  "motivation": [
+    "In this work, we focus on the implementation of the abovementioned FL protocol in practical MEC frameworks.",
+    "We believe that our work will influence the future development platform of various AI products that require a large amount of private activity data to train ML models",
+    "In particular, we consider the problem of running FL in a cellular network used by heterogeneous mobile devices with different data resources, computational capabilities, and wireless channel conditions.",
+    "Unfortunately, a direct application of existing FL protocols without any consideration of such heterogeneous client properties will make the overall trammg process inefficient.",
+    "For instance, when some clients are with limited computational resources,they will require longer time to update models.",
+    "Moreover,if the clients are under poor wireless channel conditions, that will result in longer update time.",
+    "All such problems will delay the subsequent server's aggregation step necessary to continue the training process."
+  ],
+  "questions": [
+    "mitigate the problem that clients with limited computational resources and wireless channel conditions will negatively affect FL performance"
+  ],
+  "techniques": [
+    "1. client selection",
+    [
+      "$\\begin{array}{ll} \\underset{\\mathbb{S}}{\\operatorname{max}} & |\\mathbb{S}| \\\\  \\text { s.t. } & T_{round}\\geq T_{cs}+T_{\\mathbb{S}}^d+\\mathbb{\\Theta}_{|\\mathbb{S}|}+T_{agg} \\end{array}$",
+      [
+        "$T_{cs}$: client selection time",
+        "$T_{\\mathbb{S}}^d$: model distribution time",
+        "$\\mathbb{\\Theta}_{|\\mathbb{S}|}$: model update and upload time",
+        "$T_{agg}$: model aggregation time"
+      ]
+    ]
+  ],
+  "doi": "arXiv:1804.08333",
+  "id": "nishio2019client",
+  "bibtex": "@inproceedings{nishio2019client, title={Client selection for federated learning with heterogeneous resources in mobile edge}, author={Nishio, Takayuki and Yonetani, Ryo}, booktitle={ICC 2019-2019 IEEE international conference on communications (ICC)}, pages={1--7}, year={2019}, organization={IEEE}}"
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Verification in Referral-Based Crowdsourcing",
+  "authors": [
+    "Victor Naroditskiy",
+    "Iyad Rahwan",
+    "Manuel Cebrian",
+    "Nicholas R. Jennings"
+  ],
+  "year": "2012-06",
+  "labels": [
+    "crowdsourcing",
+    "referral"
+  ],
+  "summaries": [
+    "propose __incentive mechanisms__ for referral-based crowdsourcing to minimize the cost of receiving the correct answer",
+    "incentive mechanisms include [1] incentivizing the parent node to verify the result of reporting node [2] incentivizing the parent node to participate"
+  ],
+  "systemModel": [
+    "in the referral-based crowdsourcing, a root node is enabled to publish an information gathering task with a certain budget",
+    "the referred participant and those who refer the participant will divide the budget based on a split contract [see 1. Split Contract]",
+    "Assumptions include [1] any node other than the reporter can verify, [2] verification is 'perfect'. So only $1$ verification is required. [see 2.  Incentive Parent Node to Verify]",
+    "The parent node is responsible for the verification because [1] he decides who is invited [2] from the point of view of invited children, the first point is the parent. [3] nobody except for the recruiter may have the authority/ability to question the recruit",
+    "The parent node is also required to incentivize to participate, instead of not participating [see 3. Incentive Parent Node to Refrain from not Participating]"
+  ],
+  "motivation": [
+    "In the balloon search challenge, other than mobilizing people to participate, a great challenge is distinguishing accurate balloon submission from inaccurate ones.",
+    "Verification is of great importance in referral-based crowdsourcing settings to filter out false submissions before they reach the root."
+  ],
+  "questions": [
+    "penalize misreporting in referral-based crowdsourcing"
+  ],
+  "techniques": [
+    "1. Split Contract",
+    [
+      "assume the total budget is $r$ and the reporting node $i$ can provide the true information",
+      [
+        "for reporting node $i+1$ the revenue: $(1-s_i)r$",
+        "for parent node of the reporting node $i$ the revenue: $(1-s_{i-1})s_i r$",
+        "... for the node $1$ the revenue: $(1-s_{0})s_1 s_2 \\cdots s_{i-1} s_i r$"
+      ]
+    ],
+    "2. Incentive Parent Node to Verify",
+    [
+      "$\\underbrace{\\frac{t}{t+f}(1-s_{i-1})s_ir-e}_{\\text{expected profit with verification}}\\geq \\underbrace{\\frac{t}{t+f}(1-s_{i-1})s_ir-\\frac{f}{f+t}c}_{\\text{expected profit without verification}}$",
+      [
+        "$t$: the probability that the reporting node holding and returning the answer",
+        "$f$: the probability that the reporting node sends a false report",
+        "$e$: the verification cost",
+        "$c$: the penalty to the parent node for passing a false report"
+      ],
+      "$c\\geq (1+\\frac{t}{f})e$",
+      [
+        "for a fixed $e$, the minimum level of penalty to enforce verification is $(1+\\frac{t}{f})e$"
+      ]
+    ],
+    "3. Incentive Parent Node to Refrain from not Participating",
+    [
+      "$\\frac{t}{t+f}(1-s_{i-1})s_i r-e \\geq 0$",
+      "the minimal reward sufficient to encourage participation of node $i$ is",
+      [
+        "$r_i^{\\min} = \\frac{e}{(1-s_{i-1})s_i}(1+\\frac{f}{t})$"
+      ]
+    ]
+  ],
+  "doi": "10.1371/journal.pone.0045924",
+  "id": "naroditskiy2012verification",
+  "bibtex": "@article{naroditskiy2012verification, title={Verification in referral-based crowdsourcing}, author={Naroditskiy, Victor and Rahwan, Iyad and Cebrian, Manuel and Jennings, Nicholas R}, year={2012}, publisher={Public Library of Science San Francisco, USA}}"
+}

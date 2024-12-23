@@ -96,7 +96,7 @@ const PaperCard = async ({
 
             {/* row 5 */}
             <div className="flex flex-row flex-wrap pt-2">
-                {paper.labels.map(l => <span key={l} className="border border-1 px-2 mx-1 mt-1 rounded-lg text-xs hover:border-yellow-100">{l}</span>)}
+                {paper.labels.map(l => <span key={l} className="border border-1 px-2 mx-1 mt-1 rounded-lg text-xs">{l}</span>)}
             </div>
         </div>
 

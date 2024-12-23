@@ -1,0 +1,55 @@
+{
+    "title": "A Crowdsourcing Framework for On-Device Federated Learning",
+    "authors": [
+        "Shashi Raj Pandey",
+        "Nguyen H. Tran",
+        "Mehdi Bennis",
+        "Yan Kyaw Tun",
+        "Aunas Manzoor",
+        "Choong Seon Hong"
+    ],
+    "year": "2019-05",
+    "labels": [
+        "federated learning",
+        "crowdsourcing",
+        "stackelberg game",
+        "incentive mechanism"
+    ],
+    "summaries": [
+        "propose __an incentive mechanism__ by modeling the interaction between the MEC server and participating workers as a stackelberg game to achieve [1] higher gain in the offered reward comparing to the ablations",
+        "server determines optimal reward rates, while the clients decide the optimal local accuracy"
+    ],
+    "systemModel": [
+        "$1$ MEC server, a set of clients $\\mathcal{K}$",
+        "step 1): the MEC server announce a uniform reward rate $r$",
+        "step 2): clients choose accuracy level $\\theta_k$ ($\\theta_k$ is a relative accuracy, and A smaller value of relative accuracy $\\theta_k$ indicates a high local accuracy) according to the reward rate $r$ to maximize self utility [see 1. stage II]",
+        "step 3): server optimize reward rate $r^*$ to maximize self-utility[see 2. stage I]"
+    ],
+    "questions": [
+        "how to maintain communication efficiency while exchanging the model parameters",
+        "how to motivate participating clients"
+    ],
+    "techniques": [
+        "1. stage II",
+        [
+            "$\\max\\limits_{\\theta_k>0} u_{k}(r,\\theta_k)=r(1-\\theta_k)-C_k(\\theta_k)$",
+            [
+                "$C_k(\\theta_k)=(1+\\theta_k)\\cdot\\left(\\nu_k\\cdot T_k + (1-\\nu_k)\\cdot \\gamma_k\\log\\left(\\frac{1}{\\theta_k}\\right)\\right)$: sum of computing cost and communication cost",
+                [
+                    "since $C_k'' (θ_k) > 0$, there exists an unique solution $θ_k^*(r)$"
+                ]
+            ]
+        ],
+        "2. stage I",
+        [
+            "$\\max\\limits_{r\\geq 0} \\beta \\underbrace{\\left(1-10^{-(ax^*(\\epsilon)+b)} \\right)}_{\\text{normalized utility from }\\epsilon}-r\\sum\\limits_{k\\in\\mathcal{K}}\\left(1-\\theta^*_k (r)\\right)$",
+            [
+                "$x^*(\\epsilon)=\\eta\\cdot\\log\\left(\\frac{1}{\\epsilon}\\right)$: optimal number of iterations for $\\epsilon$ accuracy"
+            ]
+        ]
+    ],
+    "experiments": [],
+    "doi": "10.1109/TWC.2020.2971981",
+    "id": "pandey2020crowdsourcing",
+    "bibtex": "@article{pandey2020crowdsourcing, title={A crowdsourcing framework for on-device federated learning}, author={Pandey, Shashi Raj and Tran, Nguyen H and Bennis, Mehdi and Tun, Yan Kyaw and Manzoor, Aunas and Hong, Choong Seon}, journal={IEEE Transactions on Wireless Communications}, volume={19}, number={5}, pages={3241--3256}, year={2020}, publisher={IEEE}}"
+}

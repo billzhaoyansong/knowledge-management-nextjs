@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation"
 import { useState } from "react"
 
+import './filter.css'
+
 const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
     orderBy: string,
     searchText: string,
@@ -89,9 +91,10 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
         <div className="flex-initial flex flex-row flex-wrap pt-6">
             {Array.from(labelsToShow).sort().map(l =>
                 <div key={l}>
-                    <button key={l} className={`text-sm underline mx-1 ${filterLabels.has(l) ? 'font-bold':'font-light'}`}
+                    <button key={l} className={`label-btn text-sm underline mx-1 ${filterLabels.has(l) ? 'font-bold' : 'font-light'}`}
                         onClick={() => updateFilterLabels(l)}
-                    >{filterLabels.has(l) ? `${l}(x)` : l}</button><span className='text-slate-400'>|</span>
+                    >{filterLabels.has(l) ? `${l}(x)` : l}</button>
+                    <span className='text-slate-400'>|</span>
                 </div>)
             }
         </div>

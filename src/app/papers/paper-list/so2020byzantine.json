@@ -1,0 +1,35 @@
+{
+  "title": "Byzantine-Resilient Secure Federated Learning",
+  "authors": [
+    "Jinhyun So",
+    "Başak Güler",
+    "A. Salman Avestimehr"
+  ],
+  "year": "2020-07",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "byzantine",
+    "privacy-preservation"
+  ],
+  "abstract": "Secure federated learning is a privacy-preserving framework to improve machine learning models by training over large volumes of data collected by mobile users. This is achieved through an iterative process where, at each iteration, users update a global model using their local datasets. Each user then masks its local update via random keys, and the masked models are aggregated at a central server to compute the global model for the next iteration. As the local updates are protected by random masks, the server cannot observe their true values. This presents a major challenge for the resilience of the model against adversarial (Byzantine) users, who can manipulate the global model by modifying their local updates or datasets. Towards addressing this challenge, this paper presents the first single-server Byzantine-resilient secure aggregation framework (BREA) for secure federated learning. BREA is based on an integrated stochastic quantization, verifiable outlier detection, and secure model aggregation approach to guarantee Byzantine-resilience, privacy, and convergence simultaneously. We provide theoretical convergence and privacy guarantees and characterize the fundamental trade-offs in terms of the network size, user dropouts, and privacy protection. Our experiments demonstrate convergence in the presence of Byzantine users, and comparable accuracy to conventional federated learning benchmarks.",
+  "summaries": [
+    "propose __a secure framework__ based on integrated stochastic quantization, verifiable outlier detection, and secure model aggregation, to tackle that local updates are masked randomly and the server cannot observe true value of updates to identify adversarial (Byzantine) users, "
+  ],
+  "systemModel": [
+    "$1$ server, $N$ mobil users",
+    "process",
+    [
+      "<u>Stochastic quantization</u>: Users initially quantize their local updates from the real domain to the domain of integers, and then embed them in a field $\\mathbb{F}_p$ of integers moduloa prime $p$.<ol>",
+      "<u>Verifiable secret sharing of the user models</u>: Users then secret share their quantized models using a verifiable secret sharing protocol.",
+      "<u>Secure distance computation</u>: users compute the pairwise distances between the secret shares of the local updates, and send the results to the server.",
+      "<u>User selection at the server</u>: the server recovers the pairwise distances between the local updates and selects the set of users whose models will be included in the aggregation, by removing the outliers.",
+      "<u>Secure model aggregation</u>: each user locally aggregates the secret shares of the models selected by the server, and sends the computation result to the server. Using the computation results, the server recovers the aggregate of the models of the selected users, and updates the model"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/JSAC.2020.3041404",
+  "id": "so2020byzantine",
+  "bibtex": "@article{so2020byzantine, title={Byzantine-resilient secure federated learning}, author={So, Jinhyun and G{\"u}ler, Ba{\\c{s}}ak and Avestimehr, A Salman}, journal={IEEE Journal on Selected Areas in Communications}, volume={39}, number={7}, pages={2168--2181}, year={2020}, publisher={IEEE}}"
+}

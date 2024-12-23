@@ -1,0 +1,56 @@
+{
+  "title": "Fed-BioMed: A General Open-Source Frontend Framework for Federated Learning in Healthcare",
+  "authors": [
+    "Santiago Silva",
+    "Andre Altmann",
+    "Boris Gutman",
+    "Marco Lorenzi "
+  ],
+  "year": "2020-09",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "FL platform"
+  ],
+  "abstract": "While data in healthcare is produced in quantities never imagined before, the feasibility of clinical studies is often hindered by the problem of data access and transfer, especially regarding privacy concerns. Federated learning allows privacy-preserving data analyses using decentralized optimization approaches keeping data securely decentralized. There are currently initiatives providing federated learning frameworks, which are however tailored to specific hardware and modeling approaches, and do not provide natively a deployable production-ready environment. To tackle this issue, herein we propose an open-source federated learning frontend framework with application in healthcare. Our framework is based on a general architecture accommodating for different models and optimization methods. We present software components for clients and central node, and we illustrate the workflow for deploying learning models. We finally provide a real-world application to the federated analysis of multi-centric brain imaging data.",
+  "summaries": [
+    "propose __an open-source production-ready FL framework__ in healthcare to tackle that current FL frameworks are tailored to specific hardward and modeling approaches"
+  ],
+  "systemModel": [
+    "a set of clients, a set of federators, and a central node placing between clients and federators",
+    [
+      "federators are to combine models from clients",
+      "the central node manages jobs and submissions between clients and federators"
+    ],
+    "clients can be deployed with homogeneous and heterogeneous dataset",
+    "the central node can be contact via RESTful API implemented by the python library (fed-requests)",
+    "federators can choose different aggragation models (such as FedAvg)",
+    "authors used brain imaging data (MRI) in experiments, that's why in the title it says this is for healthcare",
+    "no UI implemented"
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    ""
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1007/978-3-030-60548-3_20",
+  "id": "silva2020fed",
+  "bibtex": "@inproceedings{silva2020fed, title={Fed-biomed: A general open-source frontend framework for federated learning in healthcare}, author={Silva, Santiago and Altmann, Andre and Gutman, Boris and Lorenzi, Marco}, booktitle={Domain Adaptation and Representation Transfer, and Distributed and Collaborative Learning: Second MICCAI Workshop, DART 2020, and First MICCAI Workshop, DCL 2020, Held in Conjunction with MICCAI 2020, Lima, Peru, October 4--8, 2020, Proceedings 2}, pages={201--210}, year={2020}, organization={Springer}}"
+}

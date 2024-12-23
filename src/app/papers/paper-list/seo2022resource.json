@@ -1,0 +1,92 @@
+{
+    "title": "Resource-Efficient Federated Learning With Non-IID Data: An Auction Theoretic Approach",
+    "authors": [
+        "Eunil Seo",
+        "Dusit Niyato",
+        "Erik Elmroth"
+    ],
+    "year": "2022-03",
+    "labels": [
+        "federated learning",
+        "reverse auction",
+        "client selection",
+        "incentive mechanism",
+        "efficiency"
+    ],
+    "summaries": [
+        "propose __an auction-based FL framework__ to tackle heterogeneity in clients, achieving [1] resource-efficiency (lower resources usage in FL clients) and [2] payments in marketplace",
+        "client selection and payments in the framework depends on [1] max achievable local accuracies and [2] local iteration number",
+        "to tackle heterogeneity, a shared IID dataset is transmitted to the selected clients"
+    ],
+    "systemModel": [
+        "$1$ FL service provider, a set of clients, a controller as auctioneer",
+        "process 1): FL service provider designs a deep neural network, input structure, and a quality level",
+        "process 2): service provider transmits above requirements to the controller",
+        "process 3): the controller sets the auction-winning rule [see 1. auction-winning rule] and payment rule [see 2. payment rule] based on the requirements",
+        "process 4): the controller broadcasts 2 rules to the clients",
+        "amid a global iteration and global iteration terminates when a desired global accuracy is achieved:",
+        "subprocess 1): each client submit a bid to the controller [see 3. bidding]",
+        "subprocess 2): the controller determined winning bids based on the auction-winning rule",
+        "subprocess 3): local training [see 4. local training]",
+        "subprocess 4): the controller decides which local models to be used in aggregation and payments based on the payment rule"
+    ],
+    "questions": [
+        "to train with non-IID data"
+    ],
+    "techniques": [
+        "1. auction-winning rule",
+        [
+            "$R_{win}^n(f_n, D_n,\\gamma_n,p_n)=\\beta_1 \\cdot \\underbrace{\\Delta(D_n,\\gamma_n)\\cdot\\left(1-\\frac{\\alpha_1}{1+\\alpha_2 \\cdot \\frac{\\tau_n \\cdot f_n}{D_n \\cdot X}}\\right)}_{\\text{utility of local dataset}}-p_n$",
+            [
+                "utility of local dataset depends on (1) local iteration number (TBTB); (2) maximum achievable accuracy",
+                "$\\Delta(D_n,\\gamma_n)$: maximum achievable accuracy represented by a nondecreasing function with decreasing marginal accuracy",
+                [
+                    "$\\gamma_n$: data distribution of client $n$"
+                ],
+                "$\\frac{\\tau_n \\cdot f_n}{D_n \\cdot X}$: number of local iterations",
+                [
+                    "$D_n$: input data size in bits",
+                    "$\\tau_n$: completion deadline in seconds",
+                    "$X$: number of CPU cycles per bit",
+                    "$f_n$: CPU frequency of a client $n$"
+                ],
+                "$p_n$: claimed price"
+            ]
+        ],
+        "2. payment rule",
+        [
+            "$p(b_k)=\\begin{cases} \\varsigma e^{-\\left(1-\\Delta(D_k,\\gamma_k) \\cdot \\left(1-\\frac{\\alpha_1}{1+\\alpha_2+\\frac{\\tau_n \\cdot f_n}{D_n \\cdot X}}\\right)\\right)} & \\text{if } q_k^l\\geq R_{pay}^l(\\cdot) \\\\ 0 & \\text{if } q_k^l < R_{pay}^l(\\cdot)  \\end{cases}$",
+            [
+                "$R_{pay}^l(\\cdot)=\\frac{1}{K} \\sum\\limits_{k=1}^K q_k - \\beta_s\\cdot \\sigma_s$",
+                [
+                    "$\\beta_s$: a coefficient to adjust the acceptable scale of local models",
+                    "$\\sigma_s$: the standard deviation of the accuracies of local models"
+                ]
+            ]
+        ],
+        "3. bidding",
+        [
+            "$\\mathbf{b}_k=\\{l_k, f_k, D_k, p_k, q_k\\}$",
+            [
+                "$l_k$: index of global iterations of a bid $\\mathbf{b}_k$",
+                "$f_k$: CPU frequency of a client $n$",
+                "$D_k$: input data size in bits",
+                "$p_k$: claimed price",
+                "$q_k$: local model quality (accuracy) achieved after $l$ iterations"
+            ],
+            "$U_k(f_k,D_k)=\\underbrace{p(f_k,D_k)}_{\\text{revenue}}-\\underbrace{C_{f_k}-C_{\\mathbb{D}_k}}_{\\text{cost}}$: utility of client",
+            [
+                "$U_k(f_k,D_k)=\\varsigma e^{-\\left(1-\\Delta(D_k,\\gamma_k) \\cdot \\left(1-\\frac{\\alpha_1}{1+\\alpha_2+\\frac{\\tau_n \\cdot f_n}{D_n \\cdot X}}\\right)\\right)}-\\mu\\cdot\\kappa\\cdot D_k \\cdot X \\cdot f_k^2 - \\eta_k D_k$",
+                "client can maximize self utility by maximizing payment and minimizing costs"
+            ]
+        ],
+        "4. local training",
+        [
+            "1) the service provider transmits the initial global model $w_0$ and the shared IID data set $\\mathbf{s}$ to the winning clients",
+            "2) a winning client uses the $f_k, D_k$ to train the global model"
+        ]
+    ],
+    "doi": "10.1109/JIOT.2022.3197317",
+    "id": "seo2022resource",
+    "bibtex": "@article{seo2022resource, title={Resource-efficient federated learning with Non-IID data: An auction theoretic approach}, author={Seo, Eunil and Niyato, Dusit and Elmroth, Erik},  journal={IEEE Internet of Things Journal}, volume={9}, number={24}, pages={25506--25524}, year={2022}, publisher={IEEE}}"
+}

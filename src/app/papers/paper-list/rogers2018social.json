@@ -1,0 +1,93 @@
+{
+  "title": "Social Mobilization",
+  "authors": [
+    "Todd Rogers",
+    "Noah J. Goldstein",
+    "Craig R. Fox"
+  ],
+  "year": "2017",
+  "labels": [
+    "social influence",
+    "collective action",
+    "charitable giving",
+    "voter mobilization",
+    "environmental behavior",
+    "field experiments"
+  ],
+  "summaries": [
+    "__reviews research of behavioral disciplines to derive strategies__ for prompting people to perform collectively meaningful behaviors",
+    "social mobilization refers specifically to principles to influence a large number of individuals to participate in such activities.",
+    "motivational force of social mobilization is amplified by 1) encouraging beneficial behaviors 2) people are embedded in social network",
+    "this article is useful to people in the provision of 1) public goods, 2)collective action, and 3) prosocial behavior",
+    "special attention is given to field experiments on 1) election participation, 2) environmentally sustainable behaviors, and 3) charitable giving"
+  ],
+  "systemModel": [
+    "In this review, we organize behavioral principles for social mobilization into five intervention elements that have proven to be potent in the behavioral literature to effectively prompt many individuals to take personally costly actions. [see <u>1. Intervention Elements (PANIC) for Social Mobilization</u>]"
+  ],
+  "motivation": [
+    "collective action is commonly modeled using a public goods game (or related n-player prisoner's dilemma), in which each player chooses (usually privately)",
+    "Rational choice theory predicts that all players will free ride (Nash equilibrium)",
+    "nevertheless, laboratory experiments frequently observe high levels of contribution in these games, especially when participants expect others to cooperate",
+    "A basic psychological motive underlying many of the social mobilization principles that we discuss is people's fundamental need to belong or feel socially connected to others."
+  ],
+  "questions": [
+    "study the elements that affect social mobilization"
+  ],
+  "techniques": [
+    "<u>1. Intervention Elements (PANIC) for Social Mobilization</u>",
+    [
+      "<u>P</u>ersonal: principles involve more personal and personalized interactions",
+      [
+        "<u>Personal interactions</u>: In-person face-to-face authentic mobilization efforts are more effective than scripted, purely verbal, or written mobilization efforts.",
+        [
+          "1. more personal interactions undoubtedly garner more attention",
+          "2. when people are asked in face-to-face interactions to perform other-benefiting behaviors, they tend to believe that",
+          "3. partly because of this heightened perception of the social costs of declining",
+          "4. people may grow concerned that they could encounter the elicitor in the future",
+          "5. more personal interactions likely foster deeper personal connections, and in turn, engages people's empathy and their fundamental desire for acceptance,",
+          "6. more personal interactions create opportunities to notice similarities between oneself and another person"
+        ],
+        "<u>Personalized potential beneficiaries</u>: Social mobilization efforts are more effective when beneficiaries are identified or determined in advance.",
+        [
+          "Research on the identifiable victim effect reports that people are more motivated to help identified than statistical victims"
+        ],
+        "<u>Synchrony</u>: Coordinated behaviors between participants can enhance social bonds and collective identities, rendering social mobilization efforts more effective.",
+        [
+          "Perceived similarity among those participating in such events—such as similarity in perceived identity (e.g., women) or even clothing (e.g., wearing a knitted pink hat)—can foster social bonds among them",
+          "These social bonds can be further enhanced when participants engage in these behaviors in synchrony"
+        ]
+      ],
+      "<u>A</u>ccountable: they make people's behavior observable to others",
+      [
+        "<u>Social observability</u>: People are more likely to engage in other-benefiting behaviors when they are led to expect that their behaviors will be observable to others.",
+        "<u>Postbehavior signaling opportunities</u>: People are more likely to engage in other-benefiting behaviors when they expect that others will observe evidence of their behaviors after the fact.",
+        "<u>Observability cues</u>: Environmental cues that are associated with being observed (e.g., photographs of eyes) can promote other-benefiting behaviors."
+      ],
+      "<u>N</u>ormative: they convey what relevant people think what others should do",
+      [
+        "<u>Injunctive norm salience</u>: Reminding people of shared values and beliefs concerning how the group expects them to behave can enhance mobilization efforts.",
+        "<u>Norm of reciprocity</u>: Providing people with unconditional favors, gifts, or other-benefiting sacrifices can make people feel obliged to repay these gestures through participation in social mobilization activities.",
+        "<u>Beneficial descriptive norms</u>: Evidence of the pervasiveness of behaviors can amplify the effectiveness of social mobilization efforts, especially when the behaviors are performed by others who are similar to or in similar contexts as the people being targeted."
+      ],
+      "<u>I</u>dentity relevant: they align behaviors with how people see themselves",
+      [
+        "<u>Symbolic identity displays</u>: When people display behaviors that are representative of a particular group identity, they tend to feel more connected to that group and more willing to engage in mobilization activities.",
+        "<u>Identity-behavior associations</u>: Associating a behavior with a desirable identity can turn performing the behavior into an opportunity to affirm that the desirable identity is self-relevant.",
+        "<u>Identity labeling</u>: Reinforcing the idea that people possess other-benefiting identities can increase the behaviors associated with those identities.",
+        "<u>Foot-in-the-door</u>: Small, initial requests for other-benefiting behaviors can promote other-benefiting identities and lead people to be open to larger, related requests.",
+        "<u>Self-prediction</u>: People tend to believe that they will perform other-benefiting behaviors that they might not actually perform, but people's desire to behave consistently with what they say can make self-predictions self-fulfilling.",
+        "<u>Hypocrisy avoidance</u>: When people become aware that their behaviors have been inconsistent with a desirable identity, they can be especially likely to subsequently perform identity-consistent behavior."
+      ],
+      "<u>C</u>onnected: they leverage the structure of people's networks of relationships",
+      [
+        "<u>Close connections among individuals</u>: Directing social mobilization efforts at people who are well-connected to other individuals can lead to positive spillover effects such that mobilization propagates from the target to other individuals.",
+        "<u>Influential individuals within social networks</u>: Focusing appeals on people who have many strong and embedded connections in a social network can help propagate mobilization appeals through simple contagion.",
+        "<u>Observability within networks</u>: Making behaviors more visible to other members of a social network can amplify propagation of behaviors across social networks.",
+        "<u>Communities on the periphery of a larger social network</u>: When contagion depends on redundant messages from similar people, social mobilization may be enhanced by targeting communities of individuals on the periphery of a larger network."
+      ]
+    ]
+  ],
+  "doi": "10.1146/annurev-psych-122414-033718",
+  "id": "rogers2018social",
+  "bibtex": "@article{rogers2018social, title={Social mobilization}, author={Rogers, Todd and Goldstein, Noah J and Fox, Craig R}, journal={Annual review of psychology}, volume={69}, pages={357--381}, year={2018}, publisher={Annual Reviews}}"
+}

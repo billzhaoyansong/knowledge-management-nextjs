@@ -1,0 +1,86 @@
+{
+  "title": "An Incentive Auction for Heterogeneous Client Selection in Federated Learning",
+  "authors": [
+    "Jinlong Pang",
+    "Jieling Yu",
+    "Ruiting Zhou",
+    "John C.S. Lui"
+  ],
+  "year": "2022-06",
+  "labels": [
+    "federated learning",
+    "reverse auction",
+    "client selection",
+    "incentive mechanism",
+    "social welfare",
+    "multi-job"
+  ],
+  "summaries": [
+    "propose __a procument (reverse) auction mechanism__ which selects and schedules different clients at different global iterations to achieve [1] lower social cost compared with [1] FAVOR and [2] CoCoA",
+    "in the mechanism, the number of global iterations, scheduling decisions and incentive payouts are determined to minimize the social costs from one auction only",
+    "an extension of multi-job scenario is considered and introduces a budget constraint"
+  ],
+  "systemModel": [
+    "$1$ server and a set of FL clients $I$",
+    "process 1): server broadcasts information of job to all FL clients $I$ [see 1. job broadcasting]",
+    "process 2): clients submit $J$ bids [see 2. bidding]",
+    "process 3): server determines number of global iterations, schedules training plan and determines payouts [see 3. social cost minimization]",
+    "a multi-job extension is introduced [see 4. multi-job extension]"
+  ],
+  "motivation": [
+    "To fully realize the potential of FL in practice, two types of challenges need to be addressed: technical and economical.",
+    "First, on the technical side, both computation and communication are the core challenges.",
+    "Second, on the economic side, incentive mechanism design is an indispensible enabling technology for FL.",
+    "To overcome aforementioned challenges, one needs to capture the distinct feature of FL while designing incentive mechanisms, i.e., the relation between global accuracy and local accuracy among many mobile clients.",
+    "Most existing research in FL focuses on the technical side, and investigates how to improve the training efficiency or reduce energy cost [6, 10, 11, 12].",
+    "There are only a few studies on the incentive mechanism design in FL.",
+    "Most work in FL assume that the same set of clients can fully participate in the whole FL training process from beginning to end, and select energy-efficient clients to achieve fairness or utility maximization [13, 14, 15, 16].",
+    "In fact, incentive mechanism design has been well-studied in other related fields (e.g., mobile crowdsensing or crowdsourcing) by leveraging several approaches mentioned in Sec. 2. ",
+    "On behalf of one of the representative incentivizing approaches, auction already showed its superiority. ",
+    "In contrast to other incentive mechanism approaches (e.g., contract theory [17],[18]) in which clients can only decide whether or not to accept the contracts, auction enables clients to bid for any combinations of resources.",
+    "Meanwhile, traditional fixed pricing cannot exactly capture the flexible supply-demand relationship between clients and the cloud server due to the heterogeneous capacities of devices.",
+    "Consequently, overpricing and underpricing routinely occur, jeopardizing the cloud server’s profit as well as the system’s utility. ",
+    "In contrast, auction is a natural approach to balance supply and demand, and automatically discover the right price, so that the cloud server can select clients with the lowest cost. ",
+    "In addition, auction-based framework can simultaneously guarantee individual rationality and truthfulness."
+  ],
+  "questions": [
+    "incentivizes the participation of heterogeneous clients"
+  ],
+  "techniques": [
+    "1. job broadcasting",
+    [
+      "the broadcasting contents include (1) max num of global iter $T$, (2) duration of one global iter $t_{max}$, (3) num of participating clients for each iter $K$, (4) expected global accuracy $\\epsilon$"
+    ],
+    "2. bidding",
+    [
+      "the reason for 1 client to submit $J$ bids is that they value different local accuracy and period differently",
+      "the contents in each bidding includes (1) claimed cost $b_{ij}$, (2) local accuracy $\\theta_{ij}$, (3) starts and ends of availability $a_{ij},d_{ij}$, and number of global iterations can participate due to battery limitation $c_{ij}$."
+    ],
+    "3. social cost minimization",
+    [
+      "$\\begin{array}{ll} \\underset{T_g, x_{ij},y_i(t)}{\\operatorname{min}} & \\sum\\limits_{i\\in\\mathcal{I}}\\sum\\limits_{j\\in\\mathcal{J}} b_{ij}x_{ij} \\\\       \\text { s.t. } & \\sum\\limits_{i\\in\\mathcal{I}} y_i(t)\\geq K,\\quad \\forall t\\in\\mathcal{T}_g \\\\     & T_g\\geq\\frac{1}{1-\\theta_{ij}x_{ij}}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & \\sum\\limits_{t \\in \\mathcal{T}_g} y_i(t) = \\sum\\limits_{j \\in \\mathcal{J}} c_{ij} x_{ij}, \\quad \\forall i\\in\\mathcal{I} \\\\     & x_{ij} \\cdot (T_l(\\theta_{ij})t_i^{cmp}+t_i^{com})\\leq t_{max}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & y_i(t)=1 \\text{ only if } x_{ij}=1, \\quad t\\in[a_{ij}, d_{ij}], \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & \\sum\\limits_{j \\in \\mathcal{J}} x_{ij} \\leq 1, \\quad \\forall i\\in \\mathcal{I} \\\\     & x_{ij}, y_{i}(t)\\in\\{0,1\\}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J}, \\forall t \\in \\mathcal{T}_g \\\\     & T_g \\in \\{1,2,...,T\\}   \\end{array}$",
+      [
+        "$T_g$: number of global iterations",
+        "$x_{ij}\\in\\{0,1\\}$: indicator of whether to accept client $i$'s $j$-th bid",
+        "$y_{i}(t)\\in\\{0,1\\}$: indicator of whether to schedule client $i$ at $t$-th global iteration"
+      ],
+      "this problem is NP-hard",
+      "solver:",
+      [
+        "1. find the range of $T_g\\in\\lfloor\\frac{1}{1-\\theta_{\\min}}\\rfloor$",
+        "2. iterate over the range of $T_g$, and under current iterating $T_g$, find the minimum cost, winning bids, and payments",
+        [
+          "calculate the payment based on the critical bid, i.e., the schedule which has the second smallest average cost."
+        ]
+      ]
+    ],
+    "4. multi-job extension",
+    [
+      "the objective becomes $\\min \\sum\\limits_{m\\in\\mathcal{M}}\\sum\\limits_{i\\in\\mathcal{I}}\\sum\\limits_{j\\in\\mathcal{J}} b_{ijm}x_{ijm}$",
+      "constraints are modified accordingly"
+    ]
+  ],
+  "doi": "10.1109/TMC.2022.3182876",
+  "id": "pang2022incentive",
+  "bibtex": "@article{pang2022incentive, title={An incentive auction for heterogeneous client selection in federated learning}, author={Pang, Jinlong and Yu, Jieling and Zhou, Ruiting and Lui, John CS}, journal={IEEE Transactions on Mobile Computing},   year={2022}, publisher={IEEE}}"
+}

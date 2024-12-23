@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+
+@layer components {
+
+    .label-btn::first-letter {
+        font-size: 1rem;
+        /* font-weight: bold; */
+        /* color: brown; */
+      }
+}

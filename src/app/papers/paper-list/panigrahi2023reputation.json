@@ -1,0 +1,69 @@
+{
+  "title": "A reputation-aware hierarchical aggregation framework for federated learning (FedRaHa)",
+  "authors": [
+    "Monalisa Panigrahi",
+    "Sourabh Bharti",
+    "Arun Sharma"
+  ],
+  "year": "2023-04",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "client selection",
+    "architecture"
+  ],
+  "summaries": [
+    "propose __a hierarchical aggregation framework__ to (1) resolve single point of failure and (2) reduce communication cost incurred by resource-constrained FL clients, achieving (1) higher test accuracy and (2) lower communication cost, compared with (1) Classical FL protocol (2) Hierarchical FL [5]",
+    "the framework is composed of (1) a global server (2) edge servers (3) clients",
+    "in the framework, a reputation-based client selection method is used to select clients for aggregation to minimize unnecessary local update exchange"
+  ],
+  "systemModel": [
+    "$1$ global server, $L$ edge servers (local gateways), $K$ clients",
+    "process 1): each edge server selects $R$ clients to perform local training",
+    "process 2): after local training, each client estimates its reputation score [see <u>1. Reputation </u>] and model similarity [see <u>2. Model Similarity </u>] and shares with the edge server",
+    "process 3): the edge servers rank clients based on reputation values and select clients whose similarity is higher than the average similarity for local aggregation",
+    "process 4): edge servers upload aggregated models to the global server for global aggregation"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "Efficiency"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "Client Selection"
+    ]
+  ],
+  "motivation": [
+    "As a result of this centralized aggregation, a worn-out server acts as the sole point of contact for all clients, which could result in data loss in the event of a breakdown.",
+    "Additionally, due to the constrained computational capabilities, point-to-point communication between FLClients and server is not always reliable.",
+    "Due to the possibility of FLClients' updates being lost during the model exchange, this may impact the correctness of the global model.",
+    "Additionally, since every FLClient update is transmitted to the global server during each FL round, the communication cost incurred by FLClients rapidly rises. ",
+    "Reputation is employed as a decision variable for client selection in specific proposals, such as [3], before aggregating their local models."
+  ],
+  "questions": [
+    "select clients for aggregation to minimize communication cost"
+  ],
+  "techniques": [
+    "<u>1. Reputation </u>",
+    [
+      "$R^{fc}_{score}=\\alpha_1 Q l^{fc}+\\alpha_2 Q t^{fc}$",
+      [
+        "$Q l^{fc}$: test data accuracy of fc's local model",
+        "$Q t^{fc}=\\frac{|D^{fc}|}{|D^l|}$: data size ratio",
+        [
+""
+        ]
+      ]
+    ],
+    "<u>2. Model Similarity </u>",
+    [
+      "$\\cos^{fc}_{score}=\\frac{\\langle \\Delta W_{fc}^n, \\Delta W^n \\rangle}{\\Vert \\Delta W_{fc}^n\\Vert \\Vert \\Delta W^n \\Vert}$"
+    ]
+  ],
+  "doi": "10.1016/j.compeleceng.2023.108900",
+  "id": "panigrahi2023reputation",
+  "bibtex": "@article{panigrahi2023reputation, title={A reputation-aware hierarchical aggregation framework for federated learning}, author={Panigrahi, Monalisa and Bharti, Sourabh and Sharma, Arun}, journal={Computers and Electrical Engineering}, volume={111}, pages={108900}, year={2023}, publisher={Elsevier}}"
+}

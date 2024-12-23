@@ -1,0 +1,108 @@
+{
+  "title": "Reputation-aware hedonic coalition formation for efficient serverless hierarchical federated learning (SHFL)",
+  "authors": [
+    "Jer Shyuan Ng",
+    "Wei Yang Bryan Lim",
+    "Zehui Xiong",
+    "Xianbin Cao",
+    "Jiangming Jin",
+    "Dusit Niyato",
+    "Cyril Leung",
+    "Chunyan Miao"
+  ],
+  "year": "2021-08",
+  "labels": [
+    "federated learning",
+    "serverless",
+    "reputation",
+    "architecture",
+    "grouping",
+    "clustering",
+    "incentive mechanism",
+    "hedonic game"
+  ],
+  "summaries": [
+    "propose __a serveless FL framework__ in which workers are clustered by cluster heads and cluster heads exchange models to neighbors, achieving [1] lower communication costs compared to serverless FL (SFL) but higher than hierarchical FL (HFL)",
+    "in this framework, the self-interested workers form coalitions led by different cluster heads to maximize self-utility (reward + cluster head reputation - costs - disutility from congestion effect), and the process is modeled as a hedonic game",
+    "a reward pool provided by each cluster head is allocated to all members of the cluster according to respetive local data-size",
+    "cluster heads just exchange intermediate models to one-hop neighbors"
+  ],
+  "systemModel": [
+    "a set of $\\mathcal{M}=\\{1,...,m,...,M\\}$ edge servers as the cluster head, a set $\\mathcal{J}=\\{1,...,j,...,J\\}$ of IoT devices as workers, a cluster head is in charge of $S_m$ workers and has a reward pool $\\alpha_m$ for recruiting workers",
+    "coalition formation is modeled as a hedonic game [see <u>1. Hedonic Game</u>]",
+    "step 1): cluster heads send to controlling workers the intermediate model $\\bm{w}_m^{(k)}$",
+    "step 2): workers perform local training and transmit local model parameters",
+    "step 3): cluster heads aggregates local models to get a new intermediate model $\\bm{w}_m^{(k+1)}$",
+    "step 1)-3) continues",
+    "at a prespecified interval $\\kappa$, cluster heads send model parameter $\\bm{w}_m^{(k+\\kappa)}$ to their one-hop neighbours and aggregates to $\\bm{w}^{(k+\\kappa)}$"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "Incentive Mechanism"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "incentive mechanism"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    "clients coalition formation (actively joining, not passively being allocated) problem in the serverless hierarchical federated learning framework"
+  ],
+  "techniques": [
+    "<u>1. Hedonic Game</u>",
+    [
+      "the coalition game is defined by $(\\mathcal{J}, \\succ=\\{\\succ_1\\cdots,\\succ_j\\cdots\\succ_J\\})$, and following 2 conditions are satisfied",
+      [
+        "the payoff depends solely on the members of the coalitions",
+        "the coalition form as a result of the preferences of the workers over their sets of possible coalitions"
+      ],
+      "given a partition $\\Pi=\\{S_1,...,S_M\\}$, an FL worker decides to leave current coalition $S_m$ and join another coalition $S_{m'}\\in\\Pi, m\\neq m'$, if and only if $S_{m'}\\bigcup\\{j\\}\\succ_j S_m$",
+      [
+        "$S_1 \\succeq_j S_2 \\Leftrightarrow u_j^{S_1} \\geq u_j^{S_2}$",
+        [
+          "$u_j^{S_m}=\\begin{cases}\\frac{d_j}{\\sum_{j'\\in S_m} d_{j'}}\\alpha_m+\\gamma_m-c_j^{cp}-c_{j,m}^{cm}-z_j^{S_m}, & \\text{if } S_m\\notin h(j)\\\\-\\infty, & \\text{otherwise}\\end{cases}$",
+          [
+            "$h(j)$: the history set of worker, means that the worker $j$ cannot jump back to any historical cluster before",
+            "$d_j$: data quantity of $j$",
+            "$\\gamma_m=b_{\\tilde{\\mathcal{M}} \\to m}+\\omega u_{\\tilde{\\mathcal{M}} \\to m}$: reputation of cluster head $m$",
+            [
+              "$b_{\\tilde{\\mathcal{M}} \\to m}=\\frac{\\sum_{t=1}^T \\vartheta_t b_{\\tilde{\\mathcal{M}} \\to m}^t}{\\sum_{t=1}^T \\vartheta_t}$: belief that other cluster heads to $m$",
+              "$u_{\\tilde{\\mathcal{M}} \\to m}=\\frac{\\sum_{i\\in\\tilde{\\mathcal{M}}}\\sum_{t=1}^T \\vartheta_t u_{i,m}^t}{\\sum_{t=1}^T \\vartheta_t}$: uncertainty that other cluster heads to $m$",
+              [
+                "$b_{\\tilde{\\mathcal{M}} \\to m}^t=\\sum_{i\\in\\tilde{\\mathcal{M}}}u_{i,m}^t\\frac{\\zeta\\alpha_{i,m}^t}{\\zeta\\alpha_{i,m}^t+\\eta\\beta_{i,m}^t}$",
+                [
+                  "$\\alpha_{i,m}^t, \\beta_{i,m}^t$: positive\\negative interaction between cluster head $i$ and cluster head $m$ for period $t$",
+                  "$\\eta>\\zeta$: weights, referring negative interactions are penalized more heavily"
+                ],
+                "$u_{i,m}^t=1-q_{i,m}^t$: uncertainty score from cluster head $i$ to cluster head $m$ for period $t$",
+                [
+                  "$q_{i,m}^t$: packet error rate"
+                ],
+                "$\\tilde{\\mathcal{M}}=\\mathcal{M}\\backslash m$: cluster heads except $m$ and had interactions with $m$",
+                "$\\vartheta_t=z^{T-t}$",
+                [
+                  "$z\\in(0,1)$: fade parameter$"
+                ]
+              ]
+            ],
+            "$c_j^{cp}, c_{j,m}^{cm}$: computational/communication cost",
+            "$z_j^{S_m}$: disutility from the congestion effect"
+          ]
+        ]
+      ],
+      "proposition: given any initial partition $\\Pi$ it always converges to a final partition that is both Nash-stable and individually-stable"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/TPDS.2021.3139039",
+  "id": "ng2021reputation",
+  "bibtex": "@article{ng2021reputation, title={Reputation-aware hedonic coalition formation for efficient serverless hierarchical federated learning}, author={Ng, Jer Shyuan and Lim, Wei Yang Bryan and Xiong, Zehui and Cao, Xianbin and Jin, Jiangming and Niyato, Dusit and Leung, Cyril and Miao, Chunyan}, journal={IEEE Transactions on Parallel and Distributed Systems}, volume={33}, number={11}, pages={2675--2686}, year={2021}, publisher={IEEE}}"
+}

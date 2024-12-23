@@ -1,0 +1,49 @@
+{
+  "title": "Social-Aware Federated Learning: Challenges and Opportunities in Collaborative Data Training",
+  "authors": [
+    "Abdul-Rasheed Ottun",
+    "Pramod C. Mane",
+    "Zhigang Yin",
+    "Souvik Paul",
+    "Mohan Liyanage",
+    "Jason Pridmore",
+    "Aaron Yi Ding",
+    "Rajesh Sharma",
+    "Petteri Nurmi",
+    "Huber Flores"
+  ],
+  "year": "2022-11",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "social network",
+    "security"
+  ],
+  "abstract": "Federated learning (FL) is a promising privacy-preserving solution to build powerful AI models. In many FL scenarios, such as healthcare or smart city monitoring, the user's devices may lack the required capabilities to collect suitable data, which limits their contributions to the global model. We contribute social-aware federated learning as a solution to boost the contributions of individuals by allowing outsourcing tasks to social connections. We identify key challenges and opportunities, and establish a research roadmap for the path forward. Through a user study with N = 30 participants, we study collaborative incentives for FL showing that social-aware collaborations can significantly boost the number of contributions to a global model provided that the right incentive structures are in place.",
+  "summaries": [
+    "propose __a social-aware FL framework__ using social connections (known people or opportunistic connections within range of device-to-device connections) to (1) boost training contributions and (2) prevent free-riders and malicious contributions"
+  ],
+  "systemModel": [
+    "a set of people with smartphones or other IoT devices.",
+    "an FL application is installed in each device and can access social friends or other devices with this application installed",
+    "social-aware FL allows the device (a.k.a. initiator) to delegate the request to social contacts (a.k.a. delegate)",
+    "for decentralized FL scenario:",
+    [
+      "the initiator shares their local model with the delegate<ol>",
+      "the delegate updates the model and sends back to the initiator",
+      "the initiator sends to the aggregator",
+      "the initiator shares rewards with the delegate"
+    ],
+    "for contralized FL scenario:",
+    [
+      "the initiator either [1] informs the delegate of the task descriptor and its own id, [2] or sends the full model parameters to the delegate<ol>",
+      "the delegate sends the updated parameters to the aggregator and if necessary shares with the initiator"
+    ],
+    "Social-aware FL assumes prior trust relationship between the delegate and initiator and makes usage of reputation systems, which can mitigate the malicious attack problems",
+    "trivial compensation scheme is used (a fixed compensation for each participant)"
+  ],
+  "techniques": [],
+  "doi": "10.1109/MIC.2022.3219263",
+  "id": "ottun2022social",
+  "bibtex": "@article{ottun2022social, title={Social-aware federated learning: Challenges and opportunities in collaborative data training}, author={Ottun, Abdul-Rasheed and Mane, Pramod C and Yin, Zhigang and Paul, Souvik and Liyanage, Mohan and Pridmore, Jason and Ding, Aaron Yi and Sharma, Rajesh and Nurmi, Petteri and Flores, Huber}, journal={IEEE Internet Computing}, volume={27}, number={2}, pages={36--44}, year={2022}, publisher={IEEE}}"
+}

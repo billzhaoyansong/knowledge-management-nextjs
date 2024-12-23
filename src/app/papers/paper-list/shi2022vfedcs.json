@@ -1,0 +1,71 @@
+{
+  "title": "VFedCS: Optimizing Client Selection for Volatile Federated Learning",
+  "authors": [
+    "Fang Shi",
+    "Chunchao Hu",
+    "Weiwei Lin",
+    "Lisheng Fan",
+    "Tiansheng Huang",
+    "Wentai Wu"
+  ],
+  "year": "2022-02",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "multi-armed bandit"
+  ],
+  "systemModel": [
+    "$1$ server, a set of clients $K$ training over $T$ communication rounds of $t \\in \\mathcal{\\tau}=[0,1,...,T]$ with the local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$",
+    "round step (1): clients report willingness and a few client-side information (maybe size of required data)",
+    "round step (2): the server conducts client selection [see 1. Client Selection] and distributes the global model",
+    "round step (3): local training",
+    "round step (4): model transmission and aggregation"
+  ],
+  "summaries": [
+    "propose __a client selection method__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] reducing training rounds [2] higher global model accuracy comparing with [1] random selection and [2] oracle selection (finalizing selected set of clients in the first-round)",
+    "the objective of the client selection method is to maximize the total number of effective participation data size",
+    "to solve the problem under the assumption of known local dataset, a greedy algorithm is introduced",
+    "to solve the problem with data volatility assumption, a combinatorial multi-armed bandit method is proposed"
+  ],
+  "motivation": [
+    "In many scenarios, a large proportion of the clients usually exhibit a strong discrepancy in data and heterogeneous resources.",
+    "As a result, the clients, in possession of insufficient data and limited resources, may significantly degrade the accuracy of the global model and slow down its convergence in the course of FL.",
+    "the client selection problem has been considered an open problem for optimizing FL.",
+    "Existing works evades three volatile factors: set volatility, statistical volatility, training volatility",
+    "Preknowing client performance may not be realistic in all circumstances."
+  ],
+  "questions": [
+    "selecting clients withous knowing performance of clients in the volatile FL environment"
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "1.1 Original Problem",
+      [
+        "$\\begin{array}{ll} \\underset{\\{A_t\\}}{\\operatorname{max}} & \\text{CEPD}=\\sum\\limits_{t=1}^{T} \\sum\\limits_{k \\in A_t} q_k x_{k,t}|\\mathcal{D}_t(k)| \\\\  \\text { s.t. } & A_t \\subseteq K(t) \\\\ & \\left\\vert A_t \\right\\vert = m  \\end{array}$",
+        [
+          "CEPD: cumulative effective participation data",
+          "$A_t$: the set of selected client in $t$ round",
+          "$q_k=\\frac{1}{I_{\\{k|A_t\\}}}$: data weight of client $k$",
+          [
+            "$I_{\\{k|A_t\\}}$: the index of client $k$ in $A_t$ among which the selected clients are sorted in descending order according to their data size"
+          ],
+          "$x_{k,t}$: indicator if client $k$ is selected in the $t$th round",
+          "$m_t$: the maximum number of selected clients"
+        ],
+        "the problem is hard to solve since (1) the size of effective participation data of each client is unknown (2) solving the problem is NP-hard"
+      ],
+      "1.2 Greedy Algorithm",
+      [
+        "assume that effective participation data size is known, select clients with largest local data size"
+      ],
+      "1.3 Online Learning Algorithm with Combinatorial Multi-Armed Bandits",
+      [
+        "solved with upper confidence bound algorithm"
+      ]
+    ]
+  ],
+  "doi": "10.1109/JIOT.2022.3195073",
+  "id": "shi2022vfedcs",
+  "bibtex": "@article{shi2022vfedcs, title={VFedCS: Optimizing Client Selection for Volatile Federated Learning}, author={Shi, Fang and Hu, Chunchao and Lin, Weiwei and Fan, Lisheng and Huang, Tiansheng and Wu, Wentai}, journal={IEEE Internet of Things Journal}, volume={9}, number={24}, pages={24995--25010}, year={2022}, publisher={IEEE}}"
+}

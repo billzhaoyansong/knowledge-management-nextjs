@@ -1,0 +1,100 @@
+{
+  "title": "Efficient Client Selection Based on Contextual Combinatorial Multi-Arm Bandits",
+  "authors": [
+    "Fang Shi",
+    "Weiwei Lin",
+    "Lisheng Fan",
+    "Xiazhi Lai",
+    "Xiumin Wang"
+  ],
+  "year": "2023-01",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "multi-armed bandit"
+  ],
+  "systemModel": [
+    "$1$ server and multiple remote clients training over $T$ communication rounds of $t \\in \\mathcal{T}=[0,1,...,T-1]$, each $k$ client has a local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$",
+    "proved that for non-convex and strongly convex cases, a larger $q_k p_k \\mathbb{E}[F_k(\\bar{w}_t)]$ towards a lower error and faster convergence, where $q_k$ is participation state, $p_k$ is the expectation of aggregation weight, and $\\mathbb{E}[F_k(\\bar{w}_t)]$ is the expectation of local loss",
+    "round step (1): client selection: in $t$th round, a client set of $A_t$ is selected from $K(t)$ candidates and the total number of selected clients is capped by $m$ due to limited bandwidth [see 1. Client Selection]",
+    "round step (2): model aggregation: deadline-based FedAvg aggregation: $\\sum_{k\\in A_t} p_{k,t}\\mathbf{w}_{k,t}$ - only model parameters returned before the deadline is aggregated"
+  ],
+  "summaries": [
+    "propose __a client selection method for the volatile FL__ (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] faster convergence speed [2] higher global model accuracy, and [3] reducing energy consumption comparing with [1] random selection, [2] FedCS, and [3] Oort",
+    "proved that for non-convex and strongly convex cases, a larger product of participation state, aggregation weight, and local loss leads to a lower error and faster convergence rate",
+    "the client selection method aims to maximize the product of participation state, aggregation weight, and local loss",
+    "the original client selection problem is transformed into a contextual combinatorial multi-armed bandit problem due to volatile set and unknown model exchange time"
+  ],
+  "motivation": [
+    "However, a challenge is that there have not enough wireless resources for all clients to upload their models due to the limited bandwidth.",
+    "To overcome this, client selection, which chooses a part of clients to participate in the FL training, has been considered an effective method for optimizing FL.",
+    "Existing works have made some contributions to this problem.",
+    "However, the current line of research evades four volatile factors: set volatility, statistical volatility, training volatility, and transmitting volatility.",
+    "Regrettably, in existing works, they all assume that the clients contained in the whole training process of FL are a constant set and ignore the problem of new clients joining the training process.",
+    "Data collected at different times may exhibit some discrepancies even for the same client.",
+    "Local training of some clients is likely to fail due to numerous unexpected reasons (such as unintentional shutdown, low battery, and user abort)",
+    "the model may fail to be transmitted during the transmission process due to poor channel conditions and high latency",
+    "Although some works have separately considered the training volatility and transmitting volatility, all of their works are based on the assumption that the client set and client dataset are constant."
+  ],
+  "questions": [
+    "analyze the impact of volatility on model training performance and discuss the client selection problem in a volatile environment."
+  ],
+  "techniques": [
+    "1. Client Selection",
+    [
+      "1.1 Original Problem",
+      [
+        "$\\begin{array}{ll}  \\underset{A_t}{\\operatorname{max}} & \\sum\\limits_{t \\in \\mathcal{T}} \\sum\\limits_{k \\in A_t} \\mathbb{1}_{\\{\\tau_{k,t} \\leq \\tau\\}} \\underbrace{\\left\\vert \\mathcal{D}_t(k) \\right \\vert \\sqrt{\\frac{1}{\\left\\vert \\mathcal{D}_t(k) \\right\\vert} \\sum\\limits_{i \\in \\mathcal{D}_t(k)} l^2_i}}_{\\text{approximation to } \\mathbb{E}[p_{k,t}F_k(\\bar{w}_t)]} \\\\  \\text { s.t. } & A_t \\subseteq K(t) \\\\  & \\left\\vert A_t \\right\\vert = m \\\\ & r_{k,t} \\geq r_t, \\quad t\\in\\mathcal{T} \\end{array}$",
+        [
+          "$\\tau$: deadline set by server",
+          "$\\tau_{k,t}=\\tau_{k,t}^{train}+\\tau_{k,t}^{com}$:model exchange time",
+          [
+            "$\\tau_{k,t}^{train}=\\frac{|\\mathcal{D}_t(k)| \\cdot NLE \\cdot BPS \\cdot CPB}{f_{k,t}}$",
+            [
+              "NLE, BPS, CPB: number of local epochs, bits per sample, cycles per bit",
+              "$f_{k,t}$: CPU frequency of client $k$ at round $t$"
+            ],
+            "$\\tau_{k,t}^{com}=\\frac{MS}{r_{k,t}}$",
+            [
+              "$MS$: model size",
+              "$r_{k,t}$: transmit rate from client $k$"
+            ]
+          ],
+          "$l_i(\\cdot)$: training loss of sample $i$",
+          [
+            "for linear regression: $l_i(\\mathbf{w})=\\frac{1}{2}(x_i^T\\mathbf{w}-y_i)^2$",
+            "for logistic regression: $l_i(\\mathbf{w})=-\\log(1+\\exp(-y_i x_i^T \\mathbf{w}))$",
+            "for support vector machine: $l_i(\\mathbf{w})=\\max\\{0, 1- x_i^T\\mathbf{w} \\}$"
+          ]
+        ],
+        "it is tricky to select the optimal set of clients due to (1) unknown model exchange time in advance, (2) dynamics in client utilities, and (3) volatile set"
+      ],
+      "1.2 Transform to contextual combinatorial multi-armed bandit problem (C2MAB)",
+      [
+        "base arm: each client $k$ with a known but dynamic contextual vector $\\mathbf{x}_{k,t}$ and an unknown but stationary eigenvector $\\mathbf{\\theta}_k^*$",
+        [
+          "$\\mathbf{x}_{k,t}=[|\\mathcal{D}_t(k)|, F_{k,i}, \\tau_{k,t}^{train}, \\mathbb{1}_{\\{\\tau_{k,t \\leq \\tau}\\}}]$",
+          [
+            "$F_{k,i}$: loss function value in the last round",
+            "$\\mathbb{1}_{\\{\\tau_{k,t \\leq \\tau}\\}}$: participation state selected in the last round"
+          ]
+        ],
+        "reward of each base arm: $\\mathbf{E}[r_{k,t} | \\mathbf{x}_{k,t}]=\\mathbf{x}_{k,t}^T \\mathbf{\\theta}_k^*$",
+        "super arm: $m$-combination of base arms",
+        "ultimate aim: $\\frac{1}{T}\\sum_{t \\in \\mathcal{T}} \\sum_{k \\in A_t} \\mathbf{E}[r_{k,t}]$",
+        "due to clients' volatility, $\\mathbf{\\theta}_k^*$ is unknown",
+        [
+          "using historical information to predict: $\\hat{\\mathbf{\\theta}}_{k,t}=(\\mathbf{D}_{k,t}^T \\mathbf{D}_{k,t} + \\lambda \\mathbf{I}_d) \\mathbf{D}_{k,t}^T \\mathbf{y}_{k,t}$",
+          [
+            "$\\mathbf{D}_{k,t}$ of size $n \\times d$: historical information of $n$ training inputs and $d$ dimensions of features of $\\mathbf{x}_{k,t}$",
+            "$\\mathbf{I}_d$: $d \\times d$ indentity matrix",
+            "$y_{k,t}$: rewards vector of dimension $n \\times 1$"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/TWC.2022.3232891",
+  "id": "shi2023efficient",
+  "bibtex": "@article{shi2023efficient, title={Efficient Client Selection Based on Contextual Combinatorial Multi-Arm Bandits}, author={Shi, Fang and Lin, Weiwei and Fan, Lisheng and Lai, Xiazhi and Wang, Xiumin}, journal={IEEE Transactions on Wireless Communications}, year={2023}, publisher={IEEE}}"
+}
