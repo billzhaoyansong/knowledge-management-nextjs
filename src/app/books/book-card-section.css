@@ -4,19 +4,35 @@
 
     .book-content {
 
-        ul li {
+        @apply text-sm !important;
+
+        ul li,
+        ol li {
             @apply no-underline hover:cursor-default text-sm !important;
         }
 
-        h1{
-            @apply text-xl pb-1
+        ol > li {
+            @apply list-decimal !important;
         }
 
-        table th, table td{
+        a{
+            @apply underline;
+        }
+
+        h1 {
+            @apply text-xl pb-1;
+        }
+
+        h2 {
+            @apply text-lg pt-6;
+        }
+
+        table th,
+        table td {
             @apply border text-sm text-left align-top;
         }
 
-        table td ul{
+        table td ul {
             @apply pl-6;
         }
     }

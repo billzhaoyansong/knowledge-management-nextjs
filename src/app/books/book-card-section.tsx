@@ -65,7 +65,7 @@ export default function BookCardSection({
 
                                 {/* get the contents of current row */}
                                 {sections.filter(s => s.title.startsWith(`${i}.`)).sort().map((s, j, a) =>
-                                    <div key={`${s.title}-${i}-${j}`} className={`px-6 py-6 ${a.length > 1 ? `basis-1/${a.length} border-r` : ''}`}
+                                    <div key={`${s.title}-${i}-${j}`} className={`px-6 py-6 border bg-yellow-50 rounded-lg mx-3 my-3 ${a.length > 1 ? `basis-1/${a.length} border-r` : ''}`}
                                         dangerouslySetInnerHTML={{ __html: unifiedProcessor.processSync(s.content).toString() }}>
                                     </div>
                                 )}
