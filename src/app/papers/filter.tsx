@@ -73,6 +73,8 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
         >
             <option value={'date-desc'}>Date Desc</option>
             <option value={'date-asc'}>Date Asc</option>
+            <option value={'paper-id-asc'}>Paper ID Asc</option>
+            <option value={'paper-id-desc'}>Paper ID Desc</option>
         </select>
 
         <div className='pt-6 flex flex-col'>

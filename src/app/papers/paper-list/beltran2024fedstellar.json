@@ -1,5 +1,6 @@
 {
   "title": "Fedstellar: A Platform for Decentralized Federated Learning",
+  "type": "technical",
   "authors": [
     "Enrique Tomás Martínez Beltrán",
     "Ángel Luis Perales Gómez",
@@ -15,12 +16,11 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "FL platform",
-    "user interface"
+    "software"
   ],
   "abstract": "In 2016, Google proposed Federated Learning (FL) as a novel paradigm to train Machine Learning (ML) models across the participants of a federation while preserving data privacy. Since its birth, Centralized FL (CFL) has been the most used approach, where a central entity aggregates participants’ models to create a global one. However, CFL presents limitations such as communication bottlenecks, single point of failure, and reliance on a central server. Decentralized Federated Learning (DFL) addresses these issues by enabling decentralized model aggregation and minimizing dependency on a central entity. Despite these advances, current platforms training DFL models struggle with key issues such as managing heterogeneous federation network topologies, adapting the FL process to virtualized or physical deployments, and using a limited number of metrics to evaluate different federation scenarios for efficient implementation. To overcome these challenges, this paper presents Fedstellar, a novel platform designed to train FL models in a decentralized, semi-decentralized, and centralized fashion across diverse federations of physical or virtualized devices. Fedstellar allows users to create federations by customizing parameters like the number and type of devices training FL models, the network topology connecting them, the machine and deep learning algorithms, or the datasets of each participant, among others. Additionally, it offers real-time monitoring of model and network performance. The Fedstellar implementation encompasses a web application with an interactive graphical interface, a controller for deploying federations of nodes using physical or virtual devices, and a core deployed on each device, which provides the logic needed to train, aggregate, and communicate in the network. The effectiveness of the platform has been demonstrated in two scenarios: a physical deployment involving single-board devices such as Raspberry Pis for detecting cyberattacks and a virtualized deployment comparing various FL approaches in a controlled environment using MNIST and CIFAR-10 datasets. In both scenarios, Fedstellar demonstrated consistent performance and adaptability, achieving F1 score of 91%, 98%, and 91.2% using DFL for detecting cyberattacks and classifying MNIST and CIFAR-10, respectively, reducing training time by 32% compared to centralized approaches.",
   "summaries": [
-    "propose __a training platform__ to enable FL training in a decentralized, centralized, and semi-centralized fashion with physical or virtualized devices, to tackle the key issues in training decentralized FL(DFL), such as (1) managing heterogeneous federation network topologies, (2) adapting the FL process to virtualized or physical deployments, and (3) using a limited number of metrics to evaluate different federation scenarios"
+    "in decentralized, centralized, and semi-centralized FL frameworks, develop __a training platform__ to enable FL training with physical or virtualized devices"
   ],
   "systemModel": [
     "main components:",

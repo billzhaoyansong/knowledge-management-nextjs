@@ -1,0 +1,72 @@
+{
+    "title": "Adaptive federated learning in resource constrained edge computing systems",
+    "authors": [
+        "Shiqiang Wang",
+        "Tiffany Tuor",
+        "Theodoros Salonidis",
+        "Kin K. Leung",
+        "Christian Makaya",
+        "Ting He",
+        "Kevin Chan"
+    ],
+    "year": "2019-02",
+    "labels": [
+        "federated learning",
+        "architecture",
+        "adaptive aggregation"
+    ],
+    "summaries": [
+        "propose __an FL framework under the resource constraints__ (e.g. time, energy, bandwidth) to minimize the loss of the global model, achieving [1] higher accuracy in comparison to [1] centralized GD, [2] FL framework with fixed local steps, and [3] synchronous FL with local step of $1$",
+        "in the framework, the decision for next global aggregation is adaptively scheduled during the training process."
+    ],
+    "systemModel": [
+        "$N$ edge nodes, $M$ types of resources and each resource is bounded by budget $R_m$",
+        [
+            "$T$ total number of local steps",
+            "$K$ total number of global aggregations",
+            "$\\tau=T/K$ number of local steps between global aggregations"
+        ],
+        "the objective of the proposed FL framework is to minimize the loss of global model on all distributed dataset under the constraint of [1] limited resources and [2] fixed number of total steps [see 1. Problem Formulation]",
+        "process 1): server distributes $\\mathbf{w}, \\tau$ (global model, and number of local steps for the next global aggregation) to all edge nodes (set $\\tau=1$ as the default)",
+        "process 2): local training and send some parameters to the server [see 2. Local Training]",
+        "process 3): global aggregation $\\mathbf{w}(t)=\\frac{\\sum_{i=1}^N D_i\\mathbf{w}_i(t)}{D}$ and compute $\\tau$ for the next global aggregation [see 3. Global Aggregation]"
+    ],
+    "questions": [
+        "to minimize the loss function under a given resource budget"
+    ],
+    "techniques": [
+        "1. Problem Formulation",
+        [
+            "$\\begin{array}{ll} \\underset{\\bm{\\tau, K\\in\\{1,2,...\\}}}{\\operatorname{max}} & F(\\mathbf{w})\\triangleq\\frac{\\sum_{j\\in\\bigcup_i\\mathcal{D}_i}f_j(\\mathbf{w})}{|\\bigcup_i\\mathcal{D}_i|}=\\frac{\\sum_{i=1}^N D_iF_i(\\mathbf{w})}{D}\\\\ \\text { s.t. } & (T+1)c_m + (K+1)b_m \\leq R_m, \\forall m\\in\\{1,...,M\\} \\\\& T=K\\tau\\end{array}$",
+            [
+                "$T$: total number of local steps",
+                "$K$: total number of global aggregation",
+                "$\\tau$: number of local steps between global aggregations",
+                "$f_j(\\mathbf{w})$: loss of global model on the distributed local data sample $j$",
+                "$c_m$: unit consumption of resource $m$ for each local update",
+                "$b_m$: unit consumption of resource $m$ for each global aggregation"
+            ],
+            "assumptions",
+            [
+                "1. each node consumes the same amount of resources",
+                "2. $F_i(\\mathbf{w})$ is [1] convex, [2] $\\Vert F_i(\\mathbf{w})- F_i(\\mathbf{w'}) \\Vert\\leq \\rho\\Vert\\mathbf{w}-\\mathbf{w'}  \\Vert$, [3] $\\Vert \\nabla F_i(\\mathbf{w})- \\nabla F_i(\\mathbf{w'}) \\Vert\\leq \\beta\\Vert\\mathbf{w}-\\mathbf{w'} \\Vert$"
+            ]
+        ],
+        "2. Local Training",
+        [
+            "1. before local training estimate $\\hat{\\rho}_i, \\hat{\\beta}_i$ and mark the local step index $t_0$",
+            "2. conduct local training for $\\tau$ steps",
+            "3. estimate type-$m$ resouce consumption $\\hat{c}_{m,i}$ for one local update",
+            "4. send $\\mathbf{w}_i(t), \\hat{c}_{m,i}, \\hat{\\rho}_i, \\hat{\\beta}_i, F_i(\\mathbf{w}(t_0)), \\nabla F_i(\\mathbf{w}(t_0))$"
+        ],
+        "3. Global Aggregation",
+        [
+            "1. average $\\hat{\\rho}_i, \\hat{\\beta}_i$ after receiving from edge nodes",
+            "2. calculate $\\tau$",
+            "3. adjust $\\tau$ if any of the resource constraints is violated"
+        ]
+    ],
+    "id": "wang2019adaptive",
+    "doi": "10.1109/JSAC.2019.2904348",
+    "bibtex": "@article{wang2019adaptive, title={Adaptive federated learning in resource constrained edge computing systems}, author={Wang, Shiqiang and Tuor, Tiffany and Salonidis, Theodoros and Leung, Kin K and Makaya, Christian and He, Ting and Chan, Kevin}, journal={IEEE journal on selected areas in communications}, volume={37}, number={6}, pages={1205--1221}, year={2019}, publisher={IEEE}}"
+}

@@ -1,5 +1,6 @@
 {
   "title": "Block-RACS: Towards Reputation-Aware Client Selection and Monetization Mechanism for Federated Learning",
+  "type": "technical",
   "authors": [
     "Zahra Batool",
     "Kaiwen Zhang",
@@ -9,14 +10,15 @@
   "labels": [
     "federated learning",
     "blockchain",
+    "reverse auction",
     "smart contract",
-    "incentive mechanism",
-    "reputation",
     "client selection",
-    "reverse auction"
+    "reputation",
+    "contribution evaluation",
+    "reward"
   ],
   "summaries": [
-    "propose __a blockchain network-based mechanism__ including client selection, contribution evaluation, and smart-contract based auction, to achieve [1] higher accuracy in the global model, [2] less number of FL rounds, compared to [1] Random FL selection [2] FL-MAB",
+    "in the conventional framework, add __a blockchain-based reverse-auction rewarding mechanism__ ([1] smart-contract based auction, [2] (resources & quality & price & reputation) -based selection, [3]shapley-based contribution evaluation and reward), to achieve [1] higher accuracy and [2] less number of FL rounds, compared to [1] Random FL selection [2] FL-MAB",
     "in the mechanism, where clients are selected based on [1] compute and network resources, and [2] quality of local data [3] bidding price [4] reputation",
     "contribution evaluated by the Shapley algorithm is used in reward allocation and reputation update",
     "Auction smart contract is deployed in the blockchain network to facilitate the auctioning process"

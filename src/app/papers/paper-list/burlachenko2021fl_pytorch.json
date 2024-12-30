@@ -1,5 +1,6 @@
 {
   "title": "FL_PyTorch: optimization research simulator for federated learning",
+  "type": "technical",
   "authors": [
     "Konstantin Burlachenko",
     "Samuel Horváth",
@@ -9,12 +10,11 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "user interface",
-    "FL platform"
+    "software"
   ],
   "abstract": "Federated Learning (FL) has emerged as a promising technique for edge devices to collaboratively learn a shared machine learning model while keeping training data locally on the device, thereby removing the need to store and access the full data in the cloud. However, FL is difficult to implement, test and deploy in practice considering heterogeneity in common edge device settings, making it fundamentally hard for researchers to efficiently prototype and test their optimization algorithms. In this work, our aim is to alleviate this problem by introducing FL_PyTorch : a suite of open-source software written in python that builds on top of one the most popular research Deep Learning (DL) framework PyTorch. We built FL_PyTorch as a research simulator for FL to enable fast development, prototyping and experimenting with new and existing FL optimization algorithms. Our system supports abstractions that provide researchers with a sufficient level of flexibility to experiment with existing and novel approaches to advance the state-of-the-art. Furthermore, FL_PyTorch is a simple to use console system, allows to run several clients simultaneously using local CPUs or GPU(s), and even remote compute devices without the need for any distributed implementation provided by the user. FL_PyTorch also offers a Graphical User Interface. For new methods, researchers only provide the centralized implementation of their algorithm. To showcase the possibilities and usefulness of our system, we experiment with several well-known state-of-the-art FL algorithms and a few of the most common FL datasets.",
   "summaries": [
-    "introduce __a simulator__ to enable fast development, prototyping and experimenting"
+    "in the conventional FL framework, develop __a simulator__ to enable fast development, prototyping and experimenting"
   ],
   "systemModel": [
     "this platform only supports 1 simulation at most",

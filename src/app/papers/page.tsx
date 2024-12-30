@@ -81,7 +81,9 @@ export default async function Papers({
     _papersToShow.sort(
         (a, b) =>
             params.orderBy === "date-asc" ? a.year.localeCompare(b.year) :
-                b.year.localeCompare(a.year)
+                params.orderBy === "paper-id-asc" ? a.id.localeCompare(b.id) :
+                    params.orderBy === "paper-id-desc" ? b.id.localeCompare(a.id) :
+                        b.year.localeCompare(a.year)
     )
 
     return <PageLayout title='Papers'>

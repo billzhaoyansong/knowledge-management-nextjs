@@ -10,14 +10,29 @@
             @apply pl-6;
         }
 
-        ol>li {
-            @apply list-decimal;
-
-        }
-
         ul>li {
             @apply list-disc list-inside;
         }
+
+        /* to append a right bracket to 2nd order list */
+        ol {
+            counter-reset: list;
+        }
+
+        ol>li {
+            list-style: none;
+        }
+
+        ol>li:before {
+            content: "(" counter(list, numeric) ") ";
+            counter-increment: list;
+        }
+
+        ol>li>ol>li:before {
+            content: "(" counter(list, lower-alpha) ") ";
+            counter-increment: list;
+        }
+        /* end: to append a right bracket to 2nd order list */
 
         li:has(ol:first-child) {
             @apply list-none;
@@ -25,6 +40,10 @@
 
         p {
             @apply inline;
+        }
+
+        a {
+            @apply underline text-blue-600;
         }
     }
 }

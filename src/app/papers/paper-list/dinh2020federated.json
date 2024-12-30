@@ -1,5 +1,6 @@
 {
   "title": "Federated Learning over Wireless Networks: Convergence Analysis and Resource Allocation (FEDL)",
+  "type": "technical",
   "authors": [
     "Canh T. Dinh",
     "Nguyen H. Tran",
@@ -12,13 +13,13 @@
   "year": "2020-10",
   "labels": [
     "federated learning",
-
+    "data heterogeneity",
     "wireless",
     "resource allocation",
     "convergence rate"
   ],
   "summaries": [
-    "propose __a resource allocation algorithm__ to tackle the convergence difficulties brought by the large number of equipments and the non-iid data, achieving [1] faster convergence rate [2] higher test accuracy comparing the valina FedAvg",
+    "in the conventional FL framework, propose __a resource allocation algorithm to tackle the convergence difficulties brought by the large number of equipments and the non-iid data__ (minimize energy consumption and wall clock time in one global round), achieving [1] faster convergence rate [2] higher test accuracy comparing the valina FedAvg",
     "the resource allocation algorithm aims to minimize energy consumption and wall clock time in one global round",
     "this resource allocation algorithm optimizes (1) CPU frequencies (2) server communication times allocated to UEs (3) local accuracy (4) one global round communication time (5) one global round computation time"
   ],

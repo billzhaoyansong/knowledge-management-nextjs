@@ -1,5 +1,6 @@
 {
   "title": "Bandit-based communication-efficient client selection strategies for federated learning",
+  "type": "technical",
   "authors": [
     "Yae Jee Cho",
     "Samarth Gupta",
@@ -16,7 +17,7 @@
     "fairness"
   ],
   "summaries": [
-    "propose __a biased client selection strategy__ achieving [1] communication-efficiency (no extra communication required) [2] faster convergence [3] fairness (Jain's index)",
+    "in the conventional FL framework, propose __a biased client selection strategy__ (largest discounted UCB values which considers [1] discounted local loss value and [2] discounted number of participating times), to achieve [1] communication-efficiency (no extra communication required) [2] faster convergence [3] fairness (Jain's index)",
     "at the beginning of each communication round, clients are sorted based on a discounted UCB index, and only $m$ clients with largest discounted UCB values are selected for local training",
     "the UCB index considers [1] discounted local loss values [2] discounted number of participating times"
   ],

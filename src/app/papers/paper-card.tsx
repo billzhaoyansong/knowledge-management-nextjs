@@ -19,6 +19,7 @@ const abbrevName = function (fullname: string) {
 
 export interface PaperContent {
     "title": string;
+    "type": string,
     "authors": string[];
     "year": string;
     "editing": boolean;
@@ -51,7 +52,7 @@ const PaperCard = async ({
         <div className="h-fit px-3 py-6 mx-1 my-1 border border-1 rounded rounded-lg">
 
             {/* row 1 */}
-            <h4 className="text-slate-500 text-md capitalize">{paper.title}</h4>
+            <h4 className="text-slate-500 text-md capitalize">{paper.type && `[${paper.type}] `}{paper.title}</h4>
 
             {/* row 2 */}
             <div className="flex flex-row flex-wrap pt-1 text-slate-400">

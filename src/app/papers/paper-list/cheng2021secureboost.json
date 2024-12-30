@@ -1,5 +1,6 @@
 {
   "title": "SecureBoost: A Lossless Federated Learning Framework",
+  "type": "technical",
   "authors": [
     "Kewei Cheng",
     "Tao Fan",
@@ -13,11 +14,11 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "efficiency"
+    "efficiency",
+    "data heterogeneity"
   ],
   "summaries": [
-    "propose __a lossless gradient-tree boosting algorithm__, to preserve data privacy and maintain a high-quality model over vertically partitioned data in FL",
-    "SecureBoost contains [1] data alignment [2] the shared gradient-tree boosting model learning"
+    "in the conventional FL framework, propose __a lossless gradient-tree boosting algorithm over vertically partitioned data__ in FL ([1] privacy-preserved data alignment [2] the shared gradient-tree boosting model learning) , to maintain the accuracy as good as other nonfederated gradient tree-boosting algorithms"
   ],
   "systemModel": [],
   "techniques": [],

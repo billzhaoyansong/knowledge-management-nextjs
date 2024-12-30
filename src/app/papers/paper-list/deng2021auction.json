@@ -1,5 +1,6 @@
 {
   "title": "AUCTION: Automated and Quality-Aware Client Selection Framework for Efficient Federated Learning",
+  "type": "technical",
   "authors": [
     "Yongheng Deng",
     "Feng Lyu",
@@ -14,6 +15,7 @@
     "federated learning",
     "reverse auction",
     "client selection",
+    "reward",
     "reinforcement learning",
     "policy gradient",
     "efficiency",
@@ -21,8 +23,7 @@
     "scalability"
   ],
   "summaries": [
-    "propose __a client selection policy__ encoded in a neural network (NN), to achieve [1] efficiency (in characterizing data quality) [2] robustness (adapting to different learning tasks) [3] scalability (in that trained model performs will when the number of online candidate clients varies)",
-    "the client selection policy considers data size, data quality (labels and distributions), and learning budget",
+    "in the conventional FL framework, add __a reverse auction-based rewarding policy__ (client selection is encoded in a neural network considering [1] data size, [2] data quality (labels and distributions), and [3] bidding price), to achieve [1] efficiency (in characterizing data quality) [2] robustness (adapting to different learning tasks) [3] scalability (in that trained model performs will when the number of online candidate clients varies)",
     "the NN is trained by reinforcement learning based on observed client status and feedback reward"
   ],
   "systemModel": [

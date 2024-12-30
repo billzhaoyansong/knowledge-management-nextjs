@@ -5,6 +5,7 @@
     "Li Liang",
     "Wei Gao"
   ],
+  "type": "technical",
   "year": "2022-08",
   "editing": false,
   "labels": [
@@ -13,7 +14,7 @@
     "data heterogeneity"
   ],
   "summaries": [
-    "propose __an algorithm to tackle data heterogeneity in social network based FL__",
+    "in the FL social network, propose __an algorithm to tackle data heterogeneity__ (affine transformation to data of online neighboring users before starting FL)",
     "first select online (literally, opposite to 'offline') neighbordhood users, then apply affine transformation to data of neighboring users, lastly do FL with those neighboring users"
   ],
   "systemModel": [],

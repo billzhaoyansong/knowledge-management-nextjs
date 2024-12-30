@@ -1,0 +1,51 @@
+{
+  "title": "Towards blockchain-based reputation-aware federated learning",
+  "authors": [
+    "Muhammad Habib ur Rehman",
+    "Khaled Salah",
+    "Ernesto Damiani",
+    "Davor Svetinovic"
+  ],
+  "year": "2020-07",
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "reputation"
+  ],
+  "summaries": [
+    "propose __a hierarchical FL framework__ with blockchain to provide a more fine-grained FL environment (no experiment)",
+    "_in summary, this article states that hierarchy itself provides the so-called 'fine-grained'_",
+    "a set of fog nodes are placed in between the cloud server and devices to enable local training",
+    "a blockchain-based reputation system is used to select devices"
+  ],
+  "systemModel": [
+    "$1$ cloud server, a set $F=\\{1,...,n\\}$ of Fog nodes with the set $L=\\{1,...,n\\}$ of learning models, a set $D=\\{1,...,N\\}$ of devices, $1$ blockchain-based reputation system",
+    "a device $D_i$ must be connected with a $F_i$ and execute a given $L_i$",
+    "![](/papers/ur2020towards/system.png)",
+    "step 1): the cloud server pushes global $L_i$ to $F_i$ and $D_i$",
+    "step 2): the cloud server requests multiple $F_i$ for updated $L_i$ parameters to enable asynchronized model updates in the fine-grained FL (???)",
+    "step 3): $F_i$ pushes updated model to the selected connected $D_i$ (make use of kang2020reliable)",
+    "step 4): $D_i$ updates local $L_i$ and applies privacy-preservation techniques on updates before sending to the connected $F_i$",
+    "step 5): $F_i$ aggregates local $L_i$ and sends back to $D_i$",
+    "step 6): after some time, $F_i$ applies privacy-preservation techniques on updates before sending to the cloud server",
+    "step 7): the cloud server runs the global model aggregation and propagates updated $L_i$ to $F_i$",
+    "optional step 8): $D_i$ periodically generates the requests for the updated global model to update local $L_i$"
+  ],
+  "motivation": [
+    "Edge devices normally operate in heterogeneous environments whereby heterogeneity arises at all levels of MEC in terms of battery power, sensors and their data collection settings, types of data sources, processing capabilities, communication interfaces, data being generated, types and granularity of learning models, learning rates of applications, sparsity in datasets, frequency of incoming data streams, missing and noisy data, and application of statistical inferencing techniques [14]",
+    "In addition, the mobility and limited battery power bring the issue of asynchronization in FL model training whereby devices abruptly leave the model training processes and either completely fail or delay in reporting the local updates",
+    "This asynchronization issue results in centralized model training over an obsolete data streams which may not be relevant in certain scenarios and applications requiring real-time or near-real-time model updates",
+    "The establishment of secure communication channels is another issue because of knowledge sharing among devices",
+    "Finally, the incentive mechanisms are required to attract and engage the edge devices to ensure a fully-participating finegrained FL in MEC systems",
+    "The complexities and the involvement of multiple participants in MEC-based fine-grained FL systems cause the heterogeneity in multiple forms (i.e., raw data, pre-processed data, trained models, or deployed models) and at multiple levels (such as users, sensors, devices, data sources, edge devices, fog nodes, blockchain networks, cloud service providers, and application users)",
+    "This massive heterogeneity creates a pressing demand to design a fully collaborative, trustworthy, and reliable fine-grained FL system",
+    "Using an integrated blockchain-based decentralized reputation system could help in ensuring authenticity, traceability, provenance, incentivization, and penalization of all stakeholders in the fine-grained FL environments."
+  ],
+  "questions": [
+    "personalization in FL"
+  ],
+  "techniques": [],
+  "doi": "10.1109/INFOCOMWKSHPS50562.2020.9163027",
+  "id": "ur2020towards",
+  "bibtex": "@inproceedings{ur2020towards, title={Towards blockchain-based reputation-aware federated learning}, author={ur Rehman, Muhammad Habib and Salah, Khaled and Damiani, Ernesto and Svetinovic, Davor}, booktitle={IEEE INFOCOM 2020-IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS)}, pages={183--188}, year={2020}, organization={IEEE}}"
+}

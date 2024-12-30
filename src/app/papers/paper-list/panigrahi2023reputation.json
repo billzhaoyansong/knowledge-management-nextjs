@@ -13,7 +13,7 @@
     "architecture"
   ],
   "summaries": [
-    "propose __a hierarchical aggregation framework__ to (1) resolve single point of failure and (2) reduce communication cost incurred by resource-constrained FL clients, achieving (1) higher test accuracy and (2) lower communication cost, compared with (1) Classical FL protocol (2) Hierarchical FL [5]",
+    "propose __a hierarchical aggregation framework__ to (1) resolve single point of failure and (2) reduce communication cost incurred by resource-constrained FL clients, achieving (1) higher test accuracy (due to reputation(accuracy)-based selection) and (2) lower communication cost, compared with (1) Classical FL protocol (2) Hierarchical FL [5]",
     "the framework is composed of (1) a global server (2) edge servers (3) clients",
     "in the framework, a reputation-based client selection method is used to select clients for aggregation to minimize unnecessary local update exchange"
   ],

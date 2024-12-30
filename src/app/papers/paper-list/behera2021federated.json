@@ -1,5 +1,6 @@
 {
   "title": "Federated learning using smart contracts on blockchains, based on reward driven approach",
+  "type": "technical",
   "authors": [
     "Monik Raj Behera",
     "Sudhir Upadhyay",
@@ -10,10 +11,12 @@
   "labels": [
     "federated learning",
     "blockchain",
-    "smart contract"
+    "smart contract",
+    "reward",
+    "penalty"
   ],
   "summaries": [
-    "define __incentivization rules__, including rewarding and penalization, by leveraging the smart contract on a blockchain",
+    "in the conventional FL framework, add __a blockchain-based rewarding layer__ (smart contract-based rewarding and penalization rules according to federated contribution: deviation of 2 ML models)",
     "the incentivization rules are defined based on the federated contribution, which depicts the deviation, or divergence of two machine learning models."
   ],
   "systemModel": [],

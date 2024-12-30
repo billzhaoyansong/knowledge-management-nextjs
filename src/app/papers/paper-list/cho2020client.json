@@ -1,5 +1,6 @@
 {
   "title": "Client Selection in Federated Learning: Convergence Analysis and Power-of-Choice Selection Strategies",
+  "type": "technical",
   "authors": [
     "Yae Jee Cho",
     "Jianyu Wang",
@@ -12,7 +13,7 @@
     "convergence rate"
   ],
   "summaries": [
-    "[1] prove that __biasd selection policy leads to faster convergence rate__ at the risk of a larger non-vanishing term, [2] proposed __a client selection scheme__ borrowed from 'power of d choices load balancing strategy' in queueing theory to balance the trade-off between convergence speed, solution bias and communication/computation overhead achieving [1] faster convergence [2] higher test accuracy",
+    "in the conventional FL framework, [1] prove that __biasd selection policy leads to faster convergence rate__ at the risk of a larger non-vanishing term, [2] proposed __a client selection scheme__ borrowed from 'power of d choices load balancing strategy' in queueing theory to balance the trade-off between convergence speed, solution bias and communication/computation overhead achieving [1] faster convergence [2] higher test accuracy",
     "at the beginning of each communication round, current global model is distributed to all sampled $d$ clients and clients send back local losses. This is an extra communication.",
     "only $m$ clients with largest losses are selected for the subsequent local training"
   ],

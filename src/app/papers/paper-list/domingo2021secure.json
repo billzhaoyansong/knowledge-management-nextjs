@@ -1,5 +1,6 @@
 {
   "title": "Secure and Privacy-Preserving Federated Learning via Co-Utility",
+  "type": "technical",
   "authors": [
     "Josep Domingo-Ferrer",
     "Alberto Blanco-Justicia",
@@ -13,16 +14,53 @@
     "security",
     "byzantine",
     "privacy-preservation",
-    "reputation"
+    "reputation",
+    "reward",
+    "penalty"
   ],
   "abstract": "The decentralized nature of federated learning, that often leverages the power of edge devices, makes it vulnerable to attacks against privacy and security. The privacy risk for a peer is that the model update she computes on her private data may, when sent to the model manager, leak information on those private data. Even more obvious are security attacks, whereby one or several malicious peers return wrong model updates in order to disrupt the learning process and lead to a wrong model being learned. In this article, we build a federated learning framework that offers privacy to the participating peers as well as security against the Byzantine and poisoning attacks. Our framework consists of several protocols that provide strong privacy to the participating peers via unlinkable anonymity and that are rationally sustainable based on the co-utility property. In other words, no rational party is interested in deviating from the proposed protocols. We leverage the notion of co-utility to build a decentralized co-utile reputation management system that provides incentives for parties to adhere to the protocols. Unlike privacy protection via differential privacy, our approach preserves the values of model updates and, hence, the accuracy of plain federated learning; unlike privacy protection via update aggregation, our approach preserves the ability to detect bad model updates while substantially reducing the computational overhead compared to methods based on homomorphic encryption.",
   "summaries": [
-    "propose __a secure and privacy-preserving framework__ to offer privacy for FL participants and defend against the Byzantine and poisoning attacks",
+    "in the conventional FL framework, add __accountability managers (randomly chosen peers)__  a secure and privacy-preserving framework__ to offer privacy for FL participants and defend against the Byzantine and poisoning attacks",
     "the privacy is preserved via unlinkable anonymity, while security is achieved via co-utility through which no individual is interested in playing maliciously",
     "Unlinkable Anonymity: Peers contributing good updates must stay not only anonymous, but their successive updates must be unlinkable.",
     "if a peer contributes a good update, her reputation must be increase for rewarding; otherwise, it will be decrease for punishment"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Players",
+    [
+      "$1$ rational-but-curious __model manager__ $M$",
+      "a set of __peers__: $P_1, P_2, ..., P_i, ...$",
+      [
+        "the majority: rational-but-curious, the minority: malicious",
+        "each peer has a reputation $g_i$"
+      ],
+      "a number $m\\geq3$ (odd) of __accountability managers__ (AMs): randomly chosen peers that manage reputations of other peers"
+    ],
+    "[co-utility](https://link.springer.com/article/10.1007/s13748-016-0083-3): protocols in which mutual help is the best rational option to take, even for purely selfish agents.",
+    "Protocol 1 (Local Update Submission):",
+    [
+      "$P_1$ has a new update $U$<ol>",
+      "$P_1$ encrypts $U$ along with a random nonce $N_U$ under the public key sent by $M$ to get $PK_M (U,N_U)$",
+      "$P_1$ sends a signature $S_{P_1}(PK_M(U, N_U), H(H(H(U,N_U))),P_2)$ to $P_2$",
+      "$P_2$ decides to [1] discard this update or [2] forward to $P_3$ or [3] submit to $M$",
+      "......",
+      "in the end, $M$ receives an update $S_{P_i}(PK_M(U, N_U), H(H(H(U,N_U))),M)$",
+      [
+        "$M$ decrypts to get $U$ <ol>",
+        "$M$ waits until a batch of $b$ updates",
+        "$M$ decides $U$ is good or bad",
+        "for every bad update $U$, call PUNISH($P_i$)"
+      ]
+    ],
+    "Protocol 2 (PUNISH($P_i$))",
+    [
+      "for every AM of $P_i$, he does",
+      [
+        "ask $P_i$ to prove she did not generate $U$<ol>",
+        "if $P_i$ can show $S_{P_{i-1}}(PK_M(U, N_U), H(H(H(U,N_U))),M)$, then call PUNISH($P_{i-1}$)"
+      ]
+    ]
+  ],
   "techniques": [],
   "doi": "10.1109/JIOT.2021.3102155",
   "id": "domingo2021secure",

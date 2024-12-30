@@ -17,7 +17,7 @@ import './book-card-section.css'
 const unifiedProcessor = unified()
     .use(remarkParse)
     .use(remarkMath)
-    .use(remarkRehype, {allowDangerousHtml: true})
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeKatex)
     .use(rehypeStringify)
@@ -56,23 +56,48 @@ export default function BookCardSection({
             <div className="book-content">
                 {
                     // assume there are 10 rows
-                    [...Array(10).keys().map(x => x++)].map(i =>
+                    [...Array(10).keys().map(x => x++)].map(i => {
 
-                        // if current row has content
-                        sections.filter(s => s.title.startsWith(`${i}.`)).length ?
+                        const rowSections = sections.filter(s => s.title.startsWith(`${i}.`))
 
-                            <div key={`${title}-${section}-${i}`} className="flex flex-row">
+                        if (!rowSections.length) return ""
 
-                                {/* get the contents of current row */}
-                                {sections.filter(s => s.title.startsWith(`${i}.`)).sort().map((s, j, a) =>
-                                    <div key={`${s.title}-${i}-${j}`} className={`px-6 py-6 border bg-yellow-50 rounded-lg mx-3 my-3 ${a.length > 1 ? `basis-1/${a.length} border-r` : ''}`}
-                                        dangerouslySetInnerHTML={{ __html: unifiedProcessor.processSync(s.content).toString() }}>
-                                    </div>
-                                )}
-                            </div>
-                            : <></>)
-                }
+                        rowSections.sort()
+
+                        let columns = 0
+                        const spans: Number[] = []
+                        const indexWithHyphenRegex = /(\d+)-(\d+)\s/; // Regex pattern  
+                        const indexWithoutHyphenRegex = /\.(\s*(\d+))\s/;
+
+                        for (let j = 0; j < rowSections.length; j++) {
+                            const matchHypen = rowSections[j].title.match(indexWithHyphenRegex);
+
+                            if (matchHypen) {
+                                spans.push(Number(matchHypen[2]) - Number(matchHypen[1]) + 1)
+                                columns = Math.max(columns, Number(matchHypen[2]));
+                                continue;
+                            }
+
+                            const matchDot = rowSections[j].title.match(indexWithoutHyphenRegex);
+                            if (matchDot) {
+                                spans.push(1)
+                                columns = Math.max(columns, Number(matchDot[2]));
+                                continue;
+                            }
+
+                            throw `Wrong title format: ${rowSections[j].title}`;
+                        }
+
+                        return <div key={`${title}-${section}-${i}`} className="flex flex-row">
+                            {
+                                rowSections.map((s, j, a) => <div key={`${s.title}-${i}-${j}`} className={`px-6 py-6 border bg-yellow-50 rounded-lg mx-3 my-3 ${columns > 1 ? `basis-${spans[j]}/${columns} border-r` : 'w-full'}`}
+                                    dangerouslySetInnerHTML={{ __html: unifiedProcessor.processSync(s.content).toString() }}>
+                                </div>)
+                            }
+                        </div>
+
+                    })}
             </div>
-        </Modal>
-    </div>
+        </Modal >
+    </div >
 }
