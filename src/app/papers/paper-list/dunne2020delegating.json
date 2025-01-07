@@ -1,5 +1,6 @@
 {
   "title": "Delegating Decisions in Strategic Settings",
+  "type": "technical",
   "authors": [
     "Paul E. Dunne",
     "Paul Harrenstein",
@@ -11,9 +12,9 @@
   "labels": [
     "game theory"
   ],
-  "abstract": "Our research concerns the ubiquitous prob- lem of how to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective. The design of mechanisms so as to achieve this is through steering the strategic capabilities of interested agents by delegating decisions to them in specific ways. We distinguish the cases in which the delegation is effectuated by a principal and where the agents are delegating decisions among one another. Our reliance on the mathematical framework of Boolean games to formalise the principal and distributed delegation problems offers valuable insights into the computational complexity of these problems. The delegation problem touches on many important applications, not only in everyday life, but also in Artificial Intelligence, in particular Multi-Agent Systems.",
+  "abstract": "Our research concerns the ubiquitous problem of how to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective. The design of mechanisms so as to achieve this is through steering the strategic capabilities of interested agents by delegating decisions to them in specific ways. We distinguish the cases in which the delegation is effectuated by a principal and where the agents are delegating decisions among one another. Our reliance on the mathematical framework of Boolean games to formalise the principal and distributed delegation problems offers valuable insights into the computational complexity of these problems. The delegation problem touches on many important applications, not only in everyday life, but also in Artificial Intelligence, in particular Multi-Agent Systems.",
   "summaries": [
-    "__formalize principal and distributed delegation problems via Boolean games__ to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective",
+    "in the MAS, __formalize principal and distributed delegation problems via Boolean games__ to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective",
     "_Problem1_: in principal delegation problem, the principal determines how decisions will be delegated",
     "_Problem2_: in distributed delegation problem, agents can delegate decisions among themselves",
     "_Solution_: the authors formalise these problems using Boolean games and decisions are directly represented as Boolean variables. The objective is to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective.",

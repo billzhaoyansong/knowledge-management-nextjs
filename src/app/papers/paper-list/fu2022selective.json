@@ -7,6 +7,7 @@
     "Tom H. Luan",
     "Yao Zhan"
   ],
+  "type":"technical",
   "year": "2021-05",
   "labels": [
     "federated learning",
@@ -17,7 +18,7 @@
     "efficiency"
   ],
   "summaries": [
-    "propose __a federated reinforcement learning framework for CAVs collision avoidance knowledge aggregation__, achieving [1] improved accuracy [2] higher learning efficiency (vehicle braking distance not too far) [3] reduced communication overhead, comparing DDPG by a single vehicle, full participation FedAvg, and CMFL",
+    "in the connected autonomous vehicles environment, propose __a federated reinforcement learning framework collision avoidance knowledge aggregation__, achieving [1] improved accuracy [2] higher learning efficiency (vehicle braking distance not too far) [3] reduced communication overhead, comparing DDPG by a single vehicle, full participation FedAvg, and CMFL",
     "in this framework, CAVs train deep reinforcement learning model locally using DDPG while ",
     "CAVs are selected based on reputation, convengence-tendency, and wall clock time for global FedAvg aggregation"
   ],

@@ -14,6 +14,7 @@
     "Prashant Shah",
     "Spyridon Bakas"
   ],
+  "type":"technical",
   "year": "2022-05",
   "editing": false,
   "labels": [
@@ -23,7 +24,7 @@
   ],
   "abstract": "Federated learning (FL) is a computational paradigm that enables organizations to collaborate on machine learning (ML) and deep learning (DL) projects without sharing sensitive data, such as patient records, financial data, or classified secrets. Open federated learning (OpenFL) framework is an open-source python-based tool for training ML/DL algorithms using the data-private collaborative learning paradigm of FL, irrespective of the use case. OpenFL works with training pipelines built with both TensorFlow and PyTorch, and can be easily extended to other ML and DL frameworks. In this manuscript, we present OpenFL and summarize its motivation and development characteristics, with the intention of facilitating its application to existing ML/DL model training in a production environment. We further provide recommendations to secure a federation using trusted execution environments to ensure explicit model security and integrity, as well as maintain data confidentiality. Finally, we describe the first real-world healthcare federations that use the OpenFL library, and highlight how it can be applied to other non-healthcare use cases. The OpenFL library is designed for real world scalability, trusted execution, and also prioritizes easy migration of centralized ML models into a federated training pipeline. Although OpenFL's initial use case was in healthcare, it is applicable beyond this domain and is now reaching wider adoption both in research and production settings. The tool is open-sourced at github.com/intel/openfl.",
   "summaries": [
-    "[1] develop __an FL framework__ that ensures model security and integrity, and data confidentiality, [2] __apply this framework in a real-world healthcare scenario__"
+    "in the conventional FL framework, [1] develop __an FL framework__ that ensures model security and integrity, and data confidentiality, [2] __apply this framework in a real-world healthcare scenario__"
   ],
   "systemModel": [
     "workflow of OpenFL",

@@ -8,6 +8,8 @@
     "Marivi Higuero"
   ],
   "year": "2023-05",
+  "type": "technical",
+
   "labels": [
     "federated learning",
     "blockchain",
@@ -17,7 +19,7 @@
     "robustness"
   ],
   "summaries": [
-    "proposed __an FL training framework__ to solve the conflict between privacy and security, achieving [1] privacy-preserving and [2] robust training",
+    "in the conventional FL framework, add __a blockchain__ to __record and validate informations such as clients type of data__ to solve the conflict between privacy and security, achieving [1] privacy-preserving and [2] robust training",
     "a public blockchain is used for validating information provided in the system",
     "smart contract over blockchain potentially brings transparency, fairness and efficiency",
     "between the server and clients there is a training manager which enables multiple FL training sessions (training jobs)",

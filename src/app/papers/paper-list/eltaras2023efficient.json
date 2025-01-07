@@ -7,6 +7,7 @@
     "Khawla Alzoubi",
     "Qutaibah AHMEDELTARAS"
   ],
+  "type": "technical",
   "year": "2022-07",
   "editing": false,
   "labels": [
@@ -15,11 +16,27 @@
     "secure aggregation"
   ],
   "summaries": [
-    "propose __a protocol for secure aggregation__ in an honest-but-curious environment, to prevent adversaries to track and deduce private information and preserve communication-efficiency",
+    "in the conventional FL framework, propose __a protocol for aggregation__ which __[1] masks gradients to preserve privacy__ and __[2] verifies the correctness of the aggregated results__ in an honest-but-curious environment, to prevent adversaries to track and deduce private information and preserve communication-efficiency",
     "to ensure confidentiality of the user's local gradients, a single-masking protocol is used",
     "to verify the aggregated results, a double aggregation technique is used instead of cryptographic primitives used in many literature work"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Players",
+    [
+      "__Auxiliary Nodes__: such as hospitals, responsible for agreeing with users on shared keys as seeds for generating the random number",
+      "__Server__: responsible for aggregating the masked gradients",
+      "__Users__: responsible for uploading the masked private gradients and verifying the aggregated gradients from the server"
+    ],
+    "Process",
+    [
+      "Auxiliary Nodes and Users send their public keys to the server<ol>",
+      "The server broadcasts [1] the keys of the Users to all Auxiliary Nodes and [2] all keys of Auxiliary Nodes to all the Users.",
+      "The Users mask the model parameters by adding random numbers and send to the server",
+      "The server requests Auxiliary Nodes to send the sum of random numbers for participating Users",
+      "The server aggregates the resulting model parameters by adding all the data received from client devices and subtracting all the numbers from Auxiliary Nodes",
+      "The Users verify the aggregated results with __double aggregation__"
+    ]
+  ],
   "techniques": [],
   "doi": "10.1109/TIFS.2023.3273914",
   "id": "eltaras2023efficient",
