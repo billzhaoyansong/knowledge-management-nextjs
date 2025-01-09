@@ -8,6 +8,7 @@
     "Dusit Niyato",
     "Ahmed A. Abd El-Latif"
   ],
+  "type": "technical",
   "year": "2020-08",
   "editing": false,
   "labels": [
@@ -17,7 +18,7 @@
     "smart contract"
   ],
   "summaries": [
-    "propose __an FL framework__ for central aggregator to recognize malicious and unreliable participants by automatically executing smart contracts, and for participants to prevent membership inference attacks by employment of differental privacy techniques",
+    "in the conventional FL framework, employ __a smart contract to [1] guide FL and [2] verify local models with a hashed testing dataset__ provided by the task publisher, to recognize malicious participants.",
     "in the smart contract, a testing dataset is used to evaluate the accuracy performance of uploaded model updates. Consequently, those unreliable participants will be detected",
     "moreover, monetary reward criteria are written in the smart contract to incentivize efforts of high-quality model updates"
   ],

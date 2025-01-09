@@ -6,29 +6,21 @@
     "Zhu Han",
     "Choong Seon Hong"
   ],
+  "type": "technical",
   "year": "2020-01",
   "editing": false,
   "labels": [
     "federated learning",
     "social network",
-    "resource allocation"
+    "resource allocation",
+    "grouping"
   ],
   "summaries": [
-    "propose __a decentralized FL scheme__ for IoT devices in which [1] devices are clustered via social awareness and [2]global FL time is minimized by optimizing device frequency and resource allocation",
+    "in the FL social network, propose __a decentralized FL scheme__ for IoT devices in which [1] devices are clustered via social awareness and trained within the cluster only and [2]global FL time is minimized by optimizing device frequency and resource allocation",
     "propose a global FL time minimization problem by optimizing local device frequency and allocated resources via enabling clustering in a novel social aware FL system model, multiple diagrams showing the learning time against iterations, resource blocks, devices frequencies are also given",
     "1) select clustering head based on social relationships, 2) clustering devices towards clustering heads, 3) optimize local device frequency and resource allocation"
   ],
   "systemModel": [],
-  "problemCategory": [
-    [
-      "FL"
-    ]
-  ],
-  "solutionCategory": [
-    [
-      "FL"
-    ]
-  ],
   "motivation": [
     "Malfunctioning of a centralized server",
     "access to the centralized server might be restricted by some users due to lack of communication resources"

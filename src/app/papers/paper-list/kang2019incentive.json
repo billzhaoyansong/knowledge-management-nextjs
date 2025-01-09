@@ -7,18 +7,19 @@
     "Shengli Xie",
     "Junshan Zhang"
   ],
+  "type": "technical",
   "year": "2019-09",
   "editing": false,
   "labels": [
     "federated learning",
-    "incentive mechanism",
+    "reward",
     "client selection",
     "reputation",
     "contract theory",
     "blockchain"
   ],
   "summaries": [
-    "propose __a smart contract-based incentive mechanism__ to maximize the profit of task publishers and reward data owners according to data qualities",
+    "in the conventional FL framework, propose __a smart contract-based rewarding mechanism__ to maximize the profit of task publishers and reward data owners according to data qualities",
     "_Problem_: in FL it is challenging to design incentive mechanisms due to information asymmetry issues. Specifically, these issues include (1) willingness of clients to join, (2) reputations of clients, (3) amount of data size and computational resources, (4) local data quality",
     "_Solution_: the authors proposed a smart contract-based incentive mechanism (IM) and reliable client selection scheme, achieving [1] higher performance under attacks",
     "clients are selected by a reputation threshold",

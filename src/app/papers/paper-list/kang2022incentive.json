@@ -8,16 +8,17 @@
     "Carlotta Domeniconi",
     "Jinglin Zhang"
   ],
+  "type": "technical",
   "year": "2022-11",
   "labels": [
     "federated learning",
     "stackelberg game",
-    "incentive mechanism",
+    "reward",
     "crowdsourcing",
     "security"
   ],
   "summaries": [
-    "develop __an incentive mechanism__ by stackelberg game for federated crowdsourcing in which [1] data is constantly collected [2] model upload time varies significantly [3] data might be noisy",
+    "in the conventional FL framework, develop __a rewarding mechanism__ by stackelberg game for federated crowdsourcing in which [1] data is constantly collected [2] model upload time varies significantly [3] data might be noisy",
     "model the interaction between the crowdsourcing platform and participating workers as a stackelberg game to achieve [1] high-quality server model",
     "in the stackelberg game, server determines optimal reward rates, and clients decide response to server's reward rates, such as (1) local optimal accuracy level to achieve, (2) local optimal data freshness, and (3) local optimal completion time"
   ],

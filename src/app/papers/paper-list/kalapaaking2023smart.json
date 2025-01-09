@@ -5,16 +5,18 @@
     "Ibrahim Khalil",
     "Mohammed Atiquzzaman"
   ],
+  "type": "technical",
   "year": "2022-10",
   "editing": false,
   "labels": [
     "federated learning",
     "smart contract",
     "blockchain",
+    "security",
     "verification"
   ],
   "summaries": [
-    "propose __policy controls__ using smart contracts to audit local training and manage global aggregation, securing the FL system and guaranteeing integrity of models",
+    "in the conventional FL framework, propose __policy controls__ using smart contracts to audit local training and manage global aggregation, securing the FL system and guaranteeing integrity of models",
     "a smart contract-based local training policy control on the FL participants' side to verify the local training process",
     "a smart contract-based aggregation policy to manage the global model aggregation process",
     "Upon completion, the aggregated model and policy are stored on blockchain-based storage to allow participants of FL"

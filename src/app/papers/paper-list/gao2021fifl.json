@@ -8,30 +8,31 @@
     "ChengZhong Xu",
     "Ming Xu"
   ],
+  "type": "technical",
   "year": "2021-08",
   "editing": false,
   "labels": [
     "federated learning",
-    "incentive mechanism",
+    "reward",
     "fairness",
     "security"
   ],
   "abstract": "Federated learning is a novel machine learning framework that enables multiple devices to collaboratively train high-performance models while preserving data privacy. Federated learning is a kind of crowdsourcing computing, where a task publisher shares profit with workers to utilize their data and computing resources. Intuitively, devices have no interest to participate in training without rewards that match their expended resources. In addition, guarding against malicious workers is also essential because they may upload meaningless updates to get undeserving rewards or damage the global model. In order to effectively solve these problems, we propose FIFL, a fair incentive mechanism for federated learning. FIFL rewards workers fairly to attract reliable and efficient ones while punishing and eliminating the malicious ones based on a dynamic real-time worker assessment mechanism. We evaluate the effectiveness of FIFL through theoretical analysis and comprehensive experiments. The evaluation results show that FIFL fairly distributes rewards according to workers’ behaviour and quality. FIFL increases the system revenue by 0.2% to 3.4% in reliable federations compared with baselines. In the unreliable scenario containing attackers which destroy the model’s performance, the system revenue of FIFL outperforms the baselines by more than 46.7%.",
   "summaries": [
-    "propose __an incentive mechanism__ to fairly compensate devices and detect malicious updates",
-    "the incentive mechanism is composed of 4 modules: 1) attack detection module, 2) reputation module, 3) contribution module, 4) incentive module",
+    "in the conventional FL framework, add __an secure module and rewarding modules__ to detect malicious updates and compensate devices fairly",
+    "the proposed mechanism is composed of the following 4 modules:",
     [
-      "the attack detection module",
+      "__the attack detection module__<ol>",
       [
         "assume that attackers want to damage the global model by uploading gradients hugely different from the normal gradients and no collusion among attackers",
         "using loss difference with a gradient and without a gradient to get a detection score and using a threshold to mark the gradient is harmful or useful"
       ],
-      "the reputation module: making use of attack detection module and subjective logic model based reputation",
-      "the contribution module",
+      "__the reputation module__: making use of attack detection module and subjective logic model based reputation",
+      "__the contribution module__",
       [
         "$C_i=1-\\frac{b_i}{b_h}$, where $b_i=Dis(\\tilde{G},G_i)$, and $b_h=\\Vert\\tilde{G},G_i\\Vert^2$"
       ],
-      "the incentive module: the reward share is the product of reputation and contribution",
+      "__the incentive module__: the reward share is the product of reputation and contribution",
       [
         "$I_i=R_i\\frac{C_i}{\\sum_{j,C_j>0}C_j}$",
         "if $C_i<0$, it is a punishment",

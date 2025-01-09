@@ -5,17 +5,18 @@
     "Yan Li",
     "Byeong-Seok Shin"
   ],
+  "type": "technical",
   "year": "2023-01",
   "editing": false,
   "labels": [
     "federated learning",
     "security",
     "byzantine",
-    "privacy-preservation"
+    "privacy"
   ],
   "abstract": "Machine learning (ML) has led to disruptive innovations in many fields, such as medical diagnoses. A key enabler for ML is large training data, but existing data, such as medical data, are not fully exploited by ML because of data silos and privacy concerns. Federated learning (FL) is a promising distributed learning paradigm to address this problem. On the other hand, existing FL approaches are vulnerable to poisoning attacks or privacy leakage from a malicious aggregator or client. This article proposes an auditable FL scheme with Byzantine robustness against the aggregator and client: The aggregator is malicious but available, and the client could perform poisoning attacks. First, the Pedersen commitment scheme (PCS) for homomorphic encryption was applied to preserve privacy and for commitments to the FL process to achieve auditability. The auditability enables clients to verify the correctness and consistency of the entire FL process and to identify parties that misbehave. Second, an efficient technique of divide and conquer was designed based on PCS to allow parties to cooperate and securely aggregate gradients to defend against poisoning attacks. This technique enables clients to share no common secret key and cooperate to decrypt ciphertext, guaranteeing a client’s privacy even if some other clients are corrupted by adversaries. This technique was optimized to tolerate the dropout of clients. This article reports a formal analysis concerning privacy, efficiency, and auditability against malicious participants. Extensive experiments on various benchmark datasets show that the scheme is robust with high model accuracy against poisoning attacks.",
   "summaries": [
-    "propose __an auditable FL scheme__ to address the vulnerability of FL to poisoning attacks or privacy leakage",
+    "in the conventional FL framework, propose __an encryption scheme__ to prevent privacy leakage and __a secure aggregation scheme__ address the vulnerability of FL to poisoning attacks",
     "Pedersen commitment scheme (PCS) for homomorphic encryption was applied to preserve privacy and for commitments to the FL process to achieve auditability.",
     "an efficient technique of divide and conquer was designed based on PCS to allow parties to cooperate and securely aggregate gradients to defend against poisoning attacks."
   ],

@@ -8,6 +8,7 @@
     "Keqin Li",
     "Albert Y. Zomaya"
   ],
+  "type": "technical",
   "year": "2021-05",
   "labels": [
     "federated learning",
@@ -18,7 +19,7 @@
     "fairness"
   ],
   "summaries": [
-    "propose __a client selection policy__ to strike the balance between efficiency and fairness, in the meantime the model accuracy is improved comparing to random selection and FedCS",
+    "in the conventional FL framework, propose __a client selection policy__ to strike the balance between efficiency (model exchange time) and fairness, in the meantime the model accuracy is improved comparing to random selection and FedCS",
     "the CS policy aims to minimize the difference of model exchange time and fairness",
     "model exchange time is modeled by C2MAB in which linear contextual bandits are considered to estimate the real model exchange time",
     "reputation is regarded as historical performance in model exchange time"

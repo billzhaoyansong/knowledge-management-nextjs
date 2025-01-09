@@ -7,6 +7,7 @@
     "Cong Bai",
     "Jinglin Zhang"
   ],
+  "type": "technical",
   "year": "2021-12",
   "editing": false,
   "labels": [
@@ -14,7 +15,7 @@
     "client selection"
   ],
   "summaries": [
-    "proposed __an FL framework__ using a stacking model to solve device heterogeneity, unbalanced data distribution, and contaminated data in industrial environment, specifically to diagnose interturn short circuit (ITSC) faults in permanent magnet synchronous motors (PMSMs)",
+    "in the conventional FL framework, proposed __an FL application__ using a stacking model to solve device heterogeneity, unbalanced data distribution, and contaminated data in industrial environment, specifically to diagnose interturn short circuit (ITSC) faults in permanent magnet synchronous motors (PMSMs)",
     "in the framework, a clean verification data set on the server is used to select appropriate client models",
     "an improved particle swarm optimization (PSO) is used to optimize the weight coefficients of clients for aggregation"
   ],

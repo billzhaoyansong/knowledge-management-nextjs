@@ -11,7 +11,7 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "FL platform"
+    "software"
   ],
   "abstract": "Over the last few years, there have been several attempts to provide software tools for the development of federated learning (FL) models. However, both the complexity of the concept itself and the high entry barrier of these tools have meant that their adoption has been limited. Considering the related benefits, especially in terms of preserving data privacy, and the need for this type of solution in specific areas where data sharing is impossible, not only from a practical point of view but also from a legal and even ethical perspective, it is necessary to advance in solutions that allow its use to be democratised and its deployment to be extended. With this objective in mind, FLIP (Federated Learning Interactive Platform) has been developed as a comprehensive, easy-to-use fully functional web-based FL network management platform that eases and accelerates the usage of federated datasets by researchers in real scenarios. In this sense, FLIP has achieved a SUS score of 84.64, confirming a high level of perceived usability as expected. Taking this into account, FLIP can help increase the productivity and adoption of FL by a wider audience.",
   "summaries": [

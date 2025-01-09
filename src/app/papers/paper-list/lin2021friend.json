@@ -7,20 +7,52 @@
     "Xi Zheng",
     "Gaolei Li"
   ],
+  "type": "technical",
   "year": "2020-11",
   "editing": false,
   "labels": [
     "federated learning",
     "social network",
-    "stackelberg game",
-    "social welfare"
+    "reward",
+    "stackelberg game"
   ],
   "summaries": [
-    "propose __a framework to recruit trustworthy social friends__, achieving higher social welfare and utility of service requester",
+    "in the FL social network, propose __a mechanism to incorporate each client's utility with his friends' resource allocation__ to promote training tasks together with trustworthy friends",
     "first a social graph model is built considering mutual trust and learning task similarity",
     "then a Stackelberg game based social incentive mechanism with both complete and incomplete information to encourage better personal learning behaviors"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Players:",
+    [
+      "__Cloud Platform__: responsible for",
+      [
+        "social trust management",
+        "task assignment",
+        "reward-punishment mechanism"
+      ],
+      "__SDN__ (software defined network) in the cloud platform: responsible for",
+      [
+        "resource allocation",
+        "management of device information table: [1] training data size and [2] CPU cycle",
+        "management of BS information table: [1] communication bandwidth and [2] channel gain",
+        "learning task information table: [1] task type, [2] task time limit, [3] AI model training accuracy"
+      ],
+      "__BSs__ (Base stations)",
+      "__Edge-AI devices (simply devices)__: $\\mathcal{M}=\\{0,1,...,i,...,M\\}$",
+      [
+        "$\\mathcal{M}$ are connected with each other via social links"
+      ]
+    ],
+    "Steps:",
+    [
+      "the service requester publish their tasks to the Cloud Platform<ol>",
+      "devices upload their information to the nearest BS",
+      "BS transmits [1] devices information and [2] BS information to the SDN controller",
+      "SDN controller updates all the information tables",
+      "SDN controller recruits devices based on task matching and social trust relationship",
+      "SDN controller does resource allocation"
+    ]
+  ],
   "techniques": [],
   "doi": "10.1109/TMC.2021.3074816",
   "id": "lin2021friend",

@@ -5,18 +5,16 @@
     "Dandan Yan",
     "Fei Chen"
   ],
+  "type": "technical",
   "year": "2022-10",
   "labels": [
     "federated learning",
-    "embedding",
-    "k-means",
-    "GNN",
     "grouping",
-    "architecture",
+    "hierarchical",
     "personalization"
   ],
   "summaries": [
-    "propose __a 3-layer FL architecture to group members with similar data sample distributions__, because single client might not have sufficient samples while the global model is not tailored for personalization",
+    "in the hierarchical FL framework, propose __a 3-layer FL architecture to group members with similar data sample distributions__, because single client might not have sufficient samples while the global model is not tailored for personalization",
     "in this architecture (user layer, edge layer, cloud layer), the devices are grouped based on feature representation vectors using K-Means",
     "a GNN-based predictor trained by the cloud server is used to predict the group of a new client"
   ],

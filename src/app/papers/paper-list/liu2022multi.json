@@ -10,6 +10,7 @@
     "Huaiyu Dai",
     "Dejing Dou"
   ],
+  "type": "technical",
   "year": "2022-11",
   "labels": [
     "federated learning",
@@ -19,7 +20,7 @@
     "reinforcement learning"
   ],
   "summaries": [
-    "propose __a multi-job FL framework__ which enables the training process of multiple jobs in parallel, achieving (1) faster training time, and (2) higher accuracy, comparing with (1) single-job sequential FL with various client selection methods, and (2) multiple-job FL various client selection methods",
+    "in the conventional FL framework, propose __a multi-job scheduling scheme__ to balance execution time and selection fairness, achieving (1) faster training time, and (2) higher accuracy, comparing with (1) single-job sequential FL with various client selection methods, and (2) multiple-job FL various client selection methods",
     "the framework assumes 1) each device can only be scheduled to one job at a given time, 2) each job is of equal importance",
     "in the device scheduling stage, devices are scheduled by a contextual-based optimization problem which minimized execution time and unfairness",
     "the device scheduling optimization problem is solved by the proposed 1) Bayesian Optimization-Based method, 2) reinforcement learning based method"

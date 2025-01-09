@@ -8,6 +8,7 @@
     "Yang Zhang",
     "Mohsen Guizani"
   ],
+  "type": "technical",
   "year": "2020-04",
   "labels": [
     "federated learning",
@@ -17,7 +18,7 @@
     "security"
   ],
   "summaries": [
-    "propose __a client selection scheme__ to defend against intentionally and unintentionally unreliable local model updates",
+    "in the conventional FL framework, propose __a client selection scheme__ to defend against intentionally and unintentionally unreliable local model updates",
     "a reputation threshold is set to filter out unreliable workers",
     "multi-weight subjective logic is used in the reputation calculation, and reputations are stored in a reputation blockchain"
   ],

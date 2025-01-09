@@ -7,18 +7,18 @@
     "Bin Lin",
     "Dong In Kim"
   ],
+  "type": "technical",
   "year": "2020-03",
   "labels": [
     "federated learning",
     "reverse auction",
     "client selection",
-    "incentive mechanism",
+    "reward",
     "reinforcement learning",
-    "GNN",
     "social welfare"
   ],
   "summaries": [
-    "propose __2 auction mechanisms__ to commercialize FL services, achieving [1] maximization of social welfare (sum of platform's utility and the data owners utility)",
+    "in the conventional FL framework, propose __2 auction mechanisms__ to commercialize FL services, achieving [1] maximization of social welfare (sum of platform's utility and the data owners utility)",
     "data owners report their type profile including the bid price, data size, and the earth mover's distance (EMD) metric (the lower the better), and channel profile",
     "in reverse multi-dimensional auction (RMA) mechanism, workers are are selected by grouping and sorting workers by the EMD value, then sorting and selecting workers by marginal virtual social welfare density in non-increasing order",
     "in RMA mechanism, workers are rewarded (1) the bid price if he is the first one that has a non-negative marginal density and channel conflict (2) a price lower than his bid price",

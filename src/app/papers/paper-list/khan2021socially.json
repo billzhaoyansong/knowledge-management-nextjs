@@ -6,16 +6,17 @@
     "Dusit Niyato",
     "Choong Seon Hong"
   ],
+  "type": "technical",
   "year": "2020-11",
   "editing": false,
   "labels": [
     "federated learning",
-    "clustering",
+    "grouping",
     "social network",
     "edge computing"
   ],
   "summaries": [
-    "propose __a socially-aware framework for edge networks__ in which [1] devices are clustered by considering edge betweenness, social similarity, and physical distance, and [2] loss function is minimized by optimizing clustering, resource allocation, and relative local accuracy",
+    "in the FL social network, propose __a socially-aware framework for edge networks__ in which [1] devices are clustered by considering edge betweenness, social similarity, and physical distance, and [2] loss function is minimized by optimizing clustering, resource allocation, and relative local accuracy",
     "the framework includes clustering, in which heads are chosen considering edge betweenness, social similarity, and physical distance between devices)",
     "in this framework, an optimization problem is formulated for minimizing the customized loss function by optimizing clustering, resource allocation, and relative local accuracy",
     "the problem is decomposed into 3 sub-problems which are solved iteratively"
@@ -29,9 +30,7 @@
   "questions": [
     "solve the centralized server problem in conventional FL, more specifically the problems of malicious aggregation server, external attack, physical damage, communication efficiency"
   ],
-  "techniques": [
-    ""
-  ],
+  "techniques": [],
   "doi": "10.1109/TNSM.2021.3090446",
   "id": "khan2021socially",
   "bibtex": "@article{khan2021socially, title={Socially-aware-clustering-enabled federated learning for edge networks}, author={Khan, Latif U and Han, Zhu and Niyato, Dusit and Hong, Choong Seon}, journal={IEEE Transactions on Network and Service Management}, volume={18}, number={3}, pages={2641--2658}, year={2021}, publisher={IEEE}}"

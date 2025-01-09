@@ -7,16 +7,16 @@
     "Qian Xu",
     "Qiang Yang"
   ],
+  "type": "technical",
   "year": "2020-07",
   "editing": false,
   "labels": [
     "federated learning",
-    "FL platform",
-    "user interface"
+    "software"
   ],
   "abstract": "Collaborative and federated learning has become an emerging solution to many industrial applications where data values from different sites are exploit jointly with privacy protection. We introduce FATE, an industrial-grade project that supports enterprises and institutions to build machine learning models collaboratively at large-scale in a distributed manner. FATE supports a variety of secure computation protocols and machine learning algorithms, and features out-of-box usability with end-to-end building modules and visualization tools. Documentations are available at https://github.com/FederatedAI/FATE. Case studies and other information are available at https://www.fedai.org.",
   "summaries": [
-    "introduce __an industrial-grade FL platform__ to enable enterprises and institutions to build ML models at large-scale"
+    "in the conventional FL framework, introduce __an industrial-grade FL platform__ to enable enterprises and institutions to build ML models at large-scale"
   ],
   "systemModel": [
     "Main components:",

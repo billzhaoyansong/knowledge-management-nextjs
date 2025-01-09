@@ -8,20 +8,26 @@
     "Cyril Leung",
     "Chunyan Miao"
   ],
+  "type": "technical",
   "year": "2021-08",
   "editing": false,
   "labels": [
     "federated learning",
     "contract theory",
-    "incentive mechanism"
+    "reward"
   ],
   "abstract": "Federated learning (FL) serves as a data privacy-preserved machine learning paradigm, and realizes the collaborative model trained by distributed clients. To accomplish an FL task, the task publisher needs to pay financial incentives to the FL server offloads the task to the contributing FL clients. However, it is challenging to design proper incentives for FL clients because the task is privately trained by the clients. This paper proposes a contract theory-based FL task training model toward minimizing the incentive budget subject to clients being individually rational and incentive compatible in each FL training round. We design a two-dimensional contract model by formally defining two private types of clients, namely data quality and computation effort. To effectively aggregate the trained models, a contract-based aggregator is proposed. We analyze the feasible and optimal contract solutions for the proposed contract model. The experimental results demonstrate that the proposed framework and contract model can effectively improve the generation accuracy of FL tasks. Moreover, the generalization accuracy of the FL tasks can be improved by the proposed incentive mechanism, the contract-based aggregation is applied.",
   "summaries": [
-    "propose __a contract theory-based FL framework__ including [1] an incentive mechanism aiming to minimize budget, and [2] an aggregator",
+    "in the conventional FL framework, propose __a contract theory-based rewarding mechanism__ aiming to maximize the revenue of the server (model revenue + registration fees from clients - payment to clients)",
     "_Problem_: in FL, proper financial incentives are challenging to design as tasks are trained privately by the clients. Specifically, those private information includes local data and local computational behavior"
   ],
   "systemModel": [
-    "a task requester, a FL server, several FL clients",
+    "Players:",
+    [
+      "a task requester",
+      "a FL server",
+      "several FL clients"
+    ],
     "processes",
     [
       "the task requester publishes a task to the FL server<ol>",

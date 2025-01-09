@@ -7,6 +7,7 @@
     "Keqin Li",
     "Albert Y Zomaya"
   ],
+  "type": "technical",
   "year": "2020-11",
   "labels": [
     "federated learning",
@@ -16,7 +17,7 @@
     "convergence rate"
   ],
   "summaries": [
-    "propose __a client selection scheme under a volatile context__ (clients are likely to fail), achieving [1] fairness (setting lower bound of selection probability), [2] faster convergence rate comparing FedAvg and FedProx",
+    "in the conventional FL framework, propose __a client selection scheme under a volatile context__ (clients are likely to fail), achieving [1] fairness (setting lower bound of selection probability), [2] faster convergence rate comparing FedAvg and FedProx",
     "the client selection process starts from allocating sampling probabilities to all clients using adversarial bandit to maximize expected cumulative participation and guarantee fairness by giving a minimum probability",
     "global model aggregation is implemented by using weighted FedAvg and unsuccessful participations are also considered"
   ],

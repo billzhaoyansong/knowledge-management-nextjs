@@ -9,6 +9,7 @@
     "Zhu Han",
     "Choong Seon Hong"
   ],
+  "type": "technical",
   "year": "2020-04",
   "labels": [
     "federated learning",
@@ -16,11 +17,11 @@
     "reverse auction",
     "resource allocation",
     "client selection",
-    "incentive mechanism",
+    "reward",
     "social welfare"
   ],
   "summaries": [
-    "propose __an incentive mechanism__ via auction in which devices are selected to maximize social welfare and payment is paid based on local accuracies",
+    "in the conventional FL framework, propose __an auctioning mechanism__ which __[1] selecting clients to maximize the difference between accuracy and true cost__ and __[2] rewarding clients based on local accuracies__",
     "in the auction game, mobile devices bid with the information after optimizing local resources by jointly minimizing total completion time and total energy consumption after setting a time deadline in constraint",
     "the client selection problem is formulated by maximizing social welfare which considers local accuracy and claimed cost after setting resources constraints",
     "payments are based on local accuracies, local provided resources, and the highest normalized value of losing mobile users"

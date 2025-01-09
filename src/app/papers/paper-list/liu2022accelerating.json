@@ -9,17 +9,18 @@
     "Min Chen",
     "Quan Z. Sheng"
   ],
+  "type": "technical",
   "year": "2021-08",
   "labels": [
     "federated learning",
     "parallelism",
     "convergence rate",
-    "architecture",
+    "decentralized",
     "aggregation",
-    "clustering"
+    "grouping"
   ],
   "summaries": [
-    "propose __a parallelizable FL algorithm__ by allowing multiple parameter server (PSes) to cooperate and train a model, achieving (1) higher global accuracy (2) faster convergence rate (3) faster time cost per global iteration, comparing (1) FedAvg (2) HierFAVG (3) DPSGD",
+    "in the decentralized FL framework, propose __a parallelizable FL algorithm__ by allowing multiple parameter server (PSes) to mix model with neighboring PSes, achieving (1) higher global accuracy (2) faster convergence rate (3) faster time cost per global iteration, comparing (1) FedAvg (2) HierFAVG (3) DPSGD",
     "in this framework, each PS is only responsible for a fraction of total clients, but PSes can mix model parameters in a designed way that guarantees convergence"
   ],
   "systemModel": [

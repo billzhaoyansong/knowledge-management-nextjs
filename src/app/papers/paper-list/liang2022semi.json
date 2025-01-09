@@ -8,6 +8,7 @@
     "Kento Sato",
     "Jian Guo"
   ],
+  "type": "technical",
   "year": "2021-06",
   "editing": false,
   "labels": [
@@ -15,7 +16,7 @@
     "client selection"
   ],
   "summaries": [
-    "propose __a semi-synchronous FL protocol__ to improve the performance in IoV",
+    "in the conventional FL framework, propose __[1] a vehicle selection scheme, [2] waiting time adjustment technique, and [3] an asynchronous aggregation scheme__ to tackle hardware heterogeneities in IoV",
     "the protocol specifically includes [1] a vehicle selection scheme based on local computing capacity, network capacity and learning value of training samples [2] a dynamic waiting time adjustment technique [3] a dynamic asynchromous aggregation scheme"
   ],
   "systemModel": [],

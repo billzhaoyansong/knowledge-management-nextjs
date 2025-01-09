@@ -7,19 +7,20 @@
     "Kun Xie",
     "Yong Zhang"
   ],
+  "type": "technical",
   "year": "2022-08",
   "labels": [
     "federated learning",
-    "architecture",
     "blockchain",
     "client selection",
     "reputation",
-    "reliability",
     "security",
-    "fairness"
+    "fairness",
+    "reward",
+    "penalty"
   ],
   "summaries": [
-    "propose __an FL mechanism for mobile edge computing__ to solve [1] variability and [2] dishonesty of end nodes, achieving [1] fairness (reward-penalty) [2] reliability (reputation-based client selection) [3] security (secure aggregation)",
+    "in the conventional FL framework, propose __client selection, secure aggregation, and reward-penalty mechanisms__, achieving [1] fairness (reward-penalty) [2] reliability (reputation-based client selection) [3] security (secure aggregation)",
     "the client selection process includes [1] initial selection (meet the data type requirements and meet a threshold for the gap between the provided data and required data), [2] reputation-based (direct + recommendation) client sorting, [3] selecting with the probability propotional to the number of points in wallet",
     "during aggregation period, the best parameter is used for global model update (kinda greedy)",
     "rewards and penalty are given based on contribution"

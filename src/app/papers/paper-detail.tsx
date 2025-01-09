@@ -122,7 +122,7 @@ export default function PaperDetail(
             <div className="flex flex-row h-full paper-detail">
 
                 {/* ============= left details abstract by myself */}
-                <div className="basis-1/2 flex-1 overflow-y-scroll mx-2 border bg-yellow-50" style={{ height: '90%' }}>
+                <div className="basis-1/2 flex-1 overflow-y-scroll mx-2 space-y-3" style={{ height: '90%' }}>
                     {[
                         { 'title': 'summary', content: paperContent.summaries },
                         { 'title': 'systemModel', content: paperContent.systemModel },
@@ -130,7 +130,7 @@ export default function PaperDetail(
                     ]
                         .map(
                             (v) => {
-                                return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className="px-2 py-3">
+                                return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className="px-2 py-3 border border-slate-500 bg-yellow-50">
                                     <h3 className="font-semibold capitalize">{v.title}</h3>
                                     {generateHtmlListElement(v.content)}
                                 </div>
@@ -141,7 +141,7 @@ export default function PaperDetail(
 
                 {/* ============= right original PDF */}
                 <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
-                    containerClassName="bg-yellow-100 border basis-1/2"
+                    containerClassName="bg-yellow-100 border border-slate-500 basis-1/2"
                     containerStyle={{ height: '90%' }} />
 
             </div>
