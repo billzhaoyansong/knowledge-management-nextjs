@@ -10,7 +10,7 @@
   "year": "2020-08",
   "editing": false,
   "labels": [
-    "game theory"
+    "MAS"
   ],
   "abstract": "Our research concerns the ubiquitous problem of how to incentivise agents to decide on courses of action that are simultaneously desirable from the global perspective and rational from a local game-theoretic perspective. The design of mechanisms so as to achieve this is through steering the strategic capabilities of interested agents by delegating decisions to them in specific ways. We distinguish the cases in which the delegation is effectuated by a principal and where the agents are delegating decisions among one another. Our reliance on the mathematical framework of Boolean games to formalise the principal and distributed delegation problems offers valuable insights into the computational complexity of these problems. The delegation problem touches on many important applications, not only in everyday life, but also in Artificial Intelligence, in particular Multi-Agent Systems.",
   "summaries": [

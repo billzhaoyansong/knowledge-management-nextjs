@@ -8,16 +8,16 @@
     "Yan Zhang",
     "Tony Q. S. Quek"
   ],
+  "type": "technical",
   "year": "2020-12",
   "labels": [
     "federated learning",
     "client selection",
     "fairness",
-    "reputation",
-    "aggregation"
+    "reputation"
   ],
   "summaries": [
-    "propose __a client selection policy__ for wireless network environment where channel resources are limited, to balance accuracy and efficiency, achieving [1] counter-attack [2] better convergence performance, compared to [1] random scheduling [2] round robin [3] proportional fair",
+    "in the conventional FL framework, propose __a client selection policy__ for wireless network environment where channel resources are limited, to balance accuracy and efficiency, achieving [1] counter-attack [2] better convergence performance, compared to [1] random scheduling [2] round robin [3] proportional fair",
     "clients are selected to maximize the difference between reputations and the number of successful transmissions (to hire reputable clients while maintaining fairness among clients)",
     "reputations are maintained based on the loss difference on data samples from the test set of uploaded models and last-round global model",
     "reputation-based aggregation is exerted to defend against attacks"

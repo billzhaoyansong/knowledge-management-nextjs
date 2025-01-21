@@ -9,6 +9,7 @@
     "Rong Gu",
     "Yuzhe Tang"
   ],
+  "type": "technical",
   "year": "2020-09",
   "editing": false,
   "labels": [
@@ -17,9 +18,7 @@
     "blockchain"
   ],
   "summaries": [
-    "proposed __a verifiable and auditable FL framework__ to ensure the correctness of training procedure",
-    "present an effective committee selection scheme based on the blockchain to collectively aggregate models and record verifiable proofs in the blockchain, which can provide the verifiability",
-    "propose a novel authenticated data structure for blockchain to improve the search efficiency of verifiable proofs and support a secure rotation of committee, which can provide the auditability."
+    "in the conventional FL framework, present __[1] a rotating committee selection scheme__ to collectively aggregate models and record verifiable proofs in the blockchain to provide verifiability, and __[2] a novel authenticated data structure__ to improve the search efficiency of verifiable proofs to provide auditability"
   ],
   "systemModel": [],
   "techniques": [],

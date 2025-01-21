@@ -6,6 +6,7 @@
     "Zhuan Shi",
     "Han Yu"
   ],
+  "type": "technical",
   "year": "2023-07",
   "labels": [
     "federated learning",
@@ -15,7 +16,7 @@
     "reputation"
   ],
   "summaries": [
-    "propose __a client selection approach__ to balance performance and fairness in FL, achieving [1] higher fairness [2] higher test accuracy, compared to [1] random [2] greedy (reputable clients first) [3] RBFF [4] RBCS-F",
+    "in the conventional FL framework, propose __a client selection approach__ to balance performance (evaluated by contribution) and fairness in FL, achieving [1] higher fairness [2] higher test accuracy, compared to [1] random [2] greedy (reputable clients first) [3] RBFF [4] RBCS-F",
     "the Lyapunov-based client selection approach considers reputation and fairness jointly"
   ],
   "systemModel": [

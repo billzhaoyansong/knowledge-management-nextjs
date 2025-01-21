@@ -4,13 +4,15 @@
     "Takayuki Nishio",
     "Ryo Yonetani"
   ],
+  "type": "technical",
   "year": "2018-04",
   "labels": [
     "federated learning",
-    "client selection"
+    "client selection",
+    "efficiency"
   ],
   "summaries": [
-    "proposed __a client selection method__ to achieve shorter training time comparing to the original FL protocol by selecting as much clients as possible as long as the constraint of training time (client selection time + aggregation time + model update time + model upload time) is not violated",
+    "in the conventional FL framework, proposed __a client selection method__ to achieve shorter training time comparing to the original FL protocol by selecting as much clients as possible as long as the constraint of training time (client selection time + aggregation time + model update time + model upload time) is not violated",
     "the local model update time and upload time are calculated by their hardward conditions"
   ],
   "systemModel": [
@@ -19,18 +21,6 @@
     "process (2): selected clients send back resource information to MEC",
     "process (3): based on the resource information, MEC selects the set of clients $\\mathbb{S}\\subseteq \\mathbb{K}'$ for FL training [see 1. client selection]",
     "process (4): model distribution, local training, model uploading, and aggregation"
-  ],
-  "problemCategory": [
-    [
-      "FL",
-      "Data&System Heterogeneity"
-    ]
-  ],
-  "solutionCategory": [
-    [
-      "FL",
-      "Client Selection"
-    ]
   ],
   "motivation": [
     "In this work, we focus on the implementation of the abovementioned FL protocol in practical MEC frameworks.",

@@ -8,18 +8,18 @@
     "Qifeng Liu",
     "Song Guo"
   ],
+  "type": "technical",
   "year": "2022-04",
   "labels": [
     "federated learning",
     "multi-job",
     "double auction",
-    "incentive mechanism",
+    "reward",
     "reinforcement learning",
     "social welfare"
   ],
   "summaries": [
-    "design __2 double auction mechanisms__ to solve multi-job assignment problem at the same time by maximizing social welfare",
-    "social welfare is the difference of accuracy-based tasks utility and accuracy-based data owners' costs",
+    "in the conventional FL framework, design __2 multi-job double auction mechanisms__ by matching tasks and data owners to maximizing social welfare, which is the difference of accuracy-based tasks utility and accuracy-based data owners' costs",
     "in iterative double auction (IDA), a central broker facilitates multiple task owners and data owners to iteratively adjust their pricing for each others",
     "RL based double auction employed the experience-weighted attraction learning"
   ],

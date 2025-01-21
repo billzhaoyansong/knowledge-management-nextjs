@@ -9,17 +9,18 @@
     "Tao Chen",
     "Hui Cao"
   ],
+  "type": "technical",
   "year": "2021-03",
   "editing": false,
   "labels": [
     "federated learning",
-    "incentive mechanism"
+    "reward"
   ],
   "summaries": [
-    "propose __an FL scheme__ for private energy data sharing in smart grids with edge-cloud collaboration, where a incentive mechanism is included"
+    "in the conventional FL framework, propose __an FL scheme__ for private energy data sharing in smart grids with edge-cloud collaboration, where a incentive mechanism is included"
   ],
   "systemModel": [
-    "Components",
+    "Players",
     [
       "<b>Energy Service Providers (ESPs)</b>: $\\mathbb{J}=\\{1,...,j,...,J\\}$ with published tasks $\\mathbf{\\Upsilon}=\\{\\Upsilon_{j,1},...,\\Upsilon_{j,k},...,\\Upsilon_{j,K_j}\\}$",
       [

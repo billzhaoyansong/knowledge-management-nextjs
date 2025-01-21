@@ -9,23 +9,29 @@
     "Hye-Young Paik",
     "Liming Zhu"
   ],
+  "type": "technical",
   "year": "2021-08",
   "editing": false,
   "labels": [
     "federated learning",
-    "architecture",
     "blockchain",
     "smart contract",
     "trustworthy",
     "fairness"
   ],
   "summaries": [
-    "propose __an FL architecture__, where a smart contract deployed in the blockchain is used to track and record local data usage, to enhence accountability and fairness",
+    "in the conventioal FL framework, __[1] add a smart contract and blockchain to manage local models and global models__ to solve accountability problem, and __[2] use a weighted training dataset sampler__ to avoid biased model",
     "as a result of the deployment of smart contract, accountability problem is solved",
     "to solve the fairness problem, a weighted fair training dataset sampler is proposed"
   ],
   "systemModel": [
-    "1 central server, several clients (3 in experiment), one blockchain, one smart contract",
+    "Players:",
+    [
+      "1 central server",
+      "several clients (3 in experiment)",
+      "one blockchain",
+      "one smart contract"
+    ],
     "the smart contract is to solve accountability by managing local models and global models on the chain [see 1. Accountability and Smart Contract]",
     "a weighted training dataset sampler is proposed to solve fairness problem [see 2. Fairness and Weighted Dataset Sampler]"
   ],
@@ -33,7 +39,7 @@
     "accountability and fairness challenges facing FL"
   ],
   "techniques": [
-    "1. Accountability and Smart Contract",
+    "Accountability and Smart Contract<ol>",
     [
       "Accountability",
       [
@@ -47,7 +53,7 @@
         "after each global aggregation, the central server sends the hash value of the global model parameters to the smart contract"
       ]
     ],
-    "2. Fairness and Weighted Dataset Sampler",
+    "Fairness and Weighted Dataset Sampler",
     [
       "Fairness",
       [

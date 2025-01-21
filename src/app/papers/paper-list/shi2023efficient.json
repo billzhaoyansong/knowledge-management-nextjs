@@ -7,6 +7,7 @@
     "Xiazhi Lai",
     "Xiumin Wang"
   ],
+  "type": "technical",
   "year": "2023-01",
   "labels": [
     "federated learning",
@@ -20,7 +21,7 @@
     "round step (2): model aggregation: deadline-based FedAvg aggregation: $\\sum_{k\\in A_t} p_{k,t}\\mathbf{w}_{k,t}$ - only model parameters returned before the deadline is aggregated"
   ],
   "summaries": [
-    "propose __a client selection method for the volatile FL__ (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] faster convergence speed [2] higher global model accuracy, and [3] reducing energy consumption comparing with [1] random selection, [2] FedCS, and [3] Oort",
+    "in the conventional FL framework, propose __a client selection method to maximize the product of participation state, aggregation weight, and local loss__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] faster convergence speed [2] higher global model accuracy, and [3] reducing energy consumption comparing with [1] random selection, [2] FedCS, and [3] Oort",
     "proved that for non-convex and strongly convex cases, a larger product of participation state, aggregation weight, and local loss leads to a lower error and faster convergence rate",
     "the client selection method aims to maximize the product of participation state, aggregation weight, and local loss",
     "the original client selection problem is transformed into a contextual combinatorial multi-armed bandit problem due to volatile set and unknown model exchange time"

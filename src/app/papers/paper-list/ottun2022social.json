@@ -12,21 +12,21 @@
     "Petteri Nurmi",
     "Huber Flores"
   ],
+  "type": "technical",
   "year": "2022-11",
   "editing": false,
   "labels": [
     "federated learning",
-    "social network",
-    "security"
+    "social network"
   ],
   "abstract": "Federated learning (FL) is a promising privacy-preserving solution to build powerful AI models. In many FL scenarios, such as healthcare or smart city monitoring, the user's devices may lack the required capabilities to collect suitable data, which limits their contributions to the global model. We contribute social-aware federated learning as a solution to boost the contributions of individuals by allowing outsourcing tasks to social connections. We identify key challenges and opportunities, and establish a research roadmap for the path forward. Through a user study with N = 30 participants, we study collaborative incentives for FL showing that social-aware collaborations can significantly boost the number of contributions to a global model provided that the right incentive structures are in place.",
   "summaries": [
-    "propose __a social-aware FL framework__ using social connections (known people or opportunistic connections within range of device-to-device connections) to (1) boost training contributions and (2) prevent free-riders and malicious contributions"
+    "in the FL social network, propose __an FL task delegation scheme__ allowing delegating tasks to social contacts on their mobile phone"
   ],
   "systemModel": [
     "a set of people with smartphones or other IoT devices.",
     "an FL application is installed in each device and can access social friends or other devices with this application installed",
-    "social-aware FL allows the device (a.k.a. initiator) to delegate the request to social contacts (a.k.a. delegate)",
+    "social-aware FL allows the device (initiator) to delegate the request to social contacts (delegate)",
     "for decentralized FL scenario:",
     [
       "the initiator shares their local model with the delegate<ol>",

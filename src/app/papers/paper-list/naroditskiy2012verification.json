@@ -6,14 +6,15 @@
     "Manuel Cebrian",
     "Nicholas R. Jennings"
   ],
+  "type": "technical",
   "year": "2012-06",
   "labels": [
     "crowdsourcing",
-    "referral"
+    "referral",
+    "reward"
   ],
   "summaries": [
-    "propose __incentive mechanisms__ for referral-based crowdsourcing to minimize the cost of receiving the correct answer",
-    "incentive mechanisms include [1] incentivizing the parent node to verify the result of reporting node [2] incentivizing the parent node to participate"
+    "in the crowdsourcing scenario, propose __a referral-based reward mechanism__ by [1] incentivizing the parent node to verify the result of reporting node [2] incentivizing the parent node to participate, to minimize the cost of receiving the correct answer"
   ],
   "systemModel": [
     "in the referral-based crowdsourcing, a root node is enabled to publish an information gathering task with a certain budget",

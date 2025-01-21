@@ -5,18 +5,17 @@
         "Dusit Niyato",
         "Erik Elmroth"
     ],
+    "type": "technical",
     "year": "2022-03",
     "labels": [
         "federated learning",
         "reverse auction",
         "client selection",
-        "incentive mechanism",
+        "reward",
         "efficiency"
     ],
     "summaries": [
-        "propose __an auction-based FL framework__ to tackle heterogeneity in clients, achieving [1] resource-efficiency (lower resources usage in FL clients) and [2] payments in marketplace",
-        "client selection and payments in the framework depends on [1] max achievable local accuracies and [2] local iteration number",
-        "to tackle heterogeneity, a shared IID dataset is transmitted to the selected clients"
+        "in the conventional FL framework, __[1] tackle Non-IID problem by transmitting an shared IID dataset to winning clients__, and __[2] select and reward clients__ based on (1) max achievable local accuracies and (2) local iteration number (3) claimed price"
     ],
     "systemModel": [
         "$1$ FL service provider, a set of clients, a controller as auctioneer",

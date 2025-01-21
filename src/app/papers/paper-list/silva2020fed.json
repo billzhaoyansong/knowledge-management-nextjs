@@ -6,15 +6,16 @@
     "Boris Gutman",
     "Marco Lorenzi "
   ],
+  "type": "technical",
   "year": "2020-09",
   "editing": false,
   "labels": [
     "federated learning",
-    "FL platform"
+    "software"
   ],
   "abstract": "While data in healthcare is produced in quantities never imagined before, the feasibility of clinical studies is often hindered by the problem of data access and transfer, especially regarding privacy concerns. Federated learning allows privacy-preserving data analyses using decentralized optimization approaches keeping data securely decentralized. There are currently initiatives providing federated learning frameworks, which are however tailored to specific hardware and modeling approaches, and do not provide natively a deployable production-ready environment. To tackle this issue, herein we propose an open-source federated learning frontend framework with application in healthcare. Our framework is based on a general architecture accommodating for different models and optimization methods. We present software components for clients and central node, and we illustrate the workflow for deploying learning models. We finally provide a real-world application to the federated analysis of multi-centric brain imaging data.",
   "summaries": [
-    "propose __an open-source production-ready FL framework__ in healthcare to tackle that current FL frameworks are tailored to specific hardward and modeling approaches"
+    "in the conventional FL framework, propose __an open-source production-ready FL framework__ in healthcare to tackle that current FL frameworks are tailored to specific hardward and modeling approaches"
   ],
   "systemModel": [
     "a set of clients, a set of federators, and a central node placing between clients and federators",

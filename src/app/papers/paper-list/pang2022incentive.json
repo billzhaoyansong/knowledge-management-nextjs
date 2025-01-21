@@ -6,17 +6,18 @@
     "Ruiting Zhou",
     "John C.S. Lui"
   ],
+  "type": "technical",
   "year": "2022-06",
   "labels": [
     "federated learning",
     "reverse auction",
     "client selection",
-    "incentive mechanism",
+    "reward",
     "social welfare",
     "multi-job"
   ],
   "summaries": [
-    "propose __a procument (reverse) auction mechanism__ which selects and schedules different clients at different global iterations to achieve [1] lower social cost compared with [1] FAVOR and [2] CoCoA",
+    "in the conventional FL framework, propose __a reverse auction mechanism__ which selects and schedules different clients at different global iterations to achieve [1] lower social cost compared with [1] FAVOR and [2] CoCoA",
     "in the mechanism, the number of global iterations, scheduling decisions and incentive payouts are determined to minimize the social costs from one auction only",
     "an extension of multi-job scenario is considered and introduces a budget constraint"
   ],
@@ -47,16 +48,16 @@
     "incentivizes the participation of heterogeneous clients"
   ],
   "techniques": [
-    "1. job broadcasting",
+    "job broadcasting<ol>",
     [
       "the broadcasting contents include (1) max num of global iter $T$, (2) duration of one global iter $t_{max}$, (3) num of participating clients for each iter $K$, (4) expected global accuracy $\\epsilon$"
     ],
-    "2. bidding",
+    "bidding",
     [
       "the reason for 1 client to submit $J$ bids is that they value different local accuracy and period differently",
       "the contents in each bidding includes (1) claimed cost $b_{ij}$, (2) local accuracy $\\theta_{ij}$, (3) starts and ends of availability $a_{ij},d_{ij}$, and number of global iterations can participate due to battery limitation $c_{ij}$."
     ],
-    "3. social cost minimization",
+    "social cost minimization",
     [
       "$\\begin{array}{ll} \\underset{T_g, x_{ij},y_i(t)}{\\operatorname{min}} & \\sum\\limits_{i\\in\\mathcal{I}}\\sum\\limits_{j\\in\\mathcal{J}} b_{ij}x_{ij} \\\\       \\text { s.t. } & \\sum\\limits_{i\\in\\mathcal{I}} y_i(t)\\geq K,\\quad \\forall t\\in\\mathcal{T}_g \\\\     & T_g\\geq\\frac{1}{1-\\theta_{ij}x_{ij}}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & \\sum\\limits_{t \\in \\mathcal{T}_g} y_i(t) = \\sum\\limits_{j \\in \\mathcal{J}} c_{ij} x_{ij}, \\quad \\forall i\\in\\mathcal{I} \\\\     & x_{ij} \\cdot (T_l(\\theta_{ij})t_i^{cmp}+t_i^{com})\\leq t_{max}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & y_i(t)=1 \\text{ only if } x_{ij}=1, \\quad t\\in[a_{ij}, d_{ij}], \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J} \\\\     & \\sum\\limits_{j \\in \\mathcal{J}} x_{ij} \\leq 1, \\quad \\forall i\\in \\mathcal{I} \\\\     & x_{ij}, y_{i}(t)\\in\\{0,1\\}, \\quad \\forall i\\in\\mathcal{I},\\forall j\\in \\mathcal{J}, \\forall t \\in \\mathcal{T}_g \\\\     & T_g \\in \\{1,2,...,T\\}   \\end{array}$",
       [
@@ -74,7 +75,7 @@
         ]
       ]
     ],
-    "4. multi-job extension",
+    "multi-job extension",
     [
       "the objective becomes $\\min \\sum\\limits_{m\\in\\mathcal{M}}\\sum\\limits_{i\\in\\mathcal{I}}\\sum\\limits_{j\\in\\mathcal{J}} b_{ijm}x_{ijm}$",
       "constraints are modified accordingly"

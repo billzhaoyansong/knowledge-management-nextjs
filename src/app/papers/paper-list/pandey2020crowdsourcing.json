@@ -8,15 +8,15 @@
         "Aunas Manzoor",
         "Choong Seon Hong"
     ],
-    "year": "2019-05",
+  "type": "technical",
+  "year": "2019-05",
     "labels": [
         "federated learning",
-        "crowdsourcing",
         "stackelberg game",
-        "incentive mechanism"
+        "reward"
     ],
     "summaries": [
-        "propose __an incentive mechanism__ by modeling the interaction between the MEC server and participating workers as a stackelberg game to achieve [1] higher gain in the offered reward comparing to the ablations",
+        "in the conventional FL framework, propose __a rewarding mechanism__ by modeling the interaction between the MEC server and participating workers as a stackelberg game to achieve [1] higher gain in the offered reward comparing to the ablations",
         "server determines optimal reward rates, while the clients decide the optimal local accuracy"
     ],
     "systemModel": [

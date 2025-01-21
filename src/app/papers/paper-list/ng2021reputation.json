@@ -10,25 +10,31 @@
     "Cyril Leung",
     "Chunyan Miao"
   ],
+  "type": "technical",
   "year": "2021-08",
   "labels": [
     "federated learning",
-    "serverless",
+    "decentralized",
     "reputation",
-    "architecture",
     "grouping",
-    "clustering",
-    "incentive mechanism",
+    "reward",
     "hedonic game"
   ],
   "summaries": [
-    "propose __a serveless FL framework__ in which workers are clustered by cluster heads and cluster heads exchange models to neighbors, achieving [1] lower communication costs compared to serverless FL (SFL) but higher than hierarchical FL (HFL)",
+    "in the decentralized FL framework, propose __a rewarding mechanism__ in which [1] servers recruit and reward their own clients via a hedonic game and [2] servers exchange models to neighbors",
     "in this framework, the self-interested workers form coalitions led by different cluster heads to maximize self-utility (reward + cluster head reputation - costs - disutility from congestion effect), and the process is modeled as a hedonic game",
     "a reward pool provided by each cluster head is allocated to all members of the cluster according to respetive local data-size",
     "cluster heads just exchange intermediate models to one-hop neighbors"
   ],
   "systemModel": [
-    "a set of $\\mathcal{M}=\\{1,...,m,...,M\\}$ edge servers as the cluster head, a set $\\mathcal{J}=\\{1,...,j,...,J\\}$ of IoT devices as workers, a cluster head is in charge of $S_m$ workers and has a reward pool $\\alpha_m$ for recruiting workers",
+    "Players:",
+    [
+      "a set $\\mathcal{J}=\\{1,...,j,...,J\\}$ of IoT devices as workers",
+      "a set of $\\mathcal{M}=\\{1,...,m,...,M\\}$ edge servers as the cluster heads",
+      [
+        "a cluster head is in charge of $S_m$ workers and has a reward pool $\\alpha_m$ for recruiting workers"
+      ]
+    ],
     "coalition formation is modeled as a hedonic game [see <u>1. Hedonic Game</u>]",
     "step 1): cluster heads send to controlling workers the intermediate model $\\bm{w}_m^{(k)}$",
     "step 2): workers perform local training and transmit local model parameters",

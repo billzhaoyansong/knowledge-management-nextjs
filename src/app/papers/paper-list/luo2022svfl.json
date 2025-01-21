@@ -5,6 +5,7 @@
     "Saif Al-Kuwari",
     "Yong Ding"
   ],
+  "type": "technical",
   "year": "2022-06",
   "editing": false,
   "labels": [
@@ -13,10 +14,46 @@
     "security"
   ],
   "summaries": [
-    "propose __a protocol__ for secure gradient aggregation and verification to solve security (privacy of local gradient and trained model, correctness of aggregated gradient) problem",
+    "in the conventional FL framework, [1] __use Motp scheme__ to mask gradients before transmitting, and [2] __use HNsig__ to sign gradients and transmit with gradient, to preserve the privacy of gradients and verify the integrity of gradients",
     "firstly this protocol masks local gradients with a simple masking technique (Motp), then verify the correctness of the aggregated gradient using an efficient homomorphic network coding signature scheme"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Players:",
+    [
+      "server",
+      "clients: $C=\\{C_1,...,C_m\\}$"
+    ],
+    "Phases:",
+    [
+      "__Initialization__: a leader (randomly selected from all clients by the server) will <ol>",
+      [
+        "[1] initialize the model [2] generate $m$ seeds of PRG and a public/secret key pair of HNsig scheme [3] choose a random string [4] $m$ weights",
+        "send all above to all other clients",
+        "send the public key, the random string, and $m$ weights to the server"
+      ],
+      "__Model Training__: upon receiving all the information from the leader, all clients will",
+      [
+        "train the model locally",
+        "mask gradient using Motp scheme",
+        "sign the masked gradient using HNsig",
+        "send the (masked) gradient-signature pair to the server"
+      ],
+      "__Aggregation__: upon receiving all the gradient-signature pair from all clients, the server will",
+      [
+        "aggregates all the masked gradients",
+        "compute an aggregated signature using HNsig",
+        "returns the aggregated masked gradient and the signature to each client"
+      ],
+      "__Verification and Update__: upon receiving the aggregated masked gradient-signature pair from the server, all clients will",
+      [
+        "validate the signature",
+        "unmask the aggregated masked-gradient",
+        "update local model",
+        "otherwise, notify the other clients and terminate"
+      ]
+
+    ]
+  ],
   "techniques": [],
   "doi": "10.1109/TMC.2022.3219485",
   "id": "luo2022svfl",

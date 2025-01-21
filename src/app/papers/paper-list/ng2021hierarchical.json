@@ -9,18 +9,19 @@
     "Cyril Leung",
     "Dong In Kim"
   ],
+  "type": "technical",
   "year": "2021-06",
   "labels": [
     "federated learning",
     "evolutionary game",
     "forward auction",
     "client mapping",
-    "incentive mechanism",
+    "reward",
     "multi-job",
-    "architecture"
+    "hierarchical"
   ],
   "summaries": [
-    "propose __a hierarchical system model__ where data owners sell data to FL workers, and model owners bid for services from FL workers",
+    "in the hierarchical FL framework, propose __a reward mechanism__ in which [1] data owners sell data to FL workers via an evolutionary game, and [2] model owners bid for services from FL workers via a forward auctioning game",
     "interactions between data owners and FL workers are modeled as an evolutionary game where groups of data owners select FL workers to maximize self utility",
     "interactions between FL workers and model owners are presented as a forward auctioning game where model owners bid and a deep neural network is used to determine allocation of FL workers and corresponding payouts"
   ],

@@ -8,6 +8,7 @@
     "Tiansheng Huang",
     "Wentai Wu"
   ],
+  "type": "technical",
   "year": "2022-02",
   "labels": [
     "federated learning",
@@ -22,8 +23,7 @@
     "round step (4): model transmission and aggregation"
   ],
   "summaries": [
-    "propose __a client selection method__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] reducing training rounds [2] higher global model accuracy comparing with [1] random selection and [2] oracle selection (finalizing selected set of clients in the first-round)",
-    "the objective of the client selection method is to maximize the total number of effective participation data size",
+    "in the conventional FL framework, propose __a client selection method to maximize the total number of effective participation data size__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] reducing training rounds [2] higher global model accuracy comparing with [1] random selection and [2] oracle selection (finalizing selected set of clients in the first-round)",
     "to solve the problem under the assumption of known local dataset, a greedy algorithm is introduced",
     "to solve the problem with data volatility assumption, a combinatorial multi-armed bandit method is proposed"
   ],

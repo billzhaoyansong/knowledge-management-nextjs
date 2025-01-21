@@ -6,6 +6,7 @@
     "Sohan Dsouza",
     "Iyad Rahwan"
   ],
+  "type": "technical",
   "year": "2013-04",
   "labels": [
     "referral",
@@ -13,8 +14,7 @@
     "social mobility"
   ],
   "summaries": [
-    "__study the limits of social mobility__ to avoid inflated expectations",
-    "in particular, high-resolution simulations of the DARPA Network Challenge are conducted, considering [1] recruitment [2] response time [3] geography of ties [4] passive recruitment [5] individual mobility"
+    "in the crowdsourcing scenario, __study the limits of social mobility__ to avoid inflated expectations by considering [1] recruitment [2] response time [3] geography of ties [4] passive recruitment [5] individual mobility"
   ],
   "systemModel": [
     "to understand social mobility, the following dynamics are considered (1) branching dynamics of recruitment (2) temporal dynamics of message propagation (3) the geographical spread of social networks (4) the scales and aspects of human mobility [see <u>1. Dynamics of Social Mobility</u>]"
