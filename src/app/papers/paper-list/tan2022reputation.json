@@ -8,6 +8,7 @@
     "Dusit Niyato",
     "Han Yu"
   ],
+  "type": "technical",
   "year": "2022-01",
   "labels": [
     "federated learning",
@@ -16,7 +17,7 @@
     "multi-job"
   ],
   "summaries": [
-    "propose __a client selection algorithm__ when the reputations of clients are not fully reliable, achieving [1] most advantageous performance-cost trade-off, compared to [1] FedAvg [2] FedAvg50 [3] NRACS [4] RRAFL",
+    "in the conventional FL framework, propose __a client selection algorithm__ when the reputations of clients are not fully reliable, achieving [1] most advantageous performance-cost trade-off, compared to [1] FedAvg [2] FedAvg50 [3] NRACS [4] RRAFL",
     "in the proposed 2-stage client selection algorithm, the clients are divided into 3 groups based on reputation values, aiming to (1) minimize hiring costs for all servers and avoid herding in the first stage, and (2) maintain the performance in the global model in the second stage"
   ],
   "systemModel": [

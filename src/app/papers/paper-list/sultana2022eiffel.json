@@ -7,22 +7,27 @@
         "Fei Xu",
         "Xu Yuan"
     ],
+    "type": "technical",
     "year": "2022-06",
     "labels": [
         "federated learning",
         "client selection",
         "efficiency",
         "fairness",
-        "adaptive aggregation"
+        "aggregation"
     ],
     "summaries": [
-        "propose __a framework__ including client selection and adaptive aggregation to achieve [1] higher fairness [2] higher efficiency (reducing communication overhead) and [3] maintaining accuracy, comparing with [1] full participation [2] adaptive FL [3] centralized training [4] q-FFL [5] least loss based selection",
+        "in the conventional FL framework, propose __a client selection scheme__ considering selection fairness and adaptive aggregation to achieve [1] higher fairness [2] higher efficiency (reducing communication overhead) and [3] maintaining accuracy, comparing with [1] full participation [2] adaptive FL [3] centralized training [4] q-FFL [5] least loss based selection",
         "the client selection method selects from the group of selected clients last round and the group of unselected clients from last round to collectively consume resources",
         "the selection inside each group is based on a prioirity index, which incorporating [1] accuracy of local model, [2] amount of local data, [3] local resource efficiency (computation power to resource demand), and [4] age of update (last communication round when the UE participated in global aggregation)",
         "the adaptive aggregation is based on finding the upper bound of $F(\\theta^f)-F(\\theta^*)$, $\\theta^f$ is the final model parameter, $\\theta^*$ is the optimal model parameter"
     ],
     "systemModel": [
-        "$1$ server with resource constraint (e.g. power condition, bandwidth, etc.), $N$ users with local dataset $D_n$",
+        "Players",
+        [
+            "$1$ server with resource constraint (e.g. power condition, bandwidth, etc.)",
+            " $N$ users with local dataset $D_n$"
+        ],
         "implicit assumptions include server knowing [1] local data size [2] local resource demand [3] local computaion power",
         "process 1): server selects a portion of clients who are <b>in</b> the selected list last round to consume $\\kappa R$ resource, while select another portion of clients who are <b>not in</b> the selected list last round to consume $(1-\\kappa) R$ [see 1. sorting priority]",
         "process 2): server sends the global model $\\theta$ and local steps $\\tau$ [see 2. adaptive aggregation]",

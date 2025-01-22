@@ -7,15 +7,15 @@
         "Chengzhong Xu",
         "Huazhu Fu"
     ],
+    "type": "technical",
     "year": "2021-06",
     "labels": [
         "federated learning",
-        "effectiveness",
         "robustness",
         "security"
     ],
     "summaries": [
-        "propose __an FL framework__ including a [1] a data quality measurement (DQM) component and [2] a noise robust aggregation (NRA) component, for noisy clients environment to achieve [1] boosting accuracy, and [2] robustness in comparison with [1] FedAvg and [2] Trimmed mean"
+        "in the conventional FL framework, propose __[1] a local data quality measurement (DQM) component (measured locally and sent to the server)__ and __[2] a noise robust aggregation (NRA) component__, for noisy clients environment to achieve [1] boosting accuracy, and [2] robustness in comparison with [1] FedAvg and [2] Trimmed mean"
     ],
     "systemModel": [
         "$1$ central server, $C$ clients per round with $K$-class dataset",

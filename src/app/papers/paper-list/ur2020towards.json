@@ -6,20 +6,28 @@
     "Ernesto Damiani",
     "Davor Svetinovic"
   ],
+  "type": "technical",
   "year": "2020-07",
   "labels": [
     "federated learning",
     "blockchain",
-    "reputation"
+    "reputation",
+    "hierarchical"
   ],
   "summaries": [
-    "propose __a hierarchical FL framework__ with blockchain to provide a more fine-grained FL environment (no experiment)",
+    "in the hierarchical FL framework, add __a blockchain-based reputation system__ to provide a more fine-grained FL environment (no experiment)",
     "_in summary, this article states that hierarchy itself provides the so-called 'fine-grained'_",
     "a set of fog nodes are placed in between the cloud server and devices to enable local training",
     "a blockchain-based reputation system is used to select devices"
   ],
   "systemModel": [
-    "$1$ cloud server, a set $F=\\{1,...,n\\}$ of Fog nodes with the set $L=\\{1,...,n\\}$ of learning models, a set $D=\\{1,...,N\\}$ of devices, $1$ blockchain-based reputation system",
+    "Players:",
+    [
+      "$1$ cloud server",
+      "a set $F=\\{1,...,n\\}$ of Fog nodes with the set $L=\\{1,...,n\\}$ of learning models",
+      "a set $D=\\{1,...,N\\}$ of devices",
+      "$1$ blockchain-based reputation system"
+    ],
     "a device $D_i$ must be connected with a $F_i$ and execute a given $L_i$",
     "![](/papers/ur2020towards/system.png)",
     "step 1): the cloud server pushes global $L_i$ to $F_i$ and $D_i$",

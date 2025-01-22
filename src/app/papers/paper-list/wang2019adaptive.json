@@ -9,27 +9,34 @@
         "Ting He",
         "Kevin Chan"
     ],
+    "type": "technical",
     "year": "2019-02",
     "labels": [
         "federated learning",
-        "architecture",
-        "adaptive aggregation"
+        "aggregation"
     ],
     "summaries": [
-        "propose __an FL framework under the resource constraints__ (e.g. time, energy, bandwidth) to minimize the loss of the global model, achieving [1] higher accuracy in comparison to [1] centralized GD, [2] FL framework with fixed local steps, and [3] synchronous FL with local step of $1$",
+        "in the conventional FL framework, propose __an adaptive aggregation algorithm__ under the resource constraints__ (e.g. time, energy, bandwidth) to minimize the loss of the global model, achieving [1] higher accuracy in comparison to [1] centralized GD, [2] FL framework with fixed local steps, and [3] synchronous FL with local step of $1$",
         "in the framework, the decision for next global aggregation is adaptively scheduled during the training process."
     ],
     "systemModel": [
-        "$N$ edge nodes, $M$ types of resources and each resource is bounded by budget $R_m$",
+        "Players:",
         [
-            "$T$ total number of local steps",
-            "$K$ total number of global aggregations",
-            "$\\tau=T/K$ number of local steps between global aggregations"
+            "$1$ server",
+            "$N$ edge nodes, $M$ types of resources and each resource is bounded by budget $R_m$",
+            [
+                "$T$ total number of local steps",
+                "$K$ total number of global aggregations",
+                "$\\tau=T/K$ number of local steps between global aggregations"
+            ]
         ],
         "the objective of the proposed FL framework is to minimize the loss of global model on all distributed dataset under the constraint of [1] limited resources and [2] fixed number of total steps [see 1. Problem Formulation]",
-        "process 1): server distributes $\\mathbf{w}, \\tau$ (global model, and number of local steps for the next global aggregation) to all edge nodes (set $\\tau=1$ as the default)",
-        "process 2): local training and send some parameters to the server [see 2. Local Training]",
-        "process 3): global aggregation $\\mathbf{w}(t)=\\frac{\\sum_{i=1}^N D_i\\mathbf{w}_i(t)}{D}$ and compute $\\tau$ for the next global aggregation [see 3. Global Aggregation]"
+        "process:",
+        [
+            "server distributes $\\mathbf{w}, \\tau$ (global model, and number of local steps for the next global aggregation) to all edge nodes (set $\\tau=1$ as the default)<ol>",
+            "local training and send some parameters to the server [see 2. Local Training]",
+            "global aggregation $\\mathbf{w}(t)=\\frac{\\sum_{i=1}^N D_i\\mathbf{w}_i(t)}{D}$ and compute $\\tau$ for the next global aggregation [see 3. Global Aggregation]"
+        ]
     ],
     "questions": [
         "to minimize the loss function under a given resource budget"

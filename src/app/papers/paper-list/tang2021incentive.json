@@ -4,15 +4,16 @@
         "Ming Tang",
         "Vincent W.S. Wong"
     ],
+    "type": "technical",
     "year": "2021-05",
     "labels": [
         "federated learning",
         "social welfare",
-        "incentive mechanism",
+        "reward",
         "non-cooperative game"
     ],
     "summaries": [
-        "propose __an incentive mechanism__ for FL when the outcome is a public goods (each client is both data owner and model owner) to achieve [1] faster convergence rate comparing with [1] 'Lagrangian' method",
+        "in the conventional FL framework, propose __a rewarding mechanism__ when the outcome is a public goods (each client is both data owner and model owner) to achieve [1] faster convergence rate comparing with [1] 'Lagrangian' method",
         "the mechanism aims to maximize social welfare (sum of utilities - sum of costs) and is modeled as a non-cooperative game with perfect information to solve the problem",
         "in this mechanism, some organizations may need to pay other organizations to compensate the cost of the latter ones"
     ],

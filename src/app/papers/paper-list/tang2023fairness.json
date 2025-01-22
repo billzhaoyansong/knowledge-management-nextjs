@@ -4,18 +4,19 @@
     "Xiaoli Tang",
     "Han Yu"
   ],
+  "type": "technical",
   "year": "2023-10",
   "labels": [
     "federated learning",
     "fairness",
     "reverse auction",
     "client selection",
-    "incentive mechanism",
+    "reward",
     "Lyapunov",
     "reputation"
   ],
   "summaries": [
-    "propose __an reverse auction FL framework__ to jointly consider fairness, costs and reputations, achieving [1] higher test accuracy [2] reduced cost [3] improved fairness [4] root mean square error (quantify the difference between real labels and predicted labels, reflecting on well the model performs in regression tasks), compared with [1] random selection [2] greedy selection [3] reputation-based party selection [4] reputation-based party selection with fairness [5] RRAFL [6] FAIR",
+    "in the conventional FL framework, propose __a rewarding mechanism__ to jointly consider fairness, costs and reputations, achieving [1] higher test accuracy [2] reduced cost [3] improved fairness [4] root mean square error (quantify the difference between real labels and predicted labels, reflecting on well the model performs in regression tasks), compared with [1] random selection [2] greedy selection [3] reputation-based party selection [4] reputation-based party selection with fairness [5] RRAFL [6] FAIR",
     "clients are selected and paid to minimize the objective considering drift, payment and reputations by optimizing the winning set and payment scheme"
   ],
   "systemModel": [

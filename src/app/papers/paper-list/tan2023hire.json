@@ -4,17 +4,18 @@
     "Xavier Tan",
     "Han Yu"
   ],
+  "type": "technical",
   "year": "2023-10",
   "labels": [
     "federated learning",
     "reverse auction",
     "reputation",
     "client selection",
-    "incentive mechanism",
+    "reward",
     "multi-job"
   ],
   "summaries": [
-    "propose __a Gradual Participant Selection scheme__ for Auction-based Federated Learning (GPS-AFL) to mitigate the drawbacks of selection bias in reputation-based FL, achieving [1] lower hiring cost [2] higher total utility, compared to [1] Greedy [2] Sharpley Value-based Method (SV) [3] OORT [4] ROBO-AFL [5] RRAFL",
+    "in the conventional FL framework, propose __a Gradual Participant Selection scheme__ for Auction-based Federated Learning (GPS-AFL) to mitigate the drawbacks of selection bias in reputation-based FL, achieving [1] lower hiring cost [2] higher total utility, compared to [1] Greedy [2] Sharpley Value-based Method (SV) [3] OORT [4] ROBO-AFL [5] RRAFL",
     "in the proposed scheme, clients are selected gradually over multiple rounds of training with a hiring upper bound for each round",
     "when the regret queue is higher than $0$, only reputable clients (reputation threshold) are selected (and costs might be saved); otherwise, clients with the lowest costs are hired until round budget is reached"
   ],
