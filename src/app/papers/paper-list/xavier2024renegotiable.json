@@ -1,0 +1,79 @@
+{
+  "title": "(Preview) RENEGOTIABLE CONTRACT-THEORETIC INCENTIVE MECHANISM IN FEDERATED LEARNING",
+  "authors": [
+    "Xavier Tan",
+    "Han Yu"
+  ],
+  "type": "technical",
+  "year": "2024-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "reward",
+    "contract theory"
+  ],
+  "abstract": "Federated learning (FL) has risen in importance due to heightened concerns over data privacy, yet effective incentive mechanisms remains underdeveloped. These mechanisms are crucial for motivating data owners (DOs) to contribute towards FL tasks. The challenge is intensified by privacy restrictions, which limit task owner’s ability to accurately evaluate the capabilities and efforts of DOs, leading to moral hazard and information asymmetry issues. This study employs contract theory to devise optimal incentive mechanisms that promotes honest participation while mitigating risks, fostering a competitive and sustainable FL environment. Unlike previous contract-based approaches, our framework addresses potential changes in DOs’ behavior and budget constraints by enabling renegotiation for Re-Contract, which allows for more flexible and adaptive incentives. Our extensive simulations on real-world datasets demonstrated that our approach delivers superior performance, with an average utility yield improvement of up to 27% on average, compared to other state-of-the-art methods.",
+  "summaries": [
+    "in the conventional FL framework, propose __contract renegotiation by servers__ after clients' updates submission to adapt to changes in DOs' bahavior and budget constraints"
+  ],
+  "systemModel": [
+    "DOs: $\\mathcal{N}=\\{1,...,n,..,N\\}$",
+    "FL servers: $\\mathcal{F}=\\{1,...,f,..,F\\}$ (1 server publishes 1 task)",
+    [
+      "global model $\\omega_f(t)$ for a duration of $t\\in[0,\\mathcal{T}]$ or a specific threshold level of accuracy is attained"
+    ],
+    "Process",
+    [
+      "task initialization and contract design<ol>",
+      "contract selection process",
+      [
+        "available DOs are divided into $\\Theta$ with $K$ levels: $\\Theta=\\{\\theta_1,...,\\theta_K\\}$ in ascending order $\\theta_1 < \\dots < \\theta_K$<ol>",
+        [
+          "the inferrence of the specific type a DO belonging to is based on observation"
+        ],
+        "reward contract for arbitrary level of DOs: $\\Upsilon_f^0=(R_k^f(e_k)),\\forall k \\in K$",
+        [
+          "$R_k^f$: reward for $k$ level DO from server $f$",
+          "$e_k = \\tau_k\\cdot d_k$",
+          [
+            "$e$: effort; $\\tau$: number of local epochs; $d$: amount of quantity sample"
+          ]
+        ]
+      ],
+      "model initialization",
+      "local model training",
+      "model updating",
+      [
+        "FL server can opt to devise a new contract $\\Upsilon_f^1$ in replace of $\\Upsilon_f^0$ based on DOs'behaviors and current conditions",
+        "Both parties would have to agree to the new contract"
+      ],
+      "model aggregation and contribution assessment",
+      "reward payment"
+    ]
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    ""
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "",
+  "id": "xavier2024renegotiable",
+  "bibtex": ""
+}

@@ -1,0 +1,63 @@
+{
+  "title": "Blockchain-Enhanced Federated Learning Market With Social Internet of Things",
+  "authors": [
+    "Pengfei Wang",
+    "Yian Zhao",
+    "Mohammad S. Obaidat",
+    "Zongzheng Wei",
+    "Heng Qi",
+    "Chi Lin",
+    "Yunming Xiao",
+    "Qiang Zhang"
+  ],
+  "type": "technical",
+  "year": "2022-03",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "social network"
+  ],
+  "summaries": [
+    "in the FL social network, propose __a rewarding mechanism__ for a scenario that some devices will send their data to other devices due to computational resources constraint.",
+    "this work is hard to follow and not clearly written."
+  ],
+  "systemModel": [
+    "Components",
+    [
+      "a set of requesters $R=\\{r_1,...,r_i,...,r_M\\}$, and each requester can post an task $k_i$ with deadline $T_i$",
+      "a set of devices $E=\\{e_1,...,e_j,...,e_N\\}$, and each device has the amount of data $g_{i,j}$ for task $k_i$"
+    ],
+    "Task Allocation Steps [see Original Task Allocation Problem]",
+    [
+      "computationally bounded devices send their data to the mutually trusted computationally capable devices<ol>",
+      [
+        "computationally bounded device $e_k$ has cost $b_{i,k}$ for current task $k_i$, and broadcasts data volume $\\gamma_{i,k}$<ol>",
+        "computationally unbounded device $e_j$ calculate maximum amount of data it can receive by examing $\\gamma_{i,k}+g_{i,j}\\leq \\beta_j \\times |T_i|$; if inequality holds, it submits bid $a_{j,k}$ to $e_k$",
+        [
+          "$\\gamma_{i,k}$: unutilized data from $k$",
+          "$g_{i,j}$: local data from $j$"
+        ],
+        "$e_k$ filter out those lower-than-budget bids and sort bids in ascending order",
+        "$e_k$ selects winner"
+      ],
+      "requesters select computationally capable devices in FL tasks [see Quality-Oriented Task Allocation Algorithm]"
+    ]
+  ],
+  "techniques": [
+    "Original Task Allocation Problem<ol>",
+    [
+      "$\\begin{aligned} \\max & \\sum_i \\sum_j y_{i,j} \\hat{g}_{i,j} \\quad \\text{(acquired amount of data)} \\\\ s.t. & \\sum_j x_{k,j} \\in \\{0,1\\} \\quad \\text{(data can be sent to at most 1 device)} \\\\  & \\sum_k x_{k,j} \\gamma_{i,k}+g_{i,j}\\leq \\beta_j \\times |T_i| \\quad \\text{(device cannot train more data than its computing resource)} \\\\ & \\sum_j y_{i,j}\\hat{g}_{i,j}v_{i,j} = B_i \\quad \\text{(budget constraint)} \\\\       & c_{i,j} \\leq b_{i,k} \\quad \\text{(payment exceeding preserved price)} \\\\ & \\mathcal{L}_{j,k} \\geq \\xi \\quad \\text{(trustworthiness threshold)} \\\\  & \\Vert e_j,e_k\\Vert \\leq R_j \\quad \\text{(within communication range)} \\\\      & x_{k,j} \\leq \\{0,1\\}, \\quad \\text{(data transfer from k to j)} \\\\ & y_{i,j} \\leq \\{0,1\\} \\quad \\text{(data purchase from j by i)}      \\end{aligned}$"
+    ],
+    "Trust-Enhanced Collaborative Learning Strategy",
+    [
+     
+    ],
+    "Quality-Oriented Task Allocation Algorithm"
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JSAC.2022.3213314",
+  "id": "wang2022blockchain",
+  "bibtex": "@article{wang2022blockchain, title={Blockchain-enhanced federated learning market with social internet of things}, author={Wang, Pengfei and Zhao, Yian and Obaidat, Mohammad S and Wei, Zongzheng and Qi, Heng and Lin, Chi and Xiao, Yunming and Zhang, Qiang}, journal={IEEE Journal on Selected Areas in Communications}, volume={40}, number={12}, pages={3405--3421}, year={2022}, publisher={IEEE}}"
+}

@@ -1,0 +1,50 @@
+{
+  "title": "Privacy protection federated learning system based on blockchain and edge computing in mobile crowdsourcing",
+  "authors": [
+    "Weilong Wang",
+    "Yingjie Wang",
+    "Yan Huang",
+    "Chunxiao Mu",
+    "Zice Sun",
+    "Xiangrong Tong",
+    "Zhipeng Cai"
+  ],
+  "type": "technical",
+  "year": "2022-02",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "blockchain",
+    "privacy"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] enable task participants to delegate encrypted data (with DLD-LDP) to edge servers__ for local training __[2] employ multimodal transformer__ after the global model is trained, __[3] employ a blockchain as the platform__ to prevent malicious attacks"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "__task publishers__: government, companies, and they initialize the global model",
+      "__crowdsourcing platform__ empowered by blockchain",
+      [
+        "help task participants to download initial model",
+        "help task participants to submit local models",
+        "leader miner node aggregates the global model"
+      ],
+      "__edge server__: high computing power and data processing power, (1) help users to process data",
+      "__task participants__: upload multi-modal local data, which is protected by DLD-LDP, to edge servers to train the local model"
+    ],
+    "Process",
+    [
+      "the task publisher defines the released task as the initialization model<ol>",
+      "the task publisher publishes it through the blockchain",
+      "task participants perturb local data with DLD-LDP and send to respective edge server for training",
+      "edge servers perform local training and upload to the blockchain",
+      "the leader miner in the blockchain aggregate local models",
+      "after the model is finally trained, the platform uses the MulT algorithm to process to get multi-modal information"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1016/j.comnet.2022.109206",
+  "id": "wang2022privacy",
+  "bibtex": "@article{wang2022privacy, title={Privacy protection federated learning system based on blockchain and edge computing in mobile crowdsourcing}, author={Wang, Weilong and Wang, Yingjie and Huang, Yan and Mu, Chunxiao and Sun, Zice and Tong, Xiangrong and Cai, Zhipeng}, journal={Computer Networks}, volume={215}, pages={109206}, year={2022}, publisher=Elsevier}}"
+}

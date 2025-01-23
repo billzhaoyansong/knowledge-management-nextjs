@@ -1,0 +1,53 @@
+{
+  "title": "PASS: A Parameter Audit-Based Secure and Fair Federated Learning Scheme Against Free-Rider Attack",
+  "authors": [
+    "Jianhua Wang",
+    "Xiaolin Chang",
+    "Jelena Mišić",
+    "Vojislav B. Mišić",
+    "Yixiang Wang"
+  ],
+  "year": "2022-11",
+  "type": "technical",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "privacy",
+    "security"
+  ],
+  "abstract": "Federated learning (FL) as a secure distributed learning framework gains interests in Internet of Things (IoT) due to its capability of protecting the privacy of participant data. However, traditional FL systems are vulnerable to free-rider (FR) attacks, which causes unfairness, privacy leakage and inferior performance to FL systems. The prior defense mechanisms against FR attacks assumed that malicious clients (namely, adversaries) declare less than 50% of the total amount of clients. Moreover, they aimed for anonymous FR (AFR) attacks and lost effectiveness in resisting selfish FR (SFR) attacks. In this article, we propose a parameter audit-based secure and fair FL scheme (PASS) against FR attack. PASS has the following key features: 1) prevent from privacy leakage with less accuracy loss; 2) be effective in countering both AFR and SFR attacks; and 3) work well no matter whether AFR and SFR adversaries occupy the majority of clients or not. Extensive experimental results validate that PASS: 1) has the same level as the state-of-the-art method in mean square error against privacy leakage; 2) defends against AFR and SFR attacks in terms of a higher defense success rate, lower false positive rate, and higher F1-score; and 3) is still effective where adversaries exceed 50%, with F1-score 89% against AFR attack and F1-score 87% against SFR attack. Note that PASS produces no negative effect on FL accuracy when there is no FR adversary.",
+  "summaries": [
+    "in the conventional FL framework, __[1] perturb local updates with weak DP__ to preserve privacy, __[2] send all local updates in the previous round to clients__ to enable them to audit all updates",
+    "prior defense mechanisms against free riders usually [1] assumed the majority of the clients are honest [2] targeted at anonymous free riders (AFR)",
+    [
+      "FR attacks are categorized into two types: 1) anonymous FR (AFR) and 2) selfish FR (SFR) attacks",
+      "AFR denotes that adversaries do not own any private data sets and computation resources and an AFR adversarial client uploads its stochastic Gaussian noise to the central server",
+      "SFR means that adversaries have their own private data set and training ability but they are unwilling to devote their data and computation resources to global model training"
+    ],
+    "in this work, a privacy-preserving and parameter audit-based scheme is proposed to ensure security",
+    "privacy preservation is achieved after finishing local training by utilization of weak DP with Gaussian mechanism to add perturbation",
+    "parameter auditing is conducted by each FL client via using their private data set to calculate the accuracy divergence for other clients"
+  ],
+  "systemModel": [
+    "$1$ server, $N$ FL clients",
+    "process",
+    [
+      "server sends $(\\Delta \\theta^{r+1},\\Delta \\tilde{\\theta}^{r}_{\\text{client 1}, ldp},...,\\Delta \\tilde{\\theta}^{r}_{\\text{client N}, ldp})$<ol>",
+      [
+        "$\\Delta \\theta^{r+1}$: global update in round $r+1$",
+        "$\\Delta \\tilde{\\theta}^{r}_{\\text{client 1}, ldp}$: Local update after weak DP from client 1 in round $r$"
+      ],
+      "each client does local training based on $\\Delta \\theta^{r+1}$ and gets $\\Delta \\tilde{\\theta}^{r+1}_i$",
+      "each client adds Gaussian noise and gets $\\Delta \\tilde{\\theta}^{r+1}_{i,ldp}=\\Delta \\tilde{\\theta}^{r+1}_i + \\epsilon, \\epsilon \\sim \\mathcal{N}(0, \\sigma^2_n)$",
+      "each client calculates accuracy divergence for other clients and gets $AccDiv^r_i=Acc(\\theta^r)-Acc(\\Delta \\tilde{\\theta}^{r}_{i, ldp}+ \\tilde{\\theta}^{r-1}_{i,ldp}), i\\in [1,N-1]$",
+      "each client uploads $(\\Delta \\tilde{\\theta}^{r+1}_{i,ldp}, AccDiv^r_1,...,AccDiv^r_{N-1})$",
+      "server evaluates contributions of each client and eliminates those whose evaluation value is less than a threshold"
+    ]
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/JIOT.2023.3288936",
+  "id": "wang2023pass",
+  "bibtex": "@ARTICLE{wang2023pass, author={Wang, Jianhua and Chang, Xiaolin and Mišić, Jelena and Mišić, Vojislav B. and Wang, Yixiang}, journal={IEEE Internet of Things Journal},  title={PASS: A Parameter Audit-Based Secure and Fair Federated Learning Scheme Against Free-Rider Attack},  year={2024}, volume={11}, number={1}, pages={1374-1384}, keywords={Servers;Internet of Things;Training;Data privacy;Computational modeling;Federated learning;Data models;Federated learning (FL);free-rider (FR) attack;Internet of Things (IoT);privacy preserving}, doi={10.1109/JIOT.2023.3288936}}"
+}

@@ -1,0 +1,63 @@
+{
+  "title": "Federated Learning for Task and Resource Allocation in Wireless High Altitude Balloon Networks",
+  "authors": [
+    "Sihua Wang",
+    "Mingzhe Chen",
+    "Changchuan Yin",
+    "Walid Saad",
+    "Choong Seon Hong",
+    "Shuguang Cui",
+    "H. Vincent Poor"
+  ],
+  "type": "technical",
+  "year": "2020-03",
+  "labels": [
+    "federated learning",
+    "resource allocation"
+  ],
+  "summaries": [
+    "in a HAB network, propose __a user association and a task allocation schemes__ to enable FL in each association to reduce [1] energy consumption and [2] time consumption in comparison to [1] a conventional centralized method",
+    "HABs of the proposed FL framework collaboratively train a SVM model to predict user associations, and subsequently optimize the service sequence and task allocation to minimize the weighted sum of energy consumption and time consumption"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "a set $\\mathcal{N}$ of $N$ HABs",
+      "a set $\\mathcal{M}$ of $M$ users (users offload computational tasks to HABs, while HABs transmit the results to users)"
+    ],
+    "the objective is to minimize the weighted sum of time consumption and energy consumption [see 1. Problem Formulation]",
+    "HABs collaboratively train a SVM model to predict the optimal user association [see 2. FL for User association]",
+    "after user association is determined, the service sequence and task allocation will be determined [see 3. Service Sequence and Task Allocation]"
+  ],
+  "questions": [
+    "the problem of minimizing energy and time consumption for task computation and transmission is studied in a mobile edge computing (MEC)-enabled balloon network"
+  ],
+  "techniques": [
+    "1. Problem Formulation",
+    [
+      "$\\begin{array}{ll} \\underset{\\bm{A}_t,\\bm{Q}_t,\\bm{\\beta}_t}{\\operatorname{min}} & \\sum\\limits_{t=1}^T\\sum\\limits_{m=1}^M \\left(\\gamma_E e_{m,t} + \\gamma_T t_{m,t}\\right)\\\\ \\text { s.t. } & a_{mn,t}\\in\\{0,1\\},\\quad\\forall n\\in\\mathcal{N},\\forall m\\in\\mathcal{M} \\\\& \\sum\\limits_{n\\in\\mathcal{N}} a_{mn,t} \\leq 1,\\quad\\forall m\\in\\mathcal{M} \\\\& 1\\leq q_{mn,t}\\leq|\\bm{a}_{n,t}|, q_{mn,t}\\in\\mathbb{Z}^+,\\quad\\forall n\\in\\mathcal{N},\\forall m\\in\\mathcal{M}\\\\& q_{mn,t}\\neq q_{m'n,t},\\quad\\forall m\\neq m' \\forall n\\in\\mathcal{N},\\forall m,m'\\in\\mathcal{M}\\\\& 0 \\leq \\beta_{mn,t} \\leq 1, \\quad \\forall m \\in \\mathcal{M}, \\forall n \\in \\mathcal{N} \\\\& \\sum\\limits_{m=1} e_{n,t} (\\beta_{mn,t},a_{mn,t})\\leq E_t, \\quad \\forall n\\in\\mathcal{N}\\end{array}$",
+      [
+        "$\\bm{A}_t=[\\bm{a}_{1,t},...,\\bm{a}_{N,t}]=[(a_{11,t},...,a_{M1,t}),...,(a_{1N,t},...,a_{MN,t})]$: association matrix, $a_{mn,t}$ is the index of the user association with $a_{mn,t}= 1$  indicating that user $m$ connects to HAB $n$ at time instant $t$",
+        "$\\bm{Q}_t=[\\bm{q}_{1,t},...,\\bm{q}_{N,t}]=[(q_{11,t},...,q_{M1,t}),...,(q_{1N,t},...,q_{MN,t})]$: service sequence",
+        "$\\bm{\\beta}_t=[\\bm{\\beta}_{1,t},...,\\bm{\\beta}_{N,t}]=[(\\beta_{11,t},...,\\beta_{M1,t}),...,(\\beta_{1N,t},...,\\beta_{MN,t})]$: task division parameter"
+      ]
+    ],
+    "2. FL for User association",
+    [
+      "the SVM model is represented by a vector $w_{mn}$ (to approximate the prediction function between input $x_{m,t}$ and output $a_{mn,t+1}$) and a matrix $\\Omega_m\\in\\mathbb{R}^{N\\times N}$ (to measure the difference between the SVM by $n$ and other HABs)",
+      "1) $\\bm{W}_m$ training stage: HAB $n$ updates $w_{mn}$ based on the local dataset and last iteration $\\Omega_{m}$",
+      "2) $\\Omega_m$ training stage: HAB $n$ transmits $w_{mn}$ to other HABs and generate $\\bm{W}_m$"
+    ],
+    "3. Service Sequence and Task Allocation",
+    [
+      "original problem can be transformed to a linear and convex problem",
+      "$\\begin{array}{ll} \\underset{\\bm{q}_{n,t},\\bm{\\beta}_{n,t}}{\\operatorname{min}} & \\sum\\limits_{t=1}^T\\sum\\limits_{n=1}^N\\sum\\limits_{m=1}^{|a_n|} \\left(\\gamma_E e_{m,t} + \\gamma_T (|a_n|-q_{mn,t}+1) l_{mn,t}(\\beta_{mn,t})\\right)\\\\ \\text { s.t. } & 0 \\leq \\beta_{mn,t} \\leq 1, \\quad \\forall m \\in \\mathcal{M}, \\forall n \\in \\mathcal{N} \\\\& \\sum\\limits_{m=1} e_{n,t} (\\beta_{mn,t})\\leq E_t, \\quad \\forall n\\in\\mathcal{N}\\end{array}$"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JIOT.2021.3080078",
+  "id": "wang2021federated",
+  "bibtex": "@article{wang2021federated, title={Federated learning for task and resource allocation in wireless high-altitude balloon networks}, author={Wang, Sihua and Chen, Mingzhe and Yin, Changchuan and Saad, Walid and Hong, Choong Seon and Cui, Shuguang and Poor, H Vincent}, journal={IEEE Internet of Things Journal}, volume={8}, number={24}, pages={17460--17475}, year={2021}, publisher={IEEE}}"
+}

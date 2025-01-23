@@ -1,0 +1,29 @@
+{
+  "title": "SAFA: A Semi-Asynchronous Protocol for Fast Federated Learning With Low Overhead",
+  "authors": [
+    "Wentai Wu",
+    "Ligang He",
+    "Weiwei Lin",
+    "Rui Mao",
+    "Carsten Maple",
+    "Stephen Jarvis"
+  ],
+  "type": "technical",
+  "year": "2019-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "client selection",
+    "convergence rate"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose __[1] lag-tolerant global model distribution to tolerate outdated local models__, __[2] post-training client selection to select $C$ fraction of less-involved clients__, and __[3] discriminative global aggregation__ as clients are classified into [1] picked [2] undrafted [3] crashed to address low round efficiency and poor convergence rate problems in extreme conditions (e.g. clients dropping offline frequently)"
+  ],
+  "systemModel": [],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/TC.2020.2994391",
+  "id": "wu2020safa",
+  "bibtex": "@article{wu2020safa, title={SAFA: A semi-asynchronous protocol for fast federated learning with low overhead}, author={Wu, Wentai and He, Ligang and Lin, Weiwei and Mao, Rui and Maple, Carsten and Jarvis, Stephen}, journal={IEEE Transactions on Computers}, volume={70}, number={5}, pages={655--668}, year={2020}, publisher={IEEE}}"
+}

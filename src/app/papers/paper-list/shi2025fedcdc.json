@@ -1,0 +1,43 @@
+{
+  "title": "FedCDC: A Collaborative Framework for Data Consumers in Federated Learning Market (Review for FL@FM-TheWebConf)",
+  "authors": [
+    "Zhuan Shi",
+    "Patrick Ohl",
+    "Boi Faltings"
+  ],
+  "type": "technical",
+  "year": "2025-01",
+  "labels": [
+    "federated learning",
+    "reward"
+  ],
+  "summaries": [
+    "in the conventional FL framework, use __ensemble distillation to fuse heterogeneous models__ to enable data consumers to share data owners"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "Data Consumers $\\{C_1,...,C_m\\}$",
+      [
+        "$C_i=(M_i,L_i,D_{V_i})$",
+        [
+          "$M_i$: model",
+          "$L_i$: classes",
+          "$D_{V_i}$: target domain of $C_i$"
+        ]
+      ],
+      "Data Owners $\\{O_1,...,O_n\\}$",
+      [
+        "$D_n$: training set owned by $n$"
+      ],
+      "$1$ FL platform",
+      [
+        "performs DO-DC matching and payment determination mechanism"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "",
+  "id": "shi2025fedcdc",
+  "bibtex": ""
+}
