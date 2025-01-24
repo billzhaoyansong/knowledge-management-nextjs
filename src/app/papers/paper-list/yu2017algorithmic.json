@@ -1,0 +1,79 @@
+{
+    "title": "Algorithmic Management for Improving Collective Productivity in Crowdsourcing (SMVM)",
+    "authors": [
+        "Han Yu",
+        "Chunyan Miao",
+        "Yiqiang Chen",
+        "Simon Fauvel",
+        "Xiaoming Li",
+        "Victor R. Lesser"
+    ],
+    "type": "technical",
+    "year": "2017-03",
+    "labels": [
+        "crowdsourcing",
+        "reputation",
+        "Lyapunov"
+    ],
+    "summaries": [
+        "in the crowdsourcing scenario, propose __task allocation algorithms__ by maximizing the difference of utility (assign tasks to higher reputable workers) and surprise (Surprise Minimization & Value Maximization, SMVM)"
+    ],
+    "systemModel": [
+        "distribute new tasks to $N$ workers aiming to maximize the social welfare while reducing systematic changes [see 1. Content-Aware Optimization for Task Allocation]",
+        "in the centralized crowdsourcing system, $Q(t)$ tasks are allocated to workers one by one [see 2. Centralized SMVM Algorithm]",
+        "in the distributed crowdsourcing system, individual worker $w$ is advised to accept the number of new tasks [see 3. Distributed SVM Algorithm]"
+    ],
+    "questions": [
+        "Maximizing social welfare in crowdsourcing system is known to be NP-hard"
+    ],
+    "techniques": [
+        "Content-Aware Optimization for Task Allocation<ol>",
+        [
+            "$\\sigma\\mathbb{E}\\{U(t)\\}-\\Delta(\\bm{q}(t))$",
+            [
+                "$\\sigma$: motivation to work",
+                "$U(t)=\\sum\\limits_{w=1}^N r_w(t) a_w(t)$",
+                [
+                    "$r_w(t)\\in [0,1]$: reputation",
+                    "$a_w(t)$: number of new tasks"
+                ],
+                "$q_w(t+1)=\\max[0, q_w(t) + a_w(t) - c_w(t)]$: pending task queue",
+                [
+                    "$c_w(t)$: number of completed tasks"
+                ]
+            ],
+            "By considering only the terms containing the solution variables $a_w(t)$ for all workers",
+            "$\\begin{array}{ll} \\underset{a_w(t)}{\\operatorname{max}} &  \\frac{1}{T}\\sum\\limits_{t=0}^{T-1}\\sum\\limits_{w=1}^N a_w(t) [\\sigma_w(t) r_w(t) - q_w(t)] \\\\ \\text { s.t. } & r_w(t) \\geq r_{\\min}, \\quad \\forall w,\\forall t \\\\& a_w(t) \\leq nc_w^{\\max}, \\quad \\forall w,\\forall t\\end{array}$",
+            [
+                "$\\sigma_w(t)$: motivation to work",
+                "$n$: coefficient",
+                "$c_w^{\\max}$: physical upper limits on completed tasks"
+            ]
+        ],
+        "Centralized SMVM Algorithm",
+        [
+            "process 1): sort all workers in descending order of $\\Phi_w(t)=\\sigma_w(t)r_w(t)-q_w(t)$",
+            "process 2): iterate over all workers, if $\\Phi_w(t) >0 \\land r_w(t)\\geq r_{\\min}$, then",
+            [
+                "$a_w(t)=\\begin{cases}Q(t),& \\text{if } Q(t)<\\bar{d} c_w^{\\max}-q_w(t) \\\\ \\max[0,\\lfloor \\bar{d} c_w^{\\max}-q_w(t) \\rfloor], & \\text{otherwise}\\end{cases}$",
+                [
+                    "$\\bar{d}$: average deadline for new requests"
+                ]
+            ]
+        ],
+        "Distributed SMVM Algorithm",
+        [
+            "process 1): compute  $\\Phi_w(t)$ for current worker",
+            "process 2): if $\\Phi_w(t) >0$, then",
+            [
+                "$a_w(t)=\\begin{cases}Q(t),& \\text{if } Q(t)<\\bar{d}_w c_w^{\\max}-q_w(t) \\\\ \\max[0,\\lfloor \\bar{d}_w c_w^{\\max}-q_w(t) \\rfloor], & \\text{otherwise}\\end{cases}$"
+            ]
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [],
+    "comments": [],
+    "doi": "10.1038/s41598-017-12757-x",
+    "id": "yu2017algorithmic",
+    "bibtex": "@article{yu2017algorithmic, title={Algorithmic management for improving collective productivity in crowdsourcing}, author={Yu, Han and Miao, Chunyan and Chen, Yiqiang and Fauvel, Simon and Li, Xiaoming and Lesser, Victor R}, journal={Scientific reports}, volume={7}, number={1}, pages={12541}, year={2017}, publisher={Nature Publishing Group UK London}}"
+}

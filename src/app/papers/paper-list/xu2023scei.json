@@ -1,0 +1,86 @@
+{
+  "title": "SCEI: A Smart-Contract Driven Edge Intelligence Framework for IoT Systems",
+  "authors": [
+    "Chenhao Xu",
+    "Jiaqi Ge",
+    "Yong Li",
+    "Yao Deng",
+    "Longxiang Gao",
+    "Mengshi Zhang",
+    "Yong Xiang",
+    "Xi Zheng"
+  ],
+  "type": "technical",
+  "year": "2023-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "smart contract",
+    "blockchain",
+    "personalization",
+    "security"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose a smart-contract based mechanism to __[1] elect a committee from edge nodes for aggregation and verification__, __[2] ensure integrity of models by a shared ledger__, __[3] reach personalization by mixing global model and local model__"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "$1$ shared ledger",
+      "$K$ edge nodes",
+      [
+        "a fraction ($\\gamma$) of nodes will be selected as committee members denoted as  $\\{N_1,...\\}$",
+        "a leader of this committee is denoted as $N_0$"
+      ]
+    ],
+    "Process",
+    [
+      "initialization steps<ol>",
+      [
+        "an initial global model $w_G^0$ is trained on a committee member <ol>",
+        "the hash value of the initial global model $H(w_G^0)$ AND its download address $Addr(w_G^0)$ are uploaded to the shared ledger"
+      ],
+      "training round steps",
+      [
+        "all nodes retrieve the base model $w_G^{t-1}$ from the shared ledger and trains with local data <ol>",
+        "all nodes upload the trained local model $w_k^{t}$ to a randomly selected committee member, and replicated to all committee members for future verification",
+        "$N_0$ does model aggregation $w_G^{t}$ and shares new model to the ledger",
+        "all nodes integrate the global model with local model with the help of smart contract to reach personalization [see Personalization]"
+      ]
+    ]
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    "Personalization",
+    [
+      "personalized model $w_{kp}^t$ is achieved by combining local model $w_k^t$ and global model $w_G^t$",
+      [
+        "$w_{kp}^t=\\alpha \\times w_k^t + (1 - \\alpha) \\times w_G^t$",
+        [
+          "$\\alpha$ is assigned ubiquitously and determined by negotiation process written in the smart contract"
+        ]
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/TMC.2023.3290925",
+  "id": "xu2023scei",
+  "bibtex": "@article{xu2023scei, title={Scei: A smart-contract driven edge intelligence framework for iot systems}, author={Xu, Chenhao and Ge, Jiaqi and Li, Yong and Deng, Yao and Gao, Longxiang and Zhang, Mengshi and Xiang, Yong and Zheng, Xi}, journal={IEEE Transactions on Mobile Computing}, year={2023}, publisher={IEEE}}"
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Asynchronous Federated Learning with Incentive Mechanism Based on Contract Theory",
+  "authors": [
+    "Danni Yang",
+    "Yun Ji",
+    "Zhoubin Kou",
+    "Xiaoxiong Zhong",
+    "Sheng Zhang"
+  ],
+  "type": "technical",
+  "year": "2024-04",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "contract theory",
+    "reward"
+  ],
+  "abstract": "To address the challenges posed by the heterogeneity inherent in federated learning (FL) and to attract high-quality clients, various incentive mechanisms have been employed. However, existing incentive mechanisms are typically utilized in conventional synchronous aggregation, resulting in significant straggler issues. In this study, we propose a novel asynchronous FL framework that integrates an incentive mechanism based on contract theory. Within the incentive mechanism, we strive to maximize the utility of the task publisher by adaptively adjusting clients' local model training epochs, taking into account time delay and test accuracy. In the asynchronous scheme, considering client quality, we devise aggregation weights and an access control algorithm to facilitate asynchronous aggregation. Through experiments conducted on the MNIST dataset, our framework achieved a test accuracy that is 3.12% and 5.84% higher than the accuracy achieved by FedAvg and FedProx without any attacks, respectively. Under attacks, the framework exhibits a 1.35% accuracy improvement over the ideal Local SGD. Furthermore, aiming for the same target accuracy, our framework demands notably less computation time than both FedAvg and FedProx.",
+  "summaries": [
+    "in the conventional FL framework, propose __a contract theory-based rewarding mechanism to favor clients with higher data quality and shorter training time__ under the asynchronous setting"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "$1$ task publisher",
+      "$1$ parameter server (PS)",
+      "a set of $\\mathcal{K}=\\{1,...,K\\}$ clients/devices",
+      [
+        "local dataset $\\mathcal{D}_k=\\{(x_{k,1},y_{k,1}),...,(x_{k,D_k},y_{k,D_k})\\}$", "$|\\mathcal{D}_k|=d_k$"
+      ]
+    ],
+    "process:",
+    [
+      "clients are divided into $N$ levels based on data quality [see 1. Data Quality]<ol>",
+      "the PS published all contracts to clients, and clients sign the corresponding contract based on their owne data quality level",
+      "repeating following processes",
+      [
+        "the PS sends global model to clients,clients train their own local models<ol>",
+        "A client that is ready to upload the model in this round performs local model transmission",
+        "The PS calls the access control algorithm to decide the access decisions and the aggregating weights"
+      ],
+      "PS pays clients corresponding rewards according to the contracts while considering the principle of nonpayment and backward compatibility",
+      "The PS returns the trained global model to the task publisher"
+    ]
+  ],
+  "techniques": [
+    "Data Quality<ol>",[
+      "$\\theta_k=1-\\gamma_1\\exp(-\\gamma_2(d_k-\\gamma_3 s_k)^{\\gamma_4})$"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/WCNC57260.2024.10571297",
+  "id": "yang2024asynchronous",
+  "bibtex": "@inproceedings{yang2024asynchronous, title={Asynchronous federated learning with incentive mechanism based on contract theory}, author={Yang, Danni and Ji, Yun and Kou, Zhoubin and Zhong, Xiaoxiong and Zhang, Sheng}, booktitle={2024 IEEE Wireless Communications and Networking Conference (WCNC)}, pages={1--6}, year={2024}, organization={IEEE}}"
+}

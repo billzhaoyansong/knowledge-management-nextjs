@@ -1,0 +1,80 @@
+{
+    "title": "A Sustainable Incentive Scheme for Federated Learning (FLI)",
+    "authors": [
+        "Han Yu",
+        "Zelei Liu",
+        "Yang Liu",
+        "Tianjian Chen",
+        "Mingshu Cong",
+        "Xi Weng",
+        "Dusit Niyato",
+        "Qiang Yang"
+    ],
+    "type": "technical",
+    "year": "2020-07",
+    "labels": [
+        "federated learning",
+        "reward",
+        "fairness"
+    ],
+    "summaries": [
+        "in the conventional FL framework, propose __a rewarding mechanism aiming to maximize fairness__ when the budget is dynamically divided among different global rounds due to delays in commercialization of models",
+        "fairness considers round contributions, fluctuation in temporal and physical regrets, and difference in regrets (in plain English, it means to distribute budget considering contributions and don't let some of the participants not have profit for a long time)"
+    ],
+    "systemModel": [
+        "at the round $t$, divide the budget $B(t)$ to participants [see 1. Dynamics] aiming to maximize fairness [see 2. Fairness] [see 3. Budget Payout Model] [see 4. Solution and Algorithm]"
+    ],
+    "questions": [
+        "The training and commercialization of the models will take time. Thus, there will be some delays before the federation has enough budget to pay back the participants."
+    ],
+    "techniques": [
+        "Dynamics<ol>",
+        [
+            "$Y_i(t+1)\\triangleq \\max[Y_i(t)+c_i(t)-u_i(t), 0]$: regret",
+            "$Q_i(t+1)\\triangleq \\max[Q_i(t)+\\lambda_i(t)-u_i(t), 0]$: temporal regret",
+            [
+                "$c_i(t)$: cost",
+                "$u_i(t)$: payoff",
+                "$\\lambda_i(t)=\\begin{cases}\\hat{c}_i,& \\text{if } Y_i(t)>0, \\\\ 0, &\\text{otherwise} \\end{cases}$",
+                [
+                    "$\\hat{c}_i$: average cost"
+                ]
+            ]
+        ],
+        "Fairness",
+        [
+            "1) contribution fairness",
+            [
+                "$U=\\frac{1}{T}\\sum_{t=0}^{T-1}\\sum_{i=1}^N \\left\\{q_i(t) u_i(t)\\right\\}$"
+            ],
+            "2) regret distribution fairness (difference of regret and temporal regret shall be minimized) & expectation fairness (less fluctuation)",
+            [
+                "$\\begin{array}{ll}\\Delta&=\\frac{1}{T}\\sum_{t=0}^{T-1}\\sum_{i=1}^N \\left[ \\frac{1}{2}Y_i^2(t+1)-\\frac{1}{2}Y_i^2(t) +\\frac{1}{2}Q_i^2(t+1)-\\frac{1}{2}Q_i^2(t) \\right] \\\\ &\\leq \\frac{1}{T}\\sum_{t=0}^{T-1}\\sum_{i=1}^N\\{u_i^2(t)-u_i(t) [Y_i(t)+c_i(t)+Q_i(t)+\\lambda_i(t)]\\}\\end{array}$"
+            ]
+        ],
+        "Budget Payout Model",
+        [
+            "$\\omega U-\\Delta$",
+            "$\\begin{array}{ll} \\underset{a_w(t)}{\\operatorname{max}} &  \\frac{1}{T}\\sum_{t=0}^{T-1}\\sum_{i=1}^N\\{u_i(t)[\\omega q_i(t)+Y_i(t)+c_i(t)+Q_i(t)+\\lambda_i(t)]-u_i^2(t)\\} \\\\ \\text { s.t. } & \\sum_{i=1}^N \\hat{u}_i(t) \\leq B(t), \\quad \\forall t \\\\& \\hat{u}_i(t)=\\frac{u_i(t)}{\\sum_{i=1}^N u_i(t)}B(t)\\geq0, \\quad \\forall i,t\\end{array}$"
+        ],
+        "4. Solution and Algorithm",
+        [
+            "take the first-order derivative of the objective function:",
+            [
+                "$u_i(t)=\\frac{1}{2}[\\omega q_i(t)+Y_i(t)+c_i(t)+Q_i(t)+\\lambda_i(t)]$"
+            ],
+            "the real payout",
+            [
+                "$\\hat{u}_i(t)=\\frac{u_i(t)}{\\sum_{i=1}^N u_i(t)}B(t)$"
+            ]
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [
+        "extend the fairness criteria being considered to include the likes of proportional fairness for instance"
+    ],
+    "comments": [],
+    "doi": "10.1109/MIS.2020.2987774",
+    "id": "yu2020sustainable",
+    "bibtex": "@article{yu2020sustainable,title={A sustainable incentive scheme for federated learning},author={Yu, Han and Liu, Zelei and Liu, Yang and Chen, Tianjian and Cong, Mingshu and Weng, Xi and Niyato, Dusit and Yang, Qiang},journal={IEEE Intelligent Systems},volume={35},number={4}, pages={58--69}, year={2020}, publisher={IEEE}}"
+}

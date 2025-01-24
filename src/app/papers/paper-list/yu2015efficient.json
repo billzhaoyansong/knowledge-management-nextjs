@@ -1,0 +1,92 @@
+{
+    "title": "Efficient Task Sub-Delegation for Crowdsourcing (RTS)",
+    "authors": [
+        "Han Yu",
+        "Chunyan Miao",
+        "Zhiqi Shen",
+        "Cyril Leung",
+        "Yiqiang Chen",
+        "Qiang Yang"
+    ],
+    "type": "technical",
+    "year": "2015",
+    "labels": [
+        "crowdsourcing",
+        "reputation",
+        "Lyapunov",
+        "social welfare"
+    ],
+    "summaries": [
+        "in the crowdsourcing scenario, propose an approach to help crowdsourcing workers decide __1) when and who to sub-delegate pending workload__ and __2) the amount of new workload to accept__, achieving [1] higher social welfare and [2] lower task expiry rate, compard to [1] Equality-based Approach [2] Reputation-based Approach [3] Global Considerations [4] DRAFT Approach",
+        "prove that the social welfare would be achieved by following the reputation-aware task sub-delegation (RTS)",
+        "sub-delegation decision is made to minimize the sum of drift and subdelegation cost",
+        "task acceptance decision is made to maximize the difference of profit and drift"
+    ],
+    "systemModel": [
+        "$N$ workers in a crowdsourcing platform aiming to maximize the social welfare [see 1. Social Welfare]",
+        "a worker $i$ has a physical task queue $q_i(t)$ and a virtual task queue $Q_i(t)$ [see 2. Queue Dynamics]",
+        "sub-delegation decision is made to minimize the sum of drift and subdelegation cost [see 3. Subdelegation]",
+        "task acceptance decision is made to maximize the difference of profit and drift [see 4. Task Acceptance]"
+    ],
+    "questions": [
+        "help workers decide when and to whom to sub-delegate tasks"
+    ],
+    "techniques": [
+        "1. Social Welfare",
+        [
+            "$\\lim\\limits_{T \\to \\infty} \\frac{1}{T} \\sum\\limits_{t=0}^{T-1}\\sum\\limits_{i=1}^{N}\\xi_i(t)$",
+            [
+                "$\\xi_i(t)=\\sum_{\\tau_j} u(\\tau_j)$",
+                [
+                    "$u(\\tau_j)=\\begin{cases}\\tau_j p_i(t),& \\text{complete on time with quality} \\\\ 0, &\\text{otherwise}\\end{cases}$",
+                    [
+                        "$p_i(t)$: price charged by worker $i$, measured by dollars per effort unit",
+                        "$\\tau_j$: a task in agent $i$'s pending task queue"
+                    ]
+                ]
+            ]
+        ],
+        "2. Queue Dynamics",
+        [
+            "physical queue: $q_i(t+1)=\\max[0, q_i(t) + \\lambda_i(t) - \\mu_i(t)-s_i(t)]$",
+            "virtual queue: $Q_i(t+1)=\\max[0, Q_i(t) + \\bar{\\lambda}_i \\bm{1}_{[q_i(t)>0]} - \\mu_i(t)-s_i(t)]$",
+            [
+                "$\\lambda_i(t)$: new workload in the duration of $t-1$ to $t$",
+                "$\\mu_i(t)$: completed workload in the duration of $t-1$ to $t$",
+                "$s_i(t)$: subdelegated workload in the duration of $t-1$ to $t$",
+                "$\\bar{\\lambda}_i$: average workload"
+            ]
+        ],
+        "3. Subdelegation",
+        [
+            "$\\Delta \\left( X_i(t) \\right) + \\rho_i \\mathbb{E}\\{\\varphi_i(t)s_i(t)\\}$, after elimination:",
+            "$\\begin{array}{ll} \\underset{s_i(t)}{\\operatorname{min}} &  s_i(t)[\\rho_i\\varphi_i(t)-q_i(t)-Q_i(t)] \\\\ \\text { s.t. } & 0\\leq s_i(t) \\leq q_i(t) \\\\& n_i^{sub}\\neq \\{\\emptyset \\} \\\\& \\exists k \\in n_i^{sub} \\land \\tau_j \\in q_i(t) : r_k(t)\\leq Th \\land p_k(t) \\leq p_{\\tau_j}\\end{array}$",
+            [
+                "$\\rho_i$: eagerness to work",
+                "$\\varphi_i=\\frac{1}{|n_i^{sub}|}\\sum_{j=1}^{n_i^{sub}} p_j(t)$: average price charged by trustee agents",
+                "$p_k(t)$: price charged by trustee agent $k$",
+                "$Th$: reputation threshold"
+            ],
+            "the solution: $\\hat{s}_i(t)=\\begin{cases}0,& \\text{if } \\rho_i\\varphi_i(t)-q_i(t)-Q_i(t)\\geq 0 \\\\ q_i(t)-\\mu_i(t), & \\text{otherwise}\\end{cases}$",
+            [
+                "interpretation: [1] high eagerness -> less workload -> all tasks to complete by himself",
+                "interpretation: [2] low eagerness -> more workload -> all tasks to subdelegate to trustee agents"
+            ]
+        ],
+        "4. Task Acceptance",
+        [
+            "$\\rho_i \\mathbb{E}\\{\\xi_i(t)\\}-\\Delta(X_i(t))$, after elimination:",
+            "$\\begin{array}{ll} \\underset{\\lambda_i(t)}{\\operatorname{max}} &  \\lambda_i(t)[\\rho_i p_i(t) r_i(t)-q_i(t)] \\\\ \\text { s.t. } & \\lambda_i(t) \\leq A_i(t) \\end{array}$",
+            [
+                "$A_i(t)$: amount of new workload other agents attempt to delegate or sub-delegate"
+            ],
+            "the solution: $\\hat{\\lambda}_i(t)=\\begin{cases}0,& \\text{if } \\rho_i p_i(t) r_i(t)-q_i(t)\\leq 0 \\\\ \\text{as much as possible}, & \\text{otherwise}\\end{cases}$"
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [],
+    "comments": [],
+    "doi": "10.1609/aaai.v29i1.9337",
+    "id": "yu2015efficient",
+    "bibtex": "@inproceedings{yu2015efficient, title={Efficient task sub-delegation for crowdsourcing}, author={Yu, Han and Miao, Chunyan and Shen, Zhiqi and Leung, Cyril and Chen, Yiqiang and Yang, Qiang}, booktitle={Proceedings of the AAAI Conference on Artificial Intelligence}, volume={29}, number={1}, year={2015}}"
+}

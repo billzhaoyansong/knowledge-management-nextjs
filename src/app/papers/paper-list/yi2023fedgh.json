@@ -1,0 +1,59 @@
+{
+    "title": "FedGH: Heterogeneous Federated Learning with Generalized Global Header",
+    "authors": [
+        "Liping Yi",
+        "Gang Wang",
+        "Xiaoguang Liu",
+        "Zhuan Shi",
+        "Han Yu"
+    ],
+    "type": "technical",
+    "year": "2023-03",
+    "labels": [
+        "federated learning",
+        "data heterogeneity"
+    ],
+    "summaries": [
+        "in the conventional FL framework, __[1] split local models into heterogeneous feature extractors and homogeneous prediction header__ and __[2] the the homogeneous prediction header is trained on server and shared among all clients__ to address system & data heterogeneity in clients"
+    ],
+    "systemModel": [
+        "$1$ server, $N$ clients",
+        "local models are split into heterogeneous feature extractors and homogeneous prediction header [see 1. Local Model]",
+        "process 1): server sends global header to randomly selected $K\\leq N$ clients to facilitate local training [see 2. Local Training]",
+        "process 2): server trains global header after receiving uploaded representations from clients [see 3. Global Training]",
+        "process 1) & 2) terminates until all local model converge"
+    ],
+    "questions": [
+        "enable clients to train heterogeneous models under system and data heterogeneity"
+    ],
+    "techniques": [
+        "1. Local Model",
+        [
+            "$f(\\omega_k)=\\mathscr{F}_k(\\varphi_k) \\circ \\mathscr{H} (\\theta)$",
+            [
+                "$\\omega_k$: heterogeneous local model",
+                "$\\varphi_k$: heterogeneous representation embedding",
+                "$\\theta$: shared homogeneous prediction header",
+                "$\\mathscr{F}_k(\\varphi_k): \\mathbb{R}^{d_x} \\to \\mathbb{R}^{d_{R}}$: feature extractor",
+                "$\\mathscr{H} (\\theta): \\mathbb{R}^{d_R} \\to \\mathbb{R}^{d_y}$: prediction header"
+            ]
+        ],
+        "2. Local Training",
+        [
+            "1. update local model: $\\tilde{\\omega}_k^t=\\varphi_k^{t-1} \\circ \\theta^{t-1}$",
+            "2. perform local training: $\\omega_k^t \\gets \\tilde{\\omega}_k^t - \\eta_{\\omega} \\nabla l \\left(\\tilde{\\omega}_k^t; D_k\\right)$",
+            "3. calculate the representation $\\mathscr{R}_{k,i}^t$ for each sample $i\\in D_k$",
+            "4. average representation for each class $\\bar{\\mathscr{R}}_{k}^{t,s}=\\frac{1}{|D_k^s|}\\sum_{i\\in D_k^s} \\mathscr{R}_{k,i}^t$ and upload to server"
+        ],
+        "3. Global Training",
+        [
+            "$\\theta^t \\gets \\theta^{t-1} - \\eta_{\\theta} \\nabla l\\left(\\theta^{t-1};\\bar{\\mathscr{R}}_{k}^{t,s}, s\\right)$"
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [],
+    "comments": [],
+    "doi": "10.1145/3581783.3611781",
+    "id": "yi2023fedgh",
+    "bibtex": "@article{yi2023fedgh, title={FedGH: Heterogeneous Federated Learning with Generalized Global Header}, author={Yi, Liping and Wang, Gang and Liu, Xiaoguang and Shi, Zhuan and Yu, Han},  journal={arXiv preprint arXiv:2303.13137}, year={2023}}"
+}

@@ -1,0 +1,96 @@
+{
+  "title": "A Reputation Mechanism Is All You Need: Collaborative Fairness and Adversarial Robustness in Federated Learning (RFFL)",
+  "authors": [
+    "Xinyi Xu",
+    "Lingjuan Lyu"
+  ],
+  "type": "technical",
+  "year": "2020-11",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "client selection",
+    "reward",
+    "robustness",
+    "fairness",
+    "aggregation"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose __[1] reputation threshold-based client selection__, __[2] reputation-based secure model aggregation__, and __[3] reputation-based fair model rewarding mechanism__, achieving [1] fairness [2] Robustness (counter-attacks),  compared to [1] FedAvg [2] q-FFL [3] CFFL",
+    "reputation is calculated based on the similarity between the local model and global model"
+  ],
+  "systemModel": [
+    "$1$ server and $N$ clients",
+    "process 1: server sends different models to different clients [see 1. incentive mechanism]",
+    "process 2: clients do local training",
+    "process 3: server selects clients [see 2. client selection] and conducts global aggregation [see 3. model aggregation]",
+    "process 4: clients' reputations are updated [see 4. reputation]"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "fairness"
+    ],
+    [
+      "FL",
+      "security"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "reputation"
+    ]
+  ],
+  "motivation": [
+    "Most existing FL paradigms (McMahan et al., 2017; Kairouz et al., 2019; Yang et al., 2019a; Li et al., 2020a) allow all participants to receive the same model in the end regardless of their contributions (by their uploaded parameters/gradients).",
+    "This may lead to an unfair outcome as the participants who contribute the most are rewarded equally with the ones who contribute nothing.",
+    "In practice, there may be a number of reasons for why the contributions differ, one reason is the divergence in the quality of the local data of different participants (Zhao et al., 2019).",
+    "(Yang et al., 2019b) presented a motivating example for collaborative fairness: larger banks (for fear of not being compensated fairly) may refuse to collaborate with smaller banks who have smaller client base and thus less high-quality data.",
+    "In terms of adversarial robustness, the conventional FL framework (McMahan et al., 2017) is potentially vulnerable to adversaries and free-riders as it does not offer any safeguard mechanisms."
+  ],
+  "questions": [
+    "most existing FL or distributed learning frameworks have not well addressed two important issues together: collaborative fairness and adversarial robustness"
+  ],
+  "techniques": [
+    "incentive mechanism<ol>",
+    [
+      "$\\Delta w_{*i}^{(t)} = \\text{sparsify}(\\Delta w_g^{(t)},\\text{quota}_i)-r_i^{(t-1)}\\Delta w_i^{(t)}$",
+      [
+        "$\\Delta w_{*i}^{(t)}$: gradient for $i$ to download",
+        "$\\text{quota}_i = D\\times \\frac{r_i^{(t)}}{\\max_j r_j^{(t)}}$: the number of parameters to be downloaded and determined by the relative reputation",
+        [
+          "$\\frac{r_i^{(t)}}{\\max_j r_j^{(t)}}$: aforementioned relative reputation"
+        ]
+      ]
+    ],
+    "client selection",
+    [
+      "$R:=\\{i |r_i^{(t)}\\geq\\beta\\}$: a set of reputable participants",
+      [
+        "$\\beta$: reputation threshold, hyperparameter"
+      ]
+    ],
+    "model aggregation",
+    [
+      "$\\Delta w_g^{(t)} = \\sum_{i\\in R} \\left( r_i^{(t-1)}\\Delta w_i^{(t)}\\times \\frac{\\gamma}{\\Vert \\Delta w_i^{(t)}\\Vert}\\right)$",
+      [
+        "$\\Delta w_g^{(t)}$: aggregated global gradient at time $t$",
+        "$\\Delta w_i^{(t)}$: uploaded gradient by participant $i$ at time $t$",
+        "$\\gamma$: gradient normalization coefficient, hyperparameter"
+      ]
+    ],
+    "reputation",
+    [
+      "$r_i^{(t)} = \\alpha r_i^{(t-1)} + (1-\\alpha)\\tilde{r}_i^{(t)}$",
+      [
+        "$r_i^{(t)}$: accumulated reputation",
+        "$\\tilde{r}_i^{(t)}=\\cos(\\Delta w_g^{(t)},\\Delta w_i^{(t)})$: similarity between global gradient and local gradient",
+        "$\\alpha$: moving average coefficient, hyperparameter"
+      ]
+    ]
+  ],
+  "doi": "arXiv:2011.10464",
+  "id": "xu2020reputation",
+  "bibtex": "@article{xu2020reputation, title={A reputation mechanism is all you need: Collaborative fairness and adversarial robustness in federated learning}, author={Xu, Xinyi and Lyu, Lingjuan}, journal={arXiv preprint arXiv:2011.10464}, year={2020}}"
+}

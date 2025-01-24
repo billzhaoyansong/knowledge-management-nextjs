@@ -1,0 +1,59 @@
+{
+    "title": "CMAB-based Reverse Auction for Unknown Worker Recruitment in Mobile Crowdsensing",
+    "authors": [
+        "Mingjun Xiao",
+        "Baoyi An",
+        "Jing Wang",
+        "Guoju Gao",
+        "Sheng Zhang",
+        "Jie Wu"
+    ],
+  "type": "technical",
+  "year": "2021-02",
+    "labels": [
+        "client selection",
+        "multi-armed bandit",
+        "reverse auction",
+        "incentive mechanism",
+        "multi-job",
+        "crowdsourcing",
+        "reward"
+    ],
+    "summaries": [
+        "in the crowdsourcing scenario, __[1] propose a reverse auction aiming to maximize the total quality of tasks, [2] reward workers using critical payment__,  and __[3] solve the maximization problem with combinatorial multi-armed bandit method__ when workers' qualities are unknown, achieving [1] lower regret, [2] truthfulness (changing claimed cost), [3] individual rationality (payment is greater than cost) in comparison to [1] MRCB [2] Random"
+    ],
+    "systemModel": [
+        "$1$ platform, a set $\\mathcal{M}$ of $M$ data collection tasks denoted by $j$ with different importance $w_j$ ($\\sum_{j\\in\\mathcal(M)}w_j=1$) and completed in multiple rounds $t\\in\\{1,2,...\\}$, a set $\\mathcal{N}$ of $N$ workers denoted by $i$",
+        "$\\mathcal{M}_i$ is the tasks worker $i$ prefers, $q_{i,j}^t \\in [0,1]$ denotes the sensing quality of worker $i$ completing task $j$ in the $t$-round and follows an unknown distribution with an unknown fixed expectation $q_i$",
+        "in each round $i$ submit $\\beta_i=\\langle \\mathcal{M}_i,b_i \\rangle $ ($b_i$ is claimed cost, $c_i$ is true cost), and the platform will determine the set of selected workers [see 1. worker selection] and payment $p_{i,t}$ [see 2. incentive payout]",
+        "it is worthy to note that a worker $i$ is eligible for accepting multiple tasks in a specific round. To do so, a worker can be seen as multiple virtual workers"
+    ],
+    "questions": [
+        "to select reliable workers without knowing workers' quality ahead of time and truthfulness in bidding"
+    ],
+    "techniques": [
+        "worker selection<ol>",
+        [
+            "$\\begin{array}{ll} \\underset{\\bm{\\phi}}{\\operatorname{max}} & \\sum\\limits_{t=1}^T\\sum\\limits_{1=1}^N\\sum\\limits_{j\\in\\mathcal{M}} w_jq_i\\phi_{i,t}\\\\ \\text { s.t. } & \\sum_t\\sum_{i=1}^{N} p_{i,t} \\leq B \\\\& \\sum_{i=1}^N\\phi_{i,t}=K \\\\& \\phi_{i,t} \\in \\{0,1\\}\\end{array}$",
+            [
+                "$\\phi_{i,t}\\in\\{0,1\\}$: indicator whether worker $i$ is selected in $t$-th round"
+            ],
+            "$q_{i}$ is estimated with UCB, and the problem is solved by sorting workers based on RCR$=w_j \\hat{q}_i / b_i$",
+            "Combinatorial Multi-Armed Bandit and reverse Auction (CMABA) has a divide of exploration phase and exploitation phase",
+            "Adaptive Combinatorial Multi-Armed Bandit and reverse Auction (ACMABA) tries out all workers first then continues with the exploration-exploitation"
+        ],
+        "incentive payout",
+        [
+            "critical payment",
+            [
+                "$p_i=\\min\\left\\{ \\frac{\\sum_{j\\in\\mathcal{M}_i w_jq_i}}{\\sum_{{j\\in\\mathcal{M}_{s}}_{K+1} }{w_jq_s}_{K+1}} {b_s}_{K+1}, |\\mathcal{M}_i|c_{\\max} \\right\\}$"
+            ]
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [],
+    "comments": [],
+    "doi": "10.1109/TMC.2021.3059346",
+    "id": "xiao2021cmab",
+    "bibtex": "@article{xiao2021cmab, title={Cmab-based reverse auction for unknown worker recruitment in mobile crowdsensing}, author={Xiao, Mingjun and An, Baoyi and Wang, Jing and Gao, Guoju and Zhang, Sheng and Wu, Jie}, journal={IEEE Transactions on Mobile Computing}, volume={21}, number={10}, pages={3502--3518}, year={2021}, publisher={IEEE}}  "
+}

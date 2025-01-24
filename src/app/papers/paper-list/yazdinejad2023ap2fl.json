@@ -1,0 +1,27 @@
+{
+  "title": "AP2FL: Auditable Privacy-Preserving Federated Learning Framework for Electronics in Healthcare",
+  "authors": [
+    "Abbas Yazdinejad",
+    "Ali Dehghantanha",
+    "Gautam Srivastava"
+  ],
+  "type": "technical",
+  "year": "2023-04",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "privacy",
+    "security",
+    "data heterogeneity",
+    "verification"
+  ],
+  "abstract": "The growing application of machine learning (ML) techniques in healthcare has led to increased interest in federated learning (FL), which enables the secure and private training of robust ML models. However, conventional FL methods often fall short of providing adequate privacy protection and face challenges in handling non-independent and identically distributed (Non-IID) training data. These shortcomings are of significant concern when employing FL in electronic devices in healthcare. To address these issues, we propose an Auditable Privacy-Preserving Federated Learning (AP2FL) model tailored for electronics in healthcare settings. By leveraging Trusted Execution Environments (TEE), AP2FL ensures secure training and aggregation processes on both client and server sides, effectively mitigating data leakage risks. To manage Non-IID data within the proposed framework, we incorporate the Active Personalized Federated Learning (ActPerFL) model and Batch Normalization (BN) techniques to consolidate user updates and identify data similarities. Additionally, we introduce an auditing mechanism in AP2FL that reveals the contribution of each client to the FL process, facilitating the updating of the global model following diverse data types and distributions. In other words, it ensures the FL process’s integrity, transparency, fairness, and robustness. Our results demonstrate that the proposed AP2FL model outperforms existing methods in accuracy and effectively eliminates privacy leakage.",
+  "summaries": [
+    "in the conventional FL framework, __[1] leverage trusted execution environment__ which enables encryption and decryption between the server and clients, __[2] adopt the ActPerFL model and Batch Normalization__ to address non-iid data distribution, __[3] add the independent auditor__ to verify the aggregation outcome all clients' contributions"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TCE.2023.3318509",
+  "id": "yazdinejad2023ap2fl",
+  "bibtex": "@ARTICLE{yazdinejad2023ap2fl, author={Yazdinejad, Abbas and Dehghantanha, Ali and Srivastava, Gautam}, journal={IEEE Transactions on Consumer Electronics},  title={AP2FL: Auditable Privacy-Preserving Federated Learning Framework for Electronics in Healthcare},  year={2024}, volume={70}, number={1}, pages={2527-2535}, keywords={Medical services;Data models;Servers;Load modeling;Training;Privacy;Data privacy;Privacy;FL;auditing;non-IID;healthcare}, doi={10.1109/TCE.2023.3318509}}"
+}

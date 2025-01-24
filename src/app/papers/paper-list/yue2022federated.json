@@ -1,0 +1,117 @@
+{
+  "title": "FEDERATED LEARNING VIA PLURALITY VOTE (FedVote)",
+  "authors": [
+    "Kai Yue",
+    "Richeng Jin",
+    "Chau-Wai Wong",
+    "Huaiyu Dai"
+  ],
+  "type": "technical",
+  "year": "2021-10",
+  "labels": [
+    "federated learning",
+    "efficiency",
+    "security",
+    "byzantine",
+    "reputation"
+  ],
+  "systemModel": [
+    "1 server and several clients, all use quantized $(-1,1)$ neural networks (QNN)",
+    "local training (1): clients download real-value global weights from server",
+    "local training (2): clients conduct SGD training for QNN for $\\tau$ iterations [see 1. Client QNN Training]",
+    "local training (3): clients use stochastic rounding [see 2. Stochastic Rounding] to draw a randomly quantized weight $\\{-1, 1\\}$ and send the binary weight to server",
+    "global aggregation (1): server conducts reputation-based voting to aggregate binary weights from clients [see 3. Reputation-Based Byzantine-FedVote]",
+    "global aggregation (2): server uses voting result to restore the real-value global weights [see 4. Global Weights Restore]",
+    "reputation update: server uses normalized global weights to check credibility of clients and update reputations [see 5. Reputation Update]"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose a QNN_based scheme in which __[1] parameters in local models in this architecture are restrict parameters to $(-1,1)$ and rounded to $\\{-1, 1\\}$ before uploading to the server__, __[2] the server applies reputation-based plurality vote to decide the aggregation result__"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "efficiency"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "QNN"
+    ]
+  ],
+  "motivation": [
+    "Although FedAvg takes advantage of distributed client data while maintaining their privacy, it leaves the following two challenges unsolved.",
+    "First, transmitting high-dimensional messages between a client and the server for multiple rounds can incur significant communication overhead.",
+    "Quantization has been incorporated into federated learning in recent studies.",
+    "However, directly quantizing the gradient vector does not provide the optimal trade-off between communication efficiency and model accuracy.",
+    "Second, the aggregation rule in FedAvg is vulnerable to Byzantine attacks",
+    "Prior works tackled this issue by using robust statistics such as coordinate-wise median and geometric median in the aggregation step",
+    "Another strategy is to detect and reject updates from malicious attackers.",
+    "The robustness of the algorithm is enhanced at the cost of additional computation and increased complexity of algorithms."
+  ],
+  "questions": [
+    "apply quantization techniques in FL to improve communication efficiency and resist byzantine attacks"
+  ],
+  "techniques": [
+    "Client QNN Training<ol>",
+    [
+      "1.1 a normalization function to normalize the weights of the activation functions is used: $\\tilde{\\mathbf{w}} \\triangleq \\varphi(\\mathbf{h})$",
+      [
+        "$\\mathbf{h}\\in \\mathbb{R}^d$: the real-valued vector of weights",
+        "$\\varphi(\\cdot): \\mathbb{R} \\to (-1, 1)$: invertible normalization function, e.g. $\\tanh(a\\mathbf{h})$",
+        "$\\tilde{\\mathbf{w}}$: the normalized vector of weights"
+      ],
+      "1.2 update real-valued weights: $\\mathbf{h}_m^{(k, t+1)}=\\mathbf{h}_m^{(k, t)}-\\eta \\nabla_{\\mathbf{h}} f_m(\\varphi(\\mathbf{h}_m^{(k, t)}); \\xi_m^{(k,t)})$",
+      [
+        "$\\mathbf{h}_m^{(k, t)}$: the real-valued vector of weights for client $m$ at the $t$th iteration of global round $k$",
+        "$f_m(\\varphi(\\mathbf{h}_m^{(k, t)}); \\xi_m^{(k,t)})=\\frac{1}{|\\xi_m^{(k,t)}|}\\sum_{j=1}^{|\\xi_m^{(k,t)}|}l(\\varphi(\\mathbf{h}_m^{(k, t)}); (\\mathbf{x}_{m,j}, \\mathbf{y}_{m,j}))$: objective loss function",
+        [
+          "$\\xi_m^{(k,t)}$: a mini-batch randomly drawn from $\\mathcal{D}_m$"
+        ]
+      ]
+    ],
+    "Stochastic Rounding",
+    [
+      "2.1 after $\\tau$ iterations and before sending local updates to the server, the weights can be furtherly rounded to binary values $\\{-1, 1\\}$",
+      [
+        "$w_{m,i}^{(k,\\tau)}=\\begin{cases}+1, & \\text{with probability } \\pi_{m,i}^{(k,\\tau)}=\\frac{1}{2}[\\tilde{w}_{m,i}^{(k,\\tau)}+1],\\\\ -1, & \\text{with probability } 1 - \\pi_{m,i}^{(k,\\tau)} \\end{cases}$",
+        [
+          "$w_{m,i}^{(k,\\tau)}$: the $i$th weight for client $m$ in the $\\tau$th iteration of $k$th communication round"
+        ]
+      ]
+    ],
+    "Reputation-Based Byzantine-FedVote",
+    [
+      "$p_i^{(k+1)}=\\sum_{m=1}^M \\lambda_m^{(k)} \\mathbb{1}_{[w_{m,i}^{(k,\\tau)}=1]}\\in (0,1)$",
+      [
+        "$p_i^{(k+1)}$: voting for $i$th weight in the $k+1$th round",
+        "$\\lambda_m^{(k)}=\\nu_m^{(k)}/\\sum_{m=1}^M \\nu_m^{(k)}$: a reputation-based weight of client $m$",
+        "$\\mathbb{1}_{[\\cdot]}\\in \\{0,1\\}$: indicator function"
+      ]
+    ],
+    "Global Weights Restore",
+    [
+      "$\\mathbf{h}^{(k+1)}=\\varphi^{-1}(2\\mathbb{p}^{(k+1)}-1)$"
+    ],
+    "Reputation Update",
+    [
+      "5.1 credibility in the $k$th round",
+      [
+        "$\\text{CR}_m^{(k+1)}=\\frac{1}{d}\\sum_{i=1}^{d} \\mathbb{1}_{[w_{m,i}^{(k,\\tau)}=w_{i}^{(k+1)}]}$ (how many weights guessed right)",
+        [
+          "$w_{i}^{(k+1)]}$: $i$th binary global weight after normalization and stochastic rounding"
+        ]
+      ],
+      "5.2 update reputation with exponential moving average",
+      [
+        "$\\nu_m^{(k+1)}=\\beta \\nu_m^{(k)}+(1-\\beta) \\text{CR}_m^{(k+1)}$"
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/TNNLS.2022.3225715",
+  "id": "yue2022federated",
+  "bibtex": "@article{yue2022federated, title={Federated learning via plurality vote},  author={Yue, Kai and Jin, Richeng and Wong, Chau-Wai and Dai, Huaiyu}, journal={IEEE Transactions on Neural Networks and Learning Systems},  year={2022},  publisher={IEEE}}"
+}

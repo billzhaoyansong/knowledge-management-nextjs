@@ -1,0 +1,118 @@
+{
+  "title": "Heterogeneous Federated Learning via Grouped Sequential-to-Parallel Training (FedGSP)",
+  "authors": [
+    "Shenglai Zeng",
+    "Zonghang Li",
+    "Hongfang Yu",
+    "Yihong He",
+    "Zenglin Xu",
+    "Dusit Niyato",
+    "Han Yu"
+  ],
+  "type": "technical",
+  "year": "2022-01",
+  "labels": [
+    "federated learning",
+    "data heterogeneity",
+    "grouping"
+  ],
+  "systemModel": [
+    "1 server, several group managers deployed on the server, the set of $K$ clients denoted by $\\mathcal{C}$",
+    "Under our grouped FL setting, FL clients are grouped such that clients in the same group have heterogeneous data but the overall data distributions among the groups are homogeneous",
+    "Process",
+    [
+      "in $r$th round, assign all clients $\\mathcal{C}$ to $f(r)$ groups to obtain $\\mathcal{G}$ [see Group Growth Function & ICG]<ol>",
+      "randomly sample a subset of groups $\\bar{\\mathcal{G}}\\subset \\mathcal{G}$ with proportion $\\kappa$",
+      "for each group $\\mathcal{G}_m$ in $\\bar{\\mathcal{G}}$, the first client $\\mathcal{C}_m^1$ initializes weights from server",
+      "for all clients $\\mathcal{C}_m^k$, they train model on local data $\\mathcal{D}^k_m$ for one epoch and send the model to the next client $\\mathcal{C}_m^{k+1}$",
+      "the last client uploads parameter to server",
+      "server aggregates models with FedAvg and this ends $r$th round"
+    ],
+    "responsibility of the group managers:",
+    [
+      "collect class distributions of clients to the server for clustering<ol>",
+      "shuffle order of clients within a group and report resulting model to the server",
+      "schedule model transmission from one client to another"
+    ]
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] group clients so that data distributions among groups are similar but within a group can be diverse__, __[2] training within a group is sequential__: 1 epoch each client then pass the model to the next client, to address data heterogeneity"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "efficiency"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "grouping"
+    ]
+  ],
+  "motivation": [
+    "In practical applications, FL clients' local data distributions can be highly heterogeneous due to diverse usage patterns.",
+    "This problem is referred to as the non-independent and identically distributed (non-i.i.d.) data challenge, which negatively affects training convergence and the performance of the resulting FL model",
+    "Recently, heterogeneous federated learning approaches have been proposed in an attempt to address this challenge. ",
+    "These works try to make class distributions of different FL clients similar to improve the performance of the resulting FL model.",
+    "To align client data distributions without exposing the FL process to privacy risks, we group together heterogeneous FL clients so that each group can be perceived as a homogeneous “client” to participate in FL."
+  ],
+  "questions": [
+    "solve data heterogeneity"
+  ],
+  "techniques": [
+    "1. Group Growth Function",
+    [
+      "$f(r)=\\beta \\lfloor \\alpha (r-1)+1\\rfloor$",
+      "$f(r)=\\beta \\lfloor \\alpha \\ln r + 1\\rfloor$",
+      "$f(r)=\\beta \\lfloor (\\alpha + 1)^{r-1}\\rfloor$",
+      [
+        "real number coefficient $\\alpha$ controls the growth rate",
+        "integer coefficient $\\beta$ controls the initial number of groups and the growth span"
+      ]
+    ],
+    "2. ICG: The Inter-Cluster Grouping Algorithm",
+    [
+      "2.1 Original Problem",
+      [
+        "considering $K$ clients and $f(r)=M$ groups",
+        "$\\begin{aligned} \\underset{\\mathbf{x}}{\\min} \\quad & z=\\sum_{m_1=1}^{M-1} \\sum_{m_2=m_1+1}^M<\\mathcal{V}_{m_1}, \\mathcal{V}_{m_2}>, \\\\ \\text { s.t. } \\quad & M=f(r), \\\\ & \\sum_{k=1}^K \\mathbf{x}_m^k \\leq\\left\\lceil\\frac{K}{M}\\right\\rceil \\quad \\forall m=1, \\cdots, M, \\\\ & \\sum_{m=1}^M \\mathbf{x}_m^k=1 \\quad \\forall k=1, \\cdots, K, \\\\ & \\mathcal{V}_m=\\sum_{k=1}^K \\mathbf{x}_m^k \\mathcal{V}^k \\quad \\forall m=1, \\cdots, M, \\\\ & \\mathbf{x}_m^k \\in\\{0,1\\}, k \\in[1, K], m \\in[1, M]. \\end{aligned}$",
+        [
+          "$\\mathbf{x}\\in \\mathbb{I}^{M \\times K}$: the grouping strategy that $x_m^k=1$ represents the device $k$ is assigned to the group $m$",
+          "$\\mathcal{V}\\in(\\mathbb{Z}^{+})^{\\mathcal{F} \\times K}$: the class distribution matrix composed of $\\mathcal{F}$-dimensional class distribution vectors of $K$ clients",
+          "2st constraint ensures that the groups have similar or equal size",
+          "3rd constraint ensures that each client can only be assigned to one group at a time"
+        ],
+        "it is impossible to find optimal solution with a polynomial time for this NP-hard bin packing problem"
+      ],
+      "2.2 Transformed Problem (adopt centroid equivalence theorem)",
+      [
+        "considering $K$ clients and $L=\\lfloor \\frac{K}{f(r)} \\rfloor$ clusters",
+        [
+          "e.g. $10$ clients, $2$ groups $\\Rightarrow 5$ clusters"
+        ],
+        "definition 1: cluster centroid: $C_l\\gets \\frac{\\sum_{k=1}^K y_l^k V^k}{\\sum_{k=1}^K y_l^k}$",
+        "definition 2: group centroid: let group $m$ be constructed from one point randomly sampled from each cluster $\\{\\mathcal{V}_1^m,...,\\mathcal{V}_L^m\\}$, $C^m = \\frac{1}{L} \\sum_{l=1}^L \\mathcal{V}_l^m$",
+        "definition 3: global centroid: $C_{global}=\\frac{1}{L}\\sum_{l=1}^L C_l$",
+        "proposition: the group and global centroids are expected to coincide",
+        "ICG Algorithm:",
+        [
+          "(1) do",
+          "(1.1) cluster assignment:",
+          [
+            "$\\begin{aligned} \\underset{\\mathbf{y}}{\\min} & \\sum_{k=1}^K \\sum_{l=1}^L \\mathbf{y}_l^k \\cdot\\left(\\frac{1}{2}\\left\\|\\mathcal{V}^k-C_l\\right\\|_2^2\\right), \\\\ \\text { s.t. } & \\sum_{k=1}^K \\mathbf{y}_l^k=\\frac{K}{L} \\quad \\forall l=1, \\cdots, L, \\\\ & \\sum_{l=1}^L \\mathbf{y}_l^k=1 \\quad \\forall k=1, \\cdots, K, \\\\ & \\mathbf{y}_l^k\\in\\{0,1\\}, k\\in[1,K], l\\in [1,L] \\end{aligned}$",
+            [
+              "$\\mathbf{y}\\in \\mathbb{I}^{L \\times K}$: cluster selector variable"
+            ]
+          ],
+          "(1.2) recalculate cluster centroid $C_l$",
+          "(1) while $C_l$ is not converged",
+          "(2) randomly sample one client from each cluster without replacement to construct group"
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1007/978-3-031-00126-0_34",
+  "id": "zeng2022heterogeneous",
+  "bibtex": "@inproceedings{zeng2022heterogeneous, title={Heterogeneous federated learning via grouped sequential-to-parallel training}, author={Zeng, Shenglai and Li, Zonghang and Yu, Hongfang and He, Yihong and Xu, Zenglin and Niyato, Dusit and Yu, Han}, booktitle={Database Systems for Advanced Applications: 27th International Conference, DASFAA 2022, Virtual Event, April 11--14, 2022, Proceedings, Part II}, pages={455--471}, year={2022}, organization={Springer}}"
+}

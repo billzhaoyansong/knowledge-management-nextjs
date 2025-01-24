@@ -1,0 +1,28 @@
+{
+  "title": "VerifyNet: Secure and Verifiable Federated Learning",
+  "authors": [
+    "Guowen Xu",
+    "Hongwei Li",
+    "Sen Liu",
+    "Kan Yang",
+    "Xiaodong Lin"
+  ],
+  "type": "technical",
+  "year": "2018-12",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "verification",
+    "privacy"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] propose a double-masking protocol__ to guarantee confidential of local models, and __[2] add verification of the integrity of the aggregated results from the server__ by requiring cloud server to provide the <b>Proof</b> about the correctness of the aggregated results"
+  ],
+  "systemModel": [],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/TIFS.2019.2929409",
+  "id": "xu2019verifynet",
+  "bibtex": "@ARTICLE{xu2019verifynet, author={Xu, Guowen and Li, Hongwei and Liu, Sen and Yang, Kan and Lin, Xiaodong}, journal={IEEE Transactions on Information Forensics and Security},  title={VerifyNet: Secure and Verifiable Federated Learning}, year={2020}, volume={15}, number={}, pages={911-926}, keywords={Training;Servers;Deep learning;Privacy;Biological neural networks;Security;Privacy-preserving;deep learning;verifiable federated learning;cloud computing}, doi={10.1109/TIFS.2019.2929409}}"
+}

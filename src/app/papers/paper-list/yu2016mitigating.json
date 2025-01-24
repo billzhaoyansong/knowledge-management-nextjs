@@ -1,0 +1,55 @@
+{
+    "title": "Mitigating Herding in Hierarchical Crowdsourcing Networks (RTS-P)",
+    "authors": [
+        "Han Yu",
+        "Chunyan Miao",
+        "Cyril Leung",
+        "Yiqiang Chen",
+        "Simon Fauvel",
+        "Victor R. Lesser",
+        "Qiang Yang"
+    ],
+    "type": "technical",
+    "year": "2016-04",
+    "labels": [
+        "crowdsourcing",
+        "reputation",
+        "Lyapunov",
+        "social welfare"
+    ],
+    "summaries": [
+        "in the crowdsourcing scenario, extend the work of RTS with the addition of __pricing function in the process of task acceptance__"
+    ],
+    "systemModel": [
+        "task acceptance is modeled with pricing decision [see 1. Task Acceptance]"
+    ],
+    "questions": [
+        "Existing herding (a small group of reputable workers are overloaded) control mechanisms designed for typical crowdsourcing systems are not effective in hierarchical crowdsourcing networks (HCNs)."
+    ],
+    "techniques": [
+        "1. Task Acceptance",
+        [
+            "$\\ln f(p_i(t), r_i(t)) = c_0 - c_1 \\ln r_i(t) + c_2 + \\ln N_t^p(t) + c_3 d_t + \\ln p_i(t)$",
+            [
+                "$f(p_i(t), r_i(t))$: expected demand"
+            ],
+            "$\\rho_i \\mathbb{E}\\{\\xi_i(t)\\}-\\Delta(X_i(t))$, after elimination:",
+            "$\\begin{array}{ll} \\underset{a_i(t), p_i(t)}{\\operatorname{max}} &  \\frac{1}{T}\\sum\\limits_{t=0}^{T-1}\\sum\\limits_{i=1}^N \\frac{a_i(t) \\vartheta_i p_i(t)}{[r_i(t)]^c_1}[r_i(t)\\rho_i(t) p_i(t)-q_i(t)] \\\\ \\text { s.t. } & p_i(t) \\geq p_i^{\\min}\\end{array}$",
+            [
+                "$a_i(t)$: indicator whether worker $i$ wants to accept new tasks",
+                "$p_i(t)$: pricing"
+            ],
+            "solutions",
+            [
+                "after taking first order derivative and solve when it equals $0$, we get: $p_i(t)=\\max\\left[p_i^{\\min}, \\frac{q_i(t)}{2\\rho_i(t)r_i(t)} \\right]$",
+                "$a_i(t)=\\begin{cases}1,& \\text{if } \\rho_i p_i(t) r_i(t)-q_i(t) > 0 \\\\ 0, & \\text{otherwise}\\end{cases}$"
+            ]
+        ]
+    ],
+    "experiments": [],
+    "futureWorks": [],
+    "comments": [],
+    "doi": "10.1038/s41598-016-0011-6",
+    "id": "yu2016mitigating",
+    "bibtex": "@article{yu2016mitigating, title={Mitigating herding in hierarchical crowdsourcing networks}, author={Yu, Han and Miao, Chunyan and Leung, Cyril and Chen, Yiqiang and Fauvel, Simon and Lesser, Victor R and Yang, Qiang}, journal={Scientific reports}, volume={6}, number={1}, pages={4}, year={2016}, publisher={Nature Publishing Group UK London}}"
+}

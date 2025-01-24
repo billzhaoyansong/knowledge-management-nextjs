@@ -1,0 +1,28 @@
+{
+  "title": "Accuracy Degrading: Toward Participation-Fair Federated Learning",
+  "authors": [
+    "Xianyao You",
+    "Ximeng Liu",
+    "Xuanwei Lin",
+    "Jianping Cai",
+    "Shaoquan Chen"
+  ],
+  "type": "technical",
+  "year": "2022-09",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "reward",
+    "fairness"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __reward participants with a model with an accuracy that matches their contributions__ to guarantee fairness in model rewards"
+  ],
+  "systemModel": [],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/JIOT.2023.3238038",
+  "id": "you2023accuracy",
+  "bibtex": "@article{you2023accuracy, title={Accuracy degrading: Towards participation-fair federated learning}, author={You, Xianyao and Liu, Ximeng and Lin, Xuanwei and Cai, Jianping and Chen, Shaoquan}, journal={IEEE Internet of Things Journal}, year={2023}, publisher={IEEE}}"
+}

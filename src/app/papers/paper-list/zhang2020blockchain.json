@@ -1,0 +1,73 @@
+{
+  "title": "Blockchain-Based Federated Learning for Device Failure Detection in Industrial IoT",
+  "authors": [
+    "Weishan Zhang",
+    "Qinghua Lu",
+    "Qiuyu Yu",
+    "Zhaotong Li",
+    "Yue Liu",
+    "Sin Kit Lo",
+    "Shiping Chen",
+    "Xiwei Xu",
+    "Liming Zhu"
+  ],
+  "type": "technical",
+  "year": "2020-08",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "smart contract",
+    "reward",
+    "verification"
+  ],
+  "summaries": [
+    "propose a platform architecture of blockchain-based FL system for failure detection in IIoT (applied in an air-conditioner manufacturer)",
+    "client organizations are rewarded with tokens according to smart contract stored in a blockchain",
+    "client data is verifiable by anchoring"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "__client organizations__, each of them has",
+      [
+        "<u>a blockchain full node</u>: maintain complete list of every single transasction that had occurred on the blockchain",
+        "<u>sensors</u>: collect environmental data",
+        "<u>client device</u> (e.g. Raspberry Pi)",
+        [
+          "client data collector: gather data from sensors",
+          "client data preprocessor: preprocess data from client data collector, e.g. noise reduction"
+        ],
+        "<u>client server</u>",
+        [
+          "database: store preprocessed data",
+          "dispute resolver: verify the integrity of client historical data in a certain anchoring period",
+          "model trainer: train with the central organization",
+          "detector: detect failure of IIoT and encrypt the results",
+          "client data anchor: store information of client in each selection round (e.g. Merkle tree root, status of training, size of client data, the centroid distance of client data)"
+        ]
+      ],
+      "__a central organization__ (i.e. FL platform owner, e.g. manufacturer company), including",
+      [
+        "<u>an aggregator</u>: aggregate models from client organizations",
+        "<u>a data decryptor</u>: decrypt the encrypted detection results from client organizations",
+        "<u>a database</u>: store detection results",
+        "<u>a blockchain full node</u>: maintain complete list of every single transasction that had occurred on the blockchain"
+      ]      
+    ],
+    "processes",
+    [
+      "FL training with preconfigured rounds<ol>",
+      "tokens are rewarded to client organizations based on the size and the centroid distance of data taken in model training according to smart contract",
+      "central organization sends the global model to client organizations for failure detection",
+      "client organizations apply the global model on local data and encrypt results before sending results to the central organization",
+      "the central organization decrypts results"
+    ]
+  ],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/JIOT.2020.3032544",
+  "id": "zhang2020blockchain",
+  "bibtex": "@article{zhang2020blockchain, title={Blockchain-based federated learning for device failure detection in industrial IoT}, author={Zhang, Weishan and Lu, Qinghua and Yu, Qiuyu and Li, Zhaotong and Liu, Yue and Lo, Sin Kit and Chen, Shiping and Xu, Xiwei and Zhu, Liming}, journal={IEEE Internet of Things Journal}, volume={8}, number={7}, pages={5926--5937}, year={2020}, publisher={IEEE}}"
+}
