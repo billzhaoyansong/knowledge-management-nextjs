@@ -1,0 +1,75 @@
+{
+  "title": "EasyFL: A Low-Code Federated Learning Platform for Dummies",
+  "authors": [
+    "Weiming Zhuang",
+    "Xin Gan",
+    "Yonggang Wen",
+    "Shuai Zhang"
+  ],
+  "type": "technical",
+  "year": "2021-07",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "software"
+  ],
+  "abstract": "Academia and industry have developed several platforms to support the popular privacy-preserving distributed learning method—federated learning (FL). However, these platforms are complex to use and require a deep understanding of FL, which imposes high barriers to entry for beginners, limits the productivity of researchers, and compromises deployment efficiency. In this article, we propose the first low-code FL platform, EasyFL , to enable users with various levels of expertise to experiment and prototype FL applications with little coding. We achieve this goal while ensuring great flexibility and extensibility for customization by unifying simple API design, modular design, and granular training flow abstraction. With only a few lines of code (LOC), EasyFL empowers them with many out-of-the-box functionalities to accelerate experimentation and deployment. These practical functionalities are heterogeneity simulation, comprehensive tracking, distributed training optimization, and seamless deployment. They are proposed based on challenges identified in the proposed FL life cycle. Compared with other platforms, EasyFL not only requires just three LOC (at least 10x lesser) to build a vanilla FL application but also incurs lower training overhead. Besides, our evaluations demonstrate that EasyFL expedites distributed training by 1.5x . It also improves the efficiency of deployment. We believe that EasyFL will increase the productivity of researchers and democratize FL to wider audiences.",
+  "summaries": [
+    "in the conventional FL framework, propose a low-code FL platform which __enables all training methods and heterogeneity settings__",
+    "_Scenario_: existing FL platforms are complex to use, imposing a high barrier to entry for beginners",
+    "_Problem_: challenges for a FL platform to solve:",
+    [
+      "enable statistical and system heterogeneity (partitioning of data sets to become non-IID and unbalanced; partitioning of computational resources to become unbalanced)<ol>",
+      "test new FL algorithms without replicating the whole codebase",
+      "collect metrics under diverse training methods and hierarchical training metrics (task -> round -> client)"
+    ],
+    "_Solution_: the authors propose a low-code FL platform (EasyFL) which enables all training methods and heterogeneity settings"
+  ],
+  "systemModel": [
+    "training methods",
+    [
+      "standandalone training: in experimental phase, to simulate FL on a hardware device (CPU or GPU)",
+      "distributed training: training on multiple hardware devices (scheduling is required)",
+      "remote training: in the production phase, to support remote message transmission as server and clients are deployed ot different locations with containerization, Kubernetes"
+    ],
+    "architecture",
+    [
+      "interface layer: providing a common interface across FL applications",
+      "system layer:",
+      [
+        "simulation manager",
+        "data manager",
+        "model manager",
+        "server and clients",
+        "distribution manager",
+        "tracking manager",
+        "deployment manager"
+      ]
+    ]
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    ""
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JIOT.2022.3143842",
+  "id": "zhuang2022easyfl",
+  "bibtex": "@article{zhuang2022easyfl, title={Easyfl: A low-code federated learning platform for dummies}, author={Zhuang, Weiming and Gan, Xin and Wen, Yonggang and Zhang, Shuai}, journal={IEEE Internet of Things Journal}, volume={9}, number={15}, pages={13740--13754}, year={2022}, publisher={IEEE}}"
+}

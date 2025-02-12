@@ -1,0 +1,90 @@
+{
+  "title": "Toward Robust Hierarchical Federated Learning in Internet of Vehicles (RoHFL)",
+  "authors": [
+    "Hongliang Zhou",
+    "Yifeng Zheng",
+    "Hejiao Huang",
+    "Jiangang Shu",
+    "Xiaohua Jia"
+  ],
+  "type": "technical",
+  "year": "2022-08",
+  "labels": [
+    "federated learning",
+    "reputation",
+    "hierarchical"
+  ],
+  "systemModel": [
+    "$1$ honest cloud server, a set of $l$ honest cellular base stations (CBSs), a set of $m$ road side units (RSUs), a set of $n$ vehicles",
+    "stage (1) model distribution: server -> CBSs -> RSUs -> vehicles",
+    "stage (2) local training: on vehicles",
+    "stage (3) model aggregation: vehicle -> RSUs initial reputation-based aggregation -> CBSs robust aggregation -> cloud global aggregation",
+    "stage (3) model aggregation: 3.1 RSUs conduct logarithm-based normalization and reputation-based initial aggregation; ",
+    "stage (3) model aggregation: 3.2 CBSs conduct reputation-based robost aggregation;",
+    "stage (3) model aggregation: 3.3 the server conduct global aggregation",
+    "reputations on vehicles and RSUs are maintained according to model update similarities"
+  ],
+  "summaries": [
+    "in the hierarchical FL framework, __propose a hierarchical reputation-based aggregation scheme__ for IoVs",
+    "in this paradigm, models are distributed from the cloud server to CBS, to RSU, to vehicles, which do local training ultimately",
+    "reputation-based aggregations are conducted in RSUs, CBSs, and ultimately the cloud server"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "motivation": [
+    "It is noted that while a standard federated learning framework operates under a two-layer architecture, practical IoV systems present a hierarchical structure. ",
+    "That is, there are other types of nodes sitting between the cloud server and vehicles.",
+    "It is thus necessary and desirable to adapt the standard two-layer federated learning framework to a multi-layer one so as to suit the hierarchical architecture of IoV systems",
+    "This can cope with the high latency issue faced by executing two-layer federated learning directly between the vehicles and cloud server which communicate over wide-area networks",
+    "However, the intermediate RSUs at the edge may also be compromised and act maliciously.",
+    "This poses a need to address the threats from the intermediate RSUs. ",
+    "Therefore, with federated learning adapted to such a hierarchical structure for the IoV, how to achieve robustness against poisoning attacks from malicious vehicles and intermediate RSUs remains to be fully explored."
+  ],
+  "questions": [
+    "how to counter the security problems in FL and when applying FL in IoV"
+  ],
+  "techniques": [
+    "model distribution: the vehicles with the position and motion status for a constant connection with a certain RSU throughout each round, are selected with the desired proportion $\\mathcal{C}$ from all the vehicles in each RSU, respectively.",
+    "local model update normalization by RSUs: $\\bar{g}_i^{\\mathcal{V}}\\leftarrow \\text{log-norm}(g_i^{\\mathcal{V}})=\\frac{\\lg(1+\\Vert g_i^{\\mathcal{V}}\\Vert)}{\\Vert g_i^{\\mathcal{V}}\\Vert} \\cdot g_i^{\\mathcal{V}}$",
+    [
+      "$g_i^{\\mathcal{V}}, \\bar{g}_i^{\\mathcal{V}}$: the initial local model update of the $i$th vehicle and the logarithmic normalized counterpart in the current iteration",
+      "to reduce the magnitude of gradient data, leading to the scaled malicious gradients would be more compressed in magnitude"
+    ],
+    "initial reputation-based aggregation by RSUs: $g_j^{\\mathcal{S}}\\gets\\frac{\\sum_{i=1}^{|\\mathbb{V}^{\\mathcal{S}}_{\\mathcal{S}_j}|}|\\mathcal{D}_i| \\mathcal{R}_i^{\\mathcal{V}}\\bar{g}_i^{\\mathcal{V}}}{|\\mathbb{M}_j|}$",
+    [
+      "$g_j^{\\mathcal{S}}$: the aggregated gradient in RSU $\\mathcal{S}_j$",
+      "$\\mathbb{V}^{\\mathcal{S}}_{\\mathcal{S}_j}$: selected set of vehicle",
+      "$\\mathcal{D}_i, |\\mathbb{M}_j|$: data size of vehicle $i$, total data size of selected vehicles under RSU $j$",
+      "$\\mathcal{R}_i^{\\mathcal{V}}$: reputation of vehicle $i$"
+    ],
+    "robust reputation-based aggregation by CBSs: $g_k^{\\mathcal{B}}\\gets\\frac{\\sum_{j=1}^{|\\mathbb{S}_k|}|\\mathbb{M}_j| \\mathcal{R}_j^{\\mathcal{S}} g_j^{\\mathcal{S}}}{|\\mathbb{L}_k|}$",
+    [
+      "$g_k^{\\mathcal{B}}$: the aggregated gradient in CBS $\\mathcal{B}_k$",
+      "$\\mathbb{S}_k$: the RSU set that covered the selected vehicles",
+      "$\\mathbb{L}_k$: total data size of selected vehicles under CBS $k$",
+      "$\\mathcal{R}_j^{\\mathcal{S}}$: reputation of RSU $j$"
+    ],
+    "global aggregation: $g_G \\gets \\frac{\\sum_{k=1}^{\\mathbb{B}}|\\mathbb{L}_k|g_k^{\\mathcal{B}}}{|\\mathbb{Q}|}$",
+    "reputation update: $\\mathcal{R}_i^* \\gets \\lambda \\cdot \\mathcal{R}_i^{\\mathcal{V}} \\cdot \\tanh (1+\\mathcal{T}_i^{\\mathcal{V}}), \\mathcal{R}_j^* \\gets \\lambda \\cdot \\mathcal{R}_j^{\\mathcal{S}} \\cdot \\tanh (1+\\mathcal{T}_j^{\\mathcal{S}})$",
+    [
+      "$\\mathcal{T}_i^{\\mathcal{V}} \\gets \\frac{1}{VIter}\\sum_{iter=1}^{VIter} \\cos(\\bar{g}_i^{\\mathcal{V}}, g_k^{\\mathcal{B}})$",
+      "$\\mathcal{T}_j^{\\mathcal{S}} \\gets \\frac{1}{SIter}\\sum_{iter=1}^{SIter} \\cos(g_j^{\\mathcal{S}}, g_k^{\\mathcal{B}})$"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/TITS.2023.3243003",
+  "id": "zhou2023toward",
+  "bibtex": "@article{zhou2023toward,title={Toward Robust Hierarchical Federated Learning in Internet of Vehicles},author={Zhou, Hongliang and Zheng, Yifeng and Huang, Hejiao and Shu, Jiangang and Jia, Xiaohua}, journal={IEEE Transactions on Intelligent Transportation Systems}, year={2023}, publisher={IEEE}}"
+}

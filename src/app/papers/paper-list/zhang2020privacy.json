@@ -1,0 +1,29 @@
+{
+  "title": "A Privacy-Preserving and Verifiable Federated Learning Scheme",
+  "authors": [
+    "Xianglong Zhang",
+    "Anmin Fu",
+    "Huaqun Wang",
+    "Chunyi Zhou",
+    "Zhenzhu Chen"
+  ],
+  "type": "technical",
+  "year": "2020-06",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "verification",
+    "privacy",
+    "security"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] combine the Chinese Remainder Theorem and the Paillier homomorphic encrytion__ to apply on clients' gradients to preserve privacy, [2] __use a bilinear aggregate signature technology to verify the correctness of the aggregated gradient from the server__ to prevent malicious server"
+  ],
+  "systemModel": [],
+  "techniques": [
+    ""
+  ],
+  "doi": "10.1109/ICC40277.2020.9148628",
+  "id": "zhang2020privacy",
+  "bibtex": "@inproceedings{zhang2020privacy, title={A privacy-preserving and verifiable federated learning scheme},  author={Zhang, Xianglong and Fu, Anmin and Wang, Huaqun and Zhou,Chunyi and Chen, Zhenzhu}, booktitle={ICC 2020-2020 IEEE International Conference on Communications (ICC)},pages={1--6},  year={2020},  organization={IEEE}}"
+}

@@ -1,0 +1,117 @@
+{
+  "title": "Reputation-based regional federated learning for knowledge trading in blockchain-enhanced IoV",
+  "authors": [
+    "Yue Zou",
+    "Fei Shen",
+    "Feng Yan",
+    "Jing Lin",
+    "Yunzhou Qiu"
+  ],
+  "type": "technical",
+  "year": "2021-03",
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "reputation",
+    "client selection",
+    "smart contract",
+    "non-cooperative game",
+    "grouping",
+    "decentralized"
+  ],
+  "summaries": [
+    "in the decentralized FL framework, propose [1] __a regional FL framework__ that vehicles are clustered based on signal transmission power, reputations of vehicles are calculated based on accuracy contributions/loss difference, and client selection based on reputation threshold and __[2] knowledge trading based on smart contract in the global level__, and knowledge pricing modeled as a non-cooperative game",
+    "the overall system is composed of a server, a set of RSUs, and a set of vehicles",
+    "in the regional FL, vehicles are clustered based on signal transmission power, and reputations of vehicles are calculated based on accuracy contributions/loss difference, and client selection based on reputation threshold",
+    "in the global level, knowledge trading based on smart contract, and knowledge pricing modeled as a non-cooperative game"
+  ],
+  "systemModel": [
+    "$1$ mobile edge computing (MEC) server, a set of $N$ road side units (RSUs) with each of the RSUs managing a set of regional vehicles which collect non-exchangable road and environmental information (the total number of vehicles is $K$) [see 1. Regional Vehicles Clustering]",
+    "in the RFL, vehicles are selected based on their reputation for regional aggregation [see 2. Reputation-Based Client Selection]",
+    "an inter-regional blockchain is used to store aggregated model parameters and reputataions",
+    "in the global level, knowledge trading based on smart contract [see 3. Knowledge Trading]"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "motivation": [
+    "For the blockchain-enhanced trading market, most works aim to design an efficient pricing model.",
+    "However, few works consider the effect of multi-factor competitiveness among providers on pricing."
+  ],
+  "questions": [
+    "Previous works in IoV focus on data sharing between vehicles, but a large amount of data will lead to redundant transmission and network congestion. ",
+    "In addition, security and privacy issues prevent these nodes from participating in the sharing process"
+  ],
+  "techniques": [
+    "Regional Vehicles Clustering<ol>",
+    [
+      "use Mobility Based Metric for Clustering (MOBIC), which proposes using signal transmission power between node pairs representing mobility value, to partition vehicles"
+    ],
+    "Reputation-Based Client Selection",
+    [
+      "reputation threshold $\\lambda \\cdot {R_{j\\to i}}_{\\max}$",
+      [
+        "${R_{j\\to i}}_{\\max}$: the maximum reputation of vehicles $i$ and RSU $j$",
+        "$\\lambda\\in[0,1)$"
+      ],
+      "Regional reputation calculation atom: Accuracy contribution (Ac)",
+      [
+        "$Ac_{{P_t}_{j\\to i}}=\\log_2\\left[1+\\frac{-({l_P}_{t_{j\\to i}}-{l_P}_{{t-1}_{j\\to i}})}{{l_P}_{{t-1}_{j\\to i}}}\\right]$: positive accuracy contribution before and after $t$-th iteration between RSU $j$ and vehicle $i$",
+        "$Ac_{{N_t}_{j\\to i}}=\\log_2\\left[1+\\frac{-({l_N}_{t_{j\\to i}}-{l_N}_{{t-1}_{j\\to i}})}{{l_N}_{{t-1}_{j\\to i}}}\\right]$: negative accuracy contribution before and after $t$-th iteration between $j$ and $i$",
+        "just aggregate one-by-one? is there no concept of global iteration?"
+      ],
+      "Regional reputation calculation: $R_{j\\to i}={HD_P}_{j\\to i}{It_P}_{j\\to i}+{HD_N}_{j\\to i}{It_N}_{j\\to i}$",
+      [
+        "Honesty Degree (HD) $HD_{P_{j\\to i}}=\\frac{IA_{P_{j\\to i}}}{IA_{j\\to i}}, HD_{N_{j\\to i}}=\\frac{IA_{N_{j\\to i}}}{IA_{j\\to i}}$",
+        [
+          "$IA_{j\\to i}$: total number of iterations",
+          "$IA_{P}/IA_{N}$: number of positive/negative sharing (PS/NS) interactions",
+          "if $Ac_t>0$, then it is positive sharing, otherwise it is negative sharing"
+        ],
+        "Interaction Timeliness (It)",
+        [
+          "${It_P}_{j\\to i}=\\sum_{t=1}^{{IA_P}_{j\\to i}}{{Ac_P}_{t}}_{j\\to i}e^{-(T_e-{{T_P}_t}_{j\\to i})}$: positive interaction timeliness function",
+          "${It_N}_{j\\to i}=\\sum_{t=1}^{{IA_N}_{j\\to i}}{{Ac_N}_{t}}_{j\\to i}e^{-(T_e-{{T_N}_t}_{j\\to i})}$: negative interaction timeliness function",
+          "note that ${It_P}_{j\\to i}>0$ and ${It_N}_{j\\to i}<0$"
+        ]
+      ]
+    ],
+    "Knowledge Trading",
+    [
+      "knowledge trading process: (1) request (2) publish (3) respond (4) choose (5) decide (6) trade",
+      "knowledge trading provider choice: choose the provider with highest competitive priority: $CP_j=\\frac{\\varphi_j}{p_j\\cdot cost_j}$",
+      [
+        "$\\varphi_j=1-\\eta e^{-\\gamma \\cdot \\theta_j}$",
+        "$\\eta,\\gamma>0$: parameters",
+        "$\\theta_j$: the scale of dataset and parameters",
+        "$p_j$: pricing",
+        "$cost_j=a_j+cd_j$: knowledge acquisition cost + communication delay"
+      ],
+      "knowledge trading pricing: non-cooperative game $\\mathcal{G}\\{\\mathcal{H}, \\{p_j\\}_{j\\in \\mathcal{H}}, \\{U_j(p_j,\\mathbf{p}_{-j})\\}_{j\\in \\mathcal{H}}\\}$",
+      [
+        "$\\max_{\\mathbf{p}} U_j(p_j,\\mathbf{p}_{-j})$",
+        "s.t. $p_j\\in[cost_j, p_{\\max}]$",
+        [
+          "$U_j(p_j,\\mathbf{p}_{-j})=\\frac{CP_j}{\\frac{1}{N}\\sum_{k\\in N}CP_k} (p_j-cost_j)$",
+          "find the optimal price for each provider to maximize self-utility",
+          "a Nash Equilibrium is proved to exist"
+        ]
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/WCNC49053.2021.9417347",
+  "id": "zou2021reputation",
+  "bibtex": "@inproceedings{zou2021reputation, title={Reputation-based regional federated learning for knowledge trading in blockchain-enhanced IoV}, author={Zou, Yue and Shen, Fei and Yan, Feng and Lin, Jing and Qiu, Yunzhou}, booktitle={2021 IEEE wireless communications and networking conference (WCNC)}, pages={1--6},year={2021}, organization={IEEE}}"
+}

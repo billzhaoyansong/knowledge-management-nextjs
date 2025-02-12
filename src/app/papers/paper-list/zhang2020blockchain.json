@@ -19,12 +19,11 @@
     "blockchain",
     "smart contract",
     "reward",
-    "verification"
+    "verification",
+    "security"
   ],
   "summaries": [
-    "propose a platform architecture of blockchain-based FL system for failure detection in IIoT (applied in an air-conditioner manufacturer)",
-    "client organizations are rewarded with tokens according to smart contract stored in a blockchain",
-    "client data is verifiable by anchoring"
+    "in the conventional FL framework, __[1] add a blockchain__ to maintain transasctions to maintain security, __[2] build a Merkle tree__ on clients to ensure verifiable integrity of clients' data, __[3] reward clients with tokens__ based on the size and the centroid distance of data written in the samrt contract"
   ],
   "systemModel": [
     "Players:",
@@ -53,7 +52,7 @@
         "<u>a data decryptor</u>: decrypt the encrypted detection results from client organizations",
         "<u>a database</u>: store detection results",
         "<u>a blockchain full node</u>: maintain complete list of every single transasction that had occurred on the blockchain"
-      ]      
+      ]
     ],
     "processes",
     [

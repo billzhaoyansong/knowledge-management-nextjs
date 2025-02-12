@@ -1,0 +1,44 @@
+{
+  "title": "An incentive mechanism design for federated learning with multiple task publishers by contract theory approach",
+  "authors": [
+    "Shichang Xuan",
+    "Mengda Wang",
+    "Jingyi Zhang",
+    "Wei Wang",
+    "Dapeng Man",
+    "Wu Yang"
+  ],
+  "type": "technical",
+  "year": "2022-06",
+  "labels": [
+    "federated learning",
+    "decentralized",
+    "multi-server",
+    "reward",
+    "contract",
+    "blockchain"
+  ],
+  "summaries": [
+    "in the decentralized FL framework, propose __a rewarding mechanism in a multi-servers environment__ by saving all contracts from multi-servers to a 3rd-party blockchain and let each worker select"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "multiple task publishers",
+      "$1$ blockchain",
+      "heterogeneous worker nodes: $N=\\{1,...,N\\}$"
+    ],
+    "Process:",
+    [
+      "task publishers [1] design contracts according to the quality of worker nodes [2] save the content of each contract in the blockchain<ol>",
+      "each worker signs a contract to maximize his profit",
+      "each worker trains model locally and save the update to the blockchain",
+      "the corresponding task publisher obtains the update on the blockchain and does a global aggregation",
+      "the task publisher pays the reward to the worker and save the record to the blockchain"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/WCNC49053.2021.9417347",
+  "id": "xuan2024incentive",
+  "bibtex": "@article{xuan2024incentive, title={An incentive mechanism design for federated learning with multiple task publishers by contract theory approach}, author={Xuan, Shichang and Wang, Mengda and Zhang, Jingyi and Wang, Wei and Man, Dapeng and Yang, Wu}, journal={Information Sciences}, volume={664}, pages={120330}, year={2024}, publisher={Elsevier}}"
+}

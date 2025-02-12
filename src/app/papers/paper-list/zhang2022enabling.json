@@ -1,0 +1,136 @@
+{
+  "title": "Enabling Long-Term Cooperation in Cross-Silo Federated Learning: A Repeated Game Perspective",
+  "authors": [
+    "Ning Zhang",
+    "Qian Ma",
+    "Xu Chen"
+  ],
+  "type": "technical",
+  "year": "2021-06",
+  "labels": [
+    "federated learning",
+    "reward",
+    "repeated cooperative game",
+    "stage game"
+  ],
+  "systemModel": [
+    "a server, a set $\\mathcal{N}=\\{1,2,...,N\\}$ of clients with time-varing local data sets $D_n$",
+    "cross-silo FL process is different from cross-device FL process",
+    "step 1: clients initiate an FL process",
+    "step 2: clients choose their own degree of data participation $x_n \\in D_n$ to perform local training and upload trained models to server",
+    "step 3: server conducts data-size weighted global aggregation",
+    "step 4: server distributes new global model to clients",
+    "step 2-4 is one cross-silo FL iteration",
+    "several iterations constitute an FL process, and each time slot corresponds to one cross-silo FL process",
+    "step 5: payment to the central server is equally split by customers"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose a rewarding mechanism for cross-silo FL (initiate process by clients and final model shared by all clients), __motivating clients to contribute more data__ by minimizing local cost in the short and long runs and __[2] preventing free riders__",
+    "at last participants need to pay central server equal amount of money"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "incentive mechanism"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "game theory"
+    ]
+  ],
+  "motivation": [
+    "In cross-silo FL, since clients usually belong to different entities), each client may behave selfishly to maximize its own benefit.",
+    "Specifically, each client selfishly chooses its participation level (i.e., the amount of local data) for the local training steps.",
+    "The total amount of local data chosen by all clients will affect the global model accuracy, while the model training leads to costs to clients.",
+    "In practice, clients have heterogeneous valuations for global model accuracy [9], and will make a tradeoff between the achieved global model accuracy and the incurred cost.",
+    "On the other hand, clients with low valuations for global model accuracy may choose not to perform local training to reduce the cost, and we call such clients as free riders.",
+    "This motivates us to study clients’ selfish participation behaviors in cross-silo FL through a game-theoretic approach.",
+    "In this paper, we aim at addressing the following fundamental question in cross-silo FL."
+  ],
+  "questions": [
+    "how to encourage the participation of clients with full data (avoid partial participation and free riders)"
+  ],
+  "techniques": [
+    "stage game in one cross-silo FL process: selfish participation game",
+    [
+      "The game:",
+      [
+        "Players: the set of $\\mathcal{N}$ of clients",
+        "Strategies: each client $n\\in\\mathcal{N}$ chooses the amount of local data $x_n\\in[0,D_n]$ for model training",
+        "Objective: each client $n$ aims to minimize its total cost $F_n(x_n,\\mathbf{x}_{-n})$",
+        [
+          "$F_n(x_n,\\mathbf{x}_{-n})=\\rho_n A(x_n,\\mathbf{x}_{-n}) + \\epsilon(x_n)+C+p$",
+          [
+            "$\\rho_n$: client $n$'s valuation for the model accuracy",
+            "$A(x_n,\\mathbf{x}_{-n})=\\frac{1}{\\sqrt{(x_n+\\sum_{n'\\in\\mathcal{N},n'\\neq n}x_{n'})G}}+\\frac{1}{G}$: expected global model accuracy",
+            [
+              "$G$: number of global iterations in one FL process",
+              "$x_n$: the size of data sample used for local training"
+            ],
+            "$\\epsilon(x_n)=E x_n=\\frac{\\zeta_n}{2}\\mu_n \\vartheta_n^2 x_n$: computation cost",
+            [
+              "$\\zeta_n$: coefficient depending on computing chip",
+              "$\\mu_n$: number of CPU cycles",
+              "$\\vartheta_n$: CPU processing speed"
+            ],
+            "$C,p$: communication cost, payment to central server"
+          ]
+        ]
+      ],
+      "The $n$'s best response (BR): $x_n^{BR}(\\mathbf{x}_{-n})=\\min\\left\\{D_n, \\max\\left\\{\\sqrt[3]{\\frac{\\rho_n^2}{4GE^2}}-\\sum_{n'\\in\\mathcal{N},n'\\neq n}x_{n'},0\\right\\}\\right\\}$",
+      [
+        "the $n$'s BR increases with its valuation $\\rho_n$ for model accuracy",
+        "the $n$'s BR decreases with the number of iterations $G$, the computational cost coefficient $E$, and the total amount of local data $\\sum_{n'\\in\\mathcal{N},n'\\neq n}x_{n'}$",
+        "$h_n  \\triangleq \\sqrt[3]{\\frac{\\rho_n^2}{4GE^2}}$"
+      ],
+      "the Nash Equalibrium (NE): assume $D_n=D$, and order clients by $\\rho_n$",
+      [
+        "Case I: if there exists a critical client $k\\in\\mathcal{N}$ that satisfies $(N-k)D\\leq h_k \\leq (N+1-k)D$, the the NE: ",
+        [
+          "$x_n^*=\\begin{cases}0&\\text{if }n<k\\\\h_k-(N-k)D&\\text{if }n=k\\\\D&\\text{if }n>k\\end{cases}$"
+        ],
+        "Case II: if there doesn't exist a critical client $k$ in case I then there must exist a client $m\\in\\mathcal{N}$ that satisfies $h_m<(N-m)D<h_{m+1}$, the the NE:",
+        [
+          " $x_n^*=\\begin{cases}0&\\text{if }n<m\\\\D&\\text{if }n>m\\end{cases}$"
+        ]
+      ],
+      "Distributed algorithm to compute equilibrium",
+      [
+        "1. each client reports $\\rho_n$ to server",
+        "2. server sends the total number of clients and rank according to $rho_n$ to clients",
+        "3. each client calculates BR based on the NE cases"
+      ]
+    ],
+    "repearted game in infinitely many cross-silo FL processes: cooperative participation strategy",
+    [
+      "this cooperative participation strategy aims to minimize the number of free riders while reducing the cost of each client compared with the cost at NE of the stage game",
+      "The game:",
+      [
+        "Players: the set of $\\mathcal{N}$ of clients",
+        "Strategies: each client $n\\in\\mathcal{N}$ chooses the amount of local data $x_n^t\\in[0,D_n]$ for model training in each time slot $t$",
+        "Histories: the strategy profile history $s^t\\triangleq \\{\\mathbf{x}^0,...,\\mathbf{x}^{t-1} \\}$ till time slot $t$",
+        "Objective: each client $n$ aims to minimize its long-term discounted total cost $\\mathcal{C}_n(s^{\\infty})$",
+        [
+          "$\\mathcal{C}_n(s^{\\infty})=\\sum_{t=0}^{\\infty}\\delta_n^t F_n(\\mathbf{x}^t)$",
+          [
+            "$\\delta_n\\in[0,1)$ is the discount factor"
+          ]
+        ]
+      ],
+      "cooperative strategy: omit",
+      "subgame perfect NE (SPNE): omit",
+      "optimal SPNE: omit",
+      [
+        "since the SPNE is not unique, it is possible to derive an optimal SPNE that can minimize the number of free riders while maximizing the amount of local data for model training"
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/TMC.2022.3148263",
+  "id": "zhang2022enabling",
+  "bibtex": "@article{zhang2022enabling, title={Enabling long-term cooperation in cross-silo federated learning: A repeated game perspective}, author={Zhang, Ning and Ma, Qian and Chen, Xu}, journal={IEEE Transactions on Mobile Computing}, year={2022}, publisher={IEEE}}"
+}

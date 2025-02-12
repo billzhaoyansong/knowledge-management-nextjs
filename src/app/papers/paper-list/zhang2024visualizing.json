@@ -1,0 +1,65 @@
+{
+  "title": "Visualizing the Shadows: Unveiling Data Poisoning Behaviors in Federated Learning",
+  "authors": [
+    "Xueqing Zhang",
+    "Junkai Zhang",
+    "Ka-Ho Chow",
+    "Juntao Chen",
+    "Ying Mao",
+    "Mohamed Rahouti",
+    "Xiang Li",
+    "Yuchen Liu",
+    "Wenqi Wei"
+  ],
+  "type": "technical",
+  "year": "2024-05",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "software"
+  ],
+  "abstract": "This demo paper examines the susceptibility of Federated Learning (FL) systems to targeted data poisoning attacks, presenting a novel system for visualizing and mitigating such threats. We simulate targeted data poisoning attacks via label flipping and analyze the impact on model performance, employing a five-component system that includes Simulation and Data Generation, Data Collection and Upload, User-friendly Interface, Analysis and Insight, and Advisory System. Observations from three demo modules: label manipulation, attack timing, and malicious attack availability, and two analysis components: utility and analytical behavior of local model updates highlight the risks to system integrity and offer insight into the resilience of FL systems. The demo is available at https://github.com/CathyXueqingZhang/DataPoisoningVis.",
+  "summaries": [
+    "in the conventional FL framework, __propose an advisory system to detect and mitigate the targeted data poisoning attack (TDPA)__ (Specifically the label flipping attack)",
+    "_Scenario_: the targeted data poisoning attack (TDPA) is stealthy comparing with untargeted data poisoning attack (UDPA). Because UDPA compromises the overall model performance by denial-of-service, while TDPA modifies only specific inputs.",
+    "_Problem_: a system is needed to study TDPA from the view of the server"
+  ],
+  "systemModel": [
+    "components of the advisory system",
+    [
+      "Simulation and Data Generation Component:<ol>",
+      [
+        "conduct a simulation of a complete FL process under the TDPA via label flipping to explore the effects of different [1] attack timings, [2] malicious participant percentage, and [3] availability<ol>",
+        "generate results data for the simulation"
+      ],
+      "Data Collection and Management Component: collect results data from the simulation to store in JSON format at MongoDB",
+      "UI Component: provide analytical inspection (F1 Analysis & 3D projection of client's high-dimension local model updates under PCA)",
+      "Advosary Component: translate insights into actionable recommendations"
+    ]
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    ""
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.48550/arXiv.2405.16707",
+  "id": "zhang2024visualizing",
+  "bibtex": "@article{zhang2024visualizing, title={Visualizing the Shadows: Unveiling Data Poisoning Behaviors in Federated Learning}, author={Zhang, Xueqing and Zhang, Junkai and Chow, Ka-Ho and Chen, Juntao and Mao, Ying and Rahouti, Mohamed and Li, Xiang and Liu, Yuchen and Wei, Wenqi}, journal={arXiv preprint arXiv:2405.16707}, year={2024}}"
+}

@@ -1,0 +1,75 @@
+{
+  "title": "Federated Learning-Based Collaborative Authentication Protocol for Shared Data in Social IoV",
+  "authors": [
+    "Pengcheng Zhao",
+    "Yuanhao Huang",
+    "Jianping Gao",
+    "Ling Xing",
+    "Honghai Wu",
+    "Huahong Ma"
+  ],
+  "type": "technical",
+  "year": "2022-01",
+  "editing": false,
+  "labels": [
+    "federated learning"
+  ],
+  "summaries": [
+    "extremely hard to read",
+    "to prevent data leakage and reduce the propagation delay of data, an FL authentication protocol was designed in the social vehicle networking",
+    "the anonymous mutual authentication and key agreement are included in the protocol",
+    "the proposed protocol are proved to be resistant to replay attacks, sybil attacks, and so on"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "__Trusted Agency (TA)__: a trusted 3rd-party vehicle registration and authentication agency",
+      "__Content Service Provider (CS)__",
+      [
+        "issue instructions such as automatic vehicle driving decisions and road traffic environment data",
+        "provide  wather, news and entertainment advice",
+        "aggregate models"
+      ],
+      "__Roadside Unit (RSU)__",
+      [
+        "request authentication",
+        "obtain CS aggregation model paramters from the TA"
+      ],
+      "__On-board unit (OBU)__:",
+      [
+        "a communication module in a vehicle user with a certain degree of computing power"
+      ]
+    ],
+    "Process:",
+    [
+      "The RSU and CS of the community in which the vehicle is located register the vehicle information in advance with the TA<ol>",
+      "CS sends a registration request",
+      "RSU sends a registration request"
+    ]
+  ],
+  "problemCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL"
+    ]
+  ],
+  "motivation": [
+    ""
+  ],
+  "questions": [
+    ""
+  ],
+  "techniques": [
+    ""
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JSEN.2022.3153338",
+  "id": "zhao2022federated",
+  "bibtex": "@article{zhao2022federated, title={Federated learning-based collaborative authentication protocol for shared data in social IoV}, author={Zhao, Pengcheng and Huang, Yuanhao and Gao, Jianping and Xing, Ling and Wu, Honghai and Ma, Huahong}, journal={IEEE Sensors Journal}, volume={22}, number={7}, pages={7385--7398}, year={2022}, publisher={IEEE}}"
+}

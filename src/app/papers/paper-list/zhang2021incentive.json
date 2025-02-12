@@ -1,0 +1,154 @@
+{
+  "title": "Incentive Mechanism for Horizontal Federated Learning Based on Reputation and Reverse Auction (RRAFL)",
+  "authors": [
+    "Jingwen Zhang",
+    "Yuezhou Wu",
+    "Rong Pan"
+  ],
+  "type": "technical",
+  "year": "2021-04",
+  "labels": [
+    "federated learning",
+    "reward",
+    "client selection",
+    "reputation",
+    "reverse auction",
+    "aggregation",
+    "blockchain"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] add a blockchain to store reputations__ for clients, __[2] propose a reverse auction rewarding mechanism and select clients based on the ratio of bid price and reputation__, __[3] propose an aggregation scheme__ which is weighted by the loss difference between the models with and without a specific participant, __[4] pay clients using critical payment__",
+    "comprehensive reputations, which are calculated by combining direct and indirect reputations, are used extensively in client selection (based on the ratio of bidding price to comprehensive reputation) and incentive payouts (proportional to comprehensive reputation)",
+    "direct reputations are calculated based on round-level angles between gradients and loss difference before and after aggregating a specific local model"
+  ],
+  "systemModel": [
+    "step 1): task requester broadcasts task information (budget, required data category and computing resources, etc) to the community",
+    "step 2): interested individuals submit bids as candidates",
+    "step 3): task requester downloads reputation evaluation of candidates from the blockchain, and combines the direct and indirect reputations to get a comprehensive reputation [see 1. Comprehensive Reputation Calculation]",
+    "step 4): task requester selects candidates as participants [see 2. Client Selection]",
+    "step 5): participants receive the global model, do local training, and upload the trained model",
+    "step 6): task requester aggregates into a new global model [see 3. Global Model Aggregation]",
+    "step 7): task requester detects qualities of uploaded local models [see 4. Model Quality Detection] and measures the contribution of each participant [see 5. Contribution Evaluation]",
+    "step 8): after several global iterations, the task requester updates the reputations of participants [see 6. Reputation Update] and uploads and saves the interaction information of the task to the interaction blockchain",
+    "step 9): task requester pays the participants $p_j=Re_j q_{k+1}$"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "Incentive Mechanism"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "Reverse Auction"
+    ]
+  ],
+  "motivation": [
+    "However, due to the inevitable training and communication costs, participants will not serve for free [40].",
+    "If there is no reward, participants will not stay in the federated learning system, resulting in the system's unsustainable operation.",
+    "Besides, participants may submit poor models to improve their utilities even if they are rewarded.",
+    "Also, the task requester is not aware of the amount and quality of data for each participant.",
+    "If a data poisoning attack is conducted or the data quality is poor, the performance of the global model may become worse."
+  ],
+  "questions": [
+    "incentive mechanism in FL"
+  ],
+  "techniques": [
+    "Comprehensive Reputation Calculation<ol>",
+    [
+      "$\\text{Re}_{j}=\\beta\\cdot\\text{Re}_{i,j}+(1-\\beta)\\sum_{k} w_k\\text{Re}_{k,j}$",
+      [
+        "$\\beta=-\\frac{2(1-\\beta_1)}{\\pi}\\arctan(\\frac{N_\\text{effective}}{\\beta_2\\pi})+1$: transformed arctan function",
+        [
+          "$\\beta_1$: parameter controls the lower bound, hyperparameter",
+          "$\\beta_2$: parameter controls how fast the weight of direct reputation decreases as the number of effective recommenders increases, hyperparameter",
+          "$N_{\\text{effective}}$: number of effective recommenders - whose evaluated reputation is accepted are referred to as effective recommenders"
+        ],
+        "$\\text{Re}_{i,j}$: direct reputation of worker $j$ by requester $i$",
+        "$\\sum_k w_k\\text{Re}_{k,j}$: indirect reputations of worker $j$ by recommender $k$",
+        [
+          "$w_k=\\frac{\\text{Re}_{i,k}P_k\\varphi_{i,k}}{\\sum_k \\text{Re}_{i,k}P_k\\varphi_{i,k}}$",
+          [
+            "$\\text{Re}_{i,k}$: direct reputation given from requester $i$ to recommender $k$",
+            "$P_k=f(Pr'_k)$",
+            [
+              "$Pr'_k=\\frac{Pr_k-\\nu}{\\sigma}$",
+              [
+                "$Pr_k$: pagerank value of recommender $k$"
+              ]
+            ],
+            "$\\varphi_{i,k}=\\frac{\\sum_{j\\in I\\bigcap K}(Re_{i,j}-\\bar{Re_{i,\\cdot}})(Re_{k,j}-\\bar{Re_k,\\cdot})}{\\sqrt{\\sum_{j\\in I}(Re_{i,j}-\\bar{Re_{i,\\cdot}})^2}\\sqrt{\\sum_{j\\in K}(Re_{k,j}-\\bar{Re_{k,\\cdot}})^2}}$",
+            [
+              "$I$: set of participants who have interacted with requester $i$",
+              "$K$: set of participants who have interacted with recommender $k$",
+              "$\\bar{Re_i,\\cdot}$: mean value of direct reputations from requester $i$",
+              "$\\bar{Re_k,\\cdot}$: mean value of direct reputations from recommender $k$"
+            ]
+          ]
+        ]
+      ]
+    ],
+    "Client Selection",
+    [
+      "2.1 sort candidates by $q_j=\\frac{b_j}{\\text{Re}_j}$ so that $q_1\\leq q_2\\leq\\dots\\leq q_n$",
+      "2.2 finalize participants to fulfill budget constraint: $k=\\arg \\max_k \\left\\{q_{k+1}\\sum_{j=1}^k Re_j\\leq B \\right\\}$"
+    ],
+    "Global Model Aggregation",
+    [
+      "$\\mathcal{M}_G^{(t)}=\\sum_j a_j \\mathcal{M}_{L_j}^{(t)}$",
+      [
+        "$\\mathcal{M}_G^{(t)}$: global model in round t",
+        "$\\mathcal{M}_{L_j}^{(t)}$: local model in round $t$ uploaded by participant $j$",
+        "$\\alpha_i^t=\\frac{s_0+s_j}{\\sum_j(s_0+s_j)}$",
+        [
+          "$s_j=\\frac{\\delta_j-\\min_j(\\delta_j)}{\\sum_j (\\delta_j-\\min_j (\\delta_j))}$",
+          [
+            "$\\delta_j=l'_j-l$: difference of losses of global models after and before removing participant"
+          ]
+        ]
+      ]
+    ],
+    "Model Quality Detection",
+    [
+      "$\\begin{cases}n_{j}^{pass}+=1, \\quad \\text{if } l_{-j}-l \\geq\\delta\\\\ n_{j}^{fail}+=1, \\quad\\text{if } l_{-j}-l  <\\delta\\end{cases}$",
+      [
+        "$l_{-j}$: loss of global model in the validation set when worker $j$ does not participate in model aggregation",
+        "$l$: loss of full model",
+        "$\\delta$: a predefined threshold, hyperparameter"
+      ]
+    ],
+    "Contribution Evaluation",
+    [
+      "$\\text{contrib}_j^{(t)}=g_j^{(t)}\\cos\\theta_j^{(t)}\\vert\\cos\\theta_j^{(t)}\\vert$",
+      [
+        "$\\text{contrib}_j^{(t)}$: contribution of worker $j$ in the round of $t$",
+        "$\\theta_j^{(t)}$: the angle between uploaded gradient of worker $j$ and final gradient"
+      ]
+    ],
+    "Reputation Update",
+    [
+      "$\\text{Re}_{i,j}^{\\tau}=\\lambda\\text{Re}_{i,j}^{\\tau-1}+(1-\\lambda)\\cdot\\text{re}_{i,j}^{\\tau}$",
+      [
+        "$re_{i,j}^{(\\tau)}=y_j^{(\\tau)} \\cdot z_j^{(\\tau)}$: reputation of $j$ evaluated by $i$ in the $\\tau$-th task$",
+        [
+          "$y_j=\\exp(-\\exp(-5.5\\chi_i))$",
+          [
+            "$\\chi_j=\\frac{\\omega\\cdot n_j^{pass}-(1-\\omega)\\cdot n_j^{fail}}{\\omega\\cdot n_j^{pass}+(1-\\omega)\\cdot n_j^{fail}}$",
+            "$\\omega\\in(0, 0.5]$: a predefined parameter, hyperparameter"
+          ],
+          "$z_j=\\frac{\\text{contrib}_j}{\\max_j(\\text{contrib}_j)}$",
+          [
+            "$\\text{contrib}_j=\\max\\left\\{0, \\sum_t \\text{contrib}_j^{(t)}\\right\\}$"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1145/3442381.3449888",
+  "id": "zhang2021incentive",
+  "bibtex": "@inproceedings{zhang2021incentive,  title={Incentive mechanism for horizontal federated learning based on reputation and reverse auction},  author={Zhang, Jingwen and Wu, Yuezhou and Pan, Rong},  booktitle={Proceedings of the Web Conference 2021},  pages={947--956},  year={2021}}"
+}

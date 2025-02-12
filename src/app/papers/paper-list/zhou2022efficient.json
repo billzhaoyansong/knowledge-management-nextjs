@@ -1,0 +1,92 @@
+{
+  "title": "Efficient Device Scheduling with Multi-Job Federated Learning",
+  "authors": [
+    "Chendi Zhou",
+    "Ji Liu",
+    "Juncheng Jia",
+    "Jingbo Zhou",
+    "Yang Zhou",
+    "Huaiyu Dai",
+    "Dejing Dou"
+  ],
+  "type": "technical",
+  "year": "2021-12",
+  "labels": [
+    "federated learning",
+    "multi-job",
+    "client selection",
+    "fairness",
+    "gaussian process",
+    "reinforcement learning"
+  ],
+  "systemModel": [
+    "a single server, $M$ jobs denoted by $\\mathcal{M}$, $K$ devices denoted by $\\mathcal{K}$, a device can only be scheduled to one job at a time",
+    "each device $k$ has $M$ local datasets corresponding to the $M$ jobs $\\mathcal{D}_k^m$",
+    "step 1: server initializes global models and sends requests to available devices",
+    "step 2: server schedules devices to current jobs in parallel",
+    "step 3: server distributes the latest global models to the scheduled devices",
+    "step 4: devices update model based on local data",
+    "step 5: devices upload the updated model to the server",
+    "step 6: server aggregates the models",
+    "step 1-6 is a round and repeats until the global model reaches the expected performance"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __select clients for multi-jobs by considering fairness and training time__ to enable parallel processing of multiple jobs",
+    "a Bayesian Optimization-based Scheduling and a Reinforcement learning based algorithm are proposed to solve the multi-job client selection optimiztion problem"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "multi-job"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "client selection"
+    ]
+  ],
+  "motivation": [
+    "While current FL solutions focus on a single-task job or a multi-task job, FL with multiple jobs remains an open problem.",
+    "The major difference between the multitask job and multiple jobs is that the tasks of the multi-task job share some common parts of the model, while the multiple jobs do not have interaction between each other in terms of the model.",
+    "The multi-job FL deals with the simultaneous training process of multiple independent jobs.",
+    "While the scheduling problem of devices is typical NPhard, some solutions have already been proposed for the training process of FL or distributed systems, which generally only focus on a single job with FL.",
+    "In addition, these methods either cannot address the heterogeneity of devices or do not consider the data fairness during the training process"
+  ],
+  "questions": [
+    "multi-job client selection problem"
+  ],
+  "techniques": [
+    "client selection: minimize cost, which is the weighted sum of training time and unfairness",
+    [
+      "$\\min_{\\mathcal{V}^r_m} \\sum_{m=1}^M \\alpha\\cdot\\mathcal{T}_m^r  +\\beta\\cdot \\mathcal{F}_m^r$",
+      [
+        "$\\mathcal{T}_m^r=\\max_{k\\in\\mathcal{V}_m^r} \\{t_m^k\\}$",
+        "$\\mathcal{F}_m^r=\\frac{1}{|\\mathcal{K}|}\\sum_{k\\in\\mathcal{K}}(s_{k,m}^r - \\frac{1}{|\\mathcal{K}|}\\sum_{k\\in\\mathcal{K}}s_{k,m}^r)^2$",
+        [
+          "$s_{k,m}^r$: frequency of device $k$ scheduled to job $m$"
+        ],
+        "$\\mathcal{V}^r_m$: set of scheduled devices to job $m$ in $r$-round"
+      ]
+    ],
+    "solver 1 for client selection problem: Bayesian Optimization-based Scheduling",
+    [
+      "a Gaussian Process, which is composed of a mean function $\\mu$ and a covariance function $\\Kappa$, is adjusted to fit the cost objective function",
+      "we randomly generate a set of observation points and calculate the cost",
+      "Each observation point is a pair of scheduling plans and cost for the estimation of mean function and the covariance function.",
+      "Then, within each round, we randomly sample a set of scheduling plans, within which we select the one with the biggest reward using updated $\\mu$ and $\\Kappa$",
+      "Afterward, we perform the FL training for Job $m$ with the generated scheduling plan, and calculate the cost corresponding to the real execution"
+    ],
+    "solver 2 for client selection problem: Reinforcement Learning-Based Scheduling",
+    [
+      "The policy network is implemented using a Long Short-Term Memory (LSTM) network followed by a fully connected layer",
+      "In the training process, we define the reward as $-1 \\cdot total costs$"
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "arXiv:2112.05928",
+  "id": "zhou2022efficient",
+  "bibtex": "@inproceedings{zhou2022efficient, title={Efficient device scheduling with multi-job federated learning}, author={Zhou, Chendi and Liu, Ji and Jia, Juncheng and Zhou, Jingbo and Zhou, Yang and Dai, Huaiyu and Dou, Dejing}, booktitle={Proceedings of the AAAI Conference on Artificial Intelligence}, volume={36}, number={9}, pages={9971--9979}, year={2022}}"
+}

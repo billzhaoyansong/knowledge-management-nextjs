@@ -1,0 +1,60 @@
+{
+  "title": "Using Third-Party Auditor to Help Federated Learning: An Efficient Byzantine-robust Federated Learning",
+  "authors": [
+    "Zhuangzhuang Zhang",
+    "Libing Wu",
+    "Debiao He",
+    "Jianxin Li",
+    "Na Lu",
+    "Xuejiang Wei"
+  ],
+  "type": "technical",
+  "year": "2024-03",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "security",
+    "byzantine"
+  ],
+  "abstract": "Federated Learning (FL), as a distributed machine learning technique, has promise for training models with distributed data in Artificial Intelligence of Things (AIoT). However, FL is vulnerable to Byzantine attacks from diverse participants. While numerous Byzantine-robust FL solutions have been proposed, most of them involve deploying defenses at either the aggregation server or the participant level, significantly impacting the original FL process. Moreover, it will bring extra computational burden to the server or the participant, which is especially unsuitable for the resource-constrained AIoT domain. To resolve the aforementioned concerns, we propose FL-Auditor, a Byzantine-robust FL approach based on public auditing. Its core idea is to use a Third-Party Auditor (TPA) to audit samples from the FL training process, analyzing the trustworthiness of different participants, thereby helping FL obtain a more robust global model. In addition, we also design a lazy update mechanism to reduce the negative impact of sampling audit on the performance of the global model. Extensive experiments have demonstrated the effectiveness of our FL-Auditor in terms of accuracy, robustness against attacks, and flexibility. In particular, compared to the existing method, our FL-Auditor significantly reduces the computation time on the aggregation server by 8×-17×.",
+  "summaries": [
+    "in the conventional FL framwork, __add a third-party auditor__ to audit the local updates with a clean dataset to secure the training process"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "__$1$ Aggregation Server $\\mathcal{S}$__",
+      [
+        "a trusted entity"
+      ],
+      "__$n$ Participants $\\mathcal{P}_i (i=1,...,n)$__",
+      [
+        "a significant fraction of participants may be malicious"
+      ],
+      "__$1$ Third-Party Auditor (TPA)__",
+      [
+        "own a clean dataset"
+      ]
+    ],
+    "Process:",
+    [
+      "initialization<ol>",
+      [
+        "$\\mathcal{S}$ and $\\mathcal{P}$ initilize the model parameters",
+        "the TPA obtains the auxiliary validation dataset"
+      ],
+      "LocalUpdate",
+      [
+        "each $\\mathcal{P}_i$ trains a local model and sends the model to $\\mathcal{S}$"
+      ],
+      "LocalUpdateAudit",
+      [
+        "TPA randomly samples updates and audits the selected update processes using auxiliary validation dataset"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/TSUSC.2024.3379440",
+  "id": "zhang2024using",
+  "bibtex": "@ARTICLE{zhang2024using, author={Zhang, Zhuangzhuang and Wu, Libing and He, Debiao and Li, Jianxin and Lu, Na and Wei, Xuejiang}, journal={IEEE Transactions on Sustainable Computing}, title={Using Third-Party Auditor to Help Federated Learning: An Efficient Byzantine-robust Federated Learning}, year={2024},volume={}, number={}, pages={1-14}, keywords={Servers;Computational modeling;Training;Analytical models;Data models;Protocols;Internet of Things;Federated learning;Artificial Intelligence of Things;Byzantine-robust;public auditing}, doi={10.1109/TSUSC.2024.3379440}}"
+}

@@ -1,0 +1,113 @@
+{
+  "title": "Privacy-preserving blockchain-based federated learning for IoT devices",
+  "authors": [
+    "Yang Zhao",
+    "Jun Zhao",
+    "Linshan Jiang",
+    "Rui Tan",
+    "Dusit Niyato",
+    "Zengxiang Li",
+    "Lingjuan Lyu",
+    "Yingbo Liu"
+  ],
+  "type": "technical",
+  "year": "2020-03",
+  "labels": [
+    "federated learning",
+    "blockchain",
+    "client selection",
+    "reward",
+    "byzantine",
+    "reputation",
+    "privacy"
+  ],
+  "systemModel": [
+    "Players:",
+    [
+      "a blockchain as the central server",
+      "multiple mobile edge computing (MEC) servers as computational resources",
+      "multiple customers as FL clients"
+    ],
+    "process",
+    [
+      "home appliance manufacturers raise a request to build an ML model<ol>",
+      "customers who have home appliances satisfying requirements can download the initial model (no selection)",
+      "customers use mobile phones to collect and extract features from the data in home appliances",
+      "customers add $\\epsilon$-DP noise to features and offload the perturbed features and original labels to 3rd-party MEC",
+      "MEC train the fully connected layers and return the training loss to the mobile to update the front layer (step 4&5 is partitioned deep model training)",
+      "customers sign on the hash of models and upload models via mobile phones",
+      "miners of the blockchain verify the validity of the uploaded models and select a subset of all models to resist Byzantine attacks (models filtering here)",
+      "miners compete for updating parameters to get reward and the winning miner aggregates models (the miner with more coins has a higher probability of winning)",
+      "customers receive rewards proportional to reputations which is stored in the blockchain"
+    ]
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] propose a paradigm that a blockchain is used as the central server and storage of reputation, MEC servers as computational resources, customers as data owners__ for home appliance industry, __[2] apply $\\epsilon$-DP__ on these features to preserve privacy, __[3] use miners to verify uploaded models using multi-krum__ to resist byzantine attacks, __[4] reward customers proportional to reputations__",
+    "in the proposed paradigm, a blockchain is used as the central server, MEC servers as computational resources, customers as data owners",
+    "customers use mobile phones to extract features from the data in their home appliances and apply $\\epsilon$-DP on these features",
+    "customers then employ MEC servers to train models and upload trained models to the blockchain",
+    "miners verify uploaded models using multi-krum to resist byzantine attacks and update reputations of customers",
+    "miners compete for aggregating server and reward customers proportional to reputations"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "applications"
+    ]
+  ],
+  "motivation": [
+    "However, Melis et al. [3] demonstrated that gradient updates might leak significant information about customers’ training data.",
+    "Attackers can recover data from gradients uploaded by customers [4].",
+    "Besides, the federated approach for training the model is susceptible to model poisoning attacks",
+    "In addition, information leakage risks exist in the third party’s mobile edge computing (MEC) server"
+  ],
+  "questions": [
+    "apply FL for home appliance"
+  ],
+  "techniques": [
+    "$\\epsilon$ differential privacy: transform $X_{i,j,k}$ to $\\tilde{X}_{i,j,k}$",
+    [
+      "$\\tilde{X}_{i,j,k} \\in [-\\sqrt{N-1}, \\sqrt{N-1}]$",
+      "$\\frac{1}{|B|}\\sum_{k\\in B}\\tilde{X}_{i,j,k} =0$",
+      "$\\frac{1}{|B|}\\sum_{k\\in B}(\\tilde{X}_{i,j,k})^2 =1$",
+      [
+        "$B$: batch"
+      ]
+    ],
+    "client selection: to resist Byzantine attacks",
+    [
+      "assign a Euclidean distance sum score to every uploaded model",
+      [
+        "$s(i)=\\sum_{i \\to j} \\Vert \\Delta w_i - \\Delta w_j \\Vert^2$",
+        "$j$ denotes the set of models of size $R-f-2$ with closest distance",
+        [
+          "$R$: total number of updates",
+          "$f$: number of byzantine customers"
+        ]
+      ],
+      "rank score in ascending order and choose the top $R-f$ models for aggregation"
+    ],
+    "incentive mechanism: rewards proportional to reputations",
+    [
+      "$\\gamma=\\begin{cases}\\min (\\gamma^{\\max},\\gamma+1)& \\text{if } a=H \\text{ and } \\gamma\\ge h \\\\ \\gamma-1& \\text{if } a=L \\text{ and } \\gamma\\ge h+1 \\\\ 0 & \\text{if }a=L \\text{ and } \\gamma=h  \\\\ \\gamma +1 & \\text{if } \\gamma<h\\end{cases}$",
+      [
+        "$\\gamma\\in \\{0, ..., \\gamma^{\\max}\\}$: reputation of a customer",
+        "$h$: average reputation of whole customers",
+        "$H, L$: high/low evaluation results",
+        "$a$: evaluation output from client selection, or been selected or not"
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [],
+  "doi": "10.1109/JIOT.2020.3017377",
+  "id": "zhao2020privacy",
+  "bibtex": "@article{zhao2020privacy, title={Privacy-preserving blockchain-based federated learning for IoT devices}, author={Zhao, Yang and Zhao, Jun and Jiang, Linshan and Tan,Rui and Niyato, Dusit and Li, Zengxiang and Lyu, Lingjuan and Liu, Yingbo},  journal={IEEE Internet of Things Journal}, volume={8}, number={3},  pages={1817--1829}, year={2020}, publisher={IEEE}}"
+}

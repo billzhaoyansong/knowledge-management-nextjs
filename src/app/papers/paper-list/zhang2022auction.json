@@ -1,0 +1,149 @@
+{
+  "title": "Auction-Based Ex-Post-Payment Incentive Mechanism Design for Horizontal Federated Learning with Reputation and Contribution Measurement",
+  "authors": [
+    "Jingwen Zhang",
+    "Yuezhou Wu",
+    "Rong Pan"
+  ],
+  "type": "technical",
+  "year": "2022-01",
+  "labels": [
+    "federated learning",
+    "client selection",
+    "reward",
+    "reverse auction",
+    "reputation"
+  ],
+  "systemModel": [
+    "a task publisher and a set of workers denoted by $U$",
+    "reputation of a worker $Re_i$ is public, while data quality, quantity, computing power and task cost $c_i$ are private",
+    "each task is constrained by budget $B$",
+    "stage 1: worker $i$ submits bid price $b_i$ to the publisher",
+    "stage 2: publisher obtains reputations and selects a set of $S$ workers to start the FL task",
+    "stage 3: publisher calculates contributions and internal reputations for each worker, updates the accumulated reputation and pays $p_i$"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] propose a reverse-auction based rewarding mechanism__, __[2] select workers__ based on the ratio of bidding price and reputation __[3] pay workers__ based on accumulated reputaton and task internal reputation",
+    "round contribution and trustworthiness, which are calculated based on accuracy on weighted data sample and loss difference with and without the worker respectively, are used for weighted aggregation",
+    "reputations are calculated by aggregating task round contribution and trustworthiness"
+  ],
+  "problemCategory": [
+    [
+      "FL",
+      "incentive mechanism"
+    ]
+  ],
+  "solutionCategory": [
+    [
+      "FL",
+      "auction"
+    ]
+  ],
+  "motivation": [
+    "due to the inevitable costs, rational and selfinterested workers will not serve for free.",
+    "In addition, due to data isolation, the task publisher does not know the worker’s data information, computing power, and reliability.",
+    "It is impractical to require workers to report these truthfully.",
+    "Therefore, task publishers lack the means to choose as many highquality workers as possible.",
+    "In addition, even if workers are selected and rewarded, allocating rewards reasonably and fairly remains a great challenge.",
+    "This requires designing an effective method for measuring the contribution, quantifying the performance of workers, indirectly reflecting the nature of workers."
+  ],
+  "questions": [
+    "pay clients in accordance with their contributions and reputations"
+  ],
+  "techniques": [
+    "client selection<ol>",
+    [
+      "sort all workers in non-descending order of their cost density<ol>",
+      [
+        "$\\rho_1\\leq\\dots\\leq\\rho_k\\leq\\rho_{k+1}\\leq\\dots\\leq\\rho_n$, $\\rho_i=\\frac{b_i}{\\text{Re}_i}$"
+      ],
+      "from front to back find the last worker $k$ in the sequence that satisfies: $\\rho_k\\leq\\frac{B}{\\sum_{i=1}^{k}\\text{Re}_i}$ to form $S$ the winning worker set"
+    ],
+    "reputation update",
+    [
+      "in each global round",
+      [
+        "contribution",
+        [
+          "determine the weight of each sample at round $t$<ol>",
+          [
+            "$w_j^t=\\frac{\\sum_{i\\in U}-\\ln P_{i,j}^t}{\\sum_{i\\in U}\\sum_{j\\in D}-\\ln P_{i,j}^t}$",
+            [
+              "$w_j^t$: weight of sample $j$ at round $t$",
+              "$U$: full worker set",
+              "$D$: validation set on server",
+              "$i,j$: worker, data sample",
+              "$P_{i,j}^t$: performance of worker $i$ on sample $j$ at round $t$"
+            ]
+          ],
+          "evaluate the worker's performance on the weighted sample as his contribution at round $t$",
+          [
+            "$\\text{contrib}_i^t=\\sum_{j\\in D}P_{i,j}^t w_j^t$"
+          ],
+          "standardize contribution of worker at round $t$",
+          [
+            "$\\text{contrib}_i^t=\\frac{\\text{contrib}_i^t}{\\max_{k\\in U}(\\text{contrib}_k^t)}$"
+          ]
+        ],
+        "trustwothiness",
+        [
+          "calculate loss difference at round $t$ with and without worker $i$ in the model aggregation<ol>",
+          [
+            "$\\Delta l_i=l_{-i}-l$",
+            [
+              "$l_{-i}$: loss of global model in the validation set when worker $i$ doesn't participate in model aggregation",
+              "$l$: loss of global model in the validation set when worker $i$ participates in model aggregation"
+            ]
+          ],
+          "check if the worker passed the detection at round $t$",
+          [
+            "if $\\Delta l_i\\geq\\delta$, $n_{i}^{pass}+=1$, otherwise, $n_{i}^{fail}+=1$"
+          ]
+        ],
+        "weighted aggregation",
+        [
+          "$w^t_i=\\frac{\\text{contrib\\_score}^t_i\\cdot\\text{quality\\_score}_i^t}{\\sum_{j}\\text{contrib\\_score}^t_j\\cdot\\text{quality\\_score}_j^t}$",
+          [
+            "$w^t_i$: weight for worker $i$ at round $t$",
+            "$\\text{contrib\\_score}_i^t=\\max(0,\\text{contrib}_i^t)$: contribution score",
+            "$\\text{quality\\_score}_i^t=\\frac{s_0+s_i}{\\sum_k(s_0+s_k)}$",
+            [
+              "$s_0$: a constant, usually $=1$",
+              "$s_i=\\frac{\\Delta l_i-\\min_j(\\Delta l_j)}{\\sum_k (\\Delta l_k-\\min_j (\\Delta l_j))}$"
+            ]
+          ]
+        ]
+      ],
+      "after all rounds $\\mathcal{T}$",
+      [
+        "calculate the average contribution of worker to a task $\\tau$ throughout all rounds: $\\text{contrib}_i^{\\tau}=\\frac{\\sum_{t\\in \\mathcal{T}}\\text{contrib}_i^t}{\\vert \\mathcal{T}\\vert}$",
+        "calculate trustworthiness of worker to a task: $\\text{trust}_i^\\tau=\\exp(-\\exp(-5.5x_i))$",
+        [
+          "the function is an instance of Gompertz function $y=a\\exp(b\\exp(c\\cdot x))$",
+          "$x_i=\\frac{\\theta\\cdot n_i^{pass}-(1-\\theta)\\cdot n_i^{fail}}{\\theta\\cdot n_i^{pass}+(1-\\theta)\\cdot n_i^{fail}}$"
+        ],
+        "calculate internal reputation $\\text{re}_i^{\\tau}=\\text{contrib}_i^{\\tau}\\cdot\\text{trust}_i^{\\tau}$",
+        "update reputation: $\\text{Re}_i^{\\tau}=\\alpha\\cdot\\text{re}_i^{\\tau}+(1-\\alpha)\\cdot\\text{Re}_i^{\\tau-1}$"
+      ]
+    ],
+    "payment to clients",
+    [
+      "$p_i=\\min(p_i^{up},p_i')$",
+      [
+        "$p_i^{up}=\\text{Re}_i\\cdot\\rho^*$",
+        "$p_i'=\\text{re}_i\\cdot\\max\\left(\\frac{B}{\\sum_{j\\in S}\\text{re}_j},\\rho^*\\right)$",
+        [
+          "$\\rho^*=\\min(\\frac{B}{\\sum_{i\\in S}\\text{Re}_i}, \\frac{b_{k+1}}{\\text{Re}_{k+1}})$"
+        ]
+      ]
+    ]
+  ],
+  "experiments": [],
+  "futureWorks": [],
+  "comments": [
+    "[le2021] used the reverse auction to help task publishers select the workers to maximize social welfare. workers' rewards are determined before the task"
+  ],
+  "doi": "arXiv:2201.02410",
+  "id": "zhang2022auction",
+  "bibtex": "@article{zhang2022auction, title={Auction-based ex-post-payment incentive mechanism design for horizontal federated learning with reputation and contribution measurement}, author={Zhang, Jingwen and Wu, Yuezhou and Pan, Rong}, journal={arXiv preprint arXiv:2201.02410}, year={2022}}"
+}
