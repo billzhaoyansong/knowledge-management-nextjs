@@ -38,7 +38,7 @@
     ]
   ],
   "techniques": [],
-  "doi": "10.1109/WCNC49053.2021.9417347",
+  "doi": "10.1016/j.ins.2024.120330",
   "id": "xuan2024incentive",
   "bibtex": "@article{xuan2024incentive, title={An incentive mechanism design for federated learning with multiple task publishers by contract theory approach}, author={Xuan, Shichang and Wang, Mengda and Zhang, Jingyi and Wang, Wei and Man, Dapeng and Yang, Wu}, journal={Information Sciences}, volume={664}, pages={120330}, year={2024}, publisher={Elsevier}}"
 }

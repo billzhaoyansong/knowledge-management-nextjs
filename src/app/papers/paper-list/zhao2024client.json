@@ -1,0 +1,46 @@
+{
+  "title": "Client Scheduling for Multiserver Federated Learning in Industrial IoT With Unreliable Communications",
+  "authors": [
+    "Haitao Zhao",
+    "Yuhao Tan",
+    "Kun Guo",
+    "Wenchao Xia",
+    "Bo Xu",
+    "Tony Q. S. Quek"
+  ],
+  "type": "technical",
+  "year": "2023-02",
+  "labels": [
+    "federated learning",
+    "decentralized",
+    "multi-server",
+    "grouping"
+  ],
+  "summaries": [
+    "in the decentralized FL framework, propose __a client-server association algorithm for the multi-server scenario__ to minimize the global training loss function"
+  ],
+  "systemModel": [
+    "Players",
+    [
+      "edge servers: $\\mathcal{S}=\\{1,2,...,S\\}$",
+      "client devices: $\\mathcal{U}=\\{1,2,...,U\\}$"
+    ],
+    "Process",
+    [
+      "schedule clients among multiple servers to minimize the global training loss function<ol>",
+      "intra-cluster model aggregation:",[
+        "clients perform $T_1$ rounds of local training<ol>",
+        "clients upload to the associated edge server",
+        "edge servers do intra-cluster aggregation"
+      ],
+      "inter-cluster model aggregation:",[
+        "after $T_2$ rounds of intra-cluster aggregation, edge servers broadcast their models to the adjacent servers<ol>",
+        "each edge server performs inter-cluster model aggregation"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/JIOT.2024.3354914",
+  "id": "zhao2024client",
+  "bibtex": "@article{zhao2024client, title={Client Scheduling for Multi-Server Federated Learning in Industrial IoT With Unreliable Communications}, author={Zhao, Haitao and Tan, Yuhao and Guo, Kun and Xia, Wenchao and Xu, Bo and Quek, Tony QS}, journal={IEEE Internet of Things Journal}, year={2024}, publisher={IEEE}}"
+}

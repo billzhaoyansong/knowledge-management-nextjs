@@ -1,0 +1,25 @@
+{
+  "title": "FedMes: Speeding Up Federated Learning With Multiple Edge Servers",
+  "authors": [
+    "Dong-Jun Han",
+    "Minseok Choi",
+    "Jungwuk Park",
+    "Jaekyun Moon"
+  ],
+  "type": "technical",
+  "year": "2021-03",
+  "labels": [
+    "federated learning",
+    "decentralized",
+    "multi-server"
+  ],
+  "summaries": [
+    "in the decentralized FL framework, [1] enable __indirect model sharing among servers__ by allowing clients in overlapping areas to update local models based on average of all accessible servers' models, [2] prove its efficiency under strongly convex function"
+  ],
+  "systemModel": [
+  ],
+  "techniques": [],
+  "doi": "10.1109/JSAC.2021.3118422",
+  "id": "han2021fedmes",
+  "bibtex": "@article{han2021fedmes, title={FedMes: Speeding up federated learning with multiple edge servers}, author={Han, Dong-Jun and Choi, Minseok and Park, Jungwuk and Moon, Jaekyun}, journal={IEEE Journal on Selected Areas in Communications}, volume={39}, number={12}, pages={3870--3885}, year={2021}, publisher={IEEE}}"
+}

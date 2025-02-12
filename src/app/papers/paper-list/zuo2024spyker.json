@@ -1,0 +1,37 @@
+{
+  "title": "Spyker: Asynchronous Multi-Server Federated Learning for Geo-Distributed Clients",
+  "authors": [
+    "Yuncong Zuo",
+    "Bart Cox",
+    "Lydia Y. Chen",
+    "Jérémie Decouchant"
+  ],
+  "type": "technical",
+  "year": "2024-12",
+  "labels": [
+    "federated learning",
+    "decentralized",
+    "multi-server",
+    "efficiency"
+  ],
+  "summaries": [
+    "in the decentralized FL framework, propose __an asynchronous multi-server system__ that clients do asynchronous aggregation and servers do asynchronous model exchange to ensure efficiency in a multi-server environment"
+  ],
+  "systemModel": [
+    "Players",
+    [
+      "several servers",
+      "several clients"
+    ],
+    "Process",[
+
+      "geo-distributed clients are assigned to servers<ol>",
+      "clients interact with their assigned servers to do asynchronous FL",
+      "servers exchange models asynchronously whenever they detect that their ages differ too much"
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1145/3652892.3700778",
+  "id": "zuo2024spyker",
+  "bibtex": "@inproceedings{zuo2024spyker, title={Spyker: Asynchronous Multi-Server Federated Learning for Geo-Distributed Clients}, author={Zuo, Yuncong and Cox, Bart and Chen, Lydia Y and Decouchant, J{\\'e}r{\\'e}mie}, booktitle={Proceedings of the 25th International Middleware Conference}, pages={367--378}, year={2024}}"
+}

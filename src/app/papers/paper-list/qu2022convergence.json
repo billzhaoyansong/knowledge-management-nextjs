@@ -1,0 +1,25 @@
+{
+  "title": "On the Convergence of Multi-Server Federated Learning With Overlapping Area",
+  "authors": [
+    "Zhe Qu",
+    "Xingyu Li",
+    "Jie Xu",
+    "Bo Tang",
+    "Zhuo Lu",
+    "Yao Liu"
+  ],
+  "type": "technical",
+  "year": "2022-03",
+  "labels": [
+    "federated learning",
+    "decentralized",
+    "multi-server",
+    "convergence rate"
+  ],
+  "summaries": ["in the decentralized FL framework, [1] __enable indirect model sharing among servers__ by allowing clients in overlapping areas to update local models based on average of all accessible servers' models, [2] __prove the convergence on non-iid datasets for general non-convex settings__"],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "10.1109/TMC.2022.3200016",
+  "id": "qu2022convergence",
+  "bibtex": "@article{qu2022convergence, title={On the convergence of multi-server federated learning with overlapping area}, author={Qu, Zhe and Li, Xingyu and Xu, Jie and Tang, Bo and Lu, Zhuo and Liu, Yao}, journal={IEEE Transactions on Mobile Computing}, volume={22}, number={11}, pages={6647--6662}, year={2022}, publisher={IEEE}}"
+}
