@@ -5,8 +5,8 @@
 
     .paper-detail {
 
-        ul,
-        ol {
+        ul:not(.depth-1),
+        ol:not(.depth-1) {
             @apply pl-6;
         }
 

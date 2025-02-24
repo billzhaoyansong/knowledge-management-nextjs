@@ -1,0 +1,37 @@
+{
+  "title": "Collaboration Management for Federated Learning",
+  "authors": [
+    "Marius Schlegel",
+    "Daniel Scheliga",
+    "Kai-Uwe Sattle",
+    "Marco Seeland",
+    "Patrick Mäder"
+  ],
+  "type": "technical",
+  "year": "2024-05",
+  "labels": [
+    "federated learning",
+    "software"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose a platform (FLCSP) to lower barriers of using FL, and these barriers are (1) use-case-specific preparation and setup, (2) time-consuming collaboration establishment and collaborators matching, (3) debugging the process and keeping track of the artifacts is challenging",
+    "FLCSP: federated learning collaboration and sharing platform"
+  ],
+  "systemModel": [
+    "Architecture of FLCSP",[
+      "__frontend layer__: provides interfaces for uses and external developers",
+      "__services API layer__: provides an internal low-level API of the services used by the frontend layer",
+      "__services layer__: provides modular services furthersubdivided into functional componens and storage components",
+      [
+        "__session service__: session & user manager",
+        "__collaboration service (core)__",
+        "__sharing service (core)__: ",
+        "__security service__: policy manager & evaluator"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/ICDEW61823.2024.00043",
+  "id": "schlegel2024collaboration",
+  "bibtex": "@inproceedings{schlegel2024collaboration, title={Collaboration Management for Federated Learning}, author={Schlegel, Marius and Scheliga, Daniel and Sattler, Kai-Uwe and Seeland, Marco and M{\"a}der, Patrick}, booktitle={2024 IEEE 40th International Conference on Data Engineering Workshops (ICDEW)}, pages={291--300}, year={2024}, organization={IEEE}}"
+}

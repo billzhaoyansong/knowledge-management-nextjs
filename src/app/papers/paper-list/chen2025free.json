@@ -1,0 +1,140 @@
+{
+  "title": "Free-Rider and Conflict Aware Collaboration Formation for Cross-Silo Federated Learning",
+  "authors": [
+    "Mengmeng Chen",
+    "Xiaohu Wu",
+    "Xiaoli Tang",
+    "Tiantian He",
+    "Yew Soon Ong",
+    "QIQI LIU",
+    "Qicheng Lao",
+    "Han Yu"
+  ],
+  "type": "technical",
+  "year": "2024-01",
+  "labels": [
+    "federated learning",
+    "free rider"
+  ],
+  "summaries": [
+    "in conventional FL framework, propose __a coalition formation method__ for the cross-silo scenario in which participants are both model owners and data owner and they are self-interested and have competition relationships with other participants"
+  ],
+  "systemModel": [
+    "Scenario",
+    [
+      "in the cross-silo FL, FL participants (FL-PTs) are also the final owners/users of the trained model",
+      "FL-PTs are both (1) self-interest and (2) competition among FL-PTs"
+    ],
+    "Objectives",
+    [
+      "design a collaboration formation mechanism that meets:",
+      [
+        "absence of free riders<ol>",
+        "avoid conflict of interest"
+      ]
+    ],
+    "Players & Notations:",
+    [
+      "$\\mathcal{V}=\\{v_1,...,v_n\\}$: FL-PTs, and each FL-PT has dataset $\\mathcal{D}_i$<ol>",
+      [
+        "$\\mathcal{G}_b=(\\mathcal{V}, E_b)$: a benefit graph<ol>",
+        [
+          "a weighted directed graph that describes potential collaboration advantages between any two FL-PTs",
+          "$E_b$: the edge set of $\\mathcal{G}_b$",
+          "if $v_i$ can benefit from $v_j$'s data, then",
+          [
+            "there is a directed edge from $v_j$ to $v_i$ ($(v_j,v_i)\\in E_b$)<ol>",
+            "$w_{j,i}>0$ (a larger value of $w_{j,i}$ signifies a larger benefit)"
+          ]
+        ],
+        "$\\mathcal{G}_c=(\\mathcal{V}, E_c)$: a competing graph ",
+        [
+          "an undirected graph that describes competing relationships among different FL-PTs",
+          "$E_c$: the edge set of $\\mathcal{G}_c$",
+          "if $v_i$ competes against $v_j$, then",
+          [
+            "there is an undirected edge between $v_j$ to $v_i$ ($(v_j,v_i)\\in E_c$)"
+          ]
+        ]
+      ],
+      "Central Server (CS)",
+      [
+        "assumed to be trustable",
+        "each FL-PT will report its competitors to CS, thus CS has the knowledge of $\\mathcal{G}_c$",
+        "$\\mathcal{G}_u=(V, E_u)$: the data usage graph defined by the CS",
+        [
+          "a directed graph where $x_{j,i}\\in\\{0,1\\}$",
+          "if the CS determines that $v_j$ will contribute to $v_i$ in the FL training process, then $x_{j,i}=1$"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    "Concepts in Graph Theory",
+    [
+      "$\\mathcal{G}=(\\mathcal{V}, E)$: an arbitrary graph",
+      [
+        "$\\mathcal{V}$: the node set",
+        "$E$: the edge set"
+      ],
+      "for any $\\mathcal{S} \\subseteq \\mathcal{V}$, a subgraph $\\mathcal{G}(\\mathcal{S})$ is such that",
+      [
+        "the node set of $\\mathcal{G}(\\mathcal{S})$ is $\\hat{\\mathcal{V}}$",
+        "the edge set of $\\mathcal{G}(\\mathcal{S})$ consists of all the edges in $E$ that have both endpoints in $\\mathcal{S}$"
+      ],
+      "a subgraph $\\mathcal{G}(\\mathcal{S})$ is a strongly connected components of $\\mathcal{G}$ if",
+      [
+        "$\\mathcal{G}(\\mathcal{S})$ is strongly connected (there is a path in each direct between any 2 nodes)<ol>",
+        "$\\mathcal{G}(\\mathcal{S})$ is maximal (no additional edges or nodes from $\\mathcal{G}$ can be included in the subgraph)"
+      ],
+      "a partition of the nodes of $\\mathcal{G}$: the collection of strongly connected components",
+      [
+        "a partition $\\pi=\\{\\mathcal{S}_1,\\dots,\\mathcal{S}_K\\}$ satisfies:",
+        [
+          "$\\mathcal{S}_i\\subseteq \\mathcal{V}$<ol>",
+          "$\\bigcup_{k=1}^K \\mathcal{S} = \\mathcal{V}$",
+          "$\\mathcal{S}_i \\bigcap \\mathcal{S}_j = \\emptyset$"
+        ]
+      ],
+      "a simple path: a path which does not have repeating nodes"
+    ],
+    "Collaboration Principles:",
+    [
+      "Absense of free riders<ol>",
+      [
+        "Principle: for any $v_i\\in\\mathcal{V}$, there exists a $v_j\\in\\mathcal{V}$ that _benefits_ $v_i$ if and only if there exists at least one $v_k$ that can _benefit from_ $v_i$",
+        "Coalition: a partition $\\pi=\\{\\mathcal{S}_1,\\dots,\\mathcal{S}_K\\}$ is a set of coalitions if for any $\\mathcal{S}_K \\in \\pi$ and $|\\mathcal{S}_K|\\geq 2$ and $v_i \\in \\mathcal{S}_K$ that",
+        [
+          "$\\sum_{v_j \\in \\mathcal{S}_K - \\{v_j\\}} w_{i,j} > 0$ and $\\sum_{v_j \\in \\mathcal{S}_K - \\{v_j\\}} w_{j,i} > 0$"
+        ]
+      ],
+      "Avoidance of conflict of interest",
+      [
+        "Principle: for any 2 competing FL-PTs $v_i$ and $v_j$, $v_j$ is unreacheable to $v_i$ in $\\mathcal{G}_u$"
+      ]
+    ],
+    "Problem Description",
+    [
+      "the utility of a FL-PT $v_i \\in \\mathcal{S}_k$",
+      [
+        "$u_i(\\mathcal{S}_k) = \\sum_{(v_j,v_i)\\in E_b(\\mathcal{S}_k)} w_{j,i}$"
+      ],
+      "the utility of a coalition $\\mathcal{S}_k$",
+      [
+        "$u(\\mathcal{S}_k) = \\sum_{v_i \\in \\mathcal{S}_k } u_i (\\mathcal{S}_k)$"
+      ],
+      "The Problem: find a partition $\\pi$ such that",
+      [
+        "no coalitions of $\\pi$ can collaborate together and merge into a larger coaliation with a higher utility<ol>",
+        "Principle (1) and (2) must be satisfied"
+      ]
+    ],
+    "Solution",
+    [
+      "to read"
+    ]
+  ],
+  "doi": "x",
+  "id": "chen2025free",
+  "bibtex": "@article{chen2025free, title={Free-Rider and Conflict Aware Collaboration Formation for Cross-Silo Federated Learning}, author={Chen, Mengmeng and Wu, Xiaohu and Tang, Xiaoli and He, Tiantian and Ong, Yew Soon and Liu, Qiqi and Lao, Qicheng and Yu, Han}, journal={Advances in Neural Information Processing Systems}, volume={37}, pages={54974--55004}, year={2025}}"
+}

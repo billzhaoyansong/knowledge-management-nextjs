@@ -17,7 +17,8 @@
     "smart contract",
     "non-cooperative game",
     "grouping",
-    "decentralized"
+    "decentralized",
+    "multi-server"
   ],
   "summaries": [
     "in the decentralized FL framework, propose [1] __a regional FL framework__ that vehicles are clustered based on signal transmission power, reputations of vehicles are calculated based on accuracy contributions/loss difference, and client selection based on reputation threshold and __[2] knowledge trading based on smart contract in the global level__, and knowledge pricing modeled as a non-cooperative game",

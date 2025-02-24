@@ -109,6 +109,36 @@ export default function PaperDetail(
         }
     }
 
+    function generateContents(title: string, arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
+
+        // for summaries, list all the contents directly
+        if(title === 'summary')
+            return generateHtmlListElement(arr)
+
+        // for others, handle separately
+
+        // initialize the array of element children
+        let children = []
+
+        let i = 0;
+        while(i+1<arr.length){
+
+            // <div className="h-0.5 w-10 bg-black mt-1"></div> 
+            children.push(<div className="pt-6">
+                <div className="border border-gray-700 mt-3">
+                <h4 className="table mt-[-20px] ml-2 mb-2 font-bold text-xl px-3 bg-yellow-50">{arr[i]}</h4>
+                <div className="px-2 py-1">
+                {generateHtmlListElement(arr[i+1], ulClassNames, depth + 1)}
+                </div>
+                </div></div>)
+
+            i=i+2;
+        }
+
+        return React.createElement('div', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
+    }
+
+
     return <>
         <button onClick={() => setIsOpen(true)}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
@@ -130,9 +160,12 @@ export default function PaperDetail(
                     ]
                         .map(
                             (v) => {
-                                return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className="px-2 py-3 border border-slate-500 bg-yellow-50">
-                                    <h3 className="font-semibold capitalize">{v.title}</h3>
-                                    {generateHtmlListElement(v.content)}
+                                return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className="px-2 py-3 bg-yellow-50">
+                                    <div className="mx-3">
+                                    <h3 className="font-semibold capitalize text-yellow-700 text-3xl">{v.title}</h3>
+                                    
+                                    {generateContents(v.title, v.content)}
+                                    </div>
                                 </div>
                             }
                         )}
