@@ -41,6 +41,7 @@ export default function PaperDetail(
 ) {
 
     const [isOpen, setIsOpen] = useState(false)
+    const [view, setView] = useState("detail-only")
 
     /**
      * Generate a react list element based on the given array
@@ -112,7 +113,7 @@ export default function PaperDetail(
     function generateContents(title: string, arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
 
         // for summaries, list all the contents directly
-        if(title === 'summary')
+        if (title === 'summary')
             return generateHtmlListElement(arr)
 
         // for others, handle separately
@@ -121,21 +122,21 @@ export default function PaperDetail(
         let children = []
 
         let i = 0;
-        while(i+1<arr.length){
+        while (i + 1 < arr.length) {
 
             // <div className="h-0.5 w-10 bg-black mt-1"></div> 
-            children.push(<div className="pt-6">
-                <div className="border border-gray-700 mt-3">
-                <h4 className="table mt-[-20px] ml-2 mb-2 font-bold text-xl px-3 bg-yellow-50">{arr[i]}</h4>
-                <div className="px-2 py-1">
-                {generateHtmlListElement(arr[i+1], ulClassNames, depth + 1)}
-                </div>
+            children.push(<div className={`pt-6  ${view === 'detail-only' ? 'basis-1/2' : ''}`}>
+                <div className="border border-gray-700 my-3 mx-3">
+                    <h4 className="table mt-[-20px] ml-2 mb-2 font-bold text-xl px-3 bg-yellow-50">{arr[i]}</h4>
+                    <div className="px-2 py-1">
+                        {generateHtmlListElement(arr[i + 1], ulClassNames, depth + 1)}
+                    </div>
                 </div></div>)
 
-            i=i+2;
+            i = i + 2;
         }
 
-        return React.createElement('div', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
+        return React.createElement('div', { className: [...ulClassNames, `depth-${depth}`, `flex`, `${view === 'detail-only' ? 'w-full flex-row flex-wrap' : 'flex-col'}`].join(' ') }, ...children)
     }
 
 
@@ -149,34 +150,43 @@ export default function PaperDetail(
             onClose={() => { setIsOpen(false) }}
             size="lg"
             title={paperContent.title}>
-            <div className="flex flex-row h-full paper-detail">
-
-                {/* ============= left details abstract by myself */}
-                <div className="basis-1/2 flex-1 overflow-y-scroll mx-2 space-y-3" style={{ height: '90%' }}>
-                    {[
-                        { 'title': 'summary', content: paperContent.summaries },
-                        { 'title': 'systemModel', content: paperContent.systemModel },
-                        { 'title': 'techniques', content: paperContent.techniques }
-                    ]
-                        .map(
-                            (v) => {
-                                return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className="px-2 py-3 bg-yellow-50">
-                                    <div className="mx-3">
-                                    <h3 className="font-semibold capitalize text-yellow-700 text-3xl">{v.title}</h3>
-                                    
-                                    {generateContents(v.title, v.content)}
-                                    </div>
-                                </div>
-                            }
-                        )}
-
+            <div className="flex flex-col absolute" style={{ height: '95%', width: '97%' }}>
+                <div>
+                    <button className="border rounded-md px-2 py-1 mr-3 hover:bg-yellow-100" onClick={() => setView('detail-only')}>Details Only</button>
+                    <button className="border rounded-md px-2 py-1 hover:bg-yellow-100" onClick={() => setView('with-article')}>Details with Article</button>
                 </div>
+                <hr className="my-3" />
+                <div className="h-full w-full relative">
+                    <div className="flex flex-row h-full w-full absolute paper-detail border border-yellow-700 mx-2">
 
-                {/* ============= right original PDF */}
-                <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
-                    containerClassName="bg-yellow-100 border border-slate-500 basis-1/2"
-                    containerStyle={{ height: '90%' }} />
+                        {/* ============= left details abstract by myself */}
+                        <div className="basis-1/2 flex-1 overflow-y-scroll mx-2 space-y-3">
+                            {[
+                                { 'title': 'summary', content: paperContent.summaries },
+                                { 'title': 'systemModel', content: paperContent.systemModel },
+                                { 'title': 'techniques', content: paperContent.techniques }
+                            ]
+                                .map(
+                                    (v) => {
+                                        return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className={`bg-yellow-50 w-full flex ${view === 'detail-only' ? 'flex-row' : ''}`}>
+                                            <div className="mx-3 w-full">
+                                                <h3 className="font-semibold capitalize text-yellow-700 text-3xl">{v.title}</h3>
 
+                                                {generateContents(v.title, v.content)}
+                                            </div>
+                                        </div>
+                                    }
+                                )}
+
+                        </div>
+
+                        {/* ============= right original PDF */}
+                        <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
+                            containerClassName={`bg-yellow-100 border border-slate-500 ${view === "detail-only" ? "hidden" : "basis-1/2"}`}
+                            containerStyle={{ height: '90%' }} />
+
+                    </div>
+                </div>
             </div>
         </Modal>
     </>

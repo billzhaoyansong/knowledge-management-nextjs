@@ -22,12 +22,8 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, size, title, overflowBody, chi
                         &times;
                     </button>
                 </div>
-                <div className={`p-4 flex-1 h-full ${overflowBody && 'overflow-y-scroll'}`}>{children}</div>
-                {/* <div className="flex-initial flex justify-end p-4 border-t">
-                    <button onClick={onClose} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        Close
-                    </button>
-                </div> */}
+                {/* the relative position is to help the paper details */}
+                <div className={`p-4 flex-1 h-full relative ${overflowBody && 'overflow-y-scroll'}`}>{children}</div>
             </div>
         </div>
     );
