@@ -1,0 +1,100 @@
+{
+  "title": "Collaboration in Participant-Centric Federated Learning: A Game-Theoretical Perspective",
+  "authors": [
+    "Guangjing Huang",
+    "Xu Chen",
+    "Tao Ouyang",
+    "Qian Ma",
+    "Lin Chen",
+    "Junshan Zhang"
+  ],
+  "type": "technical",
+  "year": "2022-02",
+  "labels": [
+    "federated learning",
+    "cross-silo"
+  ],
+  "summaries": [
+    "in the conventional FL framework, propose __a monetary-free incentive driven collaboration strategy__ for participant-centric FL, where selfish and heterogeneous participants are both model owners and data owners",
+    "the majority of existing studies focus on a broker-centric paradigm for incentivizing participation in FL via economic mechanisms such as auction and contract design"
+  ],
+  "systemModel": [
+    "Scenario",
+    [
+      "in the participant-centric FL, the participants are the model owners and they have the common interest of obtaining a high-quality FL model via mutually-beneficial knowledge sharing",
+      "all participants are",
+      [
+        "selfish<ol>",
+        "heterogeneous in various perspectives (valuation on the FL model, data sizes and computing capability)",
+        "not malicious of sabotaging the FL model",
+        "having IID data"
+      ]
+    ],
+    "Objectives",
+    [
+      "design a monetary-free incentive driven collaboration strategy for participant-centric FL such that",
+      [
+        "absense of free-riders",
+        "total utility of the participants are maximized with a low implementation complexity"
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$\\mathcal{K}=\\{1,2,...,K\\}$: participants, and each participant $k$ has a local dataset $\\mathcal{D}_k=\\{(x_k^1,y_k^1),...,(x_k^{N_k},y_k^{N_k})\\}$",
+      [
+        "$B_k$: the number of data samples in one batch (mini-batch SGD)",
+        "$C_k$: average number of CPU cycles",
+        "$f_k$: adopted CPU processing speed",
+        "$E_k^{com}=\\frac{1}{2}\\alpha C_k B_k f_k^2$: energy consumption of local gradients calculation in one global iteration",
+        "$T_k^{com}=\\frac{C_k B_k}{f_k}$:local training latency",
+        "$U_k(B_k,f_k)=\\theta_k \\ln (1+ \\Delta L) - \\varphi_k E_k^{com} - \\gamma_k T_k^{com}$: utility function for $k$",
+        [
+          "$\\Delta L$: the global loss decrease (model accuracy improvement)",
+          "$\\theta_k$: $k$'s preference of the FL model",
+          "$\\varphi_k, \\gamma_k$: weight parameters"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    "Contribution-oblivious FL (COFL)",
+    [
+      "COFL Game: __without__ imposing contributing requirements",
+      [
+        "Strategies: each participant can choose",
+        [
+          "$B_k \\in [0, B_k^{max}]$<ol>",
+          "$f_k \\in [f_k^{min}, f_k^{max}]$"
+        ],
+        "Utilities: $U_k(B_k,f_k)$"
+      ],
+      "Procedure: to read",
+      "Conclusion",
+      [
+        "a unique Nash equilibrium can be achieved",
+        "but free-riding phenomenon exists in COFL"
+      ]
+    ],
+    "Contribution-aware FL (CAFL)",
+    [
+      "CAFL Game: __exclude a participant__ from FL if his contributed batchsize is lower than a minimum threshold $B_{th}$, and __do not distribute__ the trained model to him",
+      [
+        "Strategies: each participant can choose",
+        [
+          "$B_k \\in \\{0\\} \\bigcup [B_{th}, B_k^{max}]$<ol>",
+          "$f_k \\in [f_k^{min}, f_k^{max}]$"
+        ],
+        "Utilities: $U_k(B_k,f_k)$"
+      ],
+      "Procedure: to read",
+      "Conclusion",
+      [
+        "free-riding phenomenon can be prevented",
+        "as the existence of Nash equlibrium cannot be always guaranteed, a refined set of participants in CAFL can always guarantee to achieve a Nash equlibrium"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TMC.2022.3194198",
+  "id": "huang2022collaboration",
+  "bibtex": "@article{huang2022collaboration, title={Collaboration in participant-centric federated learning: A game-theoretical perspective}, author={Huang, Guangjing and Chen, Xu and Ouyang, Tao and Ma, Qian and Chen, Lin and Zhang, Junshan}, journal={IEEE Transactions on Mobile Computing}, volume={22}, number={11}, pages={6311--6326}, year={2022}, publisher={IEEE}}"
+}

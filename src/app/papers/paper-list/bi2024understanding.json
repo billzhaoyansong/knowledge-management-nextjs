@@ -1,0 +1,198 @@
+{
+  "title": "Understanding Partnership Formation and Repeated Contributions in Federated Learning: An Analytical Investigation",
+  "type": "technical",
+  "authors": [
+    "Xuan Bi",
+    "Alok Gupta",
+    "Mochen Yang"
+  ],
+  "year": "2023-10",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "cross-silo"
+  ],
+  "summaries": [
+    "in the conventional cross-silo FL scenario, study __[1] the factors leading to partnership formation__, and __[2] the contractual mechanisms enforcing repeated contributions__"
+  ],
+  "systemModel": [
+    "Objectives:",
+    [
+      "Understand factors that may contribute to or hinder the success of FL by asking",
+      [
+        "(Partnership Formation): Under what conditions, would data owners prefer to participate in FL, rather than building ML models by themselves?<ol>",
+        "(Long-Term Contribution): How to promote repeated contributions among participants in the long term?"
+      ]
+    ],
+    "Concepts in Prisoner's Dilemma (PD) and Iterated Prisoner's Dilemma (IPD)",
+    [
+      "The analysis of this article relies on the PD framework",
+      "Results from PD and IPD of 2 identical players",
+      [
+        "In a standard one-shot PD, _defection_ (i.e. noncooperation) turns out to be the dominant strategy for both",
+        "In an IPD where (1) total number of rounds is finite and (2) known to all players, _defection_ is still the dominant strategy",
+        "__(Scenario adopted by this article)__: In an IPD where (1) total number of rounds is infinite or (2) unknown to players, then _cooperative equilibrium_ may arise when players adopt certain __trigger strategy__"
+      ],
+      "-",
+      "Trigger strategy: a strategy that determins what a player would do if the other party defects",
+      [
+        "_Grim trigger strategy_: each player would cooperate unless the other player defects",
+        "_Tit-for-tat strategy_: a player would cooperate at first, and then copy what the other player does in the preceding round"
+      ],
+      "Under either strategy, mutual cooperation requires that both players are not too myopic (short-sight)"
+    ],
+    "Setup for Basic Model of 2 Identical Players",
+    [
+      "Process:",
+      [
+        "in a long-term FL partnership, the FL process lasts for multiple rounds",
+        [
+          "each round represents a time period (e.g. a month or a quarter) during which new information would arrive to update the FL model"
+        ]
+      ],
+      "Players:",
+      [
+        "$2$ identical data owners (players) $A$ & $B$",
+        "each player in each round:",
+        [
+          "collects an $x$ amound of new information, which can be proportional to the size of new data (assume $x>0$)"
+        ],
+        "$1$ central server",
+        [
+          "the server is not a strategic actor",
+          "any mechanism can be hard-coded into it"
+        ]
+      ],
+      "Strategies",
+      [
+        "each player in each round makes an independent choice between",
+        [
+          "_cooperate_ (share all new data), or<ol>",
+          "_defect_ (withhold all new data, partially share, or share adversarial information)"
+        ],
+        "$U(X_t^p)$: Utility function, in which $X_t^p$ represents the amount of information possessed by $p$ up to round $t$. The utility function is:",
+        [
+          "_strictly increasing_, i.e. $U'(\\cdot)>0$, indicating a better performance with more training data",
+          "_concave_, i.e. $U''(\\cdot)<0$, indicating performance improvement sloing down or saturates as more data becomes available",
+          "_continuous on $U''(\\cdot)$_, indicating a smooth utility function"
+        ],
+        "$C(x)=\\alpha x$: Cost function, in which $\\alpha$ represents the _sensitivity_ of a player $p$. The cost includes:",
+        [
+          "operational overhead to transmit information to the central server",
+          "potential risks of data leakage"
+        ]
+      ],
+      "-",
+      "Payoff Matrix after each round",
+      [
+        "$\\begin{array}{lll} \\hline A/B & \\text{Cooperate}(C) & \\text{Defect}(D)\\\\ \\hline \\text{Cooperate}(C) & R(x|X_{t-1}^A), R(x|X_{t-1}^B) & S(x|X_{t-1}^A), T(x|X_{t-1}^B)\\\\ \\text{Defect}(D) & T(x|X_{t-1}^A), S(x|X_{t-1}^B) & P(x|X_{t-1}^A), P(x|X_{t-1}^B) \\\\ \\hline \\end{array}$",
+        [
+          "$R(x|X_{t-1}^p)=U(x_{t-1}^p + 2x) - U(x_{t-1}^p) -C(x)$",
+          "$T(x|X_{t-1}^p)=U(x_{t-1}^p + 2x) - U(x_{t-1}^p)$",
+          "$S(x|X_{t-1}^p)=U(x_{t-1}^p + x) - U(x_{t-1}^p) -C(x)$",
+          "$P(x|X_{t-1}^p)=U(x_{t-1}^p + x) - U(x_{t-1}^p)$"
+        ]
+      ],
+      "-",
+      "Discounted Total Payoff after $t$ rounds",
+      [
+        "$\\pi^C(p)=\\sum_{t=1}^{+\\infty} \\gamma^{t-1} R(x | X_{t-1}^p)$: the discounted total payoff if $p$ choose _to_ participate in FL",
+        "$\\pi^{NP}(p)=\\sum_{t=1}^{+\\infty} \\gamma^{t-1} P(x | X_{t-1}^p)$: the discounted total payoff if $p$ choose _not to_ participate in FL",
+        [
+          "$\\gamma\\in (0,1)$: the discount rate for each player with such implications:",
+          [
+            "a small $\\gamma$ implies that future payoffs are less important compared with present payoffs",
+            "a larger/smaller $\\gamma$ indicates more forward-looking/myopic preference"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    "Theoretical Results for Basic Model",
+    [
+      "Conditions for FL Partnership Formation (minimum requirement for partership formation)",
+      [
+        "$\\pi^C(p)>\\pi^{NP}(p)$, with following corollaries to make the inequation hold:",
+        [
+          "Let $\\alpha^+=\\sum_{x>0}\\frac{U(2x)-U(x)}{x}$, if $\\alpha>\\alpha^+$, then players would _not_ form a long-term FL partnership",
+          [
+            "__cost sensitive players prefer not to participate__",
+            "__privatizetion techniques (DP or SMPC) helps in partnership formation because it can reduce $\\alpha$__"
+          ],
+          "if $0<\\alpha<\\alpha^+$, then $\\exists x^+>0$ such that when $x\\geq x^+$ players would _not_ form a long-term FL partnership",
+          [
+            "__players with sufficiently large information perfer not to participate__"
+          ],
+          "there exists $\\gamma_u<1$ such that players would _not_ participate in long-term FL when $\\gamma \\geq \\gamma_u$",
+          [
+            "__forward-looking players prefer not to participate__"
+          ],
+          "Compared with a relatively easier task, the performance of a more challenging task typically saturated much slower with the increase in data size",
+          [
+            "__partnership formation is mroe likely when the underlying ML task is more challenging__"
+          ]
+        ]
+      ],
+      "-",
+      "Roles of Contractual Mechanisms (guarantee of the partnership wouldn't disolve if anyone deviates, or prevent defection)",
+      [
+        "__a server-imposed sanction (removing access to the global model to the defecting player until it cooperate) can prevent defection in most cases__, except when information acquisition ($x$) is small and players are highly forward-looking (larger $\\gamma$)",
+        "__player-initiated trigger strategy alone are unable to fully prevent defection__",
+        "__trigger strategy with sanction can fully prevent defection__"
+      ]
+    ],
+    "Variations in Basic Model",
+    [
+      "Other Forms of Cost Functions",
+      [
+        "Fixed Cost $c_0\\geq 0$",
+        [
+          "__partnership formation region will shrink in the presence of the fixed cost, since the cost to overcome has increased__"
+        ],
+        "General Cost Function",
+        [
+          "The same finding about no partnership formation is true even under nonlinear cost functions, as long as",
+          [
+            "there exists a critical threshold of information quantity where even the (undiscounted) first-round participation benefit cannot cover the associated cost, and<ol>",
+            "the cost of information exchange grows at least as fast as the corresponding benefit beyond that threshold."
+          ]
+        ]
+      ],
+      "-",
+      "Other choices on Defection",
+      [
+        "Partial Contribution",
+        [
+          "under _grim-trigger strategy_ or _sanction_ alone, or both mechanisms, it leads to __wider__ range for cooperation-inducing $\\gamma$ for a given $x$",
+          "the cooperation region under _tit-for-tat_ strategy and partial contribution is almost identical to that under _tit-for-tat_ and no contribution"
+        ],
+        "Adversarial Information",
+        [
+          "implementing a tit-for-tat trigger strategy and requiring players to accept the global model (even with adversarial information) can in fact encourage repeated cooperation"
+        ]
+      ],
+      "-",
+      "Two Nonidentical Players",
+      [
+        "repeated cooperation is determined by the player with",
+        [
+          "higher cost sensitivity",
+          "lower value extraction capability",
+          "larger information acquisition capacity",
+          "or more extreme temporal preference"
+        ]
+      ],
+      "-",
+      "Multiple Players",
+      [
+        "players can defect by no contribution and the defector will be excluded from the global model",
+        "__having a larger number of defectors in fact widens the range of cooperation because having a larger percentage of defectors dilutes the benefit of defection (free-riding)__"
+      ]
+    ]
+  ],
+  "doi": "10.1287/mnsc.2023.00611",
+  "id": "bi2024understanding",
+  "bibtex": "@article{bi2024understanding, title={Understanding partnership formation and repeated contributions in federated learning: An analytical investigation}, author={Bi, Xuan and Gupta, Alok and Yang, Mochen}, journal={Management Science}, volume={70}, number={8}, pages={4974--4994}, year={2024}, publisher={INFORMS}}"
+}

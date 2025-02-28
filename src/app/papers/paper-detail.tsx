@@ -68,6 +68,11 @@ export default function PaperDetail(
             // if current element is string
             if (isString(arr[i])) {
 
+                if(arr[i] === '-'){
+                    children.push(<hr/>);
+                    continue;
+                }
+
                 // if no more next element or next element is string, create a li for current element
                 // otherwise postpone current element creation 
                 if (i + 1 >= arr.length || isString(arr[i + 1])) {

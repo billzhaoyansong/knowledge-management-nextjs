@@ -11,18 +11,25 @@
     "federated learning",
     "reward",
     "repeated cooperative game",
-    "stage game"
+    "stage game",
+    "cross-silo"
   ],
   "systemModel": [
-    "a server, a set $\\mathcal{N}=\\{1,2,...,N\\}$ of clients with time-varing local data sets $D_n$",
-    "cross-silo FL process is different from cross-device FL process",
-    "step 1: clients initiate an FL process",
-    "step 2: clients choose their own degree of data participation $x_n \\in D_n$ to perform local training and upload trained models to server",
-    "step 3: server conducts data-size weighted global aggregation",
-    "step 4: server distributes new global model to clients",
-    "step 2-4 is one cross-silo FL iteration",
-    "several iterations constitute an FL process, and each time slot corresponds to one cross-silo FL process",
-    "step 5: payment to the central server is equally split by customers"
+    "Players",
+    [
+      "a server, a set $\\mathcal{N}=\\{1,2,...,N\\}$ of clients with time-varing local data sets $D_n$",
+      "cross-silo FL process is different from cross-device FL process"
+    ],
+    "Process",
+    [
+      "step 1: clients initiate an FL process",
+      "step 2: clients choose their own degree of data participation $x_n \\in D_n$ to perform local training and upload trained models to server",
+      "step 3: server conducts data-size weighted global aggregation",
+      "step 4: server distributes new global model to clients",
+      "step 2-4 is one cross-silo FL iteration",
+      "several iterations constitute an FL process, and each time slot corresponds to one cross-silo FL process",
+      "step 5: payment to the central server is equally split by customers"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, propose a rewarding mechanism for cross-silo FL (initiate process by clients and final model shared by all clients), __motivating clients to contribute more data__ by minimizing local cost in the short and long runs and __[2] preventing free riders__",

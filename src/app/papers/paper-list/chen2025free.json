@@ -14,7 +14,8 @@
   "year": "2024-01",
   "labels": [
     "federated learning",
-    "free rider"
+    "free rider",
+    "cross-silo"
   ],
   "summaries": [
     "in conventional FL framework, propose __a coalition formation method__ for the cross-silo scenario in which participants are both model owners and data owner and they are self-interested and have competition relationships with other participants"
