@@ -9,9 +9,10 @@ export default function BookCardSectionContent2x2({
 }) {
 
     return <div className="flex flex-row flex-wrap">
-
-        {subsections.map((ss: SubSection) => <div className={`book-subsection basis-1/2`}
-            dangerouslySetInnerHTML={{ __html: unifiedProcessor.processSync(ss.content).toString() }}>
+        {subsections.map((ss: SubSection) => <div className="basis-1/2">
+            <div className={`book-subsection`}
+                dangerouslySetInnerHTML={{ __html: unifiedProcessor.processSync(ss.content).toString() }}>
+            </div>
         </div>)}
 
     </div>

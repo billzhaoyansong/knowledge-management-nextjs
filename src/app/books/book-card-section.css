@@ -4,7 +4,7 @@
 
     .book-content {
 
-        @apply text-sm !important;
+        @apply text-base !important;
 
         .book-subsection{
 
@@ -24,7 +24,11 @@
             }
 
             li>p{
-                @apply inline-block;
+                @apply inline;
+            }
+
+            pre{
+                @apply text-xs;
             }
         }
 
@@ -62,7 +66,7 @@
 
         ul li,
         ol li {
-            @apply no-underline hover:cursor-default text-sm !important;
+            @apply no-underline hover:cursor-default !important;
         }
 
         ol > li {

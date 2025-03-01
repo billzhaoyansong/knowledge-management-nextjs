@@ -33,7 +33,7 @@ export const unifiedProcessor = unified()
     .use(rehypeStringify)
 
 import 'katex/dist/katex.min.css'
-import 'highlight.js/styles/github.min.css'
+import 'highlight.js/styles/github-dark.min.css'
 
 export type SubSection = {
     subSectionTitle: string;
