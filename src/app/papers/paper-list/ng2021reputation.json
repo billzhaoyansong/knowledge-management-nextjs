@@ -19,7 +19,8 @@
     "reputation",
     "grouping",
     "reward",
-    "hedonic game"
+    "hedonic game",
+    "coalition"
   ],
   "summaries": [
     "in the decentralized FL framework, propose __a rewarding mechanism__ in which [1] servers recruit and reward their own clients via a hedonic game and [2] servers exchange models to neighbors",
@@ -36,12 +37,15 @@
         "a cluster head is in charge of $S_m$ workers and has a reward pool $\\alpha_m$ for recruiting workers"
       ]
     ],
-    "coalition formation is modeled as a hedonic game [see <u>1. Hedonic Game</u>]",
-    "step 1): cluster heads send to controlling workers the intermediate model $\\bm{w}_m^{(k)}$",
-    "step 2): workers perform local training and transmit local model parameters",
-    "step 3): cluster heads aggregates local models to get a new intermediate model $\\bm{w}_m^{(k+1)}$",
-    "step 1)-3) continues",
-    "at a prespecified interval $\\kappa$, cluster heads send model parameter $\\bm{w}_m^{(k+\\kappa)}$ to their one-hop neighbours and aggregates to $\\bm{w}^{(k+\\kappa)}$"
+    "Process:",
+    [
+      "coalition formation is modeled as a hedonic game [see <u>1. Hedonic Game</u>]",
+      "step 1): cluster heads send to controlling workers the intermediate model $\\bm{w}_m^{(k)}$",
+      "step 2): workers perform local training and transmit local model parameters",
+      "step 3): cluster heads aggregates local models to get a new intermediate model $\\bm{w}_m^{(k+1)}$",
+      "step 1)-3) continues",
+      "at a prespecified interval $\\kappa$, cluster heads send model parameter $\\bm{w}_m^{(k+\\kappa)}$ to their one-hop neighbours and aggregates to $\\bm{w}^{(k+\\kappa)}$"
+    ]
   ],
   "problemCategory": [
     [
@@ -62,7 +66,7 @@
     "clients coalition formation (actively joining, not passively being allocated) problem in the serverless hierarchical federated learning framework"
   ],
   "techniques": [
-    "<u>1. Hedonic Game</u>",
+    "Hedonic Game",
     [
       "the coalition game is defined by $(\\mathcal{J}, \\succ=\\{\\succ_1\\cdots,\\succ_j\\cdots\\succ_J\\})$, and following 2 conditions are satisfied",
       [

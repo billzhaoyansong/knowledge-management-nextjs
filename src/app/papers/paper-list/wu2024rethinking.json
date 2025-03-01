@@ -1,0 +1,41 @@
+{
+  "title": "Rethinking Personalized Client Collaboration in Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Leijie Wu",
+    "Song Guo",
+    "Yaohong Ding",
+    "Junxiao Wang",
+    "Wenchao Xu",
+    "Yufeng Zhan"
+  ],
+  "year": "2023-09",
+  "editing": false,
+  "labels": [
+    "federated learning",
+    "personalination"
+  ],
+  "summaries": [
+    ""
+  ],
+  "systemModel": [
+    "Problem",
+    [
+      "Although collaboration between domain-relevant clients (e.g. more overlapping features) boosts _performance_ and _speed of convergence_, it is _impossible_ to directly conduct domain relevance analysis between clients on the data level",
+      "Previous studies employed the concept of personalized collaboration to tackle Non-IID data using _loss or model similarity_, which the authors proved that neither indicates __domain relevance__"
+      
+    ],
+    "Objectives",
+    [
+      "propose a mechanism to",
+      [
+        "identify domain-relevant collaborators on the _model level_, instead of data level",
+        "enhance the FL training process based on the insights from the identification process"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/TMC.2024.3396218",
+  "id": "wu2024rethinking",
+  "bibtex": "@article{wu2024rethinking, title={Rethinking personalized client collaboration in federated learning}, author={Wu, Leijie and Guo, Song and Ding, Yaohong and Wang, Junxiao and Xu, Wenchao and Zhan, Yufeng and Kermarrec, Anne-Marie}, journal={IEEE Transactions on Mobile Computing}, year={2024}, publisher={IEEE}}"
+}
