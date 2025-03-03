@@ -18,7 +18,9 @@
                 @apply pt-3 table relative ml-2 mb-[-12px] font-bold text-xl px-3 bg-yellow-50;
             }
 
-            h2+*{
+            h2+table,
+            h2+ul,
+            h2+ol{
                 @apply border border-gray-700 pt-3 pb-2 px-2;
 
             }

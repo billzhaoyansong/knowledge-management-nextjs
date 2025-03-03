@@ -13,28 +13,93 @@
   "editing": false,
   "labels": [
     "federated learning",
-    "personalination"
+    "personalination",
+    "client selection",
+    "coalition"
   ],
   "summaries": [
-    ""
+    "in the conventional FL, propose __a protocol enabling personalization/coalition with domain-relevant clients__, which are identified with the SV"
   ],
   "systemModel": [
     "Problem",
     [
       "Although collaboration between domain-relevant clients (e.g. more overlapping features) boosts _performance_ and _speed of convergence_, it is _impossible_ to directly conduct domain relevance analysis between clients on the data level",
       "Previous studies employed the concept of personalized collaboration to tackle Non-IID data using _loss or model similarity_, which the authors proved that neither indicates __domain relevance__"
-      
     ],
     "Objectives",
     [
       "propose a mechanism to",
       [
-        "identify domain-relevant collaborators on the _model level_, instead of data level",
-        "enhance the FL training process based on the insights from the identification process"
+        "identify domain-relevant collaborators on the _model level_, instead of data level, with __Shapley Value (SV)__, due to the following properties of SV:",
+        [
+          "_Symmetry_: two clients who have the same contribution to the coalition should have the same value",
+          "_Null Player_: client with zero marginal contributions to all possible coalitions is null player"
+        ],
+        "enhance the FL training process based on the insights from the identification process, specifically",
+        [
+          "use SV to guide the local personalized model aggregation"
+        ]
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$1$ server",
+      "$N=\\{1,...,n\\}$: the set of clients",
+      [
+        "$S\\subseteq N$: a coalition",
+        "$v(S): 2^n \\to \\mathbb{R}$: a utility function for each coalition; ($v(\\emptyset)=0$)",
+        "$\\Pi(N)$: the set of permutations of $N$;",
+        "$\\pi\\in\\Pi(N)$: one permutation",
+        [
+          "$C_{\\pi}(i)=\\{j \\in \\pi: \\pi(j) < \\pi(i)\\}$: a coalition containing all predecessors of client $i\\in\\pi$",
+          "$\\varphi(v)=\\frac{1}{|N|!}\\sum\\limits_{\\pi \\in \\Pi} \\left[ v\\left(C_{\\pi}(i) \\bigcup \\{i\\}\\right) - \\left(C_{\\pi}(i)\\right) \\right]$: the SV of client $i$"
+        ],
+        "$i \\in N$: one client",
+        [
+          "$\\phi^{i,t} = [\\phi_1^{i,t},...,\\phi_n^{i,t}]$: relevance vector from client $i$ to $N$",
+          "$\\mathcal{D}_{V_i}$: local validataion dataset"
+        ]
+      ]
+    ],
+    "Process in each communication round:",
+    [
+      "each client $i$ uploads local updated model $\\theta_i^t$ to the server, forming a model pool $\\{\\theta_i^t\\}_{i=1}^n$ on the server<ol>",
+      "(Personalization process) for each client $i$:",
+      [
+        "downloads models of those clients with top-$k$ relevance score in $\\phi^{i,t}$, forming a personalized coalition $S_{i,k}^t = \\theta_i^t \\bigcup \\{k \\text{ downloaded models}\\}$<ol>",
+        [
+          "choose clients with positive score only when the number of clients with positive scores is less than $k$"
+        ],
+        "conducts SV evaluation for current round: $\\varphi_j^t\\Leftarrow \\text{SV-evaluation} (S_{i,k}^t, \\mathcal{D}_{V_i}, R)$; ($R$: permutations)",
+        "updates relevance vector: $\\phi_j^{i, t+1} = \\alpha \\phi_j^{i,t} + (1 - \\alpha) \\varphi_j^t, \\forall j \\in S_{i,k}^t$",
+        "updates local model: $\\theta_i^{t*} = \\sum_j w_j^{t*} \\theta_j^t$",
+        [
+          "$w_j^{t*}=\\frac{w_j^{t}}{\\sum_j w_j^{t}} \\Leftarrow w_j^{t}=\\frac{\\max(\\varphi_j^t ,0)}{\\Vert \\theta_i^t - \\theta_j^t\\Vert}$"
+        ]
       ]
     ]
   ],
-  "techniques": [],
+  "techniques": [
+    "SV evaluation",
+    [
+      "Due to the exhibitive time complexity, a Monte Carlo sampling technique is adopted to approximate the SV",
+      [
+        "omit"
+      ]
+    ],
+    "Challenges",
+    [
+      "communication overhead",
+      [
+        "__feature extractor__",
+        [
+          "to reduce the communication overhead, all models are divided into [1] _feature extractor (all layers of a model except the last layer)_ [2] _classifer (the last layer)_",
+          "each client only needs to download [1] _one gloabl shared geature extractor_ and [2] _several classifiers of other clients_"
+        ],
+        "__model quantification and compression__"
+      ]
+    ]
+  ],
   "doi": "10.1109/TMC.2024.3396218",
   "id": "wu2024rethinking",
   "bibtex": "@article{wu2024rethinking, title={Rethinking personalized client collaboration in federated learning}, author={Wu, Leijie and Guo, Song and Ding, Yaohong and Wang, Junxiao and Xu, Wenchao and Zhan, Yufeng and Kermarrec, Anne-Marie}, journal={IEEE Transactions on Mobile Computing}, year={2024}, publisher={IEEE}}"
