@@ -20,11 +20,18 @@
     "reputation is calculated based on the similarity between the local model and global model"
   ],
   "systemModel": [
-    "$1$ server and $N$ clients",
-    "process 1: server sends different models to different clients [see 1. incentive mechanism]",
-    "process 2: clients do local training",
-    "process 3: server selects clients [see 2. client selection] and conducts global aggregation [see 3. model aggregation]",
-    "process 4: clients' reputations are updated [see 4. reputation]"
+    "Players",
+    [
+      "$1$ server",
+      "$N$ clients"
+    ],
+    "Process:",
+    [
+      "server sends different models to different clients [see 1. incentive mechanism]<ol>",
+      "clients do local training",
+      "server selects clients [see 2. client selection] and conducts global aggregation [see 3. model aggregation]",
+      "clients' reputations are updated [see 4. reputation]"
+    ]
   ],
   "problemCategory": [
     [
@@ -53,7 +60,7 @@
     "most existing FL or distributed learning frameworks have not well addressed two important issues together: collaborative fairness and adversarial robustness"
   ],
   "techniques": [
-    "incentive mechanism<ol>",
+    "incentive mechanism",
     [
       "$\\Delta w_{*i}^{(t)} = \\text{sparsify}(\\Delta w_g^{(t)},\\text{quota}_i)-r_i^{(t-1)}\\Delta w_i^{(t)}$",
       [

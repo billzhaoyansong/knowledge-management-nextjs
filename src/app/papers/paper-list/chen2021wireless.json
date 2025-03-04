@@ -1,0 +1,102 @@
+{
+  "title": "Wireless Communications for Collaborative Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Mingzhe Chen",
+    "H. Vincent Poor",
+    "Walid Saad",
+    "Shuguang Cui"
+  ],
+  "year": "2021-01",
+  "labels": [
+    "federated learning",
+    "wireless",
+    "collaboration"
+  ],
+  "summaries": [
+    "in the wireless scenario, __[1] propose a collaborative FL framework so that devices do not need to directly contact the central controller__, and [2] introduce four perforamnce metrics to quantify the CFL perforamnce and several communication techniques to optimize the CFL performance metrics"
+  ],
+  "systemModel": [
+    "Problem",
+    [
+      "_The optimization of wireless networks_ must be considered to improve FL performance, due to",
+      [
+        "limited wireless resources (which causes that only a subset of devices can use FL)<ol>",
+        "errors and delays caused by the wireless channel (which affects learning perforamnce)"
+      ],
+      "Existing surveys did not analyze how to _use wireless techniques to optimize FL performance_"
+    ],
+    "Objectives",
+    [
+      "propose a collaborative FL (CFL) framework, in which",
+      [
+        "FL devices can perform FL without the need to directly communicate with the central controller<ol>",
+        "four perforamnce metrics are introduced to quantify the CFL perforamnce",
+        "several communication techniques to optimize the CFL performance metrics"
+      ]
+    ],
+    "Process of CFL & My Questions",
+    [
+      "Process:",
+      [
+        "each device transmits its local FL model to its connected devices or the BS<ol>",
+        "for those devices which received models from other devices, they aggregate the local FL models with those received models, (reupload to BS or not?)",
+        "the BS generates the global model and transmits it to the associated devices",
+        "each device updates local model based on the local FL models received from other devices or the BS"
+      ],
+      "My Questions",
+      [
+        "what if device $a$ and device $b$ are connected to the BS, and device $c$ is connected to device $a$ and device $b$, how will device $c$ decide which device to broadcast?"
+      ]
+    ],
+    "Performance Metrics",
+    [
+      "![](/papers/chen2021wireless/summary.png)"
+    ],
+    "Communication Techniques to Improve Performance",
+    [
+      "Network Formation<ol>",
+      [
+        "Naturally, the training complexity and the FL convergence time directly depend on the formed topology<ol>",
+        [
+          "when the number of links of each device increases, the number of iterations decreases because having more links increases the frequency of local FL model sharing"
+        ],
+        "Given the defined utility function that jointly considers multiple metrics, one must develop network formation algorithms to optimize the utility function.",
+        [
+          "Although _centralized solutions_ such as searchbased algorithms may be able to find a globally optimal network topology, it is impractical in large-scale IoT due to the requirement of devices' information",
+          "As _a distributed solution_, game-theoretical approach treats each device as an agent and the decisions of all agents collectively determines the graph"
+        ],
+        "In asynchronous training, the network topology must be adapted to the changes in the number of devices and one must optimize the frequency of adaptation with which the network topology must be updated to improve metrics while the communication overhead is at a low level",
+        "In a practical IoT network, each device may only know _partial information_ such as the network architecture, device locations, and network composition.",
+        [
+          "due to partial network information, devices may form several unconnected small device groups. Hence, a multi-layer network formation must be designed"
+        ]
+      ],
+      "Device Scheduling",
+      [
+        "one must find an optimal device scheduling policy to determine the iteration number and frequency for each device",
+        "_a data importance model_ that learnt from model parameters is required to jointly consider _[1] the number of training data samples_, _[2] data distribution_, and _[3] data uniqueness_",
+        [
+          "increasing the update frequency of the devices with high data importance can improve convergence speed and increase the loss value"
+        ],
+        "when there are multiple FL tasks with various convergence time requirement and target loss value, the device scheduling policy must determine the training and transmitting sequence of tasks"
+      ],
+      "Coding",
+      [
+        "_Source coding_ can compress the high-dimensional FL model parameters so that they can be represented by a small number of bits",
+        [
+          "each device may encode its local FL model using different numbers of bits or coding techniques."
+        ],
+        "_Channel coding_ can protect the transmitted FL model parameters against noise and interference",
+        "_Gradient coding_ is used to encode the GD parameters of ML algorithms",
+        [
+          "traditional gradient coding methods require devices to share their datasets with other devices so as to remove stragglers. Hence, we need new gradient coding schemes without data sharing"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/MCOM.001.2000397",
+  "id": "chen2021wireless",
+  "bibtex": "@article{chen2021wireless, title={Wireless communications for collaborative federated learning}, author={Chen, Mingzhe and Poor, H Vincent and Saad, Walid and Cui, Shuguang}, journal={IEEE Communications Magazine}, volume={58}, number={12}, pages={48--54}, year={2021}, publisher={IEEE}}"
+}
