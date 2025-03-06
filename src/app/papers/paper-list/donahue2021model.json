@@ -1,0 +1,143 @@
+{
+  "title": "Model-sharing Games: Analyzing Federated Learning Under Voluntary Participation",
+  "type": "technical",
+  "authors": [
+    "Kate Donahue",
+    "Jon Kleinberg"
+  ],
+  "year": "2021-05",
+  "labels": [
+    "federated learning",
+    "coalition",
+    "hedonic game"
+  ],
+  "summaries": [
+    "in the conventional FL framework, study the __grand coalition formation__ for the linear regression task and mean estimation FL tasks in the lens of hedonic game"
+  ],
+  "systemModel": [
+    "Weakness in the Article",
+    [
+      "The assumptions in the article are indeed simplified to make the theoretical analysis tractable, and they may oversimplify some aspects of real-world FL tasks, e.g.",
+      [
+        "The paper focuses on __linear regression__ and __mean estimation__ as the primary ML tasks, while real-world FL tasks often involve more complex models, such as deep NN, which are non-linear and have many more parameters.<ol>",
+        "Each player draws __a fixed number of samples over time__, while in practice, the number of samples available to each player may vary over time as new data is collected or old data becomes outdated"
+      ]
+    ],
+    "Problem",
+    [
+      "due to heterogeneity in data distributions in FL, joining a global model can",
+      [
+        "__reduce variance__, but",
+        "__increase bias__"
+      ],
+      "agents can decide whether to [1] join a global model or [2] stick with their local modal"
+    ],
+    "Objectives",
+    [
+      "using coalitional game theory, specifically __hedonic games__, to study __participation and stability__ of agents"
+    ],
+    "Players & Notations",
+    [
+      "$M$ players (agents).",
+      [
+        "Coalitions:",
+        [
+          "$\\pi_g$: Grand coalition (all players federate together).",
+          "$\\pi_l$: Local learning (each player is alone)."
+        ],
+        "for each play $j$",
+        [
+          "the data distribution in local dataset:",
+          [
+            "$\\mathcal{D}_j(\\theta_j, \\epsilon_j^2)$: for _mean estimation problem_",
+            [
+              "$\\theta_j$: a scalar representing the true mean",
+              "$\\epsilon_j^2$: variance round $\\theta_j$"
+            ],
+            "$\\mathcal{D}_j(\\boldsymbol{X}_j^T\\boldsymbol{\\theta}_j, \\epsilon_j^2)$: for _linear regression problem_",
+            [
+              "$\\boldsymbol{\\theta_j}$: a $D$-dimentional vector representing coefficients on the true classification function",
+              "$\\epsilon_j^2$: variance round $\\theta_j$"
+            ]
+          ],
+          "$n_j$: number of samples drawn from local dataset (never change overtime)",
+          [
+            "$\\hat{\\theta}_j$: sample/estimated value for $\\theta_j$ in mean estimation problem or $\\boldsymbol{\\theta_j}$ in linear regression problem",
+            "$\\mu_e = \\mathbb{E}[\\epsilon_j^2]$: Expected error parameter.",
+            "$\\sigma^2 = \\text{Var}(\\theta_j)$: Variance of the true parameters."
+          ]
+        ]
+      ]
+    ],
+    "Concepts in Hedonic Game",
+    [
+      "__coalition structure $\\Pi$__: the collection of coalitions",
+      [
+        "__core-stable(in the core)__: there does not exist a coalition $C$ so that every player in $C$ prefers $C$ to its current coalition in $\\Pi$",
+        [
+          "in other words, no group of players can form a new coalition that would make all of them better off without making anyone in the new coalition worse off)"
+        ],
+        "__strictly core stable__: there does not exist a coalition $C$ so that every player in $C$ weakly prefers $C$ to its current coalition in $\\Pi$, and at least one player $\\in C$ strictly prefers $C$",
+        "__individually stable__: there does not exist a coalition $C\\in \\Pi$ so that a player $i \\notin C$ prefers $C \\bigcup \\{i\\}$ to its arrangement in $\\Pi$ and all players in $C$ weakly prefer $C \\bigcup \\{i\\}$ to $C$"
+      ]
+    ]
+  ],
+  "techniques": [
+    "Uniform Federation",
+    [
+      "all players in a coalition use a single global model",
+      [
+        "$\\hat{\\boldsymbol{\\theta}}^f=\\frac{1}{\\sum_{i=1}^M n_i} \\sum\\limits_{i=1}^M \\hat{\\boldsymbol{\\theta}}_i \\cdot n_i$"
+      ],
+      "Conclusion",
+      [
+        "When all players have the __same number of samples__:<ol>",
+        [
+          "If $n<\\frac{\\mu_e}{\\sigma^2}$, the __grand coalition__ is the only core-stable arrangement",
+          "If $n>\\frac{\\mu_e}{\\sigma^2}$, the __local learning__ is the only core-stable arrangement",
+          "If $n=\\frac{\\mu_e}{\\sigma^2}$, any arrangement is core-stable"
+        ],
+        "When all players have the __different number of samples__:<ol>",
+        [
+          "If both small and large palyers have $n\\geq\\frac{\\mu_e}{\\sigma^2}$, the __local learning__ is the only core-stable arrangement",
+          "If both small and large palyers have $n\\leq\\frac{\\mu_e}{\\sigma^2}$, the __grand coalition__ is the only core-stable arrangement",
+          "If small players have $n<\\frac{\\mu_e}{\\sigma^2}$ and large palyers have $n>\\frac{\\mu_e}{\\sigma^2}$, there exists an __individually stable__ arrangement, but it may not be core-stable."
+        ]
+      ]
+    ],
+    "Coarse-grained Federation",
+    [
+      "players can weight the global model with their local model",
+      [
+        "$\\hat{{\\theta}}^w_j=w_j\\cdot\\hat{\\theta}_j+(1-w_j)\\hat{\\theta}^f$"
+      ],
+      "Conclusion",
+      [
+        "When players use __optimal weighting__ of the global and local models<ol>",
+        [
+          "The __grand coalition is always individually stable__ (no player wishes to unilaterally defect).",
+          "However, the grand coalition may __not always be core-stable__ (e.g., small players may prefer to form their own coalition without large players)."
+        ],
+        "When all players have the __same number of samples__, the __grand coalition__ is the only core-stable arrangement."
+      ]
+    ],
+    "Fine-grained Federation",
+    [
+      "players can flexibly combine models from other players in the federation.",
+      [
+        "$\\hat{{\\theta}}^v_j=\\sum\\limits_{i=1}^M v_{ji} \\hat{{\\theta}}_i$"
+      ],
+      "Conclusion",
+      [
+        "When players use optimal fine-grained federation (flexibly combining models from other players)",
+        [
+          "The grand coalition is always core-stable because it minimizes the error for every player.",
+          "No player can achieve a lower error by forming a smaller coalition."
+        ]
+      ]
+    ]
+  ],
+  "doi": "",
+  "id": "donahue2021model",
+  "bibtex": "@inproceedings{donahue2021model, title={Model-sharing games: Analyzing federated learning under voluntary participation}, author={Donahue, Kate and Kleinberg, Jon}, booktitle={Proceedings of the AAAI Conference on Artificial Intelligence}, volume={35}, number={6}, pages={5303--5311}, year={2021}}"
+}

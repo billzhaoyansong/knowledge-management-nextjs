@@ -1,0 +1,174 @@
+{
+  "title": "One for one, or all for all: Equilibria and optimality of collaboration in federated learning",
+  "type": "technical",
+  "authors": [
+    "Avrim Blum",
+    "Nika Haghtalab",
+    "Richard Lanas Phillips",
+    "Han Shao"
+  ],
+  "year": "2021-01",
+  "labels": [
+    "federated learning",
+    "collaboration"
+  ],
+  "summaries": [
+    "in the conventional FL framework, __[1] define stable and envy-free equilibria to ensure fair collaboration among agents with heterogeneous data distributions__, and __[2] analyzes their existence, computational properties, and sample complexity__ under different canonical utility functions"
+  ],
+  "systemModel": [
+    "Scenario",
+    [
+      "in FL, agents are interested in:",
+      [
+        "accomplishing their learning objectives, while<ol>",
+        "keeping their individual sample collection burden low"
+      ],
+      "potential _inequitable_ circumstances might occur:",
+      [
+        "Agents contributing more data than necessary to achieve their goals.",
+        "Agents envying others who contribute less but still achieve their objectives."
+      ]
+    ],
+    "Objectives",
+    [
+      "design an game-theoretic framework, so that",
+      [
+        "agents can __accomplish their learning objectives__<ol>",
+        "__data contribution responsibility is 'equitably' spread__ among agents who want a lower sample collection burden"
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$k$ agents",
+      [
+        "$\\boldsymbol{ \\theta}=(\\theta_1,...,\\theta_k)\\in \\boldsymbol{\\Theta}$: strategies collaboratively selected by $k$ agents",
+        [
+          "$\\boldsymbol{\\Theta}$: the strategy space",
+          "$\\theta_i\\in \\mathbb{R}_+$: contribution level of agent $i$, e.g. number of samples",
+          "for each agent $i$",
+          [
+            "$\\mathbf{q}_i$: data distribution over the instance space $\\mathcal{X}$ with $|\\mathcal{X}|=n$",
+            "$u_i(\\boldsymbol{ \\theta})\\geq \\mu_i$: utility function for agent $i$, (implying that the utility of an agent depends on the collective decisions)",
+            [
+              "$\\mu_i=1-\\epsilon$: the minimum accuracy required by the agent"
+            ]
+          ],
+          "$\\boldsymbol{ \\theta}$ is __feasible__ if $u_i(\\boldsymbol{ \\theta})\\geq u_i$ for all $i \\in [k]$"
+        ],
+        "$(x, \\theta_{-i})$: a __modification of contribution level__ for $i$-th agent ($x=\\theta_i$), while keeping other contribution levels unchanged",
+        [
+          "Assumption: every agent can meet her learning objective individually, that is",
+          [
+            "$\\forall i  \\in [k],  \\exists  \\,  \\vartheta_i  \\in  \\mathbb{R}_+  \\,  \\textit{ such that }  \\, u_i( \\vartheta_i, \\mathbf{0}_{-i})  \\geq  \\mu_i$"
+          ]
+        ]
+      ]
+    ],
+    "Definitions",
+    [
+      "Optimal solution (__OPT__)",
+      [
+        "$\\begin{array}{ll} \\min_{\\boldsymbol{ \\theta}\\in \\boldsymbol{\\Theta}} \\mathbf{1}^T \\boldsymbol{ \\theta} \\\\ \\text{s.t.} u_i(\\boldsymbol{ \\theta}) \\geq \\mu_i, \\forall i \\in [k] \\end{array}$"
+      ],
+      "Stable equilibrium (__EQ__)",
+      [
+        "$\\forall i \\in [k]$, there is no  $\\theta_i' < \\theta_i^{ \\text{eq}}$ such that $u_i( \\theta_i',  \\boldsymbol{ \\theta}_{-i}^{ \\text{eq}})  \\geq  \\mu_i$"
+      ],
+      "Envy-free equilibrium (__EF__)",
+      [
+        "$\\forall i \\in [k]$, there is no  $\\boldsymbol{\\theta}^{\\text{ef}(i,j)}$ such that $\\theta_j^{ef}<\\theta_i^{ef}$ and $u_i(\\boldsymbol{\\theta}^{ef(i,j)}) \\geq  \\mu_i$"
+      ],
+      "Price of Stability(__PoS__)",
+      [
+        "$\\text{PoS}=\\frac{\\min_{\\boldsymbol{\\theta} \\in \\boldsymbol{\\Theta}^{eq}} \\mathbf{1}^T \\boldsymbol{\\theta}}{\\mathbf{1}^T \\boldsymbol{\\theta}^{opt}}$"
+      ],
+      "Price of Fairness(__PoF__)",
+      [
+        "$\\text{PoF}=\\frac{\\min_{\\boldsymbol{\\theta} \\in \\boldsymbol{\\Theta}^{ef}} \\mathbf{1}^T \\boldsymbol{\\theta}}{\\mathbf{1}^T \\boldsymbol{\\theta}^{opt}}$"
+      ]
+    ]
+  ],
+  "techniques": [
+    "Random Discovery (Linear Utilities)",
+    [
+      "**Setting**",
+      [
+        "In this setting, agents have **linear utility functions**, meaning their utility depends linearly on the contributions of all agents.",
+        "Each agent $i$ has a distribution $\\mathbf{q}_i$ over an instance space $\\mathcal{X}$, where $|\\mathcal{X}| = n$",
+        "The utility of agent $i$ is proportional to the expected number of instances discovered by all agents. Formally, the utility function for agent $i$ is:",
+        [
+          "$u_i(\\boldsymbol{\\theta}) = \\mathbf{q}_i Q^\\top \\boldsymbol{\\theta},$",
+          [
+            "$Q = [q_{ix}] \\in \\mathbb{R}_+^{k \\times n}$ is a matrix representing the probability that agent $i$ observes instance $x$.",
+            "$\\boldsymbol{\\theta} = (\\theta_1, \\theta_2, \\dots, \\theta_k)$ is the vector of contributions (e.g., number of samples) from all agents."
+          ]
+        ]
+      ],
+      "**Key Properties**",
+      [
+        "The utility function is **linear** in $\\boldsymbol{\\theta}$, and the matrix $W = QQ^\\top$ is symmetric and positive semi-definite (PSD).",
+        "This setting is well-suited for scenarios where agents benefit from the discoveries made by others, such as in collaborative research or data collection."
+      ],
+      "**Equilibria**",
+      [
+        "The paper shows that in this setting, **stable equilibria** exist under mild assumptions, and they can be computed using **linear programming (LP)** or **convex programming (CP)**.",
+        "The optimal stable equilibrium is also **socially optimal** for a subset of agents, while other agents contribute nothing."
+      ]
+    ],
+    "Random Coverage",
+    [
+      "**Setting**",
+      [
+        "In this setting, agents aim to **cover the instance space** $\\mathcal{X}$, but their utility depends on whether an instance has been observed **at least once** (rather than the number of times it is observed)",
+        "Each $i$ has a distribution $\\mathbf{q}_i$ over $\\mathcal{X}$, and the utility of agent $i$ is the expected accuracy of a classifier trained on the observed data",
+        "The utility function for agent $i$ is:",
+        [
+          "$u_i(\\boldsymbol{\\theta}) = 1 - \\frac{1}{2} \\sum_{x \\in \\mathcal{X}} q_{ix} \\prod_{j=1}^k (1 - q_{jx})^{\\theta_j}$",
+          [
+            "$q_{ix}$ is the probability that agent $i$ observes instance $x$",
+            "$\\theta_j$ is the number of samples taken by agent $j$."
+          ]
+        ]
+      ],
+      "__Key properties__",
+      [
+        "The utility function is **non-linear** due to the product term $\\prod_{j=1}^k (1 - q_{jx})^{\\theta_j}$, which represents the probability that instance $x$ is **not observed** by any agent.",
+        "This setting is well-suited for classification tasks where the goal is to ensure that all instances in $\\mathcal{X}$ are covered by at least one agent."
+      ],
+      "**Equilibria**",
+      [
+        "The paper shows that **stable equilibria** exist in this setting under mild assumptions, but the set of stable equilibria is **non-convex**, making it computationally challenging to find optimal equilibria.",
+        "The **envy-free equilibria** are also studied, but they may require significantly more samples than the socially optimal solution."
+      ]
+    ],
+    "General PAC Learning",
+    [
+      "**Setting**",
+      [
+        "In this setting, agents aim to learn a hypothesis from a **hypothesis class** $\\mathcal{H}$ using the Probably Approximately Correct (PAC) learning framework.",
+        "Each agent $i$ has a distribution $\\mathcal{D}_i$ over $\\mathcal{X} \\times \\mathcal{Y}$, where $\\mathcal{X}$ is the instance space and $\\mathcal{Y}$ is the label space.",
+        "The utility of agent $i$ is the expected accuracy of the optimal classifier $h_S$ trained on the combined data $S = \\cup_{j \\in [k]} S_j$:",
+        [
+          "$u_i(\\boldsymbol{\\theta}) = 1 - \\mathbb{E}_{\\{S_j \\sim \\mathcal{D}_j^{\\theta_j}\\}_{j \\in [k]}}[\\text{err}_{\\mathcal{D}_i}(h_S)]$",
+          [
+            "$\\text{err}_{\\mathcal{D}_i}(h_S)$ is the error of the classifier $h_S$ on the distribution $\\mathcal{D}_i$",
+            "$\\theta_j$ is the number of samples taken by agent $j$"
+          ]
+        ]
+      ],
+      "**Key Properties**",
+      [
+        "This setting is more general than the previous two, as it allows for **arbitrary dependencies** between instances and labels.",
+        "The utility function depends on the structure of the hypothesis class $\\mathcal{H}$ and the relationships between the agents' distributions $\\mathcal{D}_i$."
+      ],
+      "**Equilibria**",
+      [
+        "The paper shows that **stable equilibria may not exist** in this setting, particularly when the utility functions are not well-behaved (e.g., when small changes in contributions lead to large changes in utility).",
+        "This highlights the challenges of applying the proposed framework to general PAC learning settings."
+      ]
+    ]
+  ],
+  "doi": "arXiv:2103.03228v1",
+  "id": "blum2021one",
+  "bibtex": "@inproceedings{blum2021one, title={One for one, or all for all: Equilibria and optimality of collaboration in federated learning}, author={Blum, Avrim and Haghtalab, Nika and Phillips, Richard Lanas and Shao, Han}, booktitle={International Conference on Machine Learning}, pages={1005--1014}, year={2021}, organization={PMLR}}"
+}
