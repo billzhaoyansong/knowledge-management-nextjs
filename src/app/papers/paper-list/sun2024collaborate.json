@@ -1,0 +1,116 @@
+{
+  "title": "How to Collaborate: Towards Maximizing the Generalization Performance in Cross-Silo Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Yuchang Sun",
+    "Marios Kountouris",
+    "Jun Zhang"
+  ],
+  "year": "2024-12",
+  "labels": [
+    "federated learning",
+    "cross-silo",
+    "coalition"
+  ],
+  "summaries": [
+    "in the conventional FL, propose a __coalition formation__ scheme for the cross-silo scenario (_cluster-based collaborative FL_) to maximize the sum of utilities of clients"
+  ],
+  "systemModel": [
+    "Weakness in thie Article",
+    [
+      "The assumption that __gradient similarity can approximate data distribution divergence may not hold in all scenarios__, especially when clients have highly non-IID data."
+    ],
+    "Problem",
+    [
+      "in cross-silo FL in which clients are also model owners,",
+      [
+        "some powerful clients with sufficient training data have limited or no incentive to collaborate",
+        "data heterogeneity among clients degrades the training performance of the global model and the performance of local model of clients with limited amount of data"
+      ],
+      "client should seek collaborators with __[1] similar training data distribution__ and __[2] more data samples__",
+      "but under strict privacy protection, the local data distribution is only visible to the client itself"
+    ],
+    "Players & Notations",
+    [
+      "$1$ central server: has no data sample",
+      "$\\mathcal{N} = \\{1, 2, \\ldots, N\\}$: Set of clients",
+      [
+        "$i \\in \\mathcal{N}$: a client",
+        [
+          "$\\mathcal{D}_i^{tr}$: training dataset with the size $D_i$",
+          "$\\mathcal{D}_i^{te}$: test dataset",
+          "$\\mathcal{P}_i^{tr}=\\mathcal{P}_i^{te}=\\mathcal{P}_i$: training/test data distribution",
+          "$\\mathbf{x} \\in \\mathcal{X}, y \\in \\mathcal{Y}$: feature, label of any data sample",
+          "$\\mathbf{g}_i^t$: model update of client $i$"
+        ],
+        "$[K]$: the set of groups and $K$ is a priori unknown",
+        [
+          "$\\mathcal{C}_k$: the set of clients in group $k$",
+          "$G_i \\in [K]$: group index of client $i$",
+          [
+            "$\\hat{D}_{G_i}$: total training samples in group $G_i$",
+            "$\\hat{\\mathcal{P}}_{G_i}$: distribution of data samples in group $G_i$",
+            "$\\hat{\\mathbf{g}}_k^t$: Weighted average of model updates in group $k$"
+          ]
+        ]
+      ]
+    ],
+    "Utility of Clients",
+    [
+      "$U_i(G_i^t)\\triangleq -\\frac{\\alpha}{\\hat{D}_{G_i^t}} + s(i,G_i^t) + \\beta$: utility of client $i$",
+      [
+        "$s(i,G_i^t)=\\cos\\left\\langle \\mathbf{g}_i^t, \\hat{\\mathbf{g}}_k^t \\right\\rangle$: cosine similarity of gradients (_used to approximate the divergence of data distribution_)",
+        "$\\alpha>0$: a trade-off constant between __data volumn__ and __similar distribution__",
+        [
+          "if clients have sufficient data, they prefer a small $\\alpha$ because they weigh similar distribution more",
+          "if clients do not have sufficient data, they prefer a large $\\alpha$ because they weigh data volumn more"
+        ],
+        "$\\beta>0$: a constant to ensure non-negative utility"
+      ]
+    ]
+  ],
+  "techniques": [
+    "Utility Maximization Problem",
+    [
+      "$\\begin{array}{ll}\\max\\limits_{\\Pi} \\sum\\limits_{i=1}^N U_i(\\hat{D}_{G_i^t}, \\mathbf{g}_k^t)\\\\ \\text{s.t. } \\Pi\\triangleq \\left\\{\\{\\mathcal{C}_k\\}_{k=1}^K \\vert \\mathcal{C}_k\\neq\\emptyset,\\mathcal{C}_k\\bigcap\\mathcal{C}_{k'}=\\emptyset, \\bigcup_{k=1}^K \\mathcal{C}_k=\\mathcal{N} \\right\\}\\end{array}$",
+      [
+        "the constraint implies all clients are divided into $K$ non-empty and non-overlapping groups",
+        "finding an optimial solution is NP-hard in general"
+      ]
+    ],
+    "Hierarchical Clustering-based Collaborative Training (HCCT)",
+    [
+      "![](/papers/sun2024collaborate/hcct.png)"
+    ],
+    "Client Partition in HCCT",
+    [
+      "![](/papers/sun2024collaborate/partition.png)",
+      "$B(k_1, k_2) = \\sum\\limits_{i \\in \\mathcal{C}_{k_1} \\cup \\mathcal{C}_{k_2}} U_i(\\hat{D}_{k'}, \\hat{\\mathbf{g}}_{k'}) - \\sum\\limits_{i \\in \\mathcal{C}_{k_1}} U_i(\\hat{D}_{k_1}, \\hat{\\mathbf{g}}_{k_1}) - \\sum\\limits_{i \\in \\mathcal{C}_{k_2}} U_i(\\hat{D}_{k_2}, \\hat{\\mathbf{g}}_{k_2})$",
+      "$(k_1^*, k_2^*) = \\arg\\max_{\\{(k_1, k_2) | k_1 \\neq k_2, k_1, k_2 \\in [K]\\}} B(k_1, k_2)$"
+    ],
+    "Discussion on HCCT",
+    [
+      "__HCCT vs Personalized FL__",
+      [
+        "Orthogonality: HCCT can be combined with personalization methods to further enhance the performance of clients",
+        [
+          "each group in HCCT is __a micro FL system__",
+          "although group is more homogeneous compared to the entire client population, clients within a group may still have some degree of data heterogeneity, which can be addressed by incorporating personalization techniques, such as HCCT-P",
+          [
+            "Clients collaborate to train __shared feature extractors__ (e.g., the lower layers of a neural network), which capture common patterns across the group.",
+            "Each client keeps a __personalized classifier__ (e.g., the upper layers of a neural network), which is fine-tuned on its local data to capture client-specific patterns."
+          ]
+        ]
+      ],
+      "__Efficient Estimation of Client Similarity__",
+      [
+        "for the client $i$, decompose its gradient in __layer-wise manner__: $\\mathbf{g}_i=(\\mathbf{g}_i[1], \\mathbf{g}_i[2],...,\\mathbf{g}_i[L])$<ol>",
+        "Identify the Most Important Layer: $l^* = \\arg\\max_{l \\in [L]} \\frac{\\text{Var}(\\mathbf{g}_1[l], \\mathbf{g}_2[l], \\ldots, \\mathbf{g}_N[l])}{\\text{Mean}(\\mathbf{g}_1[l], \\mathbf{g}_2[l], \\ldots, \\mathbf{g}_N[l])}$",
+        "compute similarity using the most important layer: $s(i, G_i) = \\cos(\\mathbf{g}_i[l^*], \\mathbf{g}_{G_i}[l^*])$"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TMC.2024.3509852",
+  "id": "sun2024collaborate",
+  "bibtex": "@article{sun2024collaborate, title={How to collaborate: Towards maximizing the generalization performance in cross-silo federated learning}, author={Sun, Yuchang and Kountouris, Marios and Zhang, Jun}, journal={IEEE Transactions on Mobile Computing}, year={2024}, publisher={IEEE}}"
+}

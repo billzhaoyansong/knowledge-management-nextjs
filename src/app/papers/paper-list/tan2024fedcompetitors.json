@@ -1,0 +1,132 @@
+{
+  "title": "FedCompetitors: Harmonious Collaboration in Federated Learning with Competing Participants",
+  "type": "technical",
+  "authors": [
+    "Shanli Tan",
+    "Hao Cheng",
+    "Xiaohu Wu",
+    "Han Yu",
+    "Tiantian He",
+    "Yew-Soon Ong",
+    "Chongjun Wang",
+    "Xiaofeng Tao"
+  ],
+  "year": "2024-03",
+  "labels": [
+    "coalition",
+    "federated learning"
+  ],
+  "summaries": [
+    "in conventional FL framework, propose __a coalition formation method__ for the cross-silo scenario in which participants have competition relationships with other participants to __avoid training with competitors while maximizing the overall social benefit__"
+  ],
+  "systemModel": [
+    "Problem & Objectives",
+    [
+      "__Problem__",
+      [
+        "_Competition Among Participants_: In real-world scenarios, some FL-PTs may compete with each other (e.g., hospitals in the same city), making it challenging to establish harmonious collaboration.",
+        "_Conflict of Interest_: Competing FL-PTs may not want to share data or model updates with their competitors, leading to potential conflicts of interest.",
+        "_Scalability_: The FL ecosystem should be scalable, allowing even competing FL-PTs to join without conflicts."
+      ],
+      "__Objectives__",
+      [
+        "_Conflict-Free Collaboration_: Ensure that no FL-PT directly or indirectly assists its competitors, avoiding conflicts of interest.",
+        [
+          "_Balance Theory_: The principle \"the friend of my enemy is my enemy\" is extended to ensure that no FL-PT assists its competitors or their allies."
+        ],
+        "_Scalability_: Allow competing FL-PTs to join the FL ecosystem without conflicts.",
+        "_Social Welfare Maximization_: Maximize the overall benefit of the FL ecosystem by optimizing the collaboration network. __a set of coalitions will be determined__",
+        "_Efficient Algorithm_: Propose a polynomial-time algorithm to determine the collaborators for each FL-PT."
+      ]
+    ],
+    "Notations",
+    [
+      "$1$ central server",
+      "$ \\mathcal{V} = \\{v_1, v_2, \\dots, v_n\\} $: FL Participants (FL-PTs)",
+      [
+        "$ w_i = \\sum\\limits_{j \\neq i} w_{i,j} $: Level of Potential (LoP), measuring the importance of $ v_i $ to the FL ecosystem.",
+        "$ x_{j,i} \\in \\{0, 1\\} $: Decision Variable, where $ x_{j,i} = 1 $ if $ v_j $ contributes to $ v_i $'s model training."
+      ],
+      "-",
+      "Graphs",
+      [
+        "$ \\mathcal{G}_c = (\\mathcal{V}, E_c) $, Competing Graph, where $ E_c $ represents the competing relationships between FL-PTs.",
+        [
+          "$ s_{i,j} = 1 $ if $ v_i $ competes with $ v_j $",
+          "$ s_{i,j} = 0 $ otherwise."
+        ],
+        "$ \\mathcal{G}_b = (\\mathcal{V}, E_b) $, Benefit Graph, where $ E_b $ represents the benefit relationships (i.e., how one FL-PT can benefit from another's data).",
+        [
+          "$ w_{j,i} \\geq 0 $ represents $ v_j $'s data contributions to $ v_i $",
+          "$P_j^i=(v_{j_0}, v_{j_1}, v_{j_2}, \\dots, v_{j_{p_{i,j}}})$: the path from $v_j$ to $v_i$ in $ \\mathcal{G}_b$",
+          [
+            "$j_0=j, j_{p_{i,j}}=i$",
+            "$p_{i,j}$: the length of the path"
+          ]
+        ],
+        "$ \\mathcal{G}_u = (\\mathcal{V}, E_u) $, Data Usage Graph, where $ E_u $ represents the actual data usage relationships determined by the central server (CS)."
+      ]
+    ],
+    "Assumptions",
+    [
+      "For any two competing FL-PTs $v_i$ and $v_j$, $v_j$ is unreachable to $v_i$ in the data usage graph $\\mathcal{G}_u$. This ensures that no FL-PT directly or indirectly assists its competitors<ol>",
+      [
+        "Mathematically: If $(v_i, v_j) \\in E_c$, then $v_j$ is unreachable to $v_i$ in $\\mathcal{G}_u$"
+      ],
+      "The data across FL-PTs is non-IID, leading to different local optima for each FL-PT.",
+      "Some FL-PTs are in competition, and their utility depends on the performance of their competitors."
+    ],
+    "Weakness",
+    [
+      "_Complexity_: Although the algorithm is polynomial-time, the complexity is $\\mathcal{O}(n^4)$, which may still be high for very large networks.",
+      "_Assumption of Known Competition_: The approach assumes that the competing relationships (i.e., $\\mathcal{G}_c$) are known and reported by FL-PTs, which may not always be the case in practice.",
+      "_Static Environment_: The approach assumes a static environment where the competing relationships and data distributions do not change over time, which may not hold in dynamic real-world scenarios.",
+      "_Limited to Cross-Silo FL_: The framework is primarily designed for cross-silo FL, where FL-PTs are organizations or companies. It may not be directly applicable to cross-device FL scenarios.",
+      "_Dependence on Central Server_: The approach relies on a central server to regulate the collaboration network, which may raise concerns about single points of failure or trust issues."
+    ]
+  ],
+  "techniques": [
+    "Integer Linear Programming (ILP)",
+    [
+      "The problem is formulated as an ILP to determine the optimal collaboration network to maximize the benefit for each FL-PT while ensuring no conflict of interest",
+      [
+        "$\\text{maximize} \\sum_{j \\neq i} w_{j,i} \\cdot x_{j,i}$",
+        "$\\text{subject to}$",
+        [
+          "$x_{j,i} \\in \\{0, 1\\}, \\quad \\forall i, j$",
+          "$x_{j,j_1} + x_{j_1,j_2} + \\dots + x_{j_{p_{i,j}},i} \\leq p_{i,j} - 1, \\quad \\forall (v_i, v_j) \\in E_c, \\forall P^i_j \\in \\mathcal{P}_{j,i}$",
+          [
+            "The sum of the decision variables $x_{j,j_1}, x_{j_1,j_2}, \\dots, x_{j_{p_{i,j}-1}},i$ along the path $P^i_j$ must be less than or equal to $p_{i,j} - 1$. This ensures that at least one edge in the path is missing, breaking the chain of collaboration and preventing $v_j$ from indirectly assisting $v_i$.",
+            [
+              "Suppose $v_j$ competes with $v_i$, and there is a path $v_j \\rightarrow v_{j_1} \\rightarrow v_{j_2} \\rightarrow v_i$ in $\\mathcal{G}_b$. The constraint ensures that at least one of the edges $(v_j, v_{j_1})$, $(v_{j_1}, v_{j_2})$, or $(v_{j_2}, v_i)$ is not included in the data usage graph $\\mathcal{G}_u$. This prevents $v_j$ from indirectly contributing to $v_i$’s model training"
+            ]
+          ]
+        ],
+        "How is the result being generated into a set of coalitions",
+        [
+          "$X =\\begin{bmatrix} 1 & 0 & 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 & 0 & 1 \\\\ 1 & 0 & 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 & 0 & 1 \\\\ 1 & 0 & 1 & 0 & 1 & 0 \\\\0 & 1 & 0 & 1 & 0 & 1 \\\\ \\end{bmatrix}$",
+          [
+            "$v_1$: $x_{1,1} = 1$ (trivial, contributes to itself), $x_{1,3} = 1$ (contributes to $v_3$).$x_{1,5} = 1$ (contributes to $v_5$).",
+            "$v_2$: $x_{2,2} = 1$ (trivial, contributes to itself). $x_{2,4} = 1$ (contributes to $v_4$). $x_{2,6} = 1$ (contributes to $v_6$).",
+            "$v_3$: $x_{3,1} = 1$ (contributes to $v_1$). $x_{3,3} = 1$ (trivial, contributes to itself). $x_{3,5} = 1$ (contributes to $v_5$).",
+            "$v_4$: $x_{4,2} = 1$ (contributes to $v_2$).$x_{4,4} = 1$ (trivial, contributes to itself).$x_{4,6} = 1$ (contributes to $v_6$).",
+            "$v_5$: $x_{5,1} = 1$ (contributes to $v_1$).$x_{5,3} = 1$ (contributes to $v_3$).$x_{5,5} = 1$ (trivial, contributes to itself).",
+            "$v_6$: $x_{6,2} = 1$ (contributes to $v_2$).$x_{6,4} = 1$ (contributes to $v_4$).$x_{6,6} = 1$ (trivial, contributes to itself)."
+          ],
+          "the result will be 2 coalitions: $(v_1, v_3, v_5)$ and $(v_2, v_4, v_6)$"
+        ]
+      ],
+      "-",
+      "this ILP problem cannot be solve analytically",
+      [
+        "_Integer Constraints_: The decision variables $x_{j,i}$ are binary ($x_{j,i} \\in \\{0, 1\\}$), which makes the problem inherently combinatorial. Solving such problems analytically is extremely challenging because the solution space grows exponentially with the number of FL-PTs.",
+        "_Non-Convexity_: ILP problems are non-convex due to the integer constraints. Analytical methods typically rely on convexity assumptions, which do not hold for ILP problems",
+        "_Complex Constraints_: The second constraint in the ILP formulation involves paths in the benefit graph $\\mathcal{G}_b$, which adds significant complexity. Enforcing this constraint analytically is impractical because it requires checking all possible paths between competing FL-PTs",
+        "_Scalability_: As the number of FL-PTs increases, the problem size grows combinatorially. Analytical methods are not well-suited for such large-scale problems."
+      ]
+    ]
+  ],
+  "doi": "",
+  "id": "tan2024fedcompetitors",
+  "bibtex": "@inproceedings{tan2024fedcompetitors, title={Fedcompetitors: Harmonious collaboration in federated learning with competing participants}, author={Tan, Shanli and Cheng, Hao and Wu, Xiaohu and Yu, Han and He, Tiantian and Ong, Yew Soon and Wang, Chongjun and Tao, Xiaofeng}, booktitle={Proceedings of the AAAI Conference on Artificial Intelligence}, volume={38}, number={14}, pages={15231--15239}, year={2024}}"
+}

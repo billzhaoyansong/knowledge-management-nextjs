@@ -1,0 +1,103 @@
+{
+  "title": "Optimality and Stability in Federated Learning: A Game-theoretic Approach",
+  "type": "technical",
+  "authors": [
+    "Kate Donahue",
+    "Jon M. Kleinberg"
+  ],
+  "year": "2021-06",
+  "labels": [
+    "federated learning",
+    "collaboration"
+  ],
+  "summaries": [
+    "by extending the previous work on the grand collaboration formation via hedonic games, the author propose to __analyze Price of Anarchy to quantify the gap between stable and optimal solutions__"
+  ],
+  "systemModel": [
+    "Assumptions & Objectives",
+    [
+      "__Objectives__",
+      [
+        "Prior work has framed FL as a hedonic game, focusing on stability. This paper extends this by analyzing the __Price of Anarchy(PoA)__, which quantifies the __gap between stable and optimal solutions__"
+      ],
+      "__Assumptions__",
+      [
+        "Consider simple mean estimation tasks only<ol>",
+        [
+          "Hospital A: 20 patients, with an average age of 40 years.",
+          "Hospital B: 30 patients, with an average age of 50 years.",
+          "Hospital C: 50 patients, with an average age of 45 years.",
+          "Global mean age: $\\frac{(20\\times 40)+(30\\times 50)+(50\\times 45)}{100}=45.5$",
+          "but in the sampling process, errors can come from [1] sampling errors [2] measurement bias [3] data heterogeneity"
+        ],
+        "The number of samples $\\{n_i\\}$ for each agent is fixed and known",
+        "Known parameters",
+        [
+          "$\\mu_e, \\sigma^2$ are approximately known"
+        ],
+        "Agents do not know their own true parameters $\\theta_i$ or the parameters of other agents.",
+        "Each agent aims to minimize its expected test error on its local distribution",
+        "The federating coordinator aims to minimize total cost but is otherwise impartial"
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$M$ agents, for each agent $i \\in [M]$",
+      [
+        "$n_i$: data points drawn",
+        "$g(\\theta_i)$: true local distribution",
+        [
+          "$g(\\cdot)$: true labeling function",
+          "$\\theta_i,\\hat{\\theta}_i$: true, estimated local parameters"
+        ]
+      ],
+      "-",
+      "if $i$ opts for local learning:",
+      [
+        "$g(\\hat{\\theta}_i)$: use for future prediction",
+        "$\\text{err}_i(\\{i\\})$: error"
+      ],
+      "-",
+      "if a set of players $C$ federated together",
+      [
+        "$\\hat{\\theta}_C=\\frac{1}{\\sum_{i\\in C} n_i} \\cdot \\sum_{i\\in C} (n_i\\cdot \\hat{\\theta}_i)$: FedAvg?",
+        "$\\text{err}_j(C)=\\frac{\\mu_e}{\\sum_{i\\in C} n_i}+\\sigma^2\\cdot \\frac{\\sum_{i\\in C, i\\neq j} n_i^2 + \\left(\\sum_{i \\in C, i\\neq j} n_i \\right)^2}{\\left(\\sum_{i\\in C} n_i\\right)^2}$",
+        [
+          "$\\mu_e=\\mathbb{E}_{(\\theta_i,\\epsilon_i^2)\\sim \\Theta}[\\epsilon_i^2]$: the average noise in data sampling",
+          "$\\sigma^2=Var(\\theta_i)$: the average distance between the true means of players"
+        ]
+      ],
+      "-",
+      "A coalition partition $\\Pi$ is optimal if it minimizes the weighted sum of errors",
+      [
+        "$f_w(\\Pi)=\\sum\\limits_{C\\in \\Pi}\\sum\\limits_{i\\in C}n_i\\cdot err_i(C)$"
+      ],
+      "-",
+      "Price of Anarchy (PoA): the ratio of the worse stable arrangement to the optimal arrangement",
+      [
+        "$PoA=\\frac{f_w(\\Pi_M)}{f_w(\\Pi_{opt})}$",
+        [
+          "$\\Pi_M$ is the maximum-cost stable partition",
+          "$\\Pi_{opt}$ is the optimal partition"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    "Algorithm for Optimal Arrangement",
+    [
+      "Start with each agent doing local learning<ol>",
+      "Group agents in ascending order of size, stopping when adding a player would increase its error.",
+      "Prove that this arrangement is optimal using a series of lemmas."
+    ],
+    "PoA Analysis",
+    [
+      "Show that in some regions of parameter space, all stable arrangements are optimal ($PoA = 1$)<ol>",
+      "Provide examples where stable arrangements are not optimal.",
+      "Prove a constant-factor bound of 9 on the PoA, showing that the worst stable arrangement is no more than 9 times the cost of the optimal arrangement."
+    ]
+  ],
+  "doi": "",
+  "id": "donahue2021optimality",
+  "bibtex": "@article{donahue2021optimality, title={Optimality and stability in federated learning: A game-theoretic approach}, author={Donahue, Kate and Kleinberg, Jon}, journal={Advances in Neural Information Processing Systems}, volume={34}, pages={1287--1298}, year={2021}}"
+}

@@ -130,7 +130,7 @@ export default function PaperDetail(
         while (i + 1 < arr.length) {
 
             // <div className="h-0.5 w-10 bg-black mt-1"></div> 
-            children.push(<div className={`pt-6  ${view === 'detail-only' ? 'basis-1/2' : ''}`}>
+            children.push(<div className={`pt-6  ${view === 'detail-only' ? 'lg:basis-1/2 2xl:basis-1/4 flex-1' : ''}`}>
                 <div className="border border-gray-700 my-3 mx-3">
                     <h4 className="table mt-[-20px] ml-2 mb-2 font-bold text-xl px-3 bg-yellow-50">{arr[i]}</h4>
                     <div className="px-2 py-1">
