@@ -17,8 +17,11 @@
     "grouping"
   ],
   "systemModel": [
-    "1 server, several group managers deployed on the server, the set of $K$ clients denoted by $\\mathcal{C}$",
-    "Under our grouped FL setting, FL clients are grouped such that clients in the same group have heterogeneous data but the overall data distributions among the groups are homogeneous",
+    "Players",
+    [
+      "1 server, several group managers deployed on the server, the set of $K$ clients denoted by $\\mathcal{C}$",
+      "Under our grouped FL setting, FL clients are grouped such that clients in the same group have heterogeneous data but the overall data distributions among the groups are homogeneous"
+    ],
     "Process",
     [
       "in $r$th round, assign all clients $\\mathcal{C}$ to $f(r)$ groups to obtain $\\mathcal{G}$ [see Group Growth Function & ICG]<ol>",

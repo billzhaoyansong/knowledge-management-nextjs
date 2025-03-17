@@ -14,7 +14,7 @@
     "Prashant Shah",
     "Spyridon Bakas"
   ],
-  "type":"technical",
+  "type": "technical",
   "year": "2022-05",
   "editing": false,
   "labels": [
@@ -35,9 +35,12 @@
       "ensure every node has valid PKI certificate",
       "initiate the nodes"
     ],
-    "security is enhanced via a mutual transport layer security (mTLS)",
-    "connection is built with gRPC",
-    "a real-world federated tumor segmentation initiative and acute respiratory distress syndrome prediction, which leverage OpenFL, are described"
+    "Keys",
+    [
+      "security is enhanced via a mutual transport layer security (mTLS)",
+      "connection is built with gRPC",
+      "a real-world federated tumor segmentation initiative and acute respiratory distress syndrome prediction, which leverage OpenFL, are described"
+    ]
   ],
   "techniques": [
     ""

@@ -24,13 +24,19 @@
     "in this framework, each PS is only responsible for a fraction of total clients, but PSes can mix model parameters in a designed way that guarantees convergence"
   ],
   "systemModel": [
-    "$M$ connected PSes with inner topology captured by a $M\\times M$ matrix $\\mathbf{L}$: [1] for connected PSes $i$ and $i'$, $L_{ii'}=1$, [2] otherwise $L_{ii'}=0$. [3] $L_{ii'}=L_{i'i}$",
-    "$N$ clients denoted by $\\mathcal{N}$, each PS $i$ covers a $N_i$ set of clients $\\mathcal{N}_i$: [1] $\\mathcal{N}=\\bigcup_{i=1}^M \\mathcal{N}_i$; [2] $\\mathcal{N}_i\\bigcap \\mathcal{N}_{i'}=\\emptyset$",
-    "workflow (1): each PS $i$ distributes the set of model parameters $\\mathbf{x}$ to randomly selected set of clients $\\mathcal{K}_i$ in $\\mathcal{N}_i$",
-    "workflow (2): each client conducts $E$ rounds of local iterations",
-    "workflow (3): client $j$ upload parameters $\\mathbf{x}_j$ to PS $i$",
-    "workflow (4): PS $i$ generates intermediate parameter vector $\\mathbf{v}_i=\\frac{1}{K_i}\\sum\\limits_{j\\in\\mathcal{K}_i} \\mathbf{x}_j$",
-    "workflow (5): PS $i$ mix intermediate parameters with neighboring PSes to get final model $\\mathbf{x}_i=\\mathbf{Vw}_i$ [see 1. mixing topology]"
+    "Players",
+    [
+      "$M$ connected PSes with inner topology captured by a $M\\times M$ matrix $\\mathbf{L}$: [1] for connected PSes $i$ and $i'$, $L_{ii'}=1$, [2] otherwise $L_{ii'}=0$. [3] $L_{ii'}=L_{i'i}$",
+      "$N$ clients denoted by $\\mathcal{N}$, each PS $i$ covers a $N_i$ set of clients $\\mathcal{N}_i$: [1] $\\mathcal{N}=\\bigcup_{i=1}^M \\mathcal{N}_i$; [2] $\\mathcal{N}_i\\bigcap \\mathcal{N}_{i'}=\\emptyset$"
+    ],
+    "workflow",
+    [
+      "workflow (1): each PS $i$ distributes the set of model parameters $\\mathbf{x}$ to randomly selected set of clients $\\mathcal{K}_i$ in $\\mathcal{N}_i$",
+      "workflow (2): each client conducts $E$ rounds of local iterations",
+      "workflow (3): client $j$ upload parameters $\\mathbf{x}_j$ to PS $i$",
+      "workflow (4): PS $i$ generates intermediate parameter vector $\\mathbf{v}_i=\\frac{1}{K_i}\\sum\\limits_{j\\in\\mathcal{K}_i} \\mathbf{x}_j$",
+      "workflow (5): PS $i$ mix intermediate parameters with neighboring PSes to get final model $\\mathbf{x}_i=\\mathbf{Vw}_i$ [see 1. mixing topology]"
+    ]
   ],
   "motivation": [
     "In vanilla FL, a single centralized PS is responsible for coordinating clients.",

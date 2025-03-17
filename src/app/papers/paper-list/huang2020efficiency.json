@@ -25,11 +25,17 @@
     "reputation is regarded as historical performance in model exchange time"
   ],
   "systemModel": [
-    "$1$ edge server, multiple clients (mostly mobile devices)",
-    "round stage (1): interested clients report a few client-side information",
-    "round stage (2): server selects clients [see 1. Client Selection]",
-    "round stage (3): selected clients download global model, train models locally, and upload trained models to the server. The time span in this stage is model exchange time",
-    "round stage (4): server performs model aggregation"
+    "Players",
+    [
+      "$1$ edge server, multiple clients (mostly mobile devices)"
+    ],
+    "Stage",
+    [
+      "round stage (1): interested clients report a few client-side information",
+      "round stage (2): server selects clients [see 1. Client Selection]",
+      "round stage (3): selected clients download global model, train models locally, and upload trained models to the server. The time span in this stage is model exchange time",
+      "round stage (4): server performs model aggregation"
+    ]
   ],
   "motivation": [
     "Within such a novel paradigm, new challenges co-exist with opportunities.",

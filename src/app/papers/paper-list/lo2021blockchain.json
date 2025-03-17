@@ -32,8 +32,11 @@
       "one blockchain",
       "one smart contract"
     ],
-    "the smart contract is to solve accountability by managing local models and global models on the chain [see 1. Accountability and Smart Contract]",
-    "a weighted training dataset sampler is proposed to solve fairness problem [see 2. Fairness and Weighted Dataset Sampler]"
+    "Keys",
+    [
+      "the smart contract is to solve accountability by managing local models and global models on the chain [see 1. Accountability and Smart Contract]",
+      "a weighted training dataset sampler is proposed to solve fairness problem [see 2. Fairness and Weighted Dataset Sampler]"
+    ]
   ],
   "questions": [
     "accountability and fairness challenges facing FL"

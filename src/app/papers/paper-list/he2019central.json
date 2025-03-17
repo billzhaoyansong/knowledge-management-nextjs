@@ -19,13 +19,21 @@
     "this algorithm borrows a 2-step idea: local train and push local model to trusted neighbors, then each node aggregate into a new model"
   ],
   "systemModel": [
-    "$n$ clients (nodes), a directed graph $\\mathcal{G}=(\\text{nodes}: [n], \\text{edges}: E)$ with vertex set $[n]=\\{1,2,...,n\\}$ and edge set $E\\subset [n] \\times [n]$  <u>[see 1. Global Structure]</u>",
-    "propose an online push-sum (OPS) distributed learning algorithm",
-    "initialize local model $\\mathbf{x}_0^{(i)} = 0$, weight $\\omega_0^{(i)}=1$, then for each timestamp $t$",
-    "step 1): apply local learning $\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}=\\mathbf{z}_{t}^{(i)}-\\gamma \\ f_{i,t}\\left(\\mathbf{x}_t^{(i)};\\mathbf{\\xi}_t^{(i)}\\right)$",
-    "step 2): (PUSH) send out weighted models $\\left(W_{ij}\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}, W_{ij}\\omega_t^{(i)}\\right)$ to $j\\in \\mathcal{N}_i^{(out)}$",
-    "step 3): (SUM) update local models using inbound models $\\mathbf{z}_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\mathbf{z}_{t+\\frac{1}{2}}^{(k)}$, $\\omega_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\omega_t^{(k)}$, $\\mathbf{x}_{t+1}^{(i)}=\\frac{\\mathbf{z}_{t+1}^{(i)}}{\\omega_{t+1}^{(i)}}$",
-    "$\\omega$ is used to normalize $\\mathbf{z}$ and from my calculation it never changes after 1 iteration"
+    "Players",
+    [
+      "$n$ clients (nodes), a directed graph $\\mathcal{G}=(\\text{nodes}: [n], \\text{edges}: E)$ with vertex set $[n]=\\{1,2,...,n\\}$ and edge set $E\\subset [n] \\times [n]$  <u>[see 1. Global Structure]</u>"
+    ],
+    "Steps:",
+    [
+      "propose an online push-sum (OPS) distributed learning algorithm",
+      "initialize local model $\\mathbf{x}_0^{(i)} = 0$, weight $\\omega_0^{(i)}=1$, then for each timestamp $t$",
+      [
+        "step 1): apply local learning $\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}=\\mathbf{z}_{t}^{(i)}-\\gamma \\ f_{i,t}\\left(\\mathbf{x}_t^{(i)};\\mathbf{\\xi}_t^{(i)}\\right)$",
+        "step 2): (PUSH) send out weighted models $\\left(W_{ij}\\mathbf{z}_{t+\\frac{1}{2}}^{(i)}, W_{ij}\\omega_t^{(i)}\\right)$ to $j\\in \\mathcal{N}_i^{(out)}$",
+        "step 3): (SUM) update local models using inbound models $\\mathbf{z}_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\mathbf{z}_{t+\\frac{1}{2}}^{(k)}$, $\\omega_{t+1}^{(i)}=\\sum\\limits_{k\\in\\mathcal{N}_i^{\\text{in}}}W_{ki} \\omega_t^{(k)}$, $\\mathbf{x}_{t+1}^{(i)}=\\frac{\\mathbf{z}_{t+1}^{(i)}}{\\omega_{t+1}^{(i)}}$",
+        "$\\omega$ is used to normalize $\\mathbf{z}$ and from my calculation it never changes after 1 iteration"
+      ]
+    ]
   ],
   "motivation": [
     "Existing federated learning primarily adopts the central server-based network topology.",

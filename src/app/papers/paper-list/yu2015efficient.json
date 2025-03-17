@@ -23,10 +23,13 @@
         "task acceptance decision is made to maximize the difference of profit and drift"
     ],
     "systemModel": [
-        "$N$ workers in a crowdsourcing platform aiming to maximize the social welfare [see 1. Social Welfare]",
-        "a worker $i$ has a physical task queue $q_i(t)$ and a virtual task queue $Q_i(t)$ [see 2. Queue Dynamics]",
-        "sub-delegation decision is made to minimize the sum of drift and subdelegation cost [see 3. Subdelegation]",
-        "task acceptance decision is made to maximize the difference of profit and drift [see 4. Task Acceptance]"
+        "Keys",
+        [
+            "$N$ workers in a crowdsourcing platform aiming to maximize the social welfare [see 1. Social Welfare]",
+            "a worker $i$ has a physical task queue $q_i(t)$ and a virtual task queue $Q_i(t)$ [see 2. Queue Dynamics]",
+            "sub-delegation decision is made to minimize the sum of drift and subdelegation cost [see 3. Subdelegation]",
+            "task acceptance decision is made to maximize the difference of profit and drift [see 4. Task Acceptance]"
+        ]
     ],
     "questions": [
         "help workers decide when and to whom to sub-delegate tasks"

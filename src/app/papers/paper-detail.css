@@ -14,6 +14,20 @@
             @apply list-[square] list-inside;
         }
 
+        ul.depth-2,
+        ul.depth-3,
+        ul.depth-4,
+        ul.depth-5,
+        ul.depth-6,
+        ol.depth-2,
+        ol.depth-3,
+        ol.depth-4,
+        ol.depth-5,
+        ol.depth-6
+        {
+            @apply text-sm;
+        }
+
         ul.depth-1>li{
             @apply list-disc;
         }

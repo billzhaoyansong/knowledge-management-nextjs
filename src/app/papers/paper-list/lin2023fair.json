@@ -1,0 +1,115 @@
+{
+  "title": "Fair yet Asymptotically Equal Collaborative Learning",
+  "type": "technical",
+  "authors": [
+    "Xiaoqiang Lin",
+    "Xinyi Xu",
+    "See-Kiong Ng",
+    "Chuan-Sheng Foo",
+    "Bryan Kian Hsiang Low"
+  ],
+  "year": "2023-06",
+  "labels": [
+    "federated learning",
+    "reward",
+    "fairness"
+  ],
+  "summaries": [
+    "in the model-sharing framework, propose an explore-exploit framework ensuring __fairness__ (rewards proportional to contributions) in the short run and __asymptotic equality__ (all nodes converge to similar performance) in the long run"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "Fair incentives are needed to encourage resource-rich nodes to contribute, _however_",
+        "__Ex post fairness__ requires delayed incentives and external resources (e.g., money).",
+        "__Ex ante fairness__ lacks accurate contribution estimation, causing unfair rewards or model divergence.",
+        "Existing methods exacerbate __inequality__ (\"rich get richer\"), discouraging less capable nodes"
+      ],
+      "-",
+      "__Objectives__",
+      [
+        "Propose an explore-exploit framework ensuring __fairness__ (rewards proportional to contributions) and __asymptotic equality__ (all nodes converge to similar performance)",
+        [
+          "Accurately estimate node contributions during training.",
+          "Design real-time fair incentives tied to contribution estimates.",
+          "Guarantee asymptotic equality to prevent long-term performance gaps.",
+          "Validate efficacy in federated online learning (FOIL) and reinforcement learning (FRL)."
+        ]
+      ]
+    ],
+    "Notations",
+    [
+      "$1$ central server",
+      [
+        "$\\theta_t$: Global model parameters at iteration $t$"
+      ],
+      "$N$: Total number of nodes, for each node $i$",
+      [
+        "$\\mathcal{D}_i$: Local data stream at node $i$",
+        "$\\Delta\\theta_{i,t}$: Gradient/model update from node $i$ at $t$",
+        "$\\psi_i^* = \\lim\\limits_{t\\to\\infty} \\psi_{i,t}$: True contribution",
+        [
+          "$\\psi_{i,t} = \\frac{1}{t}\\sum_{l=1}^t \\phi_{i,l}$: Smoothed contribution estimate",
+          "$\\phi_{i,t}$: Shapley value (SV) of node $i$ at iteration $t$"
+        ],
+        "$T_\\alpha$: Stopping iteration for exploration (via hypothesis testing)",
+        "$\\varrho_i$: Sampling probability for node $i$ during exploitation",
+        "$\\Gamma_i = \\frac{(1-\\varrho_i)^k}{[1 - (1-\\varrho_i)^k]^2}$: Expected staleness"
+      ],
+      "$\\beta$: Temperature parameter balancing fairness and equality"
+    ],
+    "Assumptions & Weakness",
+    [
+      "__Assumptions__",
+      [
+        "__Honest Participation__: Nodes follow the protocol without adversarial behavior",
+        "__Stationary Data__: Local data distributions do not drift over time.",
+        "__Trusted Coordinator__: Central server reliably aggregates updates",
+        "__Convergence__: $\\psi_{i,t}$ converges to $\\psi_i^*$ as $t \\to \\infty$"
+      ],
+      "__Weakness__",
+      [
+        "Assumption Dependency: Relies on honest nodes and stationary data, which may not hold in practice",
+        "Computational Cost: Shapley value calculation, though approximated, scales with $N$",
+        "Empirical Limitations: Experiments focus on synthetic noise settings; real-world data heterogeneity may challenge fairness guarantees.",
+        "Communication Overhead: Exploration phase requires full participation, which may be infeasible for large $N$"
+      ]
+    ],
+    "FL Process",
+    [
+      "Global Model Initialization: The central coordinator initializes a global model $\\theta_0$ and shares it with all participating nodes<ol>",
+      "Iterative Training Process (Exploration Phase ($0 \\to T_\\alpha$) vs Exploitation Phase (after $T_\\alpha$))",
+      [
+        "A subset of nodes is selected to participate in the current iteration<ol>",
+        [
+          "During the exploration phase, nodes are _sampled uniformly_ to ensure unbiased contribution estimation",
+          "During the exploitation phase, nodes are sampled based on their contribution estimates $\\psi_{i,T_\\alpha}$ using the softmax distribution with the probability",
+          [
+            "$\\varrho_i = \\frac{\\exp(\\psi_{i,T_\\alpha}/\\beta)}{\\sum_{j=1}^N \\exp(\\psi_{j,T_\\alpha}/\\beta)}.$"
+          ]
+        ],
+        "Each selected node $i$ computes a local model update $\\Delta\\theta_{i,t}$ using its local data $\\mathcal{D}_i$",
+        "The selected nodes upload their local updates $\\Delta\\theta_{i,t}$ to the central coordinator",
+        "The coordinator aggregates the updates from the selected nodes to update the global model",
+        "Optional: during the exploration phase, the contributions of each node are estimated using the Shapley value (SV)",
+        [
+          "$\\phi_{i,t} = \\frac{1}{N} \\sum_{\\mathcal{S} \\subseteq [N] \\setminus \\{i\\}} \\binom{N-1}{|\\mathcal{S}|}^{-1} \\left( \\mathbf{U}(\\mathcal{S} \\cup \\{i\\}) - \\mathbf{U}(\\mathcal{S}) \\right)$"
+        ]
+      ],
+      "Fairness and Equality Guarantees",
+      [
+        "__Fairness__: Nodes with higher contributions receive better incentives (lower staleness $\\Gamma_i=\\frac{(1-\\varrho_i)^k}{[1 - (1-\\varrho_i)^k]^2}$)",
+        "__Asymptotic Equality__: All nodes eventually achieve the same convergence complexity $\\mathcal{O}(1/\\epsilon)$ and _similar model performance_",
+        [
+          "This property ensures that the framework is both __fair (in the short term)__ and __equal (in the long term)__, encouraging participation from all nodes"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.48550/arXiv.2306.05764",
+  "id": "lin2023fair",
+  "bibtex": "@inproceedings{lin2023fair, title={Fair yet asymptotically equal collaborative learning}, author={Lin, Xiaoqiang and Xu, Xinyi and Ng, See-Kiong and Foo, Chuan-Sheng and Low, Bryan Kian Hsiang}, booktitle={International Conference on Machine Learning}, pages={21223--21259}, year={2023}, organization={PMLR}}"
+}

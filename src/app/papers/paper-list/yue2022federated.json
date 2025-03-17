@@ -16,13 +16,19 @@
     "reputation"
   ],
   "systemModel": [
-    "1 server and several clients, all use quantized $(-1,1)$ neural networks (QNN)",
-    "local training (1): clients download real-value global weights from server",
-    "local training (2): clients conduct SGD training for QNN for $\\tau$ iterations [see 1. Client QNN Training]",
-    "local training (3): clients use stochastic rounding [see 2. Stochastic Rounding] to draw a randomly quantized weight $\\{-1, 1\\}$ and send the binary weight to server",
-    "global aggregation (1): server conducts reputation-based voting to aggregate binary weights from clients [see 3. Reputation-Based Byzantine-FedVote]",
-    "global aggregation (2): server uses voting result to restore the real-value global weights [see 4. Global Weights Restore]",
-    "reputation update: server uses normalized global weights to check credibility of clients and update reputations [see 5. Reputation Update]"
+    "Players",
+    [
+      "1 server and several clients, all use quantized $(-1,1)$ neural networks (QNN)"
+    ],
+    "Steps",
+    [
+      "local training (1): clients download real-value global weights from server",
+      "local training (2): clients conduct SGD training for QNN for $\\tau$ iterations [see 1. Client QNN Training]",
+      "local training (3): clients use stochastic rounding [see 2. Stochastic Rounding] to draw a randomly quantized weight $\\{-1, 1\\}$ and send the binary weight to server",
+      "global aggregation (1): server conducts reputation-based voting to aggregate binary weights from clients [see 3. Reputation-Based Byzantine-FedVote]",
+      "global aggregation (2): server uses voting result to restore the real-value global weights [see 4. Global Weights Restore]",
+      "reputation update: server uses normalized global weights to check credibility of clients and update reputations [see 5. Reputation Update]"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, propose a QNN_based scheme in which __[1] parameters in local models in this architecture are restrict parameters to $(-1,1)$ and rounded to $\\{-1, 1\\}$ before uploading to the server__, __[2] the server applies reputation-based plurality vote to decide the aggregation result__"

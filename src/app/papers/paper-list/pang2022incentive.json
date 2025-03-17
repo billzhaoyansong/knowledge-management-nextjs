@@ -22,11 +22,17 @@
     "an extension of multi-job scenario is considered and introduces a budget constraint"
   ],
   "systemModel": [
-    "$1$ server and a set of FL clients $I$",
-    "process 1): server broadcasts information of job to all FL clients $I$ [see 1. job broadcasting]",
-    "process 2): clients submit $J$ bids [see 2. bidding]",
-    "process 3): server determines number of global iterations, schedules training plan and determines payouts [see 3. social cost minimization]",
-    "a multi-job extension is introduced [see 4. multi-job extension]"
+    "Players",
+    [
+      "$1$ server and a set of FL clients $I$"
+    ],
+    "Process",
+    [
+      "process 1): server broadcasts information of job to all FL clients $I$ [see 1. job broadcasting]",
+      "process 2): clients submit $J$ bids [see 2. bidding]",
+      "process 3): server determines number of global iterations, schedules training plan and determines payouts [see 3. social cost minimization]",
+      "a multi-job extension is introduced [see 4. multi-job extension]"
+    ]
   ],
   "motivation": [
     "To fully realize the potential of FL in practice, two types of challenges need to be addressed: technical and economical.",

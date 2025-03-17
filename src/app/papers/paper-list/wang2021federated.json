@@ -25,9 +25,12 @@
       "a set $\\mathcal{N}$ of $N$ HABs",
       "a set $\\mathcal{M}$ of $M$ users (users offload computational tasks to HABs, while HABs transmit the results to users)"
     ],
-    "the objective is to minimize the weighted sum of time consumption and energy consumption [see 1. Problem Formulation]",
-    "HABs collaboratively train a SVM model to predict the optimal user association [see 2. FL for User association]",
-    "after user association is determined, the service sequence and task allocation will be determined [see 3. Service Sequence and Task Allocation]"
+    "Keys",
+    [
+      "the objective is to minimize the weighted sum of time consumption and energy consumption [see 1. Problem Formulation]",
+      "HABs collaboratively train a SVM model to predict the optimal user association [see 2. FL for User association]",
+      "after user association is determined, the service sequence and task allocation will be determined [see 3. Service Sequence and Task Allocation]"
+    ]
   ],
   "questions": [
     "the problem of minimizing energy and time consumption for task computation and transmission is studied in a mobile edge computing (MEC)-enabled balloon network"

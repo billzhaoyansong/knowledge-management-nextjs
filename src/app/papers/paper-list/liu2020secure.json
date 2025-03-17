@@ -23,14 +23,17 @@
     "moreover, monetary reward criteria are written in the smart contract to incentivize efforts of high-quality model updates"
   ],
   "systemModel": [
-    "smart contracts, wallet address, task publisher, central aggregator, devices",
-    "phase 1 (initialization) step 1): the task publisher creates a smart contract (including a hashed testing dataset, an initial global model) in the blockchain",
-    "phase 1 (initialization) step 2): the task publisher provides hashed indices of the data group to the central aggregator",
-    "phase 1 (initialization) step 3): the central aggregator verifies the testing data group and writes the testing data group into the smart contract, while devices downloads the initial global model",
-    "phase 2 (aggregation) step 1): devices do local training with D-SGD algorithm",
-    "phase 2 (aggregation) step 2): devices add Gaussian noise mechanism (GNM) to add noise on the local model updates prior to submission to the central aggregator",
-    "phase 2 (aggregation) step 3): the central aggregator evaluates local models",
-    "phase 3 (update): after the convergence of the global model or number of iteration reaches the upper limit, the qualified devices will obtain rewards from blockchain and the task publisher will receive a new, better global model"
+    "Phases",
+    [
+      "smart contracts, wallet address, task publisher, central aggregator, devices",
+      "phase 1 (initialization) step 1): the task publisher creates a smart contract (including a hashed testing dataset, an initial global model) in the blockchain",
+      "phase 1 (initialization) step 2): the task publisher provides hashed indices of the data group to the central aggregator",
+      "phase 1 (initialization) step 3): the central aggregator verifies the testing data group and writes the testing data group into the smart contract, while devices downloads the initial global model",
+      "phase 2 (aggregation) step 1): devices do local training with D-SGD algorithm",
+      "phase 2 (aggregation) step 2): devices add Gaussian noise mechanism (GNM) to add noise on the local model updates prior to submission to the central aggregator",
+      "phase 2 (aggregation) step 3): the central aggregator evaluates local models",
+      "phase 3 (update): after the convergence of the global model or number of iteration reaches the upper limit, the qualified devices will obtain rewards from blockchain and the task publisher will receive a new, better global model"
+    ]
   ],
   "techniques": [],
   "doi": "10.1109/MWC.01.1900525",

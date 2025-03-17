@@ -27,12 +27,18 @@
     "payments are based on local accuracies, local provided resources, and the highest normalized value of losing mobile users"
   ],
   "systemModel": [
-    "$1$ base station (BS) and a set $\\mathcal{N}$ of $N$ users",
-    "auction process (1): BS initializes the global network model",
-    "auction process (2): BS announces the auction rule and advertises the FL task to the mobile users",
-    "auction process (3): mobile users submit a set of $I_n$ of bids to the BS, each bid $\\Delta_{ni}={b_{ni}, A_{ni}, \\epsilon_{ni}, v_{ni}}$ where $b_{ni}$ is sub-channel number, $A_{ni}$ is antenna number, $\\epsilon_{ni}$ is local accuracy, $v_{ni}$ is claimed cost (bid price)[see 1. Bid Decision]",
-    "auction process (4): BS selects clients using the indicator $x_{ni}$ [see 2. Client Selection]",
-    "auction process (5): the winning mobile users join the FL and receive the payment after finishing the training model [see 3. Incentive Mechanism]"
+    "Players",
+    [
+      "$1$ base station (BS) and a set $\\mathcal{N}$ of $N$ users"
+    ],
+    "Process",
+    [
+      "auction process (1): BS initializes the global network model",
+      "auction process (2): BS announces the auction rule and advertises the FL task to the mobile users",
+      "auction process (3): mobile users submit a set of $I_n$ of bids to the BS, each bid $\\Delta_{ni}={b_{ni}, A_{ni}, \\epsilon_{ni}, v_{ni}}$ where $b_{ni}$ is sub-channel number, $A_{ni}$ is antenna number, $\\epsilon_{ni}$ is local accuracy, $v_{ni}$ is claimed cost (bid price)[see 1. Bid Decision]",
+      "auction process (4): BS selects clients using the indicator $x_{ni}$ [see 2. Client Selection]",
+      "auction process (5): the winning mobile users join the FL and receive the payment after finishing the training model [see 3. Incentive Mechanism]"
+    ]
   ],
   "motivation": [
     "In spite of the above mentioned benefits of FL, there are remaining two key challenges of having an efficient FL framework.",

@@ -19,9 +19,12 @@
         "in the crowdsourcing scenario, propose __task allocation algorithms__ by maximizing the difference of utility (assign tasks to higher reputable workers) and surprise (Surprise Minimization & Value Maximization, SMVM)"
     ],
     "systemModel": [
-        "distribute new tasks to $N$ workers aiming to maximize the social welfare while reducing systematic changes [see 1. Content-Aware Optimization for Task Allocation]",
-        "in the centralized crowdsourcing system, $Q(t)$ tasks are allocated to workers one by one [see 2. Centralized SMVM Algorithm]",
-        "in the distributed crowdsourcing system, individual worker $w$ is advised to accept the number of new tasks [see 3. Distributed SVM Algorithm]"
+        "Keys",
+        [
+            "distribute new tasks to $N$ workers aiming to maximize the social welfare while reducing systematic changes [see 1. Content-Aware Optimization for Task Allocation]",
+            "in the centralized crowdsourcing system, $Q(t)$ tasks are allocated to workers one by one [see 2. Centralized SMVM Algorithm]",
+            "in the distributed crowdsourcing system, individual worker $w$ is advised to accept the number of new tasks [see 3. Distributed SVM Algorithm]"
+        ]
     ],
     "questions": [
         "Maximizing social welfare in crowdsourcing system is known to be NP-hard"

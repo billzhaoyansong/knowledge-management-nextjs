@@ -20,14 +20,20 @@
     "when the regret queue is higher than $0$, only reputable clients (reputation threshold) are selected (and costs might be saved); otherwise, clients with the lowest costs are hired until round budget is reached"
   ],
   "systemModel": [
-    "a set $\\mathcal{F}=\\{1, .., f,.., F\\}$ of servers (federations) with a singular FL task and a hard deadline $D_f$ ",
-    "a set $\\mathcal{N}=\\{1,\\dots,n,\\dots,N\\}$ of data owners (DOs)",
-    "step 1): $f$ creates the FL task with the total budget $\\theta_f$",
-    "step 2): determines the budget for each round $\\theta_f(t)$ [see <u>1. Budget Allocation</u>]",
-    "step 3): interested DOs submit their bids to $f$ and $f$ will get a bid vector $\\mathcal{B}=\\{b_1(t), \\dots, b_n(t),\\dots, b_N(t)\\}$",
-    "step 4): $f$ select clients [see <u>2. Client Selection</u>] and selected DOs perform local training",
-    "step 5): $f$ aggregates models, pays the selected DOs as their bidding price, and updates the reputations for participating DOs [see <u>3. Reputation</u>]",
-    "step 2)- 5) continue unless [1] reaching deadline $D_f$ or [2] desired accuracy is achieved"
+    "Players",
+    [
+      "a set $\\mathcal{F}=\\{1, .., f,.., F\\}$ of servers (federations) with a singular FL task and a hard deadline $D_f$ ",
+      "a set $\\mathcal{N}=\\{1,\\dots,n,\\dots,N\\}$ of data owners (DOs)"
+    ],
+    "Steps",
+    [
+      "step 1): $f$ creates the FL task with the total budget $\\theta_f$",
+      "step 2): determines the budget for each round $\\theta_f(t)$ [see <u>1. Budget Allocation</u>]",
+      "step 3): interested DOs submit their bids to $f$ and $f$ will get a bid vector $\\mathcal{B}=\\{b_1(t), \\dots, b_n(t),\\dots, b_N(t)\\}$",
+      "step 4): $f$ select clients [see <u>2. Client Selection</u>] and selected DOs perform local training",
+      "step 5): $f$ aggregates models, pays the selected DOs as their bidding price, and updates the reputations for participating DOs [see <u>3. Reputation</u>]",
+      "step 2)- 5) continue unless [1] reaching deadline $D_f$ or [2] desired accuracy is achieved"
+    ]
   ],
   "motivation": [
     "Currently, reputation-based FL faces two key challenges.",

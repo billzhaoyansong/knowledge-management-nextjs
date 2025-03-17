@@ -36,7 +36,10 @@
         "unknown: $P^{ct}=[P^{ct}_e \\quad P^{ct}_n]$"
       ]
     ],
-    "Problem: use $\\{P_{gps}\\}$ and $\\{P^{st}\\}$ to approximate $\\{P^{ct}\\}$ while keeping data private",
+    "Problem",
+    [
+      "use $\\{P_{gps}\\}$ and $\\{P^{st}\\}$ to approximate $\\{P^{ct}\\}$ while keeping data private"
+    ],
     "Solution: a FL framework for SRVs and some CoVs to collaboratively train a NN to predict GPS errors",
     [
       "local training",

@@ -7,7 +7,7 @@
     "Tom H. Luan",
     "Yao Zhan"
   ],
-  "type":"technical",
+  "type": "technical",
   "year": "2021-05",
   "labels": [
     "federated learning",
@@ -23,12 +23,18 @@
     "CAVs are selected based on reputation, convengence-tendency, and wall clock time for global FedAvg aggregation"
   ],
   "systemModel": [
-    "a FL server and $N$ connected autonomous vehicles (CAVs) denoted by $\\mathcal{V}=\\{v_1,...,v_i,...,v_N\\}$",
-    "each CAV performs collision avoidance tasks and trains local models",
-    "step (1): CAVs download global model",
-    "step (2): local training the deep reinforcement learning (DRL) vehicle automatic decision control model using DDPG [see 1. Local Training]",
-    "step (3): select a subset of all CAVs for model upload [see 2. Client Selection]",
-    "step (4): global aggregation using FedAvg: $w_{FA}^{\\theta}\\gets \\frac{1}{N_s}\\sum_{i=1}^{N_s}w_i^{\\theta}$"
+    "Players",
+    [
+      "a FL server and $N$ connected autonomous vehicles (CAVs) denoted by $\\mathcal{V}=\\{v_1,...,v_i,...,v_N\\}$",
+      "each CAV performs collision avoidance tasks and trains local models"
+    ],
+    "Steps",
+    [
+      "step (1): CAVs download global model",
+      "step (2): local training the deep reinforcement learning (DRL) vehicle automatic decision control model using DDPG [see 1. Local Training]",
+      "step (3): select a subset of all CAVs for model upload [see 2. Client Selection]",
+      "step (4): global aggregation using FedAvg: $w_{FA}^{\\theta}\\gets \\frac{1}{N_s}\\sum_{i=1}^{N_s}w_i^{\\theta}$"
+    ]
   ],
   "motivation": [
     "Although the application of FL to autonomous driving is very promising, the following issues are worthy of further consideration.",

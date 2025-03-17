@@ -21,19 +21,25 @@
     "in the proposed 2-stage client selection algorithm, the clients are divided into 3 groups based on reputation values, aiming to (1) minimize hiring costs for all servers and avoid herding in the first stage, and (2) maintain the performance in the global model in the second stage"
   ],
   "systemModel": [
-    "a set $\\mathcal{M}=\\{1, ..., M\\}$ of master nodes (servers), a set $\\mathcal{N}=\\{1, ..., N\\}$ of worker nodes (clients)",
-    "each worker node has a reputation value $Q_n \\in [0,1]$ and based on $Q_n$ the worker set $\\mathcal{N}$ is divided into $3$ sub-groups: 1) $i \\in \\mathcal{N}_{hi}$, 2) $j \\in \\mathcal{N}_{mi}$, 3) $k \\in \\mathcal{N}_{lo}$",
-    "the problem is formulated as a stochastic integer programming (SIP) problem [see <u>1. Problem Formulation</u>]",
-    "stage I (deployment stage) 1): client selection",
-    "stage I (deployment stage) 2): local training",
-    "stage I (deployment stage) 3): model aggregation and adversarial behaviors detection",
-    "stage I (deployment stage) 4): model distribution",
-    "stage I 2)-4) continue for $T$ rounds",
-    "stage II (recourse stage) 1): hire high reputation workers only",
-    "stage II (recourse stage) 2): local training",
-    "stage II (recourse stage) 3): model aggregation",
-    "stage II (recourse stage) 4): model distribution",
-    "stage II 2)-4) continues after stage I for $\\theta_S$ rounds to recover the performance in global model"
+    "Players",
+    [
+      "a set $\\mathcal{M}=\\{1, ..., M\\}$ of master nodes (servers), a set $\\mathcal{N}=\\{1, ..., N\\}$ of worker nodes (clients)",
+      "each worker node has a reputation value $Q_n \\in [0,1]$ and based on $Q_n$ the worker set $\\mathcal{N}$ is divided into $3$ sub-groups: 1) $i \\in \\mathcal{N}_{hi}$, 2) $j \\in \\mathcal{N}_{mi}$, 3) $k \\in \\mathcal{N}_{lo}$"
+    ],
+    "steps",
+    [
+      "the problem is formulated as a stochastic integer programming (SIP) problem [see <u>1. Problem Formulation</u>]",
+      "stage I (deployment stage) 1): client selection",
+      "stage I (deployment stage) 2): local training",
+      "stage I (deployment stage) 3): model aggregation and adversarial behaviors detection",
+      "stage I (deployment stage) 4): model distribution",
+      "stage I 2)-4) continue for $T$ rounds",
+      "stage II (recourse stage) 1): hire high reputation workers only",
+      "stage II (recourse stage) 2): local training",
+      "stage II (recourse stage) 3): model aggregation",
+      "stage II (recourse stage) 4): model distribution",
+      "stage II 2)-4) continues after stage I for $\\theta_S$ rounds to recover the performance in global model"
+    ]
   ],
   "motivation": [
     "There is an uptrend in research [8], [9], [10], of using reputation values to hire worker nodes.",

@@ -8,8 +8,8 @@
         "Sheng Zhang",
         "Jie Wu"
     ],
-  "type": "technical",
-  "year": "2021-02",
+    "type": "technical",
+    "year": "2021-02",
     "labels": [
         "client selection",
         "multi-armed bandit",
@@ -23,10 +23,16 @@
         "in the crowdsourcing scenario, __[1] propose a reverse auction aiming to maximize the total quality of tasks, [2] reward workers using critical payment__,  and __[3] solve the maximization problem with combinatorial multi-armed bandit method__ when workers' qualities are unknown, achieving [1] lower regret, [2] truthfulness (changing claimed cost), [3] individual rationality (payment is greater than cost) in comparison to [1] MRCB [2] Random"
     ],
     "systemModel": [
-        "$1$ platform, a set $\\mathcal{M}$ of $M$ data collection tasks denoted by $j$ with different importance $w_j$ ($\\sum_{j\\in\\mathcal(M)}w_j=1$) and completed in multiple rounds $t\\in\\{1,2,...\\}$, a set $\\mathcal{N}$ of $N$ workers denoted by $i$",
-        "$\\mathcal{M}_i$ is the tasks worker $i$ prefers, $q_{i,j}^t \\in [0,1]$ denotes the sensing quality of worker $i$ completing task $j$ in the $t$-round and follows an unknown distribution with an unknown fixed expectation $q_i$",
-        "in each round $i$ submit $\\beta_i=\\langle \\mathcal{M}_i,b_i \\rangle $ ($b_i$ is claimed cost, $c_i$ is true cost), and the platform will determine the set of selected workers [see 1. worker selection] and payment $p_{i,t}$ [see 2. incentive payout]",
-        "it is worthy to note that a worker $i$ is eligible for accepting multiple tasks in a specific round. To do so, a worker can be seen as multiple virtual workers"
+        "Players",
+        [
+            "$1$ platform, a set $\\mathcal{M}$ of $M$ data collection tasks denoted by $j$ with different importance $w_j$ ($\\sum_{j\\in\\mathcal(M)}w_j=1$) and completed in multiple rounds $t\\in\\{1,2,...\\}$, a set $\\mathcal{N}$ of $N$ workers denoted by $i$",
+            "$\\mathcal{M}_i$ is the tasks worker $i$ prefers, $q_{i,j}^t \\in [0,1]$ denotes the sensing quality of worker $i$ completing task $j$ in the $t$-round and follows an unknown distribution with an unknown fixed expectation $q_i$"
+        ],
+        "Steps",
+        [
+            "in each round $i$ submit $\\beta_i=\\langle \\mathcal{M}_i,b_i \\rangle $ ($b_i$ is claimed cost, $c_i$ is true cost), and the platform will determine the set of selected workers [see 1. worker selection] and payment $p_{i,t}$ [see 2. incentive payout]",
+            "it is worthy to note that a worker $i$ is eligible for accepting multiple tasks in a specific round. To do so, a worker can be seen as multiple virtual workers"
+        ]
     ],
     "questions": [
         "to select reliable workers without knowing workers' quality ahead of time and truthfulness in bidding"

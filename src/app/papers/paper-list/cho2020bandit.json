@@ -22,10 +22,16 @@
     "the UCB index considers [1] discounted local loss values [2] discounted number of participating times"
   ],
   "systemModel": [
-    "$1$ server, $K$ clients with $D_k$ data samples",
-    "round step [1]: server selects $m$ clients as the active set $\\mathcal{S}_{(t)}$ based on discounted UCB (see 1. Client Selection)",
-    "round step [2]: selected clients do local training for $\\tau$ iterations",
-    "round step [3]: server does FedAvg aggregation: $\\mathbf{w}_k^{t+1}=\\frac{1}{m} \\sum_{j\\in\\mathcal{S}^{(t)}} \\left( \\mathbf{w}_j^{(t)} - \\eta_t g_j (\\mathbf{w}_j^{(t)}, \\xi_j^{(t)}) \\right)$"
+    "Players",
+    [
+      "$1$ server, $K$ clients with $D_k$ data samples"
+    ],
+    "Step",
+    [
+      "round step [1]: server selects $m$ clients as the active set $\\mathcal{S}_{(t)}$ based on discounted UCB (see 1. Client Selection)",
+      "round step [2]: selected clients do local training for $\\tau$ iterations",
+      "round step [3]: server does FedAvg aggregation: $\\mathbf{w}_k^{t+1}=\\frac{1}{m} \\sum_{j\\in\\mathcal{S}^{(t)}} \\left( \\mathbf{w}_j^{(t)} - \\eta_t g_j (\\mathbf{w}_j^{(t)}, \\xi_j^{(t)}) \\right)$"
+    ]
   ],
   "techniques": [
     "1. Client Selection",

@@ -26,18 +26,23 @@
       "$1$ cloud server",
       "a set $F=\\{1,...,n\\}$ of Fog nodes with the set $L=\\{1,...,n\\}$ of learning models",
       "a set $D=\\{1,...,N\\}$ of devices",
+      [
+        "a device $D_i$ must be connected with a $F_i$ and execute a given $L_i$",
+        "![](/papers/ur2020towards/system.png)"
+      ],
       "$1$ blockchain-based reputation system"
     ],
-    "a device $D_i$ must be connected with a $F_i$ and execute a given $L_i$",
-    "![](/papers/ur2020towards/system.png)",
-    "step 1): the cloud server pushes global $L_i$ to $F_i$ and $D_i$",
-    "step 2): the cloud server requests multiple $F_i$ for updated $L_i$ parameters to enable asynchronized model updates in the fine-grained FL (???)",
-    "step 3): $F_i$ pushes updated model to the selected connected $D_i$ (make use of kang2020reliable)",
-    "step 4): $D_i$ updates local $L_i$ and applies privacy-preservation techniques on updates before sending to the connected $F_i$",
-    "step 5): $F_i$ aggregates local $L_i$ and sends back to $D_i$",
-    "step 6): after some time, $F_i$ applies privacy-preservation techniques on updates before sending to the cloud server",
-    "step 7): the cloud server runs the global model aggregation and propagates updated $L_i$ to $F_i$",
-    "optional step 8): $D_i$ periodically generates the requests for the updated global model to update local $L_i$"
+    "Steps",
+    [
+      "step 1): the cloud server pushes global $L_i$ to $F_i$ and $D_i$",
+      "step 2): the cloud server requests multiple $F_i$ for updated $L_i$ parameters to enable asynchronized model updates in the fine-grained FL (???)",
+      "step 3): $F_i$ pushes updated model to the selected connected $D_i$ (make use of kang2020reliable)",
+      "step 4): $D_i$ updates local $L_i$ and applies privacy-preservation techniques on updates before sending to the connected $F_i$",
+      "step 5): $F_i$ aggregates local $L_i$ and sends back to $D_i$",
+      "step 6): after some time, $F_i$ applies privacy-preservation techniques on updates before sending to the cloud server",
+      "step 7): the cloud server runs the global model aggregation and propagates updated $L_i$ to $F_i$",
+      "optional step 8): $D_i$ periodically generates the requests for the updated global model to update local $L_i$"
+    ]
   ],
   "motivation": [
     "Edge devices normally operate in heterogeneous environments whereby heterogeneity arises at all levels of MEC in terms of battery power, sensors and their data collection settings, types of data sources, processing capabilities, communication interfaces, data being generated, types and granularity of learning models, learning rates of applications, sparsity in datasets, frequency of incoming data streams, missing and noisy data, and application of statistical inferencing techniques [14]",

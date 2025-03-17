@@ -23,11 +23,17 @@
     "reputation-based aggregation is exerted to defend against attacks"
   ],
   "systemModel": [
-    "$1$ base station (BS), a set of $K$ user equipments (UEs)",
-    "process 1): BS sends the same global model to UEs",
-    "process 2): UEs do local training",
-    "process 3): BS selects UEs for model upload [see 1. Client Selection for Uploading], evaluates contributions [see 2. Contribution Evaluation], and conducts aggregation [see 3. Global Model Aggregation] due to limited wireless channel resources",
-    "process 4): UEs' reputations are maintained [see 4. Reputation Update]"
+    "Players",
+    [
+      "$1$ base station (BS), a set of $K$ user equipments (UEs)"
+    ],
+    "Process",
+    [
+      "process 1): BS sends the same global model to UEs",
+      "process 2): UEs do local training",
+      "process 3): BS selects UEs for model upload [see 1. Client Selection for Uploading], evaluates contributions [see 2. Contribution Evaluation], and conducts aggregation [see 3. Global Model Aggregation] due to limited wireless channel resources",
+      "process 4): UEs' reputations are maintained [see 4. Reputation Update]"
+    ]
   ],
   "problemCategory": [
     [

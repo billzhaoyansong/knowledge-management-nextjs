@@ -17,11 +17,14 @@
     "in the crowdsourcing scenario, propose __a referral-based reward mechanism__ by [1] incentivizing the parent node to verify the result of reporting node [2] incentivizing the parent node to participate, to minimize the cost of receiving the correct answer"
   ],
   "systemModel": [
-    "in the referral-based crowdsourcing, a root node is enabled to publish an information gathering task with a certain budget",
-    "the referred participant and those who refer the participant will divide the budget based on a split contract [see 1. Split Contract]",
-    "Assumptions include [1] any node other than the reporter can verify, [2] verification is 'perfect'. So only $1$ verification is required. [see 2.  Incentive Parent Node to Verify]",
-    "The parent node is responsible for the verification because [1] he decides who is invited [2] from the point of view of invited children, the first point is the parent. [3] nobody except for the recruiter may have the authority/ability to question the recruit",
-    "The parent node is also required to incentivize to participate, instead of not participating [see 3. Incentive Parent Node to Refrain from not Participating]"
+    "Keys",
+    [
+      "in the referral-based crowdsourcing, a root node is enabled to publish an information gathering task with a certain budget",
+      "the referred participant and those who refer the participant will divide the budget based on a split contract [see 1. Split Contract]",
+      "Assumptions include [1] any node other than the reporter can verify, [2] verification is 'perfect'. So only $1$ verification is required. [see 2.  Incentive Parent Node to Verify]",
+      "The parent node is responsible for the verification because [1] he decides who is invited [2] from the point of view of invited children, the first point is the parent. [3] nobody except for the recruiter may have the authority/ability to question the recruit",
+      "The parent node is also required to incentivize to participate, instead of not participating [see 3. Incentive Parent Node to Refrain from not Participating]"
+    ]
   ],
   "motivation": [
     "In the balloon search challenge, other than mobilizing people to participate, a great challenge is distinguishing accurate balloon submission from inaccurate ones.",

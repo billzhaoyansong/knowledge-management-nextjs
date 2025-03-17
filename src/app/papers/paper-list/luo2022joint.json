@@ -28,9 +28,12 @@
       "base stations (BSs) $\\mathcal{M}=\\{1,2,...,M\\}$",
       "user equipments (UEs) $\\{1,...i...,N\\}$"
     ],
-    "training procedure 1) UEs download the global model from the cloud server via BSs [see 1. client selection and resource allocation]",
-    "training procedure 2) UEs train ML model through $\\kappa$ local rounds",
-    "training procedure 3) UEs upload local model and gradients to the cloud server via BSs"
+    "procedure",
+    [
+      "training procedure 1) UEs download the global model from the cloud server via BSs [see 1. client selection and resource allocation]",
+      "training procedure 2) UEs train ML model through $\\kappa$ local rounds",
+      "training procedure 3) UEs upload local model and gradients to the cloud server via BSs"
+    ]
   ],
   "motivation": [
     "However, HFLMEN is both time and energy consuming due to the following reasons.",

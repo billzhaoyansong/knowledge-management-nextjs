@@ -26,11 +26,17 @@
     "interactions between FL workers and model owners are presented as a forward auctioning game where model owners bid and a deep neural network is used to determine allocation of FL workers and corresponding payouts"
   ],
   "systemModel": [
-    "a set $\\mathcal{I}=\\{1,...,i,...,I\\}$ of $I$ servers (model owners)",
-    "a set of $\\mathcal{J}=\\{1,...,j,...,J\\}$ of $J$ workers (edge nodes)",
-    "a set of $K$ sensing devices (data owners)",
-    "data owners send privacy-preserved data to FL workers accordingly and receive rewards [see 1. Low-Level Evolutionary Game]",
-    "FL workers pick model owners based on their bids and receive payments [see 2. Upper-Level Deep Learning Based Auction]"
+    "Players",
+    [
+      "a set $\\mathcal{I}=\\{1,...,i,...,I\\}$ of $I$ servers (model owners)",
+      "a set of $\\mathcal{J}=\\{1,...,j,...,J\\}$ of $J$ workers (edge nodes)",
+      "a set of $K$ sensing devices (data owners)"
+    ],
+    "Process",
+    [
+      "data owners send privacy-preserved data to FL workers accordingly and receive rewards [see 1. Low-Level Evolutionary Game]",
+      "FL workers pick model owners based on their bids and receive payments [see 2. Upper-Level Deep Learning Based Auction]"
+    ]
   ],
   "motivation": [
     "To minimize the latency of the FL training tasks, coding techniques, which introduce redundant computations, can be used.",

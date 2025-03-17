@@ -24,12 +24,18 @@
     "this resource allocation algorithm optimizes (1) CPU frequencies (2) server communication times allocated to UEs (3) local accuracy (4) one global round communication time (5) one global round computation time"
   ],
   "systemModel": [
-    "one edge server and a set $\\mathcal{N}$ of $N$ user equipments (UEs), each $n$ UE has a local dataset $\\mathcal{D}_n$ of size $D_n$",
-    "propose a FL algorithm named FEDL, which considers synchronous FL and requires $\\nabla F_n(w_n^t)$ in addition to $w_n^t$ with convergence guarantee, comparing with FedAvg",
-    "step 1: solve a resource allocation problem considering CPU frequencies, server communication times, local training accuracies, one global round communication and computation time to minimize energy consumption and wall clock time of one global round [see 1. FEDL Optimization]",
-    "step 2: selected UEs download global gradient $\\nabla \\bar{F}^{t-1}$ and model $w^{t-1}$ from the server, train with local model provided with given CPU frequency [see 2. Local Training]",
-    "step 3: selected UEs transmit $w^{t}_n$ and $\\nabla F_n (w^{t}_n)$ to the edge server",
-    "step 4: the server aggregates model and gradients [see 3. Global Aggregation]"
+    "Players",
+    [
+      "one edge server and a set $\\mathcal{N}$ of $N$ user equipments (UEs), each $n$ UE has a local dataset $\\mathcal{D}_n$ of size $D_n$",
+      "propose a FL algorithm named FEDL, which considers synchronous FL and requires $\\nabla F_n(w_n^t)$ in addition to $w_n^t$ with convergence guarantee, comparing with FedAvg"
+    ],
+    "Steps",
+    [
+      "step 1: solve a resource allocation problem considering CPU frequencies, server communication times, local training accuracies, one global round communication and computation time to minimize energy consumption and wall clock time of one global round [see 1. FEDL Optimization]",
+      "step 2: selected UEs download global gradient $\\nabla \\bar{F}^{t-1}$ and model $w^{t-1}$ from the server, train with local model provided with given CPU frequency [see 2. Local Training]",
+      "step 3: selected UEs transmit $w^{t}_n$ and $\\nabla F_n (w^{t}_n)$ to the edge server",
+      "step 4: the server aggregates model and gradients [see 3. Global Aggregation]"
+    ]
   ],
   "motivation": [
     "Despite its promising benefits, FL comes with new challenges to tackle",

@@ -20,12 +20,18 @@
     "clients are selected and paid to minimize the objective considering drift, payment and reputations by optimizing the winning set and payment scheme"
   ],
   "systemModel": [
-    "$1$ model user (MU) with a set $\\mathcal{T}=\\{\\tau_1,\\tau_2,...,\\tau_{|\\mathcal{T}|},\\}$ of tasks, a set $\\mathcal{W}=\\{w_1,w_2,...,w_{|\\mathcal{W}|}\\}$ of data owners (DOs), ",
-    "step 1): the MU broadcasts data quantity requirements for all FL tasks $\\{k_j(t)\\}_{\\tau_j \\in \\mathcal{T}}$",
-    "step 2): each DO determines asking profile $A_i(t)=\\{Y_i(t), a_i(t)\\}$, where $Y_i(t)=\\{y_{ij}\\}$ is the amount of contributing data samples and $a_i(t)$ is the price, based on available data and cost $c_i(t)$ and submits to the MU",
-    "step 3): the MU selects winners $S(t)$ and determines payment $p_i(t)$ [see <u>1. Client Selection and Incentive Mechanism</u>]",
-    "step 4): the MU and selected winners conduct FL",
-    "step 5): the MU pays the customized price $p_i(t)$ to each winner in $S(t)$"
+    "Players",
+    [
+      "$1$ model user (MU) with a set $\\mathcal{T}=\\{\\tau_1,\\tau_2,...,\\tau_{|\\mathcal{T}|},\\}$ of tasks, a set $\\mathcal{W}=\\{w_1,w_2,...,w_{|\\mathcal{W}|}\\}$ of data owners (DOs), "
+    ],
+    "Steps",
+    [
+      "step 1): the MU broadcasts data quantity requirements for all FL tasks $\\{k_j(t)\\}_{\\tau_j \\in \\mathcal{T}}$",
+      "step 2): each DO determines asking profile $A_i(t)=\\{Y_i(t), a_i(t)\\}$, where $Y_i(t)=\\{y_{ij}\\}$ is the amount of contributing data samples and $a_i(t)$ is the price, based on available data and cost $c_i(t)$ and submits to the MU",
+      "step 3): the MU selects winners $S(t)$ and determines payment $p_i(t)$ [see <u>1. Client Selection and Incentive Mechanism</u>]",
+      "step 4): the MU and selected winners conduct FL",
+      "step 5): the MU pays the customized price $p_i(t)$ to each winner in $S(t)$"
+    ]
   ],
   "problemCategory": [
     [

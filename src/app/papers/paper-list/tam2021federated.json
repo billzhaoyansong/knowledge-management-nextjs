@@ -18,11 +18,17 @@
         "in the conventional FL framework, propose __[1] a local data quality measurement (DQM) component (measured locally and sent to the server)__ and __[2] a noise robust aggregation (NRA) component__, for noisy clients environment to achieve [1] boosting accuracy, and [2] robustness in comparison with [1] FedAvg and [2] Trimmed mean"
     ],
     "systemModel": [
-        "$1$ central server, $C$ clients per round with $K$-class dataset",
-        "process 1): server sends global model to clients",
-        "process 2): clients measure local data quality [see 1. Data Quality Measurement] and do local training",
-        "process 3): clients send [1] data quality (${Q_t^{c}}^{CE}$ and ${Q_t^{c}}^{Dis}$) [2] data quantity ($N^c$) [3] trained local model ($\\Theta_t^c$) to server",
-        "process 4): server does robust aggregation [see 2. Noise Robust Aggregation]"
+        "Players",
+        [
+            "$1$ central server, $C$ clients per round with $K$-class dataset"
+        ],
+        "Process",
+        [
+            "process 1): server sends global model to clients",
+            "process 2): clients measure local data quality [see 1. Data Quality Measurement] and do local training",
+            "process 3): clients send [1] data quality (${Q_t^{c}}^{CE}$ and ${Q_t^{c}}^{Dis}$) [2] data quantity ($N^c$) [3] trained local model ($\\Theta_t^c$) to server",
+            "process 4): server does robust aggregation [see 2. Noise Robust Aggregation]"
+        ]
     ],
     "questions": [
         "standard FL methods ignore the noisy client issue"

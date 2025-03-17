@@ -16,11 +16,17 @@
     "the local model update time and upload time are calculated by their hardward conditions"
   ],
   "systemModel": [
-    "$1$ MEC platform, $K$ clients denoted by $\\mathbb{K}$",
-    "process (1): MEC sends resource requests to randomly selected clients $\\mathbb{K}'\\subseteq \\mathbb{K}$",
-    "process (2): selected clients send back resource information to MEC",
-    "process (3): based on the resource information, MEC selects the set of clients $\\mathbb{S}\\subseteq \\mathbb{K}'$ for FL training [see 1. client selection]",
-    "process (4): model distribution, local training, model uploading, and aggregation"
+    "Players",
+    [
+      "$1$ MEC platform, $K$ clients denoted by $\\mathbb{K}$"
+    ],
+    "Process",
+    [
+      "process (1): MEC sends resource requests to randomly selected clients $\\mathbb{K}'\\subseteq \\mathbb{K}$",
+      "process (2): selected clients send back resource information to MEC",
+      "process (3): based on the resource information, MEC selects the set of clients $\\mathbb{S}\\subseteq \\mathbb{K}'$ for FL training [see 1. client selection]",
+      "process (4): model distribution, local training, model uploading, and aggregation"
+    ]
   ],
   "motivation": [
     "In this work, we focus on the implementation of the abovementioned FL protocol in practical MEC frameworks.",

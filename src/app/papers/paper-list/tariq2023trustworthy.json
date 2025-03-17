@@ -21,11 +21,14 @@
     "propose a taxonomy that encompasses three main pillars of trust: (1) Interpretability, (2) Fairness, (3) Security & Privacy"
   ],
   "systemModel": [
-    "define trust and trustworthiness [see 1. define trust and trustworthiness]",
-    "discussed the crucial aspects of trust evaluation methods [see 2. crucial parts of trust evaluation methods]",
-    "trustworthy FL phase (1): interpretability at the local node (data selection, data quality/feature selection, model selection) [see 3. interpretability]",
-    "trustworthy FL phase (2): fairness at the server-side (contribution evaluation, incentive mechanism) [see 4. fairness]",
-    "trustworthy FL phase (3): security and privacy (validation of local models, local data, client and server interactions) [see 5. security and privacy]"
+    "Key Takeaways",
+    [
+      "define trust and trustworthiness [see 1. define trust and trustworthiness]",
+      "discussed the crucial aspects of trust evaluation methods [see 2. crucial parts of trust evaluation methods]",
+      "trustworthy FL phase (1): interpretability at the local node (data selection, data quality/feature selection, model selection) [see 3. interpretability]",
+      "trustworthy FL phase (2): fairness at the server-side (contribution evaluation, incentive mechanism) [see 4. fairness]",
+      "trustworthy FL phase (3): security and privacy (validation of local models, local data, client and server interactions) [see 5. security and privacy]"
+    ]
   ],
   "problemCategory": [
     [

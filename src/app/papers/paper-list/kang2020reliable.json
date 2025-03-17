@@ -23,11 +23,17 @@
     "multi-weight subjective logic is used in the reputation calculation, and reputations are stored in a reputation blockchain"
   ],
   "systemModel": [
-    "a set of task publishers, a set of workers, a reputation blockchain",
-    "step 1): a task publisher publishes a task with specific data requirements (data sizes, types, and time span)",
-    "step 2): the task publisher downloads recommended reputation opinions from the reputation blockchain, and calculates composite reputations [see <u>1. Composite Reputation Calculation</u>], and selects workers with a reputation threshold",
-    "step 3): federated learning and the task publisher carries out poisoning attack detection schemes (ROIN, FoolsGold) to detect poisoning attacks and unreliable workers",
-    "step 4): reputation update [see <u>2. Direct Subjective Opinions and Reputation Update</u>]"
+    "Players",
+    [
+      "a set of task publishers, a set of workers, a reputation blockchain"
+    ],
+    "Step",
+    [
+      "step 1): a task publisher publishes a task with specific data requirements (data sizes, types, and time span)",
+      "step 2): the task publisher downloads recommended reputation opinions from the reputation blockchain, and calculates composite reputations [see <u>1. Composite Reputation Calculation</u>], and selects workers with a reputation threshold",
+      "step 3): federated learning and the task publisher carries out poisoning attack detection schemes (ROIN, FoolsGold) to detect poisoning attacks and unreliable workers",
+      "step 4): reputation update [see <u>2. Direct Subjective Opinions and Reputation Update</u>]"
+    ]
   ],
   "motivation": [
     "during a federated learning process, data owners may mislead a global model by intentional or unintentional behaviors [5].",

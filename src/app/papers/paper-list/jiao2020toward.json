@@ -34,16 +34,22 @@
     "The success of federated learning requires sufficient data owners to jointly utilize their data, computing and communication resources for model training."
   ],
   "systemModel": [
-    "step 1: FL platform initiates and announces an FL task",
-    "step 2: interested data owners report their bid prices, data size, earth mover's distance(EMD) value (a smaller EMD value is better), requested channel to communicate with FL platform",
-    "step 3: FL platform conducts worker selection and decide the payments [see 1. Client Selection]",
-    "step 4: FL platform conducts model training"
+    "Steps:",
+    [
+      "step 1: FL platform initiates and announces an FL task",
+      "step 2: interested data owners report their bid prices, data size, earth mover's distance(EMD) value (a smaller EMD value is better), requested channel to communicate with FL platform",
+      "step 3: FL platform conducts worker selection and decide the payments [see 1. Client Selection]",
+      "step 4: FL platform conducts model training"
+    ]
   ],
   "techniques": [
-    "in step 3, worker selection problem is formulated to maximize the social welfare, which is the sum of platform's utility (platform's data utility - computational cost for model averaging - communication cost for global model transmission - total payments to data owners) and data owners' utility (payment - cost)",
-    "the first mechanism to solve the utility maximization problem is call the Reverse Multi-dimensional auction (RMA) mechanism, which follows a randomied and greedy way",
-    "RMA mechanism (1) divides workers according to the EMD metric, (2) in a randomly selected group excludes workers having channel conflict with currently selected workers, (3) sort workers by non-increasing order of marginal virtual social welfare density and select those with positive density, (4) payment is devided according to marginal virtual social welfare density",
-    "the second mechanism to solve the utility maximization problem is deep reinforcement learning based and use the graph neural network (GNN) to exploit the conflict relationships and generate effective embeddings."
+    "Keys",
+    [
+      "in step 3, worker selection problem is formulated to maximize the social welfare, which is the sum of platform's utility (platform's data utility - computational cost for model averaging - communication cost for global model transmission - total payments to data owners) and data owners' utility (payment - cost)",
+      "the first mechanism to solve the utility maximization problem is call the Reverse Multi-dimensional auction (RMA) mechanism, which follows a randomied and greedy way",
+      "RMA mechanism (1) divides workers according to the EMD metric, (2) in a randomly selected group excludes workers having channel conflict with currently selected workers, (3) sort workers by non-increasing order of marginal virtual social welfare density and select those with positive density, (4) payment is devided according to marginal virtual social welfare density",
+      "the second mechanism to solve the utility maximization problem is deep reinforcement learning based and use the graph neural network (GNN) to exploit the conflict relationships and generate effective embeddings."
+    ]
   ],
   "doi": "10.1109/TMC.2020.2994639",
   "id": "jiao2020toward",

@@ -18,11 +18,17 @@
     "in the framework, a reputation-based client selection method is used to select clients for aggregation to minimize unnecessary local update exchange"
   ],
   "systemModel": [
-    "$1$ global server, $L$ edge servers (local gateways), $K$ clients",
-    "process 1): each edge server selects $R$ clients to perform local training",
-    "process 2): after local training, each client estimates its reputation score [see <u>1. Reputation </u>] and model similarity [see <u>2. Model Similarity </u>] and shares with the edge server",
-    "process 3): the edge servers rank clients based on reputation values and select clients whose similarity is higher than the average similarity for local aggregation",
-    "process 4): edge servers upload aggregated models to the global server for global aggregation"
+    "Players",
+    [
+      "$1$ global server, $L$ edge servers (local gateways), $K$ clients"
+    ],
+    "Process",
+    [
+      "process 1): each edge server selects $R$ clients to perform local training",
+      "process 2): after local training, each client estimates its reputation score [see <u>1. Reputation </u>] and model similarity [see <u>2. Model Similarity </u>] and shares with the edge server",
+      "process 3): the edge servers rank clients based on reputation values and select clients whose similarity is higher than the average similarity for local aggregation",
+      "process 4): edge servers upload aggregated models to the global server for global aggregation"
+    ]
   ],
   "problemCategory": [
     [
@@ -54,7 +60,7 @@
         "$Q l^{fc}$: test data accuracy of fc's local model",
         "$Q t^{fc}=\\frac{|D^{fc}|}{|D^l|}$: data size ratio",
         [
-""
+          ""
         ]
       ]
     ],

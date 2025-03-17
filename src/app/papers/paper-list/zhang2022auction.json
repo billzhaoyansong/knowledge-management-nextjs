@@ -15,12 +15,18 @@
     "reputation"
   ],
   "systemModel": [
-    "a task publisher and a set of workers denoted by $U$",
-    "reputation of a worker $Re_i$ is public, while data quality, quantity, computing power and task cost $c_i$ are private",
-    "each task is constrained by budget $B$",
-    "stage 1: worker $i$ submits bid price $b_i$ to the publisher",
-    "stage 2: publisher obtains reputations and selects a set of $S$ workers to start the FL task",
-    "stage 3: publisher calculates contributions and internal reputations for each worker, updates the accumulated reputation and pays $p_i$"
+    "Players",
+    [
+      "a task publisher and a set of workers denoted by $U$",
+      "reputation of a worker $Re_i$ is public, while data quality, quantity, computing power and task cost $c_i$ are private"
+    ],
+    "Stage",
+    [
+      "each task is constrained by budget $B$",
+      "stage 1: worker $i$ submits bid price $b_i$ to the publisher",
+      "stage 2: publisher obtains reputations and selects a set of $S$ workers to start the FL task",
+      "stage 3: publisher calculates contributions and internal reputations for each worker, updates the accumulated reputation and pays $p_i$"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, __[1] propose a reverse-auction based rewarding mechanism__, __[2] select workers__ based on the ratio of bidding price and reputation __[3] pay workers__ based on accumulated reputaton and task internal reputation",

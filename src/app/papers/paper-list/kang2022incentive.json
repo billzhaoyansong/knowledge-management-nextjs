@@ -22,9 +22,12 @@
     "in the stackelberg game, server determines optimal reward rates, and clients decide response to server's reward rates, such as (1) local optimal accuracy level to achieve, (2) local optimal data freshness, and (3) local optimal completion time"
   ],
   "systemModel": [
-    "step (1): server firstly announces uniform reward rates for the participating clients",
-    "step (2): each worker provide response to server's reward rates [see 1. lower-level subgame]",
-    "step (3): the task publisher determine the optimal reward rates to maximize profit after knowing the response of workers [see 2. high-level subgame]"
+    "Steps",
+    [
+      "step (1): server firstly announces uniform reward rates for the participating clients",
+      "step (2): each worker provide response to server's reward rates [see 1. lower-level subgame]",
+      "step (3): the task publisher determine the optimal reward rates to maximize profit after knowing the response of workers [see 2. high-level subgame]"
+    ]
   ],
   "motivation": [
     "Although FL has shown great advantages in privacypreserving crowdsourcing, it still faces an open challenge that how to incentive clients to participate in the FL by contributing their computational/communication resource and data",

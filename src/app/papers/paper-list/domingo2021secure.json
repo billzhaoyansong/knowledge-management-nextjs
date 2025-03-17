@@ -34,9 +34,9 @@
         "the majority: rational-but-curious, the minority: malicious",
         "each peer has a reputation $g_i$"
       ],
-      "a number $m\\geq3$ (odd) of __accountability managers__ (AMs): randomly chosen peers that manage reputations of other peers"
+      "a number $m\\geq3$ (odd) of __accountability managers__ (AMs): randomly chosen peers that manage reputations of other peers",
+      "[co-utility](https://link.springer.com/article/10.1007/s13748-016-0083-3): protocols in which mutual help is the best rational option to take, even for purely selfish agents."
     ],
-    "[co-utility](https://link.springer.com/article/10.1007/s13748-016-0083-3): protocols in which mutual help is the best rational option to take, even for purely selfish agents.",
     "Protocol 1 (Local Update Submission):",
     [
       "$P_1$ has a new update $U$<ol>",

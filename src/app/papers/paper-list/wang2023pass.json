@@ -29,7 +29,10 @@
     "parameter auditing is conducted by each FL client via using their private data set to calculate the accuracy divergence for other clients"
   ],
   "systemModel": [
-    "$1$ server, $N$ FL clients",
+    "Players",
+    [
+      "$1$ server, $N$ FL clients"
+    ],
     "process",
     [
       "server sends $(\\Delta \\theta^{r+1},\\Delta \\tilde{\\theta}^{r}_{\\text{client 1}, ldp},...,\\Delta \\tilde{\\theta}^{r}_{\\text{client N}, ldp})$<ol>",

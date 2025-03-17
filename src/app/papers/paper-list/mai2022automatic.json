@@ -24,11 +24,17 @@
     "RL based double auction employed the experience-weighted attraction learning"
   ],
   "systemModel": [
-    "$N$ FL tasks indexed by $i$, $M$ data owners (DO) indexed by $j$",
-    "$\\theta_{j}^{wo}$ is a $1\\times N$ vector meaning the accuracy willing to be provideded by $j^{th}$ DO to all tasks",
-    "$\\theta_{i}^{ag}$ is a $1\\times M$ vector meaning the accuracy requested by $i^{th}$ task to all DOs",
-    "IDA assumes monotonicity and concave-convex requirement, and uses a central broker to facilitate multiple task owners and data owners to iteratively adjust their pricing for each others [see 1. IDA]",
-    "RL based double auction assumes (1) one FL task sets the same demand accuracy and pricing for all data owner, and (2) one data owner provides the same accuracy and pricing for all task owners [see 2. RL-based double auction]"
+    "Players",
+    [
+      "$N$ FL tasks indexed by $i$, $M$ data owners (DO) indexed by $j$",
+      "$\\theta_{j}^{wo}$ is a $1\\times N$ vector meaning the accuracy willing to be provideded by $j^{th}$ DO to all tasks",
+      "$\\theta_{i}^{ag}$ is a $1\\times M$ vector meaning the accuracy requested by $i^{th}$ task to all DOs"
+    ],
+    "Keys",
+    [
+      "IDA assumes monotonicity and concave-convex requirement, and uses a central broker to facilitate multiple task owners and data owners to iteratively adjust their pricing for each others [see 1. IDA]",
+      "RL based double auction assumes (1) one FL task sets the same demand accuracy and pricing for all data owner, and (2) one data owner provides the same accuracy and pricing for all task owners [see 2. RL-based double auction]"
+    ]
   ],
   "problemCategory": [
     [

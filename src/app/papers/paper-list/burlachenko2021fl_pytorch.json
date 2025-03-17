@@ -17,7 +17,10 @@
     "in the conventional FL framework, develop __a simulator__ to enable fast development, prototyping and experimenting"
   ],
   "systemModel": [
-    "this platform only supports 1 simulation at most",
+    "Key",
+    [
+      "this platform only supports 1 simulation at most"
+    ],
     "structure:",
     [
       "frontend:",

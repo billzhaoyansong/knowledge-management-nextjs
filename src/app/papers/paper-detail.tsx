@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Modal from "../components/modal";
-import { PaperContent } from "./paper-card";
+import { PaperContent, unifiedProcessor } from "./paper-card";
 import React from "react";
 
 import { unified } from "unified";
@@ -15,22 +15,9 @@ import rehypeKatex from "rehype-katex";
 import './paper-detail.css'
 import 'katex/dist/katex.min.css'
 import PdfViewer from "../components/pdf-viewer";
+import { isArray, isString } from "../utils/typeChecker";
 
 
-function isString(content: any): boolean {
-    return (typeof (content) === 'string' || content instanceof String)
-}
-
-function isArray(content: any): boolean {
-    return content instanceof Array || Array.isArray(content)
-}
-
-const unifiedProcessor = unified()
-    .use(remarkParse)
-    .use(remarkMath)
-    .use(remarkRehype)
-    .use(rehypeKatex)
-    .use(rehypeStringify)
 
 export default function PaperDetail(
     {

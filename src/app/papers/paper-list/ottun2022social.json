@@ -24,23 +24,29 @@
     "in the FL social network, propose __an FL task delegation scheme__ allowing delegating tasks to social contacts on their mobile phone"
   ],
   "systemModel": [
-    "a set of people with smartphones or other IoT devices.",
-    "an FL application is installed in each device and can access social friends or other devices with this application installed",
-    "social-aware FL allows the device (initiator) to delegate the request to social contacts (delegate)",
-    "for decentralized FL scenario:",
+    "Players",
     [
-      "the initiator shares their local model with the delegate<ol>",
-      "the delegate updates the model and sends back to the initiator",
-      "the initiator sends to the aggregator",
-      "the initiator shares rewards with the delegate"
+      "a set of people with smartphones or other IoT devices."
     ],
-    "for contralized FL scenario:",
+    "Key Takeaways",
     [
-      "the initiator either [1] informs the delegate of the task descriptor and its own id, [2] or sends the full model parameters to the delegate<ol>",
-      "the delegate sends the updated parameters to the aggregator and if necessary shares with the initiator"
-    ],
-    "Social-aware FL assumes prior trust relationship between the delegate and initiator and makes usage of reputation systems, which can mitigate the malicious attack problems",
-    "trivial compensation scheme is used (a fixed compensation for each participant)"
+      "an FL application is installed in each device and can access social friends or other devices with this application installed",
+      "social-aware FL allows the device (initiator) to delegate the request to social contacts (delegate)",
+      "for decentralized FL scenario:",
+      [
+        "the initiator shares their local model with the delegate<ol>",
+        "the delegate updates the model and sends back to the initiator",
+        "the initiator sends to the aggregator",
+        "the initiator shares rewards with the delegate"
+      ],
+      "for contralized FL scenario:",
+      [
+        "the initiator either [1] informs the delegate of the task descriptor and its own id, [2] or sends the full model parameters to the delegate<ol>",
+        "the delegate sends the updated parameters to the aggregator and if necessary shares with the initiator"
+      ],
+      "Social-aware FL assumes prior trust relationship between the delegate and initiator and makes usage of reputation systems, which can mitigate the malicious attack problems",
+      "trivial compensation scheme is used (a fixed compensation for each participant)"
+    ]
   ],
   "techniques": [],
   "doi": "10.1109/MIC.2022.3219263",

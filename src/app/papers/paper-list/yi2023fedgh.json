@@ -17,11 +17,17 @@
         "in the conventional FL framework, __[1] split local models into heterogeneous feature extractors and homogeneous prediction header__ and __[2] the the homogeneous prediction header is trained on server and shared among all clients__ to address system & data heterogeneity in clients"
     ],
     "systemModel": [
-        "$1$ server, $N$ clients",
-        "local models are split into heterogeneous feature extractors and homogeneous prediction header [see 1. Local Model]",
-        "process 1): server sends global header to randomly selected $K\\leq N$ clients to facilitate local training [see 2. Local Training]",
-        "process 2): server trains global header after receiving uploaded representations from clients [see 3. Global Training]",
-        "process 1) & 2) terminates until all local model converge"
+        "Players",
+        [
+            "$1$ server, $N$ clients"
+        ],
+        "Process",
+        [
+            "local models are split into heterogeneous feature extractors and homogeneous prediction header [see 1. Local Model]",
+            "process 1): server sends global header to randomly selected $K\\leq N$ clients to facilitate local training [see 2. Local Training]",
+            "process 2): server trains global header after receiving uploaded representations from clients [see 3. Global Training]",
+            "process 1) & 2) terminates until all local model converge"
+        ]
     ],
     "questions": [
         "enable clients to train heterogeneous models under system and data heterogeneity"

@@ -22,11 +22,17 @@
     "global model aggregation is implemented by using weighted FedAvg and unsuccessful participations are also considered"
   ],
   "systemModel": [
-    "$1$ server, $\\mathcal{K}\\triangleq \\{1,2,...,K\\}$ clients, $t\\in\\mathcal{T}\\triangleq\\{1,...,T\\}$",
-    "round step (1): probability allocation, client selection [see 1. Client Selection] and model distribution",
-    "round step (2): local training",
-    "round step (3): model uploading",
-    "round step (4): deadline-based aggregation [see 2. Aggregation]"
+    "Players",
+    [
+      "$1$ server, $\\mathcal{K}\\triangleq \\{1,2,...,K\\}$ clients, $t\\in\\mathcal{T}\\triangleq\\{1,...,T\\}$"
+    ],
+    "Step",
+    [
+      "round step (1): probability allocation, client selection [see 1. Client Selection] and model distribution",
+      "round step (2): local training",
+      "round step (3): model uploading",
+      "round step (4): deadline-based aggregation [see 2. Aggregation]"
+    ]
   ],
   "motivation": [
     "In the client selection stage, due to the limited bandwidth as well as the budget issue, not all the clients in the system are selected for training.",

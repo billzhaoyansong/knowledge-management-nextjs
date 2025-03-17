@@ -27,16 +27,22 @@
     "the NN is trained by reinforcement learning based on observed client status and feedback reward"
   ],
   "systemModel": [
-    "a typical FL services market, including a FL platform and a set of clients",
-    "a task bid by $N$ clients denoted by $\\mathcal{C}=\\{C_1,...,C_i,...,C_n\\}$ with a claimed price $b_i$ and private local data sample $\\mathcal{D}_i$ for $i$-th client",
-    "the training samples of some clients may be mislabeled or non-IID",
-    "system step (1): a task with budget $B$ is submitted to the FL platform",
-    "system step (2): interested clients report number of data samples, quality of data labels, quality of data distributions and payment",
-    "system step (3): select clients $\\mathcal{C}_s\\subseteq \\mathcal{C}$ to maximize the accuracy of the global model [see 1. Client Selection]",
-    "system step (4): local training",
-    "system step (5): global aggregation with FedAVG and proceed to step 4 for $R$ rounds",
-    "system step (6): learning finishes when hitting target test accuracy and clients receive claimed payments",
-    "system step (7): update the client selection policy network"
+    "Players",
+    [
+      "a typical FL services market, including a FL platform and a set of clients",
+      "a task bid by $N$ clients denoted by $\\mathcal{C}=\\{C_1,...,C_i,...,C_n\\}$ with a claimed price $b_i$ and private local data sample $\\mathcal{D}_i$ for $i$-th client",
+      "the training samples of some clients may be mislabeled or non-IID"
+    ],
+    "steps",
+    [
+      "system step (1): a task with budget $B$ is submitted to the FL platform",
+      "system step (2): interested clients report number of data samples, quality of data labels, quality of data distributions and payment",
+      "system step (3): select clients $\\mathcal{C}_s\\subseteq \\mathcal{C}$ to maximize the accuracy of the global model [see 1. Client Selection]",
+      "system step (4): local training",
+      "system step (5): global aggregation with FedAVG and proceed to step 4 for $R$ rounds",
+      "system step (6): learning finishes when hitting target test accuracy and clients receive claimed payments",
+      "system step (7): update the client selection policy network"
+    ]
   ],
   "techniques": [
     "1. Client Selection",

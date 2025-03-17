@@ -16,11 +16,17 @@
     "multi-armed bandit"
   ],
   "systemModel": [
-    "$1$ server, a set of clients $K$ training over $T$ communication rounds of $t \\in \\mathcal{\\tau}=[0,1,...,T]$ with the local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$",
-    "round step (1): clients report willingness and a few client-side information (maybe size of required data)",
-    "round step (2): the server conducts client selection [see 1. Client Selection] and distributes the global model",
-    "round step (3): local training",
-    "round step (4): model transmission and aggregation"
+    "Players",
+    [
+      "$1$ server, a set of clients $K$ training over $T$ communication rounds of $t \\in \\mathcal{\\tau}=[0,1,...,T]$ with the local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$"
+    ],
+    "Step",
+    [
+      "round step (1): clients report willingness and a few client-side information (maybe size of required data)",
+      "round step (2): the server conducts client selection [see 1. Client Selection] and distributes the global model",
+      "round step (3): local training",
+      "round step (4): model transmission and aggregation"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, propose __a client selection method to maximize the total number of effective participation data size__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] reducing training rounds [2] higher global model accuracy comparing with [1] random selection and [2] oracle selection (finalizing selected set of clients in the first-round)",

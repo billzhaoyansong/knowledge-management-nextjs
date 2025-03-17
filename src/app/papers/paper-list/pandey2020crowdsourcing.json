@@ -8,8 +8,8 @@
         "Aunas Manzoor",
         "Choong Seon Hong"
     ],
-  "type": "technical",
-  "year": "2019-05",
+    "type": "technical",
+    "year": "2019-05",
     "labels": [
         "federated learning",
         "stackelberg game",
@@ -20,10 +20,16 @@
         "server determines optimal reward rates, while the clients decide the optimal local accuracy"
     ],
     "systemModel": [
-        "$1$ MEC server, a set of clients $\\mathcal{K}$",
-        "step 1): the MEC server announce a uniform reward rate $r$",
-        "step 2): clients choose accuracy level $\\theta_k$ ($\\theta_k$ is a relative accuracy, and A smaller value of relative accuracy $\\theta_k$ indicates a high local accuracy) according to the reward rate $r$ to maximize self utility [see 1. stage II]",
-        "step 3): server optimize reward rate $r^*$ to maximize self-utility[see 2. stage I]"
+        "Players",
+        [
+            "$1$ MEC server, a set of clients $\\mathcal{K}$"
+        ],
+        "Steps",
+        [
+            "step 1): the MEC server announce a uniform reward rate $r$",
+            "step 2): clients choose accuracy level $\\theta_k$ ($\\theta_k$ is a relative accuracy, and A smaller value of relative accuracy $\\theta_k$ indicates a high local accuracy) according to the reward rate $r$ to maximize self utility [see 1. stage II]",
+            "step 3): server optimize reward rate $r^*$ to maximize self-utility[see 2. stage I]"
+        ]
     ],
     "questions": [
         "how to maintain communication efficiency while exchanging the model parameters",

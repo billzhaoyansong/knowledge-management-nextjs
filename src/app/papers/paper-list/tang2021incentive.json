@@ -18,13 +18,19 @@
         "in this mechanism, some organizations may need to pay other organizations to compensate the cost of the latter ones"
     ],
     "systemModel": [
-        "a central server, a set of organizations denoted by $\\mathcal{N}$ with $S_n$ (the number of data units), and $D_n$ (the number of CPU cycles to process one data unit)",
-        "the objective is to maximize social welfare by optimizing the processing capacity of each $n$ [1. Social Welfare Maximization]",
-        "due to non-convexity of the original problem, it is tranformed and modeled as a non-cooperative game with perfect information",
-        "process 1): each organization submits [1] $\\gamma_n\\in[0,\\tilde{r}]$ (number of training rounds), and [2] $\\pi_n$ (unit monetary transfer per training round) to the central server",
-        "process 2): central server sends to all organizations all the $\\gamma_n, \\pi_n$",
-        "process 3): each organization adjusts self $\\gamma_n, \\pi_n$ [see 2. Non-cooperative Game with Perfect Information]",
-        "process 4): if adjusted $\\gamma_n$ is stable for all the organizations, then the central server announces the result [see 3. Announcement of Results]; else goes back to 1)"
+        "Players",
+        [
+            "a central server, a set of organizations denoted by $\\mathcal{N}$ with $S_n$ (the number of data units), and $D_n$ (the number of CPU cycles to process one data unit)"
+        ],
+        "Steps",
+        [
+            "the objective is to maximize social welfare by optimizing the processing capacity of each $n$ [1. Social Welfare Maximization]",
+            "due to non-convexity of the original problem, it is tranformed and modeled as a non-cooperative game with perfect information",
+            "process 1): each organization submits [1] $\\gamma_n\\in[0,\\tilde{r}]$ (number of training rounds), and [2] $\\pi_n$ (unit monetary transfer per training round) to the central server",
+            "process 2): central server sends to all organizations all the $\\gamma_n, \\pi_n$",
+            "process 3): each organization adjusts self $\\gamma_n, \\pi_n$ [see 2. Non-cooperative Game with Perfect Information]",
+            "process 4): if adjusted $\\gamma_n$ is stable for all the organizations, then the central server announces the result [see 3. Announcement of Results]; else goes back to 1)"
+        ]
     ],
     "questions": [
         "incentive mechanism problem in public goods sector (e.g. radio broadcast) which are are both non-excludable (i.e., individuals cannot be excluded from using them) and non-rivalrous (i.e., there is no competition in terms of using them)"

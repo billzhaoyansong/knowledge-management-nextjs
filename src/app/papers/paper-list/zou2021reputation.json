@@ -27,10 +27,13 @@
     "in the global level, knowledge trading based on smart contract, and knowledge pricing modeled as a non-cooperative game"
   ],
   "systemModel": [
-    "$1$ mobile edge computing (MEC) server, a set of $N$ road side units (RSUs) with each of the RSUs managing a set of regional vehicles which collect non-exchangable road and environmental information (the total number of vehicles is $K$) [see 1. Regional Vehicles Clustering]",
-    "in the RFL, vehicles are selected based on their reputation for regional aggregation [see 2. Reputation-Based Client Selection]",
-    "an inter-regional blockchain is used to store aggregated model parameters and reputataions",
-    "in the global level, knowledge trading based on smart contract [see 3. Knowledge Trading]"
+    "Players",
+    [
+      "$1$ mobile edge computing (MEC) server, a set of $N$ road side units (RSUs) with each of the RSUs managing a set of regional vehicles which collect non-exchangable road and environmental information (the total number of vehicles is $K$) [see 1. Regional Vehicles Clustering]",
+      "in the RFL, vehicles are selected based on their reputation for regional aggregation [see 2. Reputation-Based Client Selection]",
+      "an inter-regional blockchain is used to store aggregated model parameters and reputataions",
+      "in the global level, knowledge trading based on smart contract [see 3. Knowledge Trading]"
+    ]
   ],
   "problemCategory": [
     [

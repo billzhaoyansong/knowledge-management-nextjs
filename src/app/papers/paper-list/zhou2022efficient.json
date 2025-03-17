@@ -20,15 +20,21 @@
     "reinforcement learning"
   ],
   "systemModel": [
-    "a single server, $M$ jobs denoted by $\\mathcal{M}$, $K$ devices denoted by $\\mathcal{K}$, a device can only be scheduled to one job at a time",
-    "each device $k$ has $M$ local datasets corresponding to the $M$ jobs $\\mathcal{D}_k^m$",
-    "step 1: server initializes global models and sends requests to available devices",
-    "step 2: server schedules devices to current jobs in parallel",
-    "step 3: server distributes the latest global models to the scheduled devices",
-    "step 4: devices update model based on local data",
-    "step 5: devices upload the updated model to the server",
-    "step 6: server aggregates the models",
-    "step 1-6 is a round and repeats until the global model reaches the expected performance"
+    "Players",
+    [
+      "a single server, $M$ jobs denoted by $\\mathcal{M}$, $K$ devices denoted by $\\mathcal{K}$, a device can only be scheduled to one job at a time",
+      "each device $k$ has $M$ local datasets corresponding to the $M$ jobs $\\mathcal{D}_k^m$"
+    ],
+    "Steps",
+    [
+      "step 1: server initializes global models and sends requests to available devices",
+      "step 2: server schedules devices to current jobs in parallel",
+      "step 3: server distributes the latest global models to the scheduled devices",
+      "step 4: devices update model based on local data",
+      "step 5: devices upload the updated model to the server",
+      "step 6: server aggregates the models",
+      "step 1-6 is a round and repeats until the global model reaches the expected performance"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, __select clients for multi-jobs by considering fairness and training time__ to enable parallel processing of multiple jobs",

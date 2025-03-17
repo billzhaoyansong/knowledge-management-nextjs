@@ -15,10 +15,16 @@
     "multi-armed bandit"
   ],
   "systemModel": [
-    "$1$ server and multiple remote clients training over $T$ communication rounds of $t \\in \\mathcal{T}=[0,1,...,T-1]$, each $k$ client has a local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$",
-    "proved that for non-convex and strongly convex cases, a larger $q_k p_k \\mathbb{E}[F_k(\\bar{w}_t)]$ towards a lower error and faster convergence, where $q_k$ is participation state, $p_k$ is the expectation of aggregation weight, and $\\mathbb{E}[F_k(\\bar{w}_t)]$ is the expectation of local loss",
-    "round step (1): client selection: in $t$th round, a client set of $A_t$ is selected from $K(t)$ candidates and the total number of selected clients is capped by $m$ due to limited bandwidth [see 1. Client Selection]",
-    "round step (2): model aggregation: deadline-based FedAvg aggregation: $\\sum_{k\\in A_t} p_{k,t}\\mathbf{w}_{k,t}$ - only model parameters returned before the deadline is aggregated"
+    "Players",
+    [
+      "$1$ server and multiple remote clients training over $T$ communication rounds of $t \\in \\mathcal{T}=[0,1,...,T-1]$, each $k$ client has a local dataset $\\mathcal{D}_t(k)$ in the communication round of $t$"
+    ],
+    "Steps",
+    [
+      "proved that for non-convex and strongly convex cases, a larger $q_k p_k \\mathbb{E}[F_k(\\bar{w}_t)]$ towards a lower error and faster convergence, where $q_k$ is participation state, $p_k$ is the expectation of aggregation weight, and $\\mathbb{E}[F_k(\\bar{w}_t)]$ is the expectation of local loss",
+      "round step (1): client selection: in $t$th round, a client set of $A_t$ is selected from $K(t)$ candidates and the total number of selected clients is capped by $m$ due to limited bandwidth [see 1. Client Selection]",
+      "round step (2): model aggregation: deadline-based FedAvg aggregation: $\\sum_{k\\in A_t} p_{k,t}\\mathbf{w}_{k,t}$ - only model parameters returned before the deadline is aggregated"
+    ]
   ],
   "summaries": [
     "in the conventional FL framework, propose __a client selection method to maximize the product of participation state, aggregation weight, and local loss__ for the volatile FL (set volatility (varying clients), statistical volatility (varying dataset), training volatility (failing during training)) to achieve [1] faster convergence speed [2] higher global model accuracy, and [3] reducing energy consumption comparing with [1] random selection, [2] FedCS, and [3] Oort",

@@ -25,15 +25,21 @@
     "to disassociate local model from its generator, a random ordered and sequential local training method is adopted"
   ],
   "systemModel": [
-    "$1$ Training Manager, a set of clients $\\{C_1,...,C_n\\}$, and 1 server $S$ who creates multiple training sessions (jobs)",
-    "all information provided will be recorded in all nodes of blockchain",
-    "the use of smart contract over blockchain potentially brings transparency, fairness and efficiency",
-    "phase 0): $S$ publishes a new training and askes Training Manager to initialize an FL training session with the information of [1] typeofData, [2] algorithmInfo, [3] globalHash, [4] hashAlgorithm, [5] public key encryption (PKE) algorithm",
-    "phase 1): the clients register participation with the information of datasize, then training starts with [1] participants addresses and [2] participantDataSizes",
-    "phase 2): private local training and deliver the local models to $S$ [see 1. private local training]",
-    "phase 3): validation",
-    "phase 4): accurate aggregation by letting $S$ check if local hashes match with the hashes during the local training phase",
-    "phase 5): $S$ indicates if the training has finished or if a new iteration begins"
+    "Players",
+    [
+      "$1$ Training Manager, a set of clients $\\{C_1,...,C_n\\}$, and 1 server $S$ who creates multiple training sessions (jobs)"
+    ],
+    "Phases",
+    [
+      "all information provided will be recorded in all nodes of blockchain",
+      "the use of smart contract over blockchain potentially brings transparency, fairness and efficiency",
+      "phase 0): $S$ publishes a new training and askes Training Manager to initialize an FL training session with the information of [1] typeofData, [2] algorithmInfo, [3] globalHash, [4] hashAlgorithm, [5] public key encryption (PKE) algorithm",
+      "phase 1): the clients register participation with the information of datasize, then training starts with [1] participants addresses and [2] participantDataSizes",
+      "phase 2): private local training and deliver the local models to $S$ [see 1. private local training]",
+      "phase 3): validation",
+      "phase 4): accurate aggregation by letting $S$ check if local hashes match with the hashes during the local training phase",
+      "phase 5): $S$ indicates if the training has finished or if a new iteration begins"
+    ]
   ],
   "motivation": [
     "there is a fundamental conflict between privacy and robustness: safeguarding against security attacks often means having full control over the training process or accessing the training data [13], [14], which is not compatible with most cryptographic techniques that are commonly used to preserve privacy"

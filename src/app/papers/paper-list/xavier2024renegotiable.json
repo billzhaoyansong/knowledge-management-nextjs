@@ -17,10 +17,13 @@
     "in the conventional FL framework, propose __contract renegotiation by servers__ after clients' updates submission to adapt to changes in DOs' bahavior and budget constraints"
   ],
   "systemModel": [
-    "DOs: $\\mathcal{N}=\\{1,...,n,..,N\\}$",
-    "FL servers: $\\mathcal{F}=\\{1,...,f,..,F\\}$ (1 server publishes 1 task)",
+    "Players",
     [
-      "global model $\\omega_f(t)$ for a duration of $t\\in[0,\\mathcal{T}]$ or a specific threshold level of accuracy is attained"
+      "DOs: $\\mathcal{N}=\\{1,...,n,..,N\\}$",
+      "FL servers: $\\mathcal{F}=\\{1,...,f,..,F\\}$ (1 server publishes 1 task)",
+      [
+        "global model $\\omega_f(t)$ for a duration of $t\\in[0,\\mathcal{T}]$ or a specific threshold level of accuracy is attained"
+      ]
     ],
     "Process",
     [

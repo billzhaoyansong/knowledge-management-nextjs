@@ -18,16 +18,22 @@
     "in the conventional FL framework, propose __an open-source production-ready FL framework__ in healthcare to tackle that current FL frameworks are tailored to specific hardward and modeling approaches"
   ],
   "systemModel": [
-    "a set of clients, a set of federators, and a central node placing between clients and federators",
+    "Players",
     [
-      "federators are to combine models from clients",
-      "the central node manages jobs and submissions between clients and federators"
+      "a set of clients, a set of federators, and a central node placing between clients and federators",
+      [
+        "federators are to combine models from clients",
+        "the central node manages jobs and submissions between clients and federators"
+      ]
     ],
-    "clients can be deployed with homogeneous and heterogeneous dataset",
-    "the central node can be contact via RESTful API implemented by the python library (fed-requests)",
-    "federators can choose different aggragation models (such as FedAvg)",
-    "authors used brain imaging data (MRI) in experiments, that's why in the title it says this is for healthcare",
-    "no UI implemented"
+    "Keys",
+    [
+      "clients can be deployed with homogeneous and heterogeneous dataset",
+      "the central node can be contact via RESTful API implemented by the python library (fed-requests)",
+      "federators can choose different aggragation models (such as FedAvg)",
+      "authors used brain imaging data (MRI) in experiments, that's why in the title it says this is for healthcare",
+      "no UI implemented"
+    ]
   ],
   "problemCategory": [
     [

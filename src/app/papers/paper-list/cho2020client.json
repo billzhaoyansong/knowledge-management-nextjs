@@ -18,10 +18,16 @@
     "only $m$ clients with largest losses are selected for the subsequent local training"
   ],
   "systemModel": [
-    "a server and $K$ clients",
-    "selection process (1): sample the candidate set $\\mathcal{A}$ of $d$ ($m\\leq d\\leq K$) clients with the probability $p_k$, the fraction of data of the $k$-th client for $k=1,...,K$",
-    "selection process (2): server sends current global model $\\bar{\\mathbf{w}}^{(t)}$ to the clients in set $\\mathcal{A}$, each client compute and send back the local loss $F_k(\\bar{\\mathbf{w}}^{(t)})$",
-    "selection process (3): server selects a fraction $C$ of total clients $K$: $m=\\max(CK, 1)$ with the largest local loss [see 1. Convergence Analysis] for the next $\\tau$ local iterations"
+    "Players",
+    [
+      "a server and $K$ clients"
+    ],
+    "Process",
+    [
+      "selection process (1): sample the candidate set $\\mathcal{A}$ of $d$ ($m\\leq d\\leq K$) clients with the probability $p_k$, the fraction of data of the $k$-th client for $k=1,...,K$",
+      "selection process (2): server sends current global model $\\bar{\\mathbf{w}}^{(t)}$ to the clients in set $\\mathcal{A}$, each client compute and send back the local loss $F_k(\\bar{\\mathbf{w}}^{(t)})$",
+      "selection process (3): server selects a fraction $C$ of total clients $K$: $m=\\max(CK, 1)$ with the largest local loss [see 1. Convergence Analysis] for the next $\\tau$ local iterations"
+    ]
   ],
   "questions": [
     "most of the recent works assume full client participation",

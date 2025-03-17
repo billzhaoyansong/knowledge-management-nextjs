@@ -26,10 +26,13 @@
       "a set of $k$ clients",
       "$1$ blockchain storing reputations of clients"
     ],
-    "step 1): clients choose to reveal efficiency $\\theta_i\\in[0,1]$ to the server or not",
-    "step 2): the server transfers [1] the expected improvement of test accuracy $q_i(\\theta)$ and [2] the reward $R_i(q_i)$ to all clients [see <u>1. Incentive Mechanism Under Complete Information</u>] [see <u>2. Incentive Mechanism Under Incomplete Information</u>]",
-    "step 3): clients choose to participate in or not, depending on utility $U_i(q_i(\\theta), \\theta_i)\\geq 0$",
-    "step 4): the server selects the top-$k$ reputation clients [see <u>3. Reputation Calculation</u>]"
+    "Process",
+    [
+      "step 1): clients choose to reveal efficiency $\\theta_i\\in[0,1]$ to the server or not",
+      "step 2): the server transfers [1] the expected improvement of test accuracy $q_i(\\theta)$ and [2] the reward $R_i(q_i)$ to all clients [see <u>1. Incentive Mechanism Under Complete Information</u>] [see <u>2. Incentive Mechanism Under Incomplete Information</u>]",
+      "step 3): clients choose to participate in or not, depending on utility $U_i(q_i(\\theta), \\theta_i)\\geq 0$",
+      "step 4): the server selects the top-$k$ reputation clients [see <u>3. Reputation Calculation</u>]"
+    ]
   ],
   "questions": [
     "Existing AFL approaches are commonly under the assumption of sellers' market ... and the aggregation servers as buyers need to compete for the bids."

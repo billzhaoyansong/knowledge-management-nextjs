@@ -19,7 +19,10 @@
     "in the conventional FL framework, propose __integrated stochastic quantization, verifiable outlier detection, and secure model aggregation__ to tackle that local updates are masked randomly and the server cannot observe true value of updates to identify adversarial (Byzantine) users, "
   ],
   "systemModel": [
-    "$1$ server, $N$ mobil users",
+    "Players",
+    [
+      "$1$ server, $N$ mobil users"
+    ],
     "process",
     [
       "<u>Stochastic quantization</u>: Users initially quantize their local updates from the real domain to the domain of integers, and then embed them in a field $\\mathbb{F}_p$ of integers moduloa prime $p$.<ol>",

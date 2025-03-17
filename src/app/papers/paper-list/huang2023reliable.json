@@ -31,14 +31,16 @@
   ],
   "systemModel": [
     "workflow of proposed FL mechanism",
-    "step 1: Workers and task publishers register blockchain accounts",
-    "step 2: When a task publisher has a model requirement, 𝑢 first searches the blockchain to confirm whether the model has been trained before. If there is no record, publisher will launch an FL training task in the form of smart contract.",
-    "step 3: the task publisher broadcasts a smart contract containing the requirements of the FL task. The requirements include data types, data attributes, data size , worker selection time, data providers’ total points expected to participate in the training and rewards",
-    "step 4: intereseted workers send requests to the publisher with kind and attributes of data",
-    "step 5: worker selection [see 1. client selection]",
-    "step 6: selected workers deposit a certain amount of points",
-    "step 7: FL training and aggregation [see 2. Aggregation]",
-    "step 8: reward workers according to contributions [see 3. Reward]"
+    [
+      "step 1: Workers and task publishers register blockchain accounts",
+      "step 2: When a task publisher has a model requirement, 𝑢 first searches the blockchain to confirm whether the model has been trained before. If there is no record, publisher will launch an FL training task in the form of smart contract.",
+      "step 3: the task publisher broadcasts a smart contract containing the requirements of the FL task. The requirements include data types, data attributes, data size , worker selection time, data providers’ total points expected to participate in the training and rewards",
+      "step 4: intereseted workers send requests to the publisher with kind and attributes of data",
+      "step 5: worker selection [see 1. client selection]",
+      "step 6: selected workers deposit a certain amount of points",
+      "step 7: FL training and aggregation [see 2. Aggregation]",
+      "step 8: reward workers according to contributions [see 3. Reward]"
+    ]
   ],
   "motivation": [
     "While FL brings many benefits to mobile edge computing, it still faces critical challenges",

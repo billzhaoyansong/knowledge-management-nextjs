@@ -22,15 +22,18 @@
     "direct reputations are calculated based on round-level angles between gradients and loss difference before and after aggregating a specific local model"
   ],
   "systemModel": [
-    "step 1): task requester broadcasts task information (budget, required data category and computing resources, etc) to the community",
-    "step 2): interested individuals submit bids as candidates",
-    "step 3): task requester downloads reputation evaluation of candidates from the blockchain, and combines the direct and indirect reputations to get a comprehensive reputation [see 1. Comprehensive Reputation Calculation]",
-    "step 4): task requester selects candidates as participants [see 2. Client Selection]",
-    "step 5): participants receive the global model, do local training, and upload the trained model",
-    "step 6): task requester aggregates into a new global model [see 3. Global Model Aggregation]",
-    "step 7): task requester detects qualities of uploaded local models [see 4. Model Quality Detection] and measures the contribution of each participant [see 5. Contribution Evaluation]",
-    "step 8): after several global iterations, the task requester updates the reputations of participants [see 6. Reputation Update] and uploads and saves the interaction information of the task to the interaction blockchain",
-    "step 9): task requester pays the participants $p_j=Re_j q_{k+1}$"
+    "steps",
+    [
+      "step 1): task requester broadcasts task information (budget, required data category and computing resources, etc) to the community",
+      "step 2): interested individuals submit bids as candidates",
+      "step 3): task requester downloads reputation evaluation of candidates from the blockchain, and combines the direct and indirect reputations to get a comprehensive reputation [see 1. Comprehensive Reputation Calculation]",
+      "step 4): task requester selects candidates as participants [see 2. Client Selection]",
+      "step 5): participants receive the global model, do local training, and upload the trained model",
+      "step 6): task requester aggregates into a new global model [see 3. Global Model Aggregation]",
+      "step 7): task requester detects qualities of uploaded local models [see 4. Model Quality Detection] and measures the contribution of each participant [see 5. Contribution Evaluation]",
+      "step 8): after several global iterations, the task requester updates the reputations of participants [see 6. Reputation Update] and uploads and saves the interaction information of the task to the interaction blockchain",
+      "step 9): task requester pays the participants $p_j=Re_j q_{k+1}$"
+    ]
   ],
   "problemCategory": [
     [

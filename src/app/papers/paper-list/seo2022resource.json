@@ -18,16 +18,22 @@
         "in the conventional FL framework, __[1] tackle Non-IID problem by transmitting an shared IID dataset to winning clients__, and __[2] select and reward clients__ based on (1) max achievable local accuracies and (2) local iteration number (3) claimed price"
     ],
     "systemModel": [
-        "$1$ FL service provider, a set of clients, a controller as auctioneer",
-        "process 1): FL service provider designs a deep neural network, input structure, and a quality level",
-        "process 2): service provider transmits above requirements to the controller",
-        "process 3): the controller sets the auction-winning rule [see 1. auction-winning rule] and payment rule [see 2. payment rule] based on the requirements",
-        "process 4): the controller broadcasts 2 rules to the clients",
-        "amid a global iteration and global iteration terminates when a desired global accuracy is achieved:",
-        "subprocess 1): each client submit a bid to the controller [see 3. bidding]",
-        "subprocess 2): the controller determined winning bids based on the auction-winning rule",
-        "subprocess 3): local training [see 4. local training]",
-        "subprocess 4): the controller decides which local models to be used in aggregation and payments based on the payment rule"
+        "Players",
+        [
+            "$1$ FL service provider, a set of clients, a controller as auctioneer"
+        ],
+        "Process",
+        [
+            "process 1): FL service provider designs a deep neural network, input structure, and a quality level",
+            "process 2): service provider transmits above requirements to the controller",
+            "process 3): the controller sets the auction-winning rule [see 1. auction-winning rule] and payment rule [see 2. payment rule] based on the requirements",
+            "process 4): the controller broadcasts 2 rules to the clients",
+            "amid a global iteration and global iteration terminates when a desired global accuracy is achieved:",
+            "subprocess 1): each client submit a bid to the controller [see 3. bidding]",
+            "subprocess 2): the controller determined winning bids based on the auction-winning rule",
+            "subprocess 3): local training [see 4. local training]",
+            "subprocess 4): the controller decides which local models to be used in aggregation and payments based on the payment rule"
+        ]
     ],
     "questions": [
         "to train with non-IID data"
