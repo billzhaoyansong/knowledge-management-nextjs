@@ -1,0 +1,46 @@
+{
+  "title": "Collaborative Federated Learning for Healthcare: Multi-Modal COVID-19 Diagnosis at the Edge",
+  "type": "technical",
+  "authors": [],
+  "year": "2022-09",
+  "labels": [
+    "cross-silo",
+    "federated learning"
+  ],
+  "summaries": [
+    "proposes a clustered federated learning (CFL) framework for multi-modal COVID-19 diagnosis to address data heterogeneity"
+  ],
+  "systemModel": [
+    "Objectives",
+    [
+      "The paper proposes a clustered federated learning (CFL) framework for multi-modal COVID-19 diagnosis to address data heterogeneity"
+    ]
+  ],
+  "techniques": [
+    "Clustered Federated Learning (CFL)",
+    [
+      "clients are clustered based on the __type of imaging modality__ they possess, e.g.",
+      [
+        "Cluster 1 ($C_1$): Clients with X-ray imaging facilities.",
+        "Cluster 2 ($C_2$): Clients with Ultrasound imaging facilities."
+      ],
+      "Each cluster is disjoint, meaning no client belongs to more than one cluster.",
+      "The server aggregates updates from clients in $C_1$ and $C_2$ separately and then combines them to train a **multi-modal model** that can diagnose COVID-19 using both X-ray and Ultrasound data."
+    ],
+    "Focal Loss",
+    [
+      "To address class imbalance by focusing on hard-to-classify samples",
+      [
+        "$FL(p_i) = -\\alpha_i (1 - p_i)^\\gamma \\log(p_i)$",
+        [
+          "$p_i$ is the model's estimated probability for the true class",
+          "$\\alpha_i$ balances the importance of positive/negative examples",
+          "$\\gamma$ is a focusing parameter"
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/OJCS.2022.3206407",
+  "id": "qayyum2022collaborative",
+  "bibtex": "@article{qayyum2022collaborative, title={Collaborative federated learning for healthcare: Multi-modal covid-19 diagnosis at the edge}, author={Qayyum, Adnan and Ahmad, Kashif and Ahsan, Muhammad Ahtazaz and Al-Fuqaha, Ala and Qadir, Junaid}, journal={IEEE Open Journal of the Computer Society}, volume={3}, pages={172--184}, year={2022}, publisher={IEEE}}"
+}

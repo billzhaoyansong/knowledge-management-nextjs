@@ -1,0 +1,135 @@
+{
+  "title": "Promoting Collaboration in Cross-Silo Federated Learning: Challenges and Opportunities",
+  "type": "technical",
+  "authors": [
+    "Chao Huang",
+    "Ming Tang",
+    "Qian Ma",
+    "Jianwei Huang; Xin Liu"
+  ],
+  "year": "2023-12",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "game theory",
+    "auction",
+    "reward"
+  ],
+  "summaries": [
+    "model and analyze the free-rider problem, business competition problem, and long-term collaboration problem, through an auction-based incentive mechanism, a revenue-sharing scheme, and a subgame perfect nash equilibrium in cross-silo FL"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "Motivations",
+      [
+        "free-riding problem: The global model in cross-silo FL is a public good, leading to __free-riding issues__ where clients may contribute little in the whole process but still benefit from the model",
+        "business competitor problem: Clients in cross-silo FL may be business competitors, which discourages collaboration as they may not want to benefit their competitors",
+        "long-term collaboration: clients may free ride on others' long-term active contributions by partially contributing in some iterations"
+      ],
+      "Objective",
+      [
+        "model and analyze the above key challenges in cross-silo FL through a game-theoretical perspective"
+      ]
+    ]
+  ],
+  "techniques": [
+    "An Auction-Based Incentive Mechanism to Address Free-rider Issue",
+    [
+      "Steps",
+      [
+        "Each organization $n$ submits a message profile $ (\\gamma_n, \\pi_n) $.<ol>",
+        [
+          "$\\gamma_n$: number of training round",
+          "$\\pi_n$: unit monetary transfer that $n$ expects to receive from (or pay for) other organizations"
+        ],
+        "The central server processes the profiles and determines the number of training rounds $ \\hat{r}(\\gamma) $and monetary transfer to $n$: $ m_n(\\gamma, \\pi) = \\hat{r}(\\gamma)(\\pi_{\\mu(n+1)} - \\pi_{\\mu(n+2)}) $",
+        "The server replies to organizations with the number of training rounds and monetary transfers.",
+        "Each organization computes its processing capacity used for training."
+      ],
+      "Good Parts",
+      [
+        "organizations would truthfully report their marginal valuations",
+        "can be extended to deal with other resources (e.g., communication resources, datasets)"
+      ],
+      "Challenges not yet to be addressed:",
+      [
+        "it is crucial to investigate their potential coalition behaviors among business entities",
+        "It is beneficial to extend the mechanism for asynchronous FL scenario in order to characterize the straggler issue and dynamic participation behaviors of organizations.",
+        "it is important to develop efficient and transparent communication protocols in cross-silo FL, as it can help track contributions and usage, potentially mitigating the free-rider problem by providing a clear record of each organization’s participation and impact on the model training process"
+      ]
+    ],
+    "Revenue Share to Mitigate Business Competition",
+    [
+      "Business Competition:",
+      [
+        "companies or organizations could potentially act as both __collaborators__ in model training and __competitors__ in the business arena"
+      ],
+      "a revenue-sharing mechanism that promotes client collaboration. _(does it really work?)_",
+      [
+        "Organizations decide whether to participate in FL and how much local data to use.<ol>",
+        "Organizations fine-tune the global model to obtain a final local model.",
+        "Organizations provide model-related services and set prices.",
+        "Customers decide whether to purchase services and from which Organization.",
+        "Organizations share revenues based on their contributions (by Shapley Value) to the global model."
+      ],
+      "_This revenue sharing mechanism might not work in a monopoly-similar market_",
+      "Unaddressed Challenges",
+      [
+        "lacks the study of more intricate customer behaviors, for example, multi-homing in which a customer purchases services from multiple clients",
+        "extend the mechanism to an oligopoly scenario with more than two competing organizations, which brings communication challenges and demands improved solutions for data synchronization and conflict resolution"
+      ]
+    ],
+    "Long-Term Collaboration",
+    [
+      "Stage Game: Organizations decide the quantity of local data to contribute in each FL round",
+      "Repeated Game: Organizations engage in multiple FL rounds, and a cooperative strategy is used to enforce long-term collaboration",
+      [
+        "to enforce punishment whenever organizations deviate from the cooperative strategy"
+      ],
+      "Unsolved Challenges",
+      [
+        "One important direction is to derive the cooperative strategy under the imperfect information case",
+        "It is also interesting to study the incomplete information case, in which the client information (e.g., valuation toward the global model accuracy) is private to each client and unknown to other clients"
+      ]
+    ],
+    "Future Directions",
+    [
+      "Mechanism Design with Data Quality",
+      [
+        "Current Focus: Most existing mechanisms in cross-silo FL assume either ideal IID (independent and identically distributed) data or non-IID data.",
+        "Future Direction: Incorporate data quality into mechanism design. Data quality refers to factors such as the correctness of labels and the reliability of data."
+      ],
+      "Mechanism Design with Exiting Entities",
+      [
+        "allow an entity to exit collaboration reasonably with affordable punishment"
+      ],
+      "Market Entry",
+      [
+        "Investigate how organizations decide to enter the competitive market in cross-silo FL.",
+        [
+          "Analyze factors influencing market entry, such as data availability, market size, growth potential, and competitive landscape.",
+          "Develop strategies for organizations to position themselves effectively in the market.",
+          "Study the impact of market entry decisions on collaboration and competition in cross-silo FL."
+        ]
+      ],
+      "Coalition Formation",
+      [
+        "Explore strategic coalition formation to maximize market competitiveness",
+        [
+          "Investigate how smaller organizations can form coalitions to compete with larger counterparts.",
+          "Study the impact of coalition formation on model performance and market influence.",
+          "Develop mechanisms to incentivize coalition formation and fair resource sharing."
+        ]
+      ],
+      "Nash Bargaining",
+      [
+        "In many cross-silo settings, there is no neutral third party (e.g., government) to enforce collaboration mechanisms.",
+        "Use Nash Bargaining to enable organizations to negotiate binding agreements on how to contribute and collaborate."
+      ]
+    ]
+  ],
+  "doi": "10.1109/MCOM.005.2300467",
+  "id": "huang2023promoting",
+  "bibtex": "@article{huang2023promoting, title={Promoting collaboration in cross-silo federated learning: Challenges and opportunities}, author={Huang, Chao and Tang, Ming and Ma, Qian and Huang, Jianwei and Liu, Xin}, journal={IEEE Communications Magazine}, volume={62}, number={4}, pages={82--88}, year={2023}, publisher={IEEE}}"
+}

@@ -1,10 +1,9 @@
 @tailwind base;
 @tailwind components;
 
-
 @layer components {
 
-    /* temporarily replaced by .paper-card */
+    .paper-card,
     .paper-detail {
 
         ul:not(.depth-1),

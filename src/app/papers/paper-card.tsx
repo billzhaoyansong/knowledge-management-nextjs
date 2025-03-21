@@ -9,6 +9,9 @@ import CopyIcon from '../components/copy-icon';
 import React from 'react';
 import { isArray, isString } from '../utils/typeChecker';
 
+import './paper-card.css'
+
+
 export const unifiedProcessor = unified()
     .use(remarkParse)
     .use(remarkMath)
@@ -43,113 +46,117 @@ export interface PaperContent {
     "bibtex": string;
 }
 
-const PaperCard = async ({
-    paper
-}: {
-    paper: PaperContent
-}) => {
-
-    /**
+/**
      * Generate a react list element based on the given array
      * @param arr the array of contents
      * @param ulClassNames 
      * @param depth at what depth of this current array
      * @returns 
      */
-    function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
+export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
 
-        // for empty 'arr', simply ignore
-        if (arr.length === 0) return <></>
+    // for empty 'arr', simply ignore
+    if (arr.length === 0) return <></>
 
-        // default formation of 'arr': first element must be a string
-        if (!isString(arr[0]))
-            throw new Error(`error format: ${arr[0]}`)
+    // default formation of 'arr': first element must be a string
+    if (!isString(arr[0]))
+        throw new Error(`error format: ${arr[0]}`)
 
-        // initialize the array of element children
-        let children = []
+    // initialize the array of element children
+    let children = []
 
-        // iterate over elements of 'arr'
-        for (let i = 0; i < arr.length; i++) {
+    // iterate over elements of 'arr'
+    for (let i = 0; i < arr.length; i++) {
 
-            // if current element is string
-            if (isString(arr[i])) {
+        // if current element is string
+        if (isString(arr[i])) {
 
-                if (arr[i] === '-') {
-                    children.push(<hr />);
-                    continue;
-                }
-
-                // if no more next element or next element is string, create a li for current element
-                // otherwise postpone current element creation 
-                if (i + 1 >= arr.length || isString(arr[i + 1])) {
-
-                    const _lineContent = unifiedProcessor
-                        .processSync(arr[i].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
-
-                    children.push(<li dangerouslySetInnerHTML={{ __html: _lineContent.toString() }}></li>)
-                }
-
+            if (arr[i] === '-') {
+                children.push(<hr />);
+                continue;
             }
-            // if current element is array
-            else if (isArray(arr[i])) {
 
-                // if previous element is string, combine current array with previous string to create a li
-                // otherwise, create a li for current array
-                if (i - 1 >= 0 && isString(arr[i - 1])) {
+            // if no more next element or next element is string, create a li for current element
+            // otherwise postpone current element creation 
+            if (i + 1 >= arr.length || isString(arr[i + 1])) {
 
-                    const _prevLineContent = unifiedProcessor
-                        .processSync(arr[i - 1].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
+                const _lineContent = unifiedProcessor
+                    .processSync(arr[i].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
 
-                    children.push(<li ><span dangerouslySetInnerHTML={{ __html: _prevLineContent.toString() }}></span>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
-                }
-                else
-                    children.push(<li>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
+                children.push(<li dangerouslySetInnerHTML={{ __html: _lineContent.toString() }}></li>)
             }
-            else {
-                throw new Error(`unknown data structure: ${arr}`)
-            }
+
         }
+        // if current element is array
+        else if (isArray(arr[i])) {
 
-        if (arr[0].endsWith('<ol>')) {
-            return React.createElement('ol', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
-        }
-        else if (arr[0].endsWith('<step-ol>')) {
-            return React.createElement('ol', { className: [...ulClassNames, `depth-${depth}`, "step-ol"].join(' ') }, ...children)
+            // if previous element is string, combine current array with previous string to create a li
+            // otherwise, create a li for current array
+            if (i - 1 >= 0 && isString(arr[i - 1])) {
+
+                const _prevLineContent = unifiedProcessor
+                    .processSync(arr[i - 1].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
+
+                children.push(<li ><span dangerouslySetInnerHTML={{ __html: _prevLineContent.toString() }}></span>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
+            }
+            else
+                children.push(<li>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
         }
         else {
-            return React.createElement('ul', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
+            throw new Error(`unknown data structure: ${arr}`)
         }
     }
 
-    function generateContents(title: string, arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
+    if (arr[0].endsWith('<ol>')) {
+        return React.createElement('ol', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
+    }
+    else if (arr[0].endsWith('<step-ol>')) {
+        return React.createElement('ol', { className: [...ulClassNames, `depth-${depth}`, "step-ol"].join(' ') }, ...children)
+    }
+    else {
+        return React.createElement('ul', { className: [...ulClassNames, `depth-${depth}`].join(' ') }, ...children)
+    }
+}
 
-        // for summaries, list all the contents directly
-        if (title === 'summary')
-            return generateHtmlListElement(arr)
+export function generateContents(title: string,
+    arr: Array<any>,
+    sectionTitleClassNames: Array<string> = ["text-xl"],
+    sectionClassNames: Array<string> = ["w-full"],
+    ulClassNames: Array<string> = [],
+    depth: number = 0): React.ReactElement {
 
-        // for others, handle separately
+    // for summaries, list all the contents directly
+    if (title === 'summary')
+        return generateHtmlListElement(arr)
 
-        // initialize the array of element children
-        let children = []
+    // for others, handle separately
 
-        let i = 0;
-        while (i + 1 < arr.length) {
+    // initialize the array of element children
+    let children = []
 
-            // <div className="h-0.5 w-10 bg-black mt-1"></div> 
-            children.push(<div className={`pt-6  w-full`}>
-                <div className="border border-gray-700 my-3 mx-3">
-                    <h4 className="table mt-[-20px] ml-2 mb-2 font-bold text-xl px-3 bg-yellow-50">{arr[i]}</h4>
-                    <div className="px-2 py-1">
-                        {generateHtmlListElement(arr[i + 1], ulClassNames, depth + 1)}
-                    </div>
-                </div></div>)
+    let i = 0;
+    while (i + 1 < arr.length) {
 
-            i = i + 2;
-        }
+        // <div className="h-0.5 w-10 bg-black mt-1"></div> 
+        children.push(<div className={`pt-6  ${sectionClassNames}`}>
+            <div className="border border-gray-700 my-3 mx-3">
+                <h4 className={`table mt-[-20px] ml-2 mb-2 font-bold px-3 bg-yellow-50 ${sectionTitleClassNames}`}>{arr[i]}</h4>
+                <div className="px-2 py-1">
+                    {generateHtmlListElement(arr[i + 1], ulClassNames, depth + 1)}
+                </div>
+            </div></div>)
 
-        return React.createElement('div', { className: [...ulClassNames, `depth-${depth}`, `flex`, `${'w-full flex-row flex-wrap'}`].join(' ') }, ...children)
+        i = i + 2;
     }
 
+    return React.createElement('div', { className: [...ulClassNames, `depth-${depth}`, `flex`, `${'w-full flex-row flex-wrap'}`].join(' ') }, ...children)
+}
+
+const PaperCard = async ({
+    paper
+}: {
+    paper: PaperContent
+}) => {
 
 
     // render the first line of the summary to show on the card
@@ -161,8 +168,8 @@ const PaperCard = async ({
         .use(rehypeStringify)
         .process(paper.summaries[0]) : "";
 
-    return <div className="lg:basis-1/4 md:basis-full">
-        <div className="h-fit px-3 py-6 mx-1 my-1 border border-1 rounded rounded-lg border-black">
+    return <div className="2xl:basis-1/4 xl:basis-1/2 md:basis-full">
+        <div className="paper-card h-fit px-3 py-6 mx-1 my-1 border border-1 rounded rounded-lg border-black">
 
             {/* row 1 */}
             <h4 className="text-slate-500 text-md capitalize">{paper.type && `[${paper.type}] `}{paper.title}</h4>
@@ -209,7 +216,7 @@ const PaperCard = async ({
                 {paper.labels.map(l => <span key={l} className="border border-1 px-2 mx-1 mt-1 rounded-lg text-xs">{l}</span>)}
             </div>
 
-            <hr className='my-3'/>
+            <hr className='my-3' />
 
             {/* row 6 */}
             <div className="flex-1 h-96 overflow-y-scroll mx-2 space-y-3">
@@ -221,9 +228,9 @@ const PaperCard = async ({
                         (v) => {
                             return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className={`bg-yellow-50 w-full flex flex-row`}>
                                 <div className="mx-3 w-full">
-                                    <h3 className="font-semibold capitalize text-yellow-700 text-xl">{v.title}</h3>
+                                    <h3 className="font-semibold capitalize text-yellow-700 text-lg">{v.title}</h3>
 
-                                    {generateContents(v.title, v.content)}
+                                    {generateContents(v.title, v.content, ['text-md'])}
                                 </div>
                             </div>
                         }
