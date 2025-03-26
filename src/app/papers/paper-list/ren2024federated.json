@@ -10,8 +10,7 @@
   "labels": [
     "federated learning",
     "collaboration",
-    "coalition",
-    "editing"
+    "coalition"
   ],
   "summaries": [
     "identify potential cooperative relationships by leveraging SOINN to generate prototype samples representing the original distribution, and using K-Means to cluster prototypes and determine partnership by examing the clustering results"

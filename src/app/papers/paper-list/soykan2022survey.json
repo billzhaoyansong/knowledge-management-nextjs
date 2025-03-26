@@ -1,0 +1,39 @@
+{
+  "title": "A Survey and Guideline on Privacy Enhancing Technologies for Collaborative Machine Learning",
+  "type": "survey",
+  "authors": [
+    "Elif Ustundag Soykan",
+    "Leyli Karaçay",
+    "Ferhat Karakoç",
+    "Emrah Tomur"
+  ],
+  "year": "2022-08",
+  "labels": [
+    "federated learning",
+    "survey"
+  ],
+  "summaries": [
+    "analyze collaborative ML approaches (including FL), threat models, survey privacy enhancing technologies"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "__Motivations__",
+      [
+        "Traditional centralized ML requires data sharing, which poses privacy and legal risks. Collaborative ML (e.g., Federated Learning) addresses this but still has privacy vulnerabilities.",
+        "Privacy Enhancing Technologies (PETs) are essential to mitigate privacy leaks in collaborative ML settings."
+      ],
+      "__Objectives__",
+      [
+        "Analyze collaborative ML approaches (FL, Split Learning, Decentralized Learning) from a privacy perspective.",
+        "Provide a detailed threat model and security/privacy considerations for each collaborative method.",
+        "Survey PETs (SMPC, HE, DP, CC) in the context of collaborative ML.",
+        "Offer guidelines for selecting PETs based on collaboration requirements and constraints."
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/ACCESS.2022.3204037",
+  "id": "soykan2022survey",
+  "bibtex": "@article{soykan2022survey, title={A survey and guideline on privacy enhancing technologies for collaborative machine learning}, author={Soykan, Elif Ustundag and Kara{\\c{c}}ay, Leyli and Karako{\\c{c}}, Ferhat and Tomur, Emrah}, journal={Ieee access}, volume={10}, pages={97495--97519}, year={2022}, publisher={IEEE}}"
+}

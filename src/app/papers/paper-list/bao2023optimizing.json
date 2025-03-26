@@ -1,0 +1,169 @@
+{
+  "title": "Optimizing the Collaboration Structure in Cross-Silo Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Wenxuan Bao",
+    "Haohan Wang",
+    "Jun Wu",
+    "Jingrui He"
+  ],
+  "year": "2023-06",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "coalition",
+    "data heterogeneity"
+  ],
+  "summaries": [
+    "prior to FL, clustering clients with similar data distributions (specifically data distribution distances and data quantities) to minimize the training theoretical bound and avoid training with heterogeneous clients"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "negative transfer problem in FL",
+        [
+          "Negative transfer occurs when the global FL model performs worse than models trained locally due to non-IID (non-independent and identically distributed) data among clients"
+        ],
+        "previous clustering algorithms during training mainly are based on loss values or parameter/gradients similarities, which can reinforce poor initial clusters due to neural networks' non-convexity"
+      ],
+      "__Objective__",
+      [
+        "__prior to FL training, by clustering clients with similar data distributions (specifically data distribution distances and data quantities)__ to alleviate the negative transfer problem:",
+        [
+          "derive a theoretical error bound consisting of [1] an irreducible minimal error term related to the model and data noise; [2] a generalization error term depending on data quantities, and [3] a dataset shift term depending on pairwise distribution distance between clients<ol>",
+          "solve for the optimal collaboration structure by minimizing the error bounds",
+          "train a light-weight client discriminator between each pair of clients to predict which client the labeled data comes from",
+          "design an online efficient optimization method to minimize the error bound",
+          "conduct federated training within each coalition"
+        ]
+      ]
+    ],
+    "Strength & Weakness",
+    [
+      "__Strength__",
+      [
+        "Low Computational Cost: one-time clustering",
+        "Flexible: Works with any FL algorithm"
+      ],
+      "-",
+      "__Weakness__",
+      [
+        "__Static Data Assumption__:",
+        [
+          "FedCollab assumes client data distributions remain stable. If distributions shift during FL, the pre-computed clusters may become suboptimal"
+        ],
+        "__Cold Start Problem__:",
+        [
+          "New clients joining post-clustering require re-estimating distances and potentially retraining coalition models"
+        ],
+
+        "__Assumption of Honest Participation__",
+        [
+          "in the process, the server must know the number of data samples in each client and each client must report important numbers"
+        ]
+      ]
+    ],
+    "Notations",
+    [
+      "$N$: Number of clients, for each client $i$",
+      [
+        "$m_i$: Number of samples",
+        "$\\beta_i$: Data quantity proportion, $\\beta_i = \\frac{m_i}{m}$",
+        "$\\mathcal{D}_i$: True data distribution",
+        "$\\hat{\\mathcal{D}}_i$: Empirical dataset"
+      ],
+      "$m$: Total number of samples across all clients, $m = \\sum\\limits_{i=1}^{N} m_i$"
+    ]
+  ],
+  "techniques": [
+    "Quantity-aware function using VC Dimension",
+    [
+      "Purpose",
+      [
+        "quantifies the _generalization error for a coalition_ introduced by combining data from multiple clients in a coalition"
+      ],
+      "Mathematical Definition",
+      [
+        "$\\phi_{|\\mathcal{H}|}(\\boldsymbol{\\alpha}_i, \\boldsymbol{\\beta}, m, \\delta) = \\sqrt{\\left(\\sum_{j=1}^N \\frac{\\alpha_{ij}^2}{\\beta_j}\\right) \\left(\\frac{2d \\log(2m+2) + \\log(4/\\delta)}{m}\\right)}$",
+        [
+          "$\\alpha_{ij} = \\begin{cases} \\frac{\\beta_j}{\\sum_{l \\in \\mathcal{C}_k} \\beta_l} & \\text{if } j \\in \\mathcal{C}_k, \\\\0 & \\text{otherwise.}\\end{cases}$: Collaboration weight (client $i$'s reliance on client $j$'s data)",
+          "$\\beta_j = \\frac{m_j}{m}$: Relative data quantity of client $j$",
+          "$d$: VC dimension of hypothesis space $\\mathcal{H}$",
+          "$\\delta$: Confidence parameter (typically 0.05)"
+        ]
+      ],
+      "Interpretations",
+      [
+        "$\\phi \\propto \\sqrt{\\sum_{j \\in 𝒞ₖ} \\frac{\\alpha_{ij}^2}{\\beta_j}} = \\sqrt{\\sum_{j \\in 𝒞ₖ} \\frac{(\\beta_j)^2}{(\\sum_{l \\in 𝒞ₖ} \\beta_l)^2 \\beta_j}} = \\sqrt{\\frac{1}{\\sum_{l \\in 𝒞ₖ} \\beta_l}}$",
+        [
+          "Larger coalitions benefit small-$m_i$ clients by compensating for their limited data while ",
+          [
+            "e.g. Total samples $m = 1000$",
+            [
+              "Small client $i$: $m_i = 10$ → $\\beta_i = 0.01$",
+              "Existing coalition $\\mathcal{C}_k$: 5 clients with $\\beta_j = 0.1$ each → $\\sum \\beta_l = 0.5$",
+              [
+                "for client $i$, before join: $\\sqrt{1/0.01}=10$, after join: $\\sqrt{1/(0.5+0.01)}\\approx1.4$",
+                "for existing members in coaliation, before join: $\\sqrt{1/0.5}\\approx 1.41$, after join: $\\sqrt{1/(0.5+0.01)}\\approx1.4$"
+              ]
+            ]
+          ],
+          "__cannot over-relying__ on partners with very small datasets (high $\\frac{\\alpha_{ij}^2}{\\beta_j}$)"
+        ]
+      ]
+    ],
+    "Distribution Difference",
+    [
+      "Purpose",
+      [
+        "$D(\\mathcal{D}_i, \\mathcal{D}_j)$ measures **discrepancy** between clients' data distributions to ensure clients only collaborate if their data is _statistically similar_",
+        "Since raw data cannot be shared, FedCollab estimates $D(\\mathcal{D}_i, \\mathcal{D}_j)$ using a binary classifier (client discriminator $f$)"
+      ],
+      "Steps",
+      [
+        "Train binary classifier $f$ to distinguish $\\mathcal{D}_i$ (label 1) vs $\\mathcal{D}_j$ (label 0)<ol>",
+        [
+          "for client $i$ and $j$, train $f_{ij}$ independently<ol>",
+          [
+            "$i$ will take $\\mathbf{X}_i, \\mathbf{y}_i$ as input and $1$ as output",
+            "$j$ will take $\\mathbf{X}_j, \\mathbf{y}_j$ as input and $0$ as output"
+          ],
+          "both $i$ and $j$ send updates $\\Delta w_i$, $\\Delta w_j$ to server",
+          "server aggregate weights $w_S = w + (\\Delta w_i+\\Delta w_j) /2$, and $f_{ij}=w_S$"
+        ],
+        "Compute balanced accuracy (BalAcc) of $f$ on validation set",
+        [
+          "the server sends updated $f_{ij}$ to $i$ to compute recall",
+          "the server sends updated $f_{ij}$ to $j$ to compute specificity",
+          "$\\text{BalAcc}=\\frac{\\text{recall}+\\text{specificity}}{2}$"
+        ],
+        "Distance is $D(\\mathcal{D}_i, \\mathcal{D}_j) = 2 \\cdot \\text{BalAcc}(f) - 1$"
+      ]
+    ],
+    "The Proposed FedCollab",
+    [
+      "__Core Objectives__",
+      [
+        "For each client $i$, FedCollab aims to minimize its theoretical error bound:",
+        [
+          "$\\epsilon_i(\\hat{h}_{\\boldsymbol{\\alpha}_i}) \\leq \\underbrace{\\epsilon_i(h_i^*)}_\\text{Irreducible error} + \\underbrace{2\\phi_{|\\mathcal{H}|}(\\boldsymbol{\\alpha}_i, \\boldsymbol{\\beta}, m, \\delta)}_\\text{Generalization error} + \\underbrace{2\\sum_{j \\neq i} \\alpha_{ij} D(\\mathcal{D}_i, \\mathcal{D}_j)}_\\text{Dataset shift penalty}$"
+        ],
+        "The FedCollab objective:",
+        [
+          "$\\min\\limits_{A} \\sum\\limits_{i=1}^N \\left( \\frac{C}{\\sqrt{m}} \\sqrt{\\sum\\limits_{j=1}^N \\frac{\\alpha_{ij}^2}{\\beta_j}} + \\sum\\limits_{j \\neq i} \\alpha_{ij} D(\\mathcal{D}_i, \\mathcal{D}_j) \\right)$"
+        ]
+      ],
+      "-",
+      "__Algorithm__",
+      [
+        "We initialize the coalition assignment with local training, i.e., $p(i) = i, \\forall i$",
+        "iteratively assign clients to a new coalition that can further minimize the FEDCOLLAB objective"
+      ]
+    ]
+  ],
+  "doi": "",
+  "id": "bao2023optimizing",
+  "bibtex": "@inproceedings{bao2023optimizing, title={Optimizing the collaboration structure in cross-silo federated learning}, author={Bao, Wenxuan and Wang, Haohan and Wu, Jun and He, Jingrui}, booktitle={International Conference on Machine Learning}, pages={1718--1736}, year={2023}, organization={PMLR}}"
+}

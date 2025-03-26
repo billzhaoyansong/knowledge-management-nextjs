@@ -1,0 +1,120 @@
+{
+  "title": "Coalitional FL: Coalition Formation and Selection in Federated Learning With Heterogeneous Data",
+  "type": "technical",
+  "authors": [
+    "Ning Zhang",
+    "Qian Ma",
+    "Wuxing Mao",
+    "Xu Chen"
+  ],
+  "year": "2023-06",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "reward"
+  ],
+  "summaries": [
+    "prior to FL starting, propose __[1] a devices' coalition formation games by considering EMD-related reward, privacy loss, and energy cost__ and __[2] a selection of coalitions to minimize the group EMD (model accuracy)__"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "Data Heterogeneity in FL"
+      ],
+      "-",
+      "__Objectives__",
+      [
+        "Establish a relationship between data heterogeneity (measured by Earth Mover's Distance, EMD) and model accuracy loss",
+        "Model devices' selfish behaviors as a coalition formation game and analyze Nash stable partitions",
+        "Develop a low-complexity algorithm for the server to select device coalitions that minimize model accuracy loss"
+      ]
+    ],
+    "Notations",
+    [
+      "$ \\mathcal{K} $: Set of devices, with $ |\\mathcal{K}| = K $. for each device $k$",
+      [
+        "$ n_k $: Number of local data samples on device $ k $",
+        "$ d_k $: Earth Mover's Distance (EMD) of device $ k $",
+        "$h_k\\in\\{1,2,...,Z\\}$: the coalition index for $k$ to join, __indenpendent variable__"
+      ],
+      "$\\Pi=\\{s_1,s_2,...,s_Z\\}$: a partition, where $\\bigcup_{z=1}^Z=\\mathcal{K}$ and $s_z\\bigcap s_{z'}=\\emptyset$, for a coalition $\\mathcal{S}$",
+      [
+        "$ D_{\\mathcal{S}} $: Weighted EMD of selected devices or coalitions"
+      ]
+    ],
+    "Key Workflow",
+    [
+      "**Initialization**: Devices compute EMD ($d_k$) and scores ($c_k = 1 - d_k/2$).<ol>",
+      [
+        "$d_k = \\sum\\limits_{i=1}^C |p_k(y=i) - p(y=i)|$",
+        [
+          "$C$: number of classes",
+          "$p_k(y=i)$: Probability of label $i$ in device $k$'s local data",
+          "$p(y=i)$: Probability of label $i$ in __population set__",
+          [
+            "Q: how can $p(y=i)$ is known to $k$? this article assume it is known"
+          ]
+        ]
+      ],
+      "**Coalition Formation**: Devices form coalitions via merge/split/switch (Algorithm 1).",
+      "**Server Selection**: Server picks coalitions to minimize $D_{\\mathcal{S}}$.",
+      "**FL Training**: Selected coalitions train with D2D consensus."
+    ],
+    "Weaknesses",[
+      "Devices share metadata (EMD, data sizes) without formal privacy guarantees",
+      "Requires known/estimated $p(y=i)$, which may be biased or unavailable.",
+      "No adaptation to dynamic data or device churn",
+      "assuming 'no harm to others' in preference decisions, which would not hold in selfish environment",
+      "Oversimplified Rewards by Assuming perfect GEMD measurement and linear reward trade-offs",
+      "Coalition formation complexity is $O(K^3)$ for merge/switch operations; May not scale to ultra-large-scale FL systems (e.g., >10,000 devices)"
+    ]
+  ],
+  "techniques": [
+    "Coalition Formation Game",
+    [
+      "__Settings__",
+      [
+        "Players: the set $\\mathcal{K}$ of devices",
+        "Strategies: each device $k \\in \\mathcal{K}$ decides the device coalition $h_k$ to join.",
+        "Payoff functions: each device $k \\in \\mathcal{K}$ aims to maximize its payoff $P_k(h_k, \\bm{h}_{-k}) = (R_k(h_k, \\bm{h}_{-k}) - V_k(h_k, \\bm{h}_{-k}) - E_k)x_{h_k}$",
+        [
+          "$R_k(h_k, \\bm{h}_{-k})=\\left( \\frac{c_k}{\\sum_{j:h_j=h_k} c_j} \\cdot \\bar{c}_{h_k} \\cdot r \\right)$: reward to $k$ for joining $h_k$",
+          "$V_k(h_k, \\bm{h}_{-k})=(l_{h_k} - 1) c_k \\varepsilon$: privacy loss of device $k$ for joining $h_k$",
+          "$E_k$: energy cost due to model trainings, a constant in this paper"
+        ],
+        "Preference orders:  For device $k \\in \\mathcal{K}$, its **preference order** $\\succeq_k$ over two coalitions $s_z$ and $s_{z'}$ satisfies:",
+        [
+          "Payoff Improvement: $P_k(h_k = z, \\bm{h}_{-k}) \\geq P_k(h_k = z', \\bm{h}_{-k})$, and<ol>",
+          "No Harm to Others: $P_j(h_k = z, \\bm{h}_{-k}) \\geq P_j(h_k = z', \\bm{h}_{-k}), \\quad \\forall j \\in \\mathcal{K} \\text{ with } h_j = z$"
+        ]
+      ],
+      "__Coalition Formation Algorithm__",
+      [
+        "Devices iteratively adjust coalitions via __merge, split, and switch operations__ until reaching a __Nash-stable partition__ (no device can improve its payoff by leaving/joining another coalition).",
+        [
+          "Merge: Coalitions combine if $\\bar{c}_{z_{\\text{merge}}} > \\bar{c}_z + \\bar{c}_{z'}$",
+          "Split: Coalitions divide if subsets improve payoffs",
+          "Switch: Devices move if $\\bar{c}_{z_{\\text{switch}}} > \\bar{c}_{z'} + \\frac{c_k}{\\sum_{j \\in z} c_j}$"
+        ]
+      ]
+    ],
+    "Server Selection of Coalitions",
+    [
+      "The server's goal is to __minimize model accuracy loss (group EMD)__ by selecting an optimal subset of coalitions",
+      "The Optimization Problem",
+      [
+        "$\\min\\limits_{\\bm{x}} D_{\\mathcal{S}}(\\bm{x})=\\sum_{z=1}^Z x_z \\cdot \\frac{\\bar{n}_z \\bar{d}_z}{\\sum_{z'=1}^Z x_{z'} \\bar{n}_{z'}}$",
+        "$\\text{s.t.} \\sum_{z=1}^Z x_z = S, x_z \\in \\{0,1\\}.$",[
+
+          "$S$: Number of coalitions to select (Q: this is predefined?)",
+          "$x_z=1$ if coalition $z$ is selected, else $0$"
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/TMC.2024.3375325",
+  "id": "zhang2024coalitional",
+  "bibtex": "@article{zhang2024coalitional, title={Coalitional FL: Coalition formation and selection in federated learning with heterogeneous data}, author={Zhang, Ning and Ma, Qian and Mao, Wuxing and Chen, Xu}, journal={IEEE Transactions on Mobile Computing}, year={2024}, publisher={IEEE}}"
+}
