@@ -1,0 +1,124 @@
+{
+  "title": "Collaboration Equilibrium in Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Sen Cui",
+    "Jian Liang",
+    "Weishen Pan",
+    "Kun Chen",
+    "Changshui Zhang",
+    "Fei Wang"
+  ],
+  "year": "2022-08",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "coalition"
+  ],
+  "summaries": [
+    "propose to build benefit graph via pareto optimization, and detect coalitions via strongly Connected components from the benefit graph."
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "Collaborating with clients having dissimilar data distributions can degrade model performance due to negative transfer.",
+        "Not all collaborations are beneficial; clients should form coalitions only with those who improve their model utility."
+      ],
+      "__Objectieves__",
+      [
+        "**Define Collaboration Equilibrium (CE)**: A state where no client can improve its model utility by changing its coalition",
+        "**Optimal Coalition Formation**: Identify subsets of clients (coalitions) where collaboration maximizes mutual benefits",
+        "**Algorithmic Framework**: Propose a method to achieve CE using Pareto optimization and graph theory"
+      ]
+    ],
+    "Notations",
+    [
+      "$I = \\{I^i\\}_{i=1}^N$: Set of $N$ clients.",
+      [
+        "$D^i = \\{X^i, Y^i\\}$ | Local data of client $I^i$",
+        "$M^i$: Personalized model for client $I^i$.",
+        "$U(I^i, C)$: Utility of client $I^i$ when collaborating with coalition $C$.",
+        "$U_{max}(I^i, C)$: Maximum achievable utility for $I^i$ over subsets of $C$.",
+        "$C_{I}^{opt}(I^i)$ | Optimal collaborator set for $I^i$."
+      ]
+    ],
+    "Workflow",
+    [
+      "Local Model Training (FL Initialization)<ol>",
+      "Pareto Optimization for Collaborator Selection and Benefit Graph Construction",
+      "Coalition Formation via Strongly Connected Components (SCCs)",
+      [
+        "given the Optimal Collaborator Set (OCS), detect SCCs to form coalitions"
+      ],
+      "Federated Learning Within Coalitions",
+      "Verification of Collaboration Equilibrium (CE)",
+      [
+        "**Inner Agreement**: No subset of clients in a coalition can leave and form a smaller coalition without harming at least one member.",
+        "**Outer Agreement**: No client can join another coalition to improve its utility without reducing others' utilities."
+      ]
+    ],
+    "Weakness",
+    [
+      "**Scalability**:  The method may struggle with large-scale networks due to the combinatorial complexity of coalition formation",
+      "**Hypernetwork Training**: Training $HN(d)$ requires significant computational resources",
+      "**Threshold Sensitivity**: The collaborator selection depends on a sparsity threshold $\\epsilon$, which may need tuning",
+      "**Dynamic Environments**: Assumes static data distributions; may not handle evolving client data well"
+    ]
+  ],
+  "techniques": [
+    "Key Concepts",
+    [
+      "**Pareto Dominance**: A solution $h_1$ dominates another solution $h_2$ if",
+      [
+        "$h_1$ is at least as good as $h_2$ in all objectives, and",
+        "$h_1$ is strictly better in at least one objective.",
+        [
+          "Mathematically, $\\forall i: l_i(h_1) \\leq l_i(h_2), \\quad \\exists j: l_j(h_1) < l_j(h_2)$"
+        ]
+      ],
+      "**Pareto Front (PF)**: The set of all non-dominated solutions, representing the best possible trade-offs between objectives.",
+      [
+        "$P(C) = \\{ h \\in \\mathcal{H} \\mid \\nexists h' \\text{ that dominates } h \\}$"
+      ],
+      "**Pareto Optimality**: A solution $h^*$ is Pareto optimal if no other solution improves one objective without worsening another."
+    ],
+    "Pareto Optimization for Collaborator Selection",
+    [
+      "Define Multi-Objective Loss<ol>",
+      [
+        "Each client $I^i$ has its own loss function $l_i$. The goal is to minimize a weighted combination of all losses:",
+        [
+          "$L(h, \\mathbf{d}) = \\sum_{i=1}^N d^i l_i(h), \\quad \\text{where } \\sum_{i=1}^N d^i = 1$"
+        ]
+      ],
+      "Hypernetwork for Pareto Front Learning",
+      [
+        "A hypernetwork $HN(\\mathbf{d})$ generates model parameters for any given $\\mathbf{d}$: $M = HN(\\mathbf{d})$",
+        [
+          "$HN$ is a neural network trained to output model weights",
+          "Each $\\mathbf{d}$ corresponds to a different Pareto-optimal model"
+        ]
+      ],
+      "Finding the Best Model for Each Client",
+      [
+        "For client $I^i$, we search for the best $\\mathbf{d}^*$ that minimizes its validation loss:",
+        [
+          "$\\mathbf{d}^* = \\arg \\min_{\\mathbf{d}} l_i(HN(\\mathbf{d})).$"
+        ]
+      ],
+      "Constructing the Benefit Graph",
+      [
+        "If $d^{j} > \\epsilon$ (threshold), then $I^j$ is a necessary collaborator for $I^i$",
+        "Defines edges in the benefit graph $BG(I)$",
+        [
+          "$I^j \\rightarrow I^i \\iff I^j \\in C_{I}^{opt}(I^i).$"
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1145/3534678.3539237",
+  "id": "cui2022collaboration",
+  "bibtex": "@inproceedings{cui2022collaboration, title={Collaboration equilibrium in federated learning}, author={Cui, Sen and Liang, Jian and Pan, Weishen and Chen, Kun and Zhang, Changshui and Wang, Fei}, booktitle={Proceedings of the 28th ACM SIGKDD conference on knowledge discovery and data mining}, pages={241--251}, year={2022}}"
+}

@@ -3,6 +3,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkMath from 'remark-math';
 import remarkRehype from 'remark-rehype';
+import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify'
 import CopyIcon from '../components/copy-icon';
@@ -14,6 +15,7 @@ import './paper-card.css'
 
 export const unifiedProcessor = unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkMath)
     .use(remarkRehype)
     .use(rehypeKatex)
@@ -160,12 +162,7 @@ const PaperCard = async ({
 
 
     // render the first line of the summary to show on the card
-    const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await unified()
-        .use(remarkParse)
-        .use(remarkMath)
-        .use(remarkRehype)
-        .use(rehypeKatex)
-        .use(rehypeStringify)
+    const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await unifiedProcessor
         .process(paper.summaries[0]) : "";
 
     return <div className="2xl:basis-1/4 xl:basis-1/2 md:basis-full">

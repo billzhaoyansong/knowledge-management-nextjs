@@ -1,0 +1,136 @@
+{
+  "title": "Coalitional Federated Learning: Improving Communication and Training on Non-IID Data With Selfish Clients",
+  "type": "technical",
+  "authors": [
+    "Sarhad Arisdakessian",
+    "Omar Abdel Wahab",
+    "Azzam Mourad",
+    "Hadi Otrok"
+  ],
+  "year": "2022-08",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "coalition",
+    "hierarchical"
+  ],
+  "summaries": [
+    "in a web of IoT, propose [1] coalitions formation mechanism by leveraging trust among devices and considering the resource utilizations, and [2] 2-stage aggregation FL"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "**Non-IID data distribution** across clients due to heterogeneous local data",
+        "**Communication bottleneck** from frequent model exchanges between server and clients",
+        "**Selfish clients** that seek to obtain global models without fully contributing to training"
+      ],
+      "-",
+      "__Objective__",
+      [
+        "Mitigate non-IID data effects through coalition-level data sharing",
+        "Reduce communication overhead via local aggregations within coalitions",
+        "Detect and minimize participation of selfish clients using trust mechanisms",
+        "Form stable coalitions of trustworthy clients for more effective FL"
+      ]
+    ],
+    "Notations",
+    [
+      "$G=(I,E,Trust)$: a directed network graph to model the IoT network",
+      [
+        "$I = \\{1...n\\}$: Set of IoT devices (clients)",
+        [
+          "$Trust(i, j)$: Trust value from device $i$ to $j$"
+        ]
+      ]
+    ],
+    "Workflow",
+    [
+      "Trust Establishment Phase<ol>",
+      "Coalition Formation Phase",
+      "Coalition Master Election",
+      "Federated Training Phase"
+    ],
+    "Weakness",[
+      "Non-iid problem is address by sharing a ratio of random data?",
+      "trust values never update in the whole process?",
+      "no mechanisms to incentivize devices to contribute"
+    ]
+  ],
+  "techniques": [
+    "Trust Establishment Phase",
+    [
+      "**Subjective Trust (Algorithm 1):**",
+      [
+        "The system builds a web of trust recommendations",
+        "Each device queries its neighbors about others' behavior, creating a trust propagation network.",
+        [
+          "$Rec_i = \\frac{1}{n}\\sum\\limits_{j=1}^n Trust(j, i)$",
+          [
+            "$n$: the number of recommending devices."
+          ]
+        ]
+      ],
+      "**Objective Trust (Algorithm 2):**",
+      [
+        "Tracks CPU, RAM, and bandwidth usage over time by computing percentiles for each resource $r \\in R$<ol>",
+        [
+          "$Q1_r = 25^{th}$ percentile",
+          "$Q3_r = 75^{th}$ percentile",
+          "$IQR_r = Q3 - Q1$",
+          "$LL_r = Q1 - 1.5 \\times IQR$ (Lower Limit)"
+        ],
+        "$d_{i,r} = \\max(0, LL_r - u_{i,r})/LL_r$: deviation score for each resource $r$",
+        [
+          "$u_{i,r}$ is device $i$'s utilization of resource $r$"
+        ],
+        "$\\tau_i = 1 - \\frac{1}{|R|}\\sum\\limits_{r \\in R} w_r \\cdot d_{i,r}$: objective trust",
+        [
+          "$w_r$ is the weight for resource $r$ (normalized: $\\sum w_r = 1$)"
+        ]
+      ],
+      "**Bayesian Aggregation (Equation 1):**",
+      [
+        "The final trust score",
+        [
+          "$Trust_i = \\frac{n\\tau_i + Rec_i}{2n}$"
+        ]
+      ]
+    ],
+    "Coalition Formation Phase",
+    [
+      "**Hedonic Game Formulation:**",
+      [
+        "Devices seek to maximize sum of trust scores within a coalition as their respective utility",
+        [
+          "$U_i(C) = \\sum_{j \\in C} Trust_j^i$"
+        ]
+      ],
+      "**Preference Function**",
+      [
+        "$P_i(C) = \\begin{cases} - \\infty, & \\text{if selfish members exist} \\\\ 0, & \\text{if } C \\in history \\\\ U_i(C), & \\text{otherwise} \\end{cases}$"
+      ]
+    ],
+    "Coalition Master Election",
+    [
+      "Each coalition elects a leader responsible for coordination and communication.",
+      [
+        "$Score(CMS_i) = \\sum_{r \\in R} w_r \\times r_i$"
+      ],
+      "Key Responsibilities:",[
+        "Model Aggregation: Performs weighted averaging of member models: $w_{coalition} = \\frac{1}{|C|}\\sum_{i \\in C} w_i$",
+        "Data Sharing: Distributes $\\alpha\\%$ of coalition data with members to mitigate non-IID effects (Q????)"
+      ]
+    ],
+    "Federated Training Phase",
+    [
+      "Local Training Process<ol>",
+      "Local Aggregation at Coalition Masters",
+      "Global Aggregation At Server"
+    ]
+  ],
+  "doi": "10.1109/TSC.2023.3246988",
+  "id": "arisdakessian2023coalitional",
+  "bibtex": "@article{arisdakessian2023coalitional, title={Coalitional federated learning: Improving communication and training on non-iid data with selfish clients}, author={Arisdakessian, Sarhad and Wahab, Omar Abdel and Mourad, Azzam and Otrok, Hadi}, journal={IEEE Transactions on Services Computing}, volume={16}, number={4}, pages={2462--2476}, year={2023}, publisher={IEEE}}"
+}

@@ -1,0 +1,143 @@
+{
+  "title": "Cohort-based federated learning services for industrial collaboration on the edge",
+  "type": "technical",
+  "authors": [
+    "Thomas Hiessl",
+    "Safoura Rezapour Lakani",
+    "Jana Kemnitz",
+    "Daniel Schall",
+    "Stefan Schulte"
+  ],
+  "year": "2021-09",
+  "labels": [
+    "federated learning",
+    "k-means",
+    "coalition",
+    "collaboration",
+    "data heterogeneity",
+    "industrial"
+  ],
+  "summaries": [
+    "to address data heterogeneity industrial FL collaboration , propose to form cohorts(coalitions) of clients via k-means; and within each cohort the clients share similar data distributions"
+  ],
+  "systemModel": [
+    "Problems & Motivations",
+    [
+      "__Problems__",
+      [
+        "**Non-IID Data Challenges**: Industrial environments exhibit heterogeneous data distributions (feature and label skew), which degrade FL performance.",
+        "**Client Autonomy**: Industrial clients need control over collaboration partners, model selection, and on-demand participation in FL rounds."
+      ],
+      "**Objectives**",
+      [
+        "**Design an FL System for Industry**: Propose a cohort-based Industrial FL system (IFL) tailored for industrial clients, addressing non-IID data and client autonomy.",
+        "**Improve Model Performance**: Mitigate non-IID data issues by organizing clients into cohorts **with similar data distributions.**"
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$1$ Server",
+      "$t_i=(a^{t_i}, m^{t_i}, crit^{t_i}, cb^{t_i}, alg^{t_i}) \\in T$: a task submitted by client $c_i$",
+      [
+        "$a^{t_i}\\in A$: the asset managed by $c_i$ (e.g. concrete heating pump)",
+        [
+          "$type(a^{t_i})$: asset type (e.g. a centrifugal pump)",
+          [
+            "$u(type(a))$: data scheme by asset type"
+          ]
+        ],
+        "$m^{t_i}\\in M$: model",
+        "$crit^{t_i}\\in CRIT$: federateion criteria",
+        "$cb{t_i}\\in CB$: cohort-building method",
+        "$alg^{t_i}\\in ALG$: FL algorithm for aggregating model weights"
+      ],
+      "$T = A\\times M \\times CRIT \\times CB \\times ALG$: the set of tasks",
+      [
+        "$p \\subseteq T$: a set of tasks with same asset type $type^p$, $m^p$, $alg^p$, $cb^p$",
+        [
+          "$coh \\subseteq p$: a **cohort**, which is a set of tasks with similar data distributions",
+          "$COH^p=\\{ coh^p_1, coh^p_2,...\\}$: the set of all cohorts of population $p$",
+          [
+            "$coh^p_j \\bigcap coh^p_k = \\emptyset, \\forall j\\neq k$"
+          ]
+        ]
+      ]
+    ],
+    "Workflow",
+    [
+      "**Task Submission**<ol>",
+      [
+        "Clients submit tasks $t_i$ to the IFL Server"
+      ],
+      "**Population and Cohort Building**",
+      [
+        "Tasks are grouped into populations $p$ based on shared configurations",
+        "Cohorts $coh_j$ are formed within populations using clustering (e.g., k-means) on statistical moments of $X$ or $y$:",
+        [
+          "For feature skew: $r = (mean(X^{t_i}), var(X^{t_i}), skew(X^{t_i}), kurt(X^{t_i}))$.",
+          "For label skew: $r = (mean(y^{t_i}), var(y^{t_i}), skew(y^{t_i}), kurt(y^{t_i}))$."
+        ]
+      ],
+      "**FL Execution**",
+      "**Validation and Deployment**"
+    ],
+    "Weaknesses",
+    [
+      "**Truthful Report**: the server requests each client to truthful report individual asset and its statistics, such as the mean, variance, skewnewss, and kurtosis of the target data $y$",
+      "**Cold Start Problem**: The system requires a minimum number of clients to form cohorts, which may delay initial FL rounds.",
+      "**Static Cohorts**: Cohorts are fixed during FL execution; dynamic reorganization is not supported.",
+      "**Resource Intensive**: Clustering and FL processes may strain edge devices with limited compute power."
+    ]
+  ],
+  "techniques": [
+    "Population Formation",
+    [
+      "Algorithmic Steps:",
+      [
+        "When a new task $t_i$ is submitted, the server checks existing populations $P$.<ol>",
+        "If a matching population $p$ exists, $t_i$ is added to $p$.",
+        "Else, a new population $p_{\\text{new}} = \\{t_i\\}$ is created and added to $P$."
+      ]
+    ],
+    "Cohort Building",
+    [
+      "Algorithmic Steps:",
+      [
+        "Feature Matrix Construction<ol>",
+        [
+          "For each task $t_i \\in p$, compute $r$ and assemble into matrix $F$ (size $n \\times m$, where $n = |p|$, $m = \\text{features}$)",
+          [
+            "Input Distribution Skew (Feature Skew): Clusters clients based on statistical moments of input data $X^{t_i}$",
+            [
+              "$r = \\left( \\text{mean}(X^{t_i}),\\text{var}(X^{t_i}), \\text{skew}(X^{t_i}), \\text{kurt}(X^{t_i}) \\right).$"
+            ],
+            "Label Distribution Skew (Target Skew): Clusters clients based on label statistics of $y^{t_i}$",
+            [
+              "$r = \\left( \\text{mean}(y^{t_i}), \\text{var}(y^{t_i}), \\text{skew}(y^{t_i}), \\text{kurt}(y^{t_i}) \\right).$"
+            ]
+          ]
+        ],
+        "Feature Selection",
+        [
+          "Remove low-variance features (noise reduction): $\\text{if } \\text{std}(f) < \\epsilon \\text{, remove feature } f \\text{ from } F.$"
+        ],
+        "Clustering",
+        [
+          "Apply **k-means** on $F$ to partition tasks into cohorts",
+          [
+            "**Optimal $k$**: Determined via the **elbow method** (maximizing silhouette score)",
+            [
+              "$s(i) = \\frac{b(i) - a(i)}{\\max(a(i), b(i))},$: Silhouette score $s(i)$ for task $i$",
+              [
+                "$a(i)$ = mean intra-cluster distance, $b(i)$ = mean nearest-cluster distance"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1016/j.jpdc.2022.04.021",
+  "id": "hiessl2022cohort",
+  "bibtex": "@article{hiessl2022cohort,title={Cohort-based federated learning services for industrial collaboration on the edge}, author={Hiessl, Thomas and Lakani, Safoura Rezapour and Kemnitz, Jana and Schall, Daniel and Schulte, Stefan}, journal={Journal of Parallel and Distributed Computing}, volume={167}, pages={64--76}, year={2022}, publisher={Elsevier}}"
+}

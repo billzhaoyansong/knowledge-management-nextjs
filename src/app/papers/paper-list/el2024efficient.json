@@ -1,0 +1,88 @@
+{
+  "title": "Efficient Collaborations through Weight-Driven Coalition Dynamics in Federated Learning Systems",
+  "type": "technical",
+  "authors": [
+    "Mohammed El Hanjri",
+    "Hamza Reguieg",
+    "Adil Attiaoui",
+    "Amine Abouaomar",
+    "Abdellatif Kobbane",
+    "Mohamed El Kamili"
+  ],
+  "year": "2024-01",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "coalition"
+  ],
+  "summaries": [
+    "to tackle non-IID data distributions among IoT devices, propose a coalition formation mechanism based on similarity between model weights and a 2-step aaggregation"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "IoT devices exhibit diverse computational capabilities and non-IID data distributions",
+        "Reducing bandwidth usage by __forming coalitions of devices with similar model weights__ minimizes redundant updates",
+        "Coalition formation aims to enhance global model performance by aggregating updates from homogeneous subgroups"
+      ],
+      "__Objectieves__",
+      [
+        "**Group devices based on Euclidean distance between model weights** to create homogeneous clusters",
+        "**Use barycenters to average updates within coalitions**, improving the global model's robustness"
+      ]
+    ],
+    "Notations",
+    [
+      " $ U $: Set of devices (users) participating in FL, for each device $i$",
+      [
+        "$ \\omega_i $: Model weights of device $ i $.",
+        "$d(\\omega_i, \\omega_j) $: Euclidean distance between weights of devices $ i $ and $ j $"
+      ],
+      "for each coalition $C_j$",
+      [
+        "$ b_j $: Barycenter (average weights) of coalition $ C_j $",
+        " $ v_j^r $: Center device of coalition $ C_j $ at round $ r $"
+      ]
+    ],
+    "Workflow",
+    [
+      "**Initialization**<ol>",
+      [
+        "Select a subset of devices $ U $ and initialize empty coalitions $ C_j $.",
+        "Randomly choose initial coalition centers $ v_j^0 $ with non-zero weight distances."
+      ],
+      "**Device Assignment**",
+      [
+        "For each device $ u_i $, compute Euclidean distances to all coalition centers.",
+        "Assign $ u_i $ to the nearest coalition $ C_j $ based on $\\min d(\\omega_i, \\omega_{v_j})$"
+      ],
+      "**Barycenter Calculation (Intra-Coalition Aggregation)**",
+      [
+        "Compute the barycenter $ b_j $ for each coalition $ C_j $",
+        [
+          "$b_j = \\frac{1}{|C_j|} \\sum_{u_i \\in C_j} \\omega_i$"
+        ],
+        "Update the coalition center $ v_j $ to the device closest to $ b_j $."
+      ],
+      "**Global Aggregation**",
+      [
+        "Average the barycenters of all coalitions to update the global model",
+        "$\\theta^{(r)} = \\frac{1}{3} \\sum_{j=1}^3 b_j$"
+      ],
+      "**Local Training**",
+      [
+        "Devices perform local training using the global model $ \\theta^{(r)} $ and submit updated weights $ \\omega_i $"
+      ],
+      "**Iteration**",
+      [
+        "Repeat steps 2–5 for multiple rounds until convergence."
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/ICC51166.2024.10623064",
+  "id": "el2024efficient",
+  "bibtex": "@inproceedings{el2024efficient, title={Efficient Collaborations through Weight-Driven Coalition Dynamics in Federated Learning Systems}, author={El Hanjri, Mohammed and Reguieg, Hamza and Attiaoui, Adil and Abouaomar, Amine and Kobbane, Abdellatif and El Kamili, Mohamed}, booktitle={ICC 2024-IEEE International Conference on Communications}, pages={3482--3487}, year={2024}, organization={IEEE}}"
+}

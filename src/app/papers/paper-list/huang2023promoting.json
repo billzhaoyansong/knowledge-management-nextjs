@@ -1,6 +1,6 @@
 {
   "title": "Promoting Collaboration in Cross-Silo Federated Learning: Challenges and Opportunities",
-  "type": "technical",
+  "type": "Survey",
   "authors": [
     "Chao Huang",
     "Ming Tang",
@@ -13,7 +13,8 @@
     "collaboration",
     "game theory",
     "auction",
-    "reward"
+    "reward",
+    "survey"
   ],
   "summaries": [
     "model and analyze the free-rider problem, business competition problem, and long-term collaboration problem, through an auction-based incentive mechanism, a revenue-sharing scheme, and a subgame perfect nash equilibrium in cross-silo FL"

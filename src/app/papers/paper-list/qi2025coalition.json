@@ -1,0 +1,159 @@
+{
+  "title": "Coalition Formation for Heterogeneous Federated Learning Enabled Channel Estimation in RIS-assisted Cell-free MIMO",
+  "type": "technical",
+  "authors": [
+    "Nan Qi",
+    "Haoxuan Liu",
+    "Theodoros A. Tsiftsis",
+    "Alexandros-Apostolos A. Boulogeorgos",
+    "Fuhui Zhou",
+    "Shi Jin",
+    "Qihui Wu"
+  ],
+  "year": "2025-02",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "coalition"
+  ],
+  "summaries": [
+    "proposes a coalition-formation-guided FL approach for channel estimation in RIS-assisted cell-free MIMO systems, where coalitions are formed by leveraging DRF (Qmix) to balance accuracy and efficiency"
+  ],
+  "systemModel": [
+    "Problems & Objectives",
+    [
+      "__Problems__",
+      [
+        "As one of the most powerful 5G technologies, multiple-input multipleoutput (MIMO) comprised of multiple multi-antenna base stations (BSs) serving multiple users within a designated area",
+        "reconfigurable intelligent surface/intelligent reflection surfaces (RISs / IRSs), which can manipulate electromagnetic parameters like phase, amplitude, frequency, and polarization to create a favorable wireless communication environment, have been integrated into MIMO to increase communication rates greatly",
+        "Existing FL approaches use predefined groups, which may reduce channel estimation accuracy due to heterogeneous channel conditions."
+      ],
+      "__Objectieves__",
+      [
+        "proposes a coalition-formation-guided heterogeneous FL approach for channel estimation in RIS-assisted cell-free MIMO systems",
+        [
+          "Optimize FL user grouping via coalition formation games to improve channel estimation accuracy",
+          "Reduce local model size for resource-constrained devices while maintaining privacy",
+          "Accelerate FL convergence using distance and RSRP similarity metrics",
+          "Enable autonomous user coalition decisions via distributed DRL (Qmix)."
+        ]
+      ]
+    ],
+    "Notations",
+    [
+      "A central server",
+      [
+        "$W_g$: the global model",
+        [
+          "$W_g$ is decomposed into the shared part $W_g^1$ and distillation part $W_g^2$"
+        ],
+        "$W_f$: a small NN distilled from $W_g$ and broadcast to local users",
+        [
+          "$W_f$ is composed of $W_f^1$ and $W_f^2$",
+          "the structure of $W_f^1$ is identical to $W_g^1$ but with different parameters"
+        ]
+      ],
+      "$K$ Users",
+      [
+        "$W_l$: the local model composed of the shared part $W_l^1$ and the distillation part $W_l^2$"
+      ]
+    ],
+    "Workflow",
+    [
+      "**Initialization**<ol>",
+      [
+        "UEs collect local channel data",
+        "Initialize DNN models and FL parameters"
+      ],
+      "**Iterative FL Process** (repeated each epoch)",
+      [
+        "**Dynamic Coalition Update**<ol>",
+        [
+          "Each UE independently optimizes its coalition membership via Qmix DRL based on channel estimation performance, forming self-organizing groups that balance accuracy and efficiency"
+        ],
+        "**Per-Iteration Transfer Learning**",
+        [
+          "to reduces training epochs by leveraging prior knowledge from similar users."
+        ],
+        "**Local Training**: Within each coalition:",
+        [
+          "[Each UE] Trains local DNNs to minimize",
+          [
+            "$\\min_\\omega L(\\omega) = \\frac{1}{D_k}\\sum_{D_k} \\|f_\\omega(y_k) - h_k\\|^2$"
+          ]
+        ],
+        "**Federated Aggregation**",
+        [
+          "[Central Nodes] Aggregate models using weighted average",
+          [
+            "$\\omega_{t+1} = \\omega_t - \\eta_t \\sum_{m\\in\\mathcal{M}_t} \\left(\\frac{\\alpha_m}{\\sum_i \\alpha_i}\\right) g(\\omega^l_{m,t})$"
+          ]
+        ],
+        "**Model Distillation**",
+        [
+          "[Central Nodes] Distill global model $W_g$ to $W_f$:",
+          [
+            "$W_f = \\text{distill}(W_g)$"
+          ]
+        ]
+      ],
+      "**Convergence Check**",
+      [
+        "Evaluate channel estimation accuracy (NMSE)",
+        "Repeat FL rounds until convergence or max epochs reached"
+      ]
+    ]
+  ],
+  "techniques": [
+    "Dynamic Coalition Update",
+    [
+      "[UEs] Evaluate current coalition performance via NMSE:",
+      [
+        "$\\text{NMSE}_{S_j} = \\frac{1}{|S_j|}\\sum_{k\\in S_j} \\frac{\\|\\hat{h}_k - h_k\\|^2}{\\|h_k\\|^2}$",
+        [
+          "$S_j$: Current coalition being evaluated",
+          "$\\hat{h}_k$: Estimated channel for UE $k$",
+          "$h_k$: True channel for UE $k$"
+        ]
+      ],
+      "[QMix distributed across UEs] Updates groupings using utility:",
+      [
+        "$U(S_j) = A - \\sum_{p=1}^P e_{j,p}$",
+        [
+          "$A$: Base utility constant",
+          "$e_{j,p}$: Error metric for parameter $p$ in coalition $j$",
+          "$P$: Total number of error metrics"
+        ],
+        "Considers channel correlation changes",
+        "Accounts for device capability variations",
+        "Optimizes for estimation accuracy and efficiency"
+      ],
+      "[Each UE] Independently decides to join/leave coalitions via Qmix",
+      [
+        "$Q_{tot} = f_{mix}(Q_1,...,Q_K)$",
+        [
+          "$Q_{tot}$: Joint action-value",
+          "$Q_k$: Individual Q-value for UE $k$",
+          "$f_{mix}$: Qmix mixing network function"
+        ]
+      ]
+    ],
+    "Per-Iteration Transfer Learning",
+    [
+      "[Central Nodes] Re-initialize models using RSRP+Dis weights",
+      "$\\alpha''_m = \\begin{cases} (1 - \\frac{|P_m - P_{center}|}{2\\Delta})\\alpha'_m, & \\text{if } P_{center} - \\Delta < P_m < P_{center} + \\Delta \\\\ 0, & \\text{otherwise} \\end{cases}$",
+      [
+        "$\\alpha''_m$: Final weight for UE $m$",
+        "$P_m$: Received signal power for UE $m$",
+        "$P_{center}$: Center of power range",
+        "$\\Delta$: Power range width",
+        "$\\alpha'_m = \\max(1 - L_m/L, 0)$: Base weight",
+        "$L_m$: Distance of UE $m$ to BS",
+        "$L$: Maximum considered distance"
+      ]
+    ]
+  ],
+  "doi": "arXiv:2502.05538v1",
+  "id": "qi2025coalition",
+  "bibtex": "@article{qi2025coalition, title={Coalition Formation for Heterogeneous Federated Learning Enabled Channel Estimation in RIS-assisted Cell-free MIMO}, author={Qi, Nan and Liu, Haoxuan and Tsiftsis, Theodoros A and Boulogeorgos, Alexandros-Apostolos A and Zhou, hui and Jin, Shi and Wu, Qihui}, journal={arXiv preprint arXiv:2502.05538}, year={2025}}"
+}
