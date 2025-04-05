@@ -1,0 +1,122 @@
+{
+  "title": "Realizing the Heterogeneity: A Self-Organized Federated Learning Framework for IoT",
+  "type": "technical",
+  "authors": [
+    "Junjie Pang",
+    "Yan Huang",
+    "Zhenzhen Xie",
+    "Qilong Han",
+    "Zhipeng Cai"
+  ],
+  "year": "2020-05",
+  "labels": [
+    "federated learning",
+    "data heterogeneity",
+    "reinforcement learning",
+    "collaboration",
+    "coalition"
+  ],
+  "summaries": [
+    "to address negative transfer problem brought by data heterogeneity, propose a RL-based aggregation mechanism and the associated grand coalition formation mechanism to filter out non-contributed clients"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Heterogeneity in Federated Learning (FL)**: Traditional FL treats all clients equally, potentially sacrificing the performance of the majority to accommodate minority clients with low-quality or non-IID data.",
+        "**Fairness vs. Performance**: Existing fairness mechanisms in FL fail to account for the varying utility of client data, leading to suboptimal global models."
+      ],
+      "**Objectives**",
+      [
+        "**Recognize Heterogeneity**: Develop an FL framework that dynamically identifies and adapts to client heterogeneity (data quality, quantity, distribution).",
+        "**Optimize Collaboration Plans**: Use Reinforcement Learning (RL) to iteratively adjust client weights, forming coalitions where clients mutually benefit.",
+        "**Block Data Poisoning**: Mitigate the impact of malicious clients by reducing their influence in the global model aggregation."
+      ]
+    ],
+    "Notations",
+    [
+      "$C = \\{c_1, c_2, \\dots, c_n\\}$: Set of $n$ clients",
+      [
+        "$g_{\\text{local}}(c_i)$: performance gain when train by the local raw data",
+        "$g_{\\text{avg}} = \\frac{1}{|C|} \\sum_{c_i \\in C} g_{\\text{local}}(c_i)$: Baseline performance gain"
+      ],
+      "$p_i = \\{w^1, w^2, \\dots, w^n\\}$: Collaboration plan (weight allocation) for the $i$-th iteration.",
+      [
+        "$g_{p_i}(c_i)$: Performance gain of client $c_i$ under plan $p_i$",
+        "$u_{p_i}$: Coalition under the collaboration plan (weight allocation)",
+        [
+          "$c_i \\in u_{p_i}$ when $g_{p_i}(c_i) > g_{\\text{avg}}$"
+        ],
+        "$G(p_i) = \\frac{1}{|u_{p_i}|} \\sum_{c_j \\in u_{p_i}} g_{p_i}(c_j)$: Performance gain of coalition $u_{p_i}$"
+      ]
+    ],
+    "Assumptions",
+    [
+      "**Client Feedback**: Clients provide accurate feedback (e.g., local model accuracy) without violating privacy",
+      "**Malicious Clients**: A minority of clients may submit poisoned data or low-quality updates."
+    ],
+    "Workflow",
+    [
+      "**Initialization**<ol>",
+      [
+        "Server trains an initial global model on public data.  ",
+        "Clients download the global model."
+      ],
+      "**Local Training**",
+      [
+        "Each client $c_i$ trains the model on its local data, producing updated parameters $L_i$."
+      ],
+      "**Feedback and Aggregation**",
+      [
+        "Clients upload $L_i$ and a **rating feedback** (local accuracy) to the server.  (used to calculate performance gain)",
+        "Server uses RL (C-DDPG) to adjust weights $w^i$ based on feedback, maximizing $G(p_i)$.",
+        [
+          "$u_{p_i}$: Coalition under the collaboration plan (weight allocation)",
+          [
+            "$c_i \\in u_{p_i}$ when $g_{p_i}(c_i) > g_{\\text{avg}}$"
+          ]
+        ]
+      ],
+      "**Global Model Update**",
+      [
+        "Server aggregates weighted updates: $L_{\\text{aggreg}} = \\sum_{i=1}^n w^i L_i$.  ",
+        "New global model $G_{\\text{new}}$ is broadcast to clients."
+      ],
+      "**Iteration**",
+      [
+        "Steps 2–4 repeat until convergence or a stable coalition $u_{p_i}$ is formed.  ",
+        "Clients outside $u_{p_i}$ may leave the federation and **join another one (another coalition)**."
+      ]
+    ],
+    "Weaknesses",
+    [
+      "**Feedback Reliability**: Assumes honest client feedback; adversarial feedback could disrupt coalition formation.",
+      "**Computational Overhead**: RL-based aggregation is more complex than FedAvg, requiring additional resources.",
+      "**Dynamic Environments**: Assumes static data distributions; performance may degrade with rapid client data changes.",
+      "**Multiple Coalitions**: The framework struggles when multiple disjoint coalitions exist (future work)."
+    ]
+  ],
+  "techniques": [
+    "Reinforcement Learning (C-DDPG)",
+    [
+      "**States $S$**: Current collaboration plan $p_i$.",
+      "**Actions $A$**: Weight adjustments $\\Delta w^i$ for each client.",
+      "**Reward $r_k$**: Performance gap between coalition and non-coalition clients:  ",
+      [
+        "$r_k = g_C^k - g_U^k, \\quad \\text{where} \\quad g_C^k = \\frac{\\sum_{c_i \\in C^k} g_{p_i}(c_i)}{|C^k|}, \\quad g_U^k = \\frac{\\sum_{c_i \\in U^k} g_{p_i}(c_i)}{|U^k|}.$"
+      ],
+      "**Actor-Critic Networks**",
+      [
+        "**Actor**: Generates actions (weight changes) via policy $\\pi(s|\\theta^\\pi)$",
+        "**Critic**: Evaluates actions using $Q(s, a|\\theta^Q)$, updated via Bellman equation:",
+        [
+          "$Q(s_t, a_t) = r_t + \\gamma Q(s_{t+1}, \\pi(s_{t+1})).$"
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/JIOT.2020.3007662",
+  "id": "pang2020realizing",
+  "bibtex": "@article{pang2020realizing, title={Realizing the heterogeneity: A self-organized federated learning framework for IoT}, author={Pang, Junjie and Huang, Yan and Xie, Zhenzhen and Han, Qilong and Cai, Zhipeng}, journal={IEEE Internet of Things Journal}, volume={8}, number={5}, pages={3088--3098}, year={2020}, publisher={IEEE}}"
+}

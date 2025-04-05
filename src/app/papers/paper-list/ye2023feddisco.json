@@ -1,0 +1,26 @@
+{
+  "title": "FedDisco: Federated Learning with Discrepancy-Aware Collaboration",
+  "type": "technical",
+  "authors": [
+    "Rui Ye",
+    "Mingkai Xu",
+    "Jianyu Wang",
+    "Chenxin Xu",
+    "Siheng Chen",
+    "Yanfeng Wang"
+  ],
+  "year": "2023-01",
+  "labels": [
+    "federated learning",
+    "data heterogeneity",
+    "aggregation"
+  ],
+  "summaries": [
+    "to address the challenge of category distribution heterogeneity and the associated problem of unrobust global model,  leverages **both dataset size and discrepancy levels to determine aggregation weights**"
+  ],
+  "systemModel": [],
+  "techniques": [],
+  "doi": "",
+  "id": "ye2023feddisco",
+  "bibtex": "@inproceedings{ye2023feddisco, title={Feddisco: Federated learning with discrepancy-aware collaboration}, author={Ye, Rui and Xu, Mingkai and Wang, Jianyu and Xu, Chenxin and Chen, Siheng and Wang, Yanfeng}, booktitle={International Conference on Machine Learning}, pages={39879--39902}, year={2023}, organization={PMLR}}"
+}

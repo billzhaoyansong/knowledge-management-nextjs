@@ -1,0 +1,125 @@
+{
+  "title": "Personalized Federated Learning with Inferred Collaboration Graphs",
+  "type": "technical",
+  "authors": [
+    "Rui Ye",
+    "Zhenyang Ni",
+    "Fangzhao Wu",
+    "Siheng Chen",
+    "Yanfeng Wang"
+  ],
+  "year": "2023-01",
+  "labels": [
+    "federated learning",
+    "data heterogeneity",
+    "security",
+    "collaboration"
+  ],
+  "summaries": [
+    "to promote collaboration with clients of similar data distributions, construct a collaboration graph based on model similarities on the server, and generate different version of aggregated models for each clients; furthermore, as malicious clients can be dissimilar with others, its weights can be very small"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Data Heterogeneity**: Traditional FL methods struggle with diverse data distributions across clients, leading to suboptimal global models.",
+        "**Malicious Clients**: Existing methods lack mechanisms to filter out harmful collaborators, compromising model integrity.",
+        "**Fine-Grained Collaboration**: Prior work does not adaptively determine collaboration intensity between clients, limiting flexibility"
+      ],
+      "**Objectives**",
+      [
+        "**Learn a Collaboration Graph**: Model pairwise collaboration benefits to guide personalized model training",
+        "**Adapt to Heterogeneity**: Automatically adjust collaboration based on data distribution similarity.",
+        "**Robustness**: Mitigate the impact of malicious clients by inferring beneficial collaborations."
+      ]
+    ],
+    "Notations",
+    [
+      "$K$ clients, for each client $c_i$",
+      [
+        "$\\mathcal{D}_i$ of size $n_i$"
+      ],
+      "$\\mathcal{G}(\\mathcal{V}, W)$: Collaboration Graph",
+      [
+        "$\\mathcal{V} = \\{c_1, \\dots, c_K\\}$: nodes",
+        "$W \\in \\mathbb{R}^{K \\times K}$: adjacency matrix, $W_{ij}$ = collaboration strength"
+      ]
+    ],
+    "Main Workflow",
+    [
+      "**1. Server Initialization (Round 0)**",
+      [
+        "The server initializes a **global model** (e.g., random weights or pre-trained model).",
+        "**Broadcast**: The server sends this initial model to all clients."
+      ],
+      "**2. Client-Side Local Training (Per Round)**",
+      [
+        "Each client $c_i$ performs the following",
+        [
+          "**Receives Aggregated Model**<ol>",
+          [
+            "The server sends client $c_i$ its **personalized aggregated model** $\\tilde{\\theta}_i$",
+            "Optionally, the server may also send a **normalized version** $\\hat{\\theta}_i = \\sum_j W_{ij} \\frac{\\theta_j}{\\|\\theta_j\\|}$ for regularization."
+          ],
+          "**Local Model Initialization** ",
+          [
+            "Client $c_i$ initializes its local model $\\theta_i$ using $\\tilde{\\theta}_i$"
+          ],
+          "**Local Optimization**",
+          "**Upload Model to Server**",
+          [
+            "Client $c_i$ sends its updated $\\theta_i$ back to the server"
+          ]
+        ]
+      ],
+      "**3. Server-Side Aggregation & Graph Update (Per Round)**",
+      [
+        "**Collects All Client Models**<ol>",
+        [
+          "Receives $\\{\\theta_1, \\theta_2, \\dots, \\theta_K\\}$ from all clients."
+        ],
+        "**Computes Pairwise Model Similarities**",
+        [
+          "Constructs a **similarity matrix** $S$",
+          [
+            "$S_{ij} = \\cos(\\theta_i, \\theta_j) = \\left\\langle \\frac{\\theta_i}{\\|\\theta_i\\|}, \\frac{\\theta_j}{\\|\\theta_j\\|} \\right\\rangle.$"
+          ],
+          "**Efficiency Trick**: Computes similarity only on the **last few layers** (e.g., fully connected layers) to reduce computation.",
+          "Malicious Models Are Dissimilar to Benign Models, so **malicious clients are automatically downweighted** in the following collaboration graph"
+        ],
+        "**Updates Collaboration Graph $W$**",
+        [
+          "Solves the following **quadratic program** for each client",
+          [
+            "$\\min_{\\{W_{ij}\\}_j} \\sum_j (W_{ij} - p_j)^2 - \\alpha \\sum_j W_{ij} S_{ij}$, s.t.",
+            [
+              "$\\sum_j W_{ij} = 1$",
+              "$W_{ij} \\geq 0$",
+              [
+                "$p_j = n_j / \\sum_{j'} n_{j'}$: dataset size weighting",
+                "$\\alpha$: Hyperparameter balancing similarity vs. dataset size."
+              ]
+            ]
+          ]
+        ],
+        "**Computes Aggregated Models for Next Round**",
+        [
+          "$\\tilde{\\theta}_i = \\sum_j W_{ij} \\theta_j$ and optionally, $\\hat{\\theta}_i = \\sum_j W_{ij} \\frac{\\theta_j}{\\|\\theta_j\\|}$"
+        ],
+        "**Broadcasts Aggregated Models**",
+        [
+          "Sends each client its personalized $\\tilde{\\theta}_i$ (and optionally $\\hat{\\theta}_i$)"
+        ]
+      ],
+      "**4. Repeat Until Convergence**",
+      [
+        "The process repeats for multiple **communication rounds** until models stabilize."
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "",
+  "id": "ye2023personalized",
+  "bibtex": "@inproceedings{ye2023personalized, title={Personalized federated learning with inferred collaboration graphs}, author={Ye, Rui and Ni, Zhenyang and Wu, Fangzhao and Chen, Siheng and Wang, Yanfeng}, booktitle={International Conference on Machine Learning}, pages={39801--39817}, year={2023}, organization={PMLR}}"
+}
