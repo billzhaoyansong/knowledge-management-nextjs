@@ -1,0 +1,88 @@
+{
+  "title": "Personalized Cross-Silo Federated Learning on Non-IID Data",
+  "type": "technical",
+  "authors": [
+    "Yutao Huang",
+    "Lingyang Chu",
+    "Zirui Zhou",
+    "Lanjun Wang",
+    "Jiangchuan Liu",
+    "Jian Pei",
+    "Yong Zhang"
+  ],
+  "year": "2021-05",
+  "labels": [
+    "federated learning",
+    "collaboration"
+  ],
+  "summaries": [
+    "to facilitate collaborate with clients with similar data distributions, propose to aggregate personalized client models on the server based on the gradient similarities"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Non-IID Data Challenge**: Traditional federated learning (FL) assumes IID data across clients, but real-world data is often non-IID, leading to poor performance of global models.",
+        "**Global Model Limitation**: A single global model may not fit all clients due to diverse data distributions, necessitating personalized approaches.",
+        "**Pairwise Collaboration**: Clients with similar data distributions can benefit more from collaborating directly, rather than through a global model."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Personalized Federated Learning**: Train personalized models for each client while preserving privacy.",
+        "**Facilitate Pairwise Collaboration**: Enable clients with similar data to collaborate more effectively."
+      ]
+    ],
+    "Players and Notations",
+    [
+      "$C_1, \\ldots, C_m$: Clients, for each client $C_i$",
+      [
+        "$D_i$: private data",
+        "$M(w_i)$: personalized model"
+      ],
+      "$1$ Server",
+      [
+        "$u_i$: the personalized cloud model for each client $i$ and maintained on the server",
+        "$A(\\|w_i - w_j\\|^2)=1 - e^{-\\|w_i - w_j\\|^2 / \\sigma}, \\quad \\sigma > 0$: Attention-inducing function measuring similarity between $w_i$ and $w_j$",
+        [
+          "**Monotonicity**: $A$ increases with $\\|w_i - w_j\\|^2$",
+          "**Concavity**: $A$ is concave on $[0, \\infty)$.",
+          "**Smoothness**: $A$ is differentiable, with finite $\\lim_{t \\to 0^+} A'(t)$.",
+          "**Normalization**: $ A(0) = 0 $."
+        ],
+        "$\\xi_{i,j}$: Weight for message passing from $C_j$ to $C_i$"
+      ]
+    ],
+    "Workflow",
+    [
+      "**Initialization**: Randomly initialize $w_i^0$ for each client.<ol>",
+      "**Iterative Process** (for $k = 1$ to $K$):",
+      [
+        "**Server Computes Cloud Models**:<ol>",
+        [
+          "Collects $w_i^{k-1}$ from clients",
+          "Computes $u_i^k = \\sum_{j=1}^m \\xi_{i,j} w_j^{k-1}$",
+          [
+            "$\\xi_{i,j}$ is derived from $A'(\\|w_i - w_j\\|^2)$",
+            "**Pairwise Collaboration** is achieved by adjusting $\\xi_{i,j}$ to prioritize similar clients"
+          ]
+        ],
+        "**Clients Update Local Models**:",
+        [
+          "Each client $C_i$ requests $u_i^k$ from the server.",
+          "Updates $w_i^k = \\arg\\min_w F_i(w) + \\frac{\\lambda}{2\\alpha_k} \\|w - u_i^k\\|^2$"
+        ]
+      ],
+      "**Termination**: After $K$ iterations, return final models $w_i^K$."
+    ],
+    "Weaknesses",
+    [
+      "**Scalability Issue**: For $m$ clients, computing $\\xi_{i,j}$ requires $O(m^2)$ pairwise similarities. The overhead is repeated in every communication round, exacerbating the problem"
+    ]
+  ],
+  "techniques": [],
+  "doi": "",
+  "id": "huang2021personalized",
+  "bibtex": "@inproceedings{huang2021personalized, title={Personalized cross-silo federated learning on non-iid data}, author={Huang, Yutao and Chu, Lingyang and Zhou, Zirui and Wang, Lanjun and Liu, Jiangchuan and Pei, Jian and Zhang, Yong}, booktitle={Proceedings of the AAAI conference on artificial intelligence}, volume={35}, number={9}, pages={7865--7873}, year={2021}}"
+}

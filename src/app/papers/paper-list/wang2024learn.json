@@ -1,0 +1,114 @@
+{
+  "title": "Learn to Collaborate in MEC: An Adaptive Decentralized Federated Learning Framework",
+  "type": "technical",
+  "authors": [
+    "Yatong Wang",
+    "Zhongyi Wen",
+    "Yunjie Li",
+    "Bin Cao"
+  ],
+  "year": "2023-12",
+  "labels": [
+    "federated learning",
+    "MEC",
+    "RL",
+    "collaboration",
+    "decentralized"
+  ],
+  "summaries": [
+    "to improve learning efficiencies in FL MEC, propose a decentralized FL framework by [1] optimizing local training decisions and [2] resource scheduling decisions to improve the accuracy for each node"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Heterogeneity**: Nodes in MEC systems have skewed datasets (Non-IID) and uneven computational/communication capabilities, leading to inefficiencies in conventional FL.",
+        "**Dynamic Environments**: Wireless networks are dynamic due to node mobility and time-varying channels, making static collaboration strategies inflexible.",
+        "**Scalability**: Centralized FL (CFL) suffers from single-point failures and bottlenecks, while decentralized FL (DFL) offers robustness and scalability."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Efficiency Maximization**: Improve the learning efficiency of DFL in MEC by optimizing collaboration strategies.",
+        "**Adaptability**: Design adaptive strategies to handle dynamic network conditions and node heterogeneity",
+        "**Resource Optimization**: Jointly optimize local training and resource scheduling to reduce costs (e.g., communication, computation)."
+      ]
+    ],
+    "Players and Notations",
+    [
+      "$\\mathcal{V}=\\{1,...,i,...,|\\mathcal{V}|\\}$: Set of collaborating nodes (e.g., edge devices, base stations).",
+      [
+        "$\\mathcal{N}_i$: Set of one-hop neighbors of node $i$.",
+        "$\\mathcal{D}_i$: Local dataset of node $i$, with size $|\\mathcal{D}_i|$.",
+        "$\\omega_{i,j}(k)$: Binary indicator: 1 if node $i$ requests model from neighbor $j$ at iteration $k$."
+      ]
+    ],
+    "Workflow (Each FL Iteration)",
+    [
+      "**Adaptive Collaboration Strategy for FL Iteration $k$**<ol>",
+      [
+        "Based on individual current state, each node decide",
+        [
+          "whether to perform local training, ",
+          "how many resource blocks (RBs) to allocate to neighbors for model transmission"
+        ]
+      ],
+      "**Customized Local Training**",
+      [
+        "Each node $i$ decides whether to train locally ($\\omega_{i,0}(k) = 1$) based on its strategy.",
+        "If training: Samples a batch, computes gradient $\\Delta\\theta_i(k)$, updates model via SGD:",
+        [
+          "$\\theta_i\\left(k + \\frac{1}{2}\\right) = \\theta_i(k) - \\omega_{i,0}(k)\\beta \\Delta\\theta_i(k).$"
+        ],
+        "**Objective Addressed**: Resource efficiency by skipping unnecessary training."
+      ],
+      "**Selected Model Gossiping**",
+      [
+        "Node $i$ requests models from neighbors $j \\in \\mathcal{N}_i$ if $\\omega_{i,j}(k) = 1$.",
+        "Transmission rate $V_{i,j}(k)$ depends on allocated RBs and power (Eq. 9).",
+        "**Objective Addressed**: Dynamic collaboration by adapting to channel conditions."
+      ],
+      "**Flexible Model Aggregation**",
+      [
+        "Node $i$ aggregates local and received models",
+        [
+          "$\\theta_i(k+1) = \\rho_i(k)\\theta_i\\left(k + \\frac{1}{2}\\right) + \\sum_{j \\in \\mathcal{N}_i} \\frac{(1-\\rho_i(k))\\omega_{i,j}(k)}{\\sum_{j \\in \\mathcal{N}_i} \\omega_{i,j}(k)}\\theta_j\\left(k + \\frac{1}{2}\\right).$"
+        ]
+      ]
+    ],
+    "Weaknesses",[
+      "**Overhead**: Frequent policy updates require additional computation."
+    ]
+  ],
+  "techniques": [
+    "Adaptive Collaboration Strategy",
+    [
+      "**State Observation**<ol>",
+      [
+        "At the start of iteration $k$, each node $i$ observes its current state $\\bm{s}(k)=[acc_i(k), C_i^{mem}(k),C_i^{core}(k),N_i(k),P_i^{max}(k)]_{i\\in \\mathcal{V}}$",
+        [
+          "$acc_i(k)$: accuracy of node $i$ at iteration step $k$",
+          "$C_i^{mem}(k),C_i^{core}(k)$: computational capability of node $i$",
+          "$N_i(k)$: available number of RBs",
+          "$P_i^{max}(k)]_{i\\in \\mathcal{V}}$: maximum transmit power of node $i$"
+        ],
+        "The state is updated dynamically based on mobility, channel conditions, and resource availability"
+      ],
+      "**Strategy Execution**",
+      [
+        "**Decentralized Training Strategy ($\\pi_i^\\Omega$)**: Node $i$ decides whether to perform local training ($\\omega_{i,0}(k) = 1$) or skip it ($\\omega_{i,0}(k) = 0$)",
+        "**Resource Scheduling Strategy ($\\pi_i^\\omega$)**: Node $i$ allocates RBs ($a_{i,j}(k)$) to neighbors for model transmission."
+      ],
+      "**Model Updates**",[
+        "Decisions are applied in **Customized Local Training**, **Selected Model Gossiping**, and **Aggregation**"
+      ],
+      "**Feedback Loop**",[
+        "The reward $R_i(k) = \\frac{\\text{acc}_i(\\theta_i(k)) - \\text{acc}_i(\\theta_i(k-1))}{\\tau_i(k)}$ is computed post-iteration."
+      ]
+    ]
+  ],
+  "doi": "10.1109/TMC.2024.3439588",
+  "id": "wang2024learn",
+  "bibtex": "@article{wang2024learn, title={Learn to Collaborate in MEC: An Adaptive Decentralized Federated Learning Framework}, author={Wang, Yatong and Li, Yunjie and Cao, Bin and others}, journal={IEEE Transactions on Mobile Computing}, year={2024}, publisher={IEEE}}"
+}

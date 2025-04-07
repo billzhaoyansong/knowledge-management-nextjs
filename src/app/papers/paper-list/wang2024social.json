@@ -1,0 +1,152 @@
+{
+  "title": "Social-Aware Clustered Federated Learning With Customized Privacy Preservation",
+  "type": "technical",
+  "authors": [
+    "Yuntao Wang",
+    "Zhou Su",
+    "Yanghe Pan",
+    "Tom H. Luan",
+    "Ruidong Li",
+    "Shui Yu"
+  ],
+  "year": "2022-12",
+  "labels": [
+    "federated learning",
+    "free rider",
+    "social network",
+    "collaboration",
+    "coalition",
+    "game theory"
+  ],
+  "summaries": [
+    "by leveraging social trust, propose a FL formation game in which clients more likely to join the cluster where (1) it has higher trust with the cluster head, (2) it has more trusted  cluster members, (3) it involves less communication overhead"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Social Trust Exploitation**: Leveraging social connections among users can enhance privacy without sacrificing utility by forming trusted clusters."
+      ],
+      "**Objectives**",
+      [
+        "**Dynamic Social Clustering**: Form stable clusters of mutually trusted users to improve privacy and utility.",
+        "**Fair Revenue Allocation**: Quantify contributions and prevent free-riding within clusters.",
+        "**Distributed Convergence**: Achieve Nash-stable cluster partitions via game-theoretic approaches."
+      ]
+    ],
+    "Notations",
+    [
+      "$\\mathcal{N}$: users",
+      [
+        " $\\alpha_{n,m}= \\omega e_{n,m} + (1-\\omega)\\tau_{n,m} \\in [0,1]$: Trust degree between $n$ and $m$",
+        [
+          "$e_{n,m} \\in [0,1]$: Social closeness between users $n$ and $m$.",
+          "$\\tau_{n,m}$ is indirect trust (Eq. 6)."
+        ],
+        "$\\Theta_n^k$: Local model of user $n$ at round $k$ (Eq. 1).  ",
+        "$\\widetilde{\\Theta}_n^k$: Noised model with Gaussian noise $\\mathbb{G}(0, \\sigma^2 S^2)$"
+      ],
+      "$\\Phi = \\{\\Phi_1,...,\\Phi_J\\}$: a partition structure which divides $\\mathcal{N}$ into mutually disjoint clusters",
+      [
+        "$\\mathcal{S} \\in \\Phi$ or $\\Phi_j \\in \\Phi$: a social cluster",
+        [
+          "$\\phi_j$: cluster head for the cluster $\\Phi_j$",
+          "$\\mathcal{V}(\\mathcal{S})$ or $\\mathcal{V}(\\Phi_j) = \\begin{cases} \\lambda_p \\sum_{n \\in \\Phi_j} q_n - \\lambda_c |\\Phi_j|, & \\text{if } |\\Phi_j| > 1, \\\\ \\lambda_p \\hat{q}_n, & \\text{if } |\\Phi_j| = 1. \\end{cases}$: Federal utility of cluster $\\Phi_j$",
+          [
+            "$q_n = -\\kappa_1 \\mathcal{L}_n + \\kappa_2$: quality of local model (QoLM) of user $n$ in the cluster",[
+              "$\\mathcal{L}_n = \\frac{\\mu_1 \\exp(-\\mu_2 \\gamma)}{\\mu_3 + \\exp(-\\mu_4 \\sigma_{n,j})} + \\mu_5$"
+            ]
+          ]
+        ],
+        "$\\psi_n(\\mathcal{S})$ or $\\psi_n(\\Phi_j)=\\underbrace{\\varpi_{n,j} \\left(\\mathcal{V}(\\Phi_j) - \\sum_{l \\in \\Phi_j} \\mathcal{V}(\\{l\\}) - \\varsigma\\right)}_{\\text{Extra revenue from cooperation}} + \\underbrace{\\mathcal{V}(\\{n\\})}_{\\text{Solo payoff}}$: Individual payoff that joins the cluster $\\Phi_j$",
+        " $\\epsilon_{n,j}= \\theta_1 \\cdot \\frac{\\alpha_{n,j}}{\\alpha_{n,j} + \\theta_2}$: Privacy budget",
+        [
+          "$\\alpha_{n,j}$: social trust degree between the user $n$ with the cluster head $\\phi_j$"
+        ]
+      ]
+    ],
+    "Main Workflow (For Each FL Iteration)",
+    [
+      "**Social Trust Evaluation**<ol>",
+      [
+        "Global Trust: $\\alpha_{n,j} = \\omega e_{n,m} + (1 - \\omega)\\tau_{n,m}.$",
+        [
+          "$e_{n,m} = \\max\\left\\{\\frac{\\sum_{b=1}^{K_{n,m}^P} \\Gamma_b - \\nu \\sum_{b=1}^{K_{n,m}^N} \\Gamma_b}{K_{n,m}^P + K_{n,m}^N}, 0\\right\\}$",
+          [
+            "$\\Gamma_b = \\exp(-\\xi(t - t_b))$"
+          ],
+          "$\\tau_{n,m} = \\prod_{l,k \\in \\mathcal{P}_{n,m}, l \\to k} e_{l,k}.$"
+        ]
+      ],
+      "**Cluster Formation**:",
+      [
+        "Users join/leave clusters via Algorithm 1 (two-sided matching).  ",
+        "Nash-stable partitions are achieved (Theorem 2).  "
+      ],
+      "**Local Training**:",
+      [
+        "Users train models $\\Theta_n^k$ via SGD (Eq. 1).",
+        "**High-Trust Clusters ($\\alpha_{n,j} \\geq \\alpha_{th}$)**: share raw data",
+        "**Low-Trust Clusters ($0 < \\alpha_{n,j} < \\alpha_{th}$)**: add LDP noise"
+      ],
+      "**Intra-Cluster Aggregation**:  ",
+      [
+        "Cluster heads aggregate models (Eq. 2–3)."
+      ],
+      "**Global Aggregation**:",
+      [
+        "Cloud combines cluster outputs (Eq. 4). "
+      ]
+    ]
+  ],
+  "techniques": [
+    "Cluster Formation",
+    [
+      "**1. Evaluate Payoffs for All Options**",
+      [
+        "For each candidate cluster $\\Phi_j$ (including working alone), user $n$ calculates:",
+        [
+          "**Payoff if Joining $\\Phi_j$**",
+          [
+            "$\\psi_n(\\Phi_j) = \\underbrace{\\varpi_{n,j} \\left(\\mathcal{V}(\\Phi_j) - \\sum_{l \\in \\Phi_j} \\mathcal{V}(\\{l\\}) - \\varsigma\\right)}_{\\text{Extra revenue from cooperation}} + \\underbrace{\\mathcal{V}(\\{n\\})}_{\\text{Solo payoff}}.$",
+            [
+              "$\\varpi_{n,j}=\\frac{q_n}{\\sum_{l \\in \\Phi_j} q_l}$: weight of user $n$'s contribution in $\\Phi_j$",
+              "$\\mathcal{V}(\\Phi_j) = \\begin{cases} \\lambda_p \\sum_{n \\in \\Phi_j} q_n - \\lambda_c |\\Phi_j|, & \\text{if } |\\Phi_j| > 1, \\\\ \\lambda_p \\hat{q}_n, & \\text{if } |\\Phi_j| = 1. \\end{cases}$: federal utility",
+              [
+                "$\\lambda_p$: task publisher’s unit payment per model quality",
+                "$\\lambda_c$: unit communication overhead in proportional with the coalition size"
+              ],
+              "$\\varsigma$: additional reward to the cluster head"
+            ]
+          ],
+          "**Payoff if Working Alone**",
+          [
+            "$\\psi_n(\\{n\\}) = \\lambda_p \\hat{q}_n$"
+          ]
+        ]
+      ],
+      "**2. Determine Transferable Clusters**",[
+        "User $n$ identifies clusters where their payoff **increases**: ",[
+          "$C^{\\text{cluster}}_{n,t} = \\left\\{\\Phi_j \\mid \\psi_n(\\Phi_j \\cup \\{n\\}) \\geq \\psi_n(\\text{current cluster})\\right\\}$"
+        ]
+      ],
+      "**3. Send Transfer Request**",
+      [
+        "User $n$ requests to join the **top-preferred cluster** $\\Phi_j^* \\in C^{\\text{cluster}}_{n,t}$"
+      ],
+      "**4. Cluster Admission Decision**",[
+        "Cluster $\\Phi_j$ admits the user $n^*$ who **maximizes cluster utility**:",[
+          "$n^* = \\arg\\max_{n \\in \\mathcal{C}^{\\text{user}}_{\\Phi_j,t}} \\left(\\mathcal{V}(\\Phi_j \\cup \\{n\\}) - \\mathcal{V}(\\Phi_j)\\right)$"
+        ]
+      ],
+      "**5. Update Cluster Membership**",[
+        "**If admitted $n$ over $m$ ($\\alpha_{n,j} > \\alpha_{m,j}$ and $\\psi_n(\\Phi_j\\bigcup \\{n\\}) > \\psi_m(\\Phi_j\\bigcup \\{m\\})$)**: User $n$ joins $\\Phi_j$ and updates its upload strategy",
+        "**If rejected**: $n$ stays in the current cluster or works alone"
+      ]
+    ]
+  ],
+  "doi": "10.1109/TNET.2024.3379439",
+  "id": "wang2024social",
+  "bibtex": "@article{wang2024social, title={Social-aware clustered federated learning with customized privacy preservation}, author={Wang, Yuntao and Su, Zhou and Pan, Yanghe and Luan, Tom H and Li, Ruidong and Yu, Shui}, journal={IEEE/ACM Transactions on Networking}, year={2024}, publisher={IEEE}}"
+}

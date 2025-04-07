@@ -1,0 +1,189 @@
+{
+  "title": "RCFL: Redundancy-Aware Collaborative Federated Learning in Vehicular Networks",
+  "type": "technical",
+  "authors": [
+    "Yilong Hui",
+    "Jie Hu",
+    "Nan Cheng",
+    "Gaosheng Zhao",
+    "Rui Chen",
+    "Tom H. Luan"
+  ],
+  "year": "2023-02",
+  "labels": [
+    "federated learning",
+    "IoV",
+    "data heterogeneity",
+    "data redundancy",
+    "coalition",
+    "collaboration",
+    "game theory",
+    "EMD"
+  ],
+  "summaries": [
+    "to address decay in global model by data heterogeneity and redundancy in IoV FL, propose a framework for vehicles to form coalitions based on EMD and RoD to ensure that [1] data distribution within each coalition is aligned with global data distribution [2] redundant data distributions are penalized"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "Motivations",
+      [
+        "**Data Heterogeneity in Vehicular Networks (VNets):** The data collected by Vehicle Nodes (VNs) is non-IID and redundant due to varying locations and data collection methods, which negatively impacts federated learning (FL) model accuracy.",
+        "**Lack of Cooperation Among VNs:** Existing FL schemes assume VNs train models independently, ignoring potential benefits of collaboration to enhance data importance and model accuracy.",
+        "**Resource and Time Constraints:** VNs have diverse computational resources and data volumes, leading to inefficiencies in FL due to synchronization delays caused by slower nodes."
+      ],
+      "-",
+      "Objectives",
+      [
+        "**Improve Model Accuracy:** By designing a redundancy-aware collaborative FL (RCFL) scheme that evaluates data importance (IoD) and optimizes VN cooperation.",
+        "**Enhance Data Importance:** Develop a model to quantify IoD by integrating non-IID degree and redundancy of data (RoD).",
+        "**Optimize Resource Utilization:** Group VNs with similar training times to reduce synchronization delays and improve FL efficiency."
+      ]
+    ],
+    "Players and Associated Notations",
+    [
+      "**Task Requesters (TRs):**",
+      [
+        "Request learning tasks to be executed by VNs (e.g. VN themselves, organizations, or departments)",
+        "$\\mathbb{J}=\\{1,...,j,...,J\\}$: the set of the learning tasks"
+      ],
+      "**Edge Server:**  ",
+      [
+        "Manages FL tasks, aggregates model parameters, and broadcasts global models. "
+      ],
+      "**CBSs**",
+      [
+        "connected to the edge server through high-speed wired connection"
+      ],
+      "**Vehicle Nodes (VNs):**",
+      [
+        "$\\mathbb{I}=\\{1,...,i,...,I\\}$: Set of VNs",
+        [
+          "$D_i^j$: Dataset of VN $i$ for task $j$",
+          "$t_i^{cmp}$: Computation time for VN $i$ (formula: $t_i^{cmp} = \\frac{c_i |D_i^j|}{\\phi_i}$)"
+        ]
+      ],
+      "**Coalitions:** ",
+      [
+        "$\\mathbb{S}=\\{S_1,...,S_m,...,S_M\\}$: set of coalition",
+        [
+          "$V_{S_m}^j$: IoD of coalition $S_m$ (formula: $V_{S_m}^j = \\alpha^j (-\\log(\\rho_B^j B_{S_m}^j + \\varpi_B^j) + a^j) + \\vartheta^j (-\\log(\\rho_R^j R_{S_m}^j + \\varpi_R^j) + b^j)$)."
+        ]
+      ]
+    ],
+    "Assumptions",
+    [
+      "**Non-IID and Redundant Data:** Data across VNs is heterogeneous and may contain redundancies.",
+      "**Free Flow Traffic Model:** VNs move at constant speeds and directions within the coverage of the edge server.",
+      "**Stable Communication:** VNs remain within the coverage area long enough to complete FL tasks."
+    ],
+    "Workflow",
+    [
+      "**Task Initialization:**<ol>",
+      [
+        "TRs submit learning tasks to the edge server.",
+        "Edge server broadcasts task details to VNs."
+      ],
+      "**VN Participation:** ",
+      [
+        "VNs decide to participate based on their data and resources.",
+        "VNs send training capability information ($\\Gamma_i^j$) to the edge server, including",
+        [
+          "set of labels",
+          "number of data of each label",
+          "hash value of a data sample",
+          "computation time for a local iteration"
+        ]
+      ],
+      "**Coalition Formation:**",
+      [
+        "Edge server evaluates IoD and forms coalitions",
+        "VNs collaborate to maximize IoD"
+      ],
+      "**Grouping by Training Time:**",
+      [
+        "VNs are grouped based on similar training times to reduce synchronization delays ??"
+      ],
+      "**FL Iterative Training Rounds:**",
+      [
+        "**Local Training:** VNs train models locally and send updates to coalition leaders. ",
+        "**Intra/Inter-Group Aggregation:** Coalition leaders aggregate updates within or across groups",
+        "**Global Aggregation:** Edge server aggregates coalition updates to form the global model"
+      ]
+    ],
+    "Weaknesses",
+    [
+      "**Communication Overhead:**: Frequent coalition updates require extra signaling.",
+      "Exposure of individual data information",
+      "**Mobility Sensitivity:**  If VNs move too quickly, coalitions may break before FL completes.",
+      "Possible Divergence: "
+    ]
+  ],
+  "techniques": [
+    "Coalition Formation",
+    [
+      "**Step 1: Initialization**",
+      [
+        "Each VN starts in its own coalition: $\\mathbb{S} = \\{\\{1\\}, \\{2\\}, \\dots, \\{I\\}\\}$"
+      ],
+      "**Step 2: Candidate Coalition Sequence ($SQ_i$)**",
+      [
+        "Each VN $i$ evaluates potential coalitions to join based on:",
+        [
+          "Transmission distance constraint:",
+          [
+            "$ |\\sigma_i - \\sigma_{i'}| \\leq \\theta, \\quad \\text{(ensuring reliable communication)}$",
+            [
+              "$\\sigma_i$ = position of VN $i$, $\\theta$ = maximum allowed distance."
+            ]
+          ],
+          "**Coalition condition:**",
+          [
+            "A VN $i$ joins $S_{m'}$ only if it increases the **total IoD** of the system.",
+            [
+              "$V_{S_m}^j = \\alpha^j (-\\log(\\rho_B^j B_{S_m}^j + \\varpi_B^j) + a^j) + \\vartheta^j (-\\log(\\rho_R^j R_{S_m}^j + \\varpi_R^j) + b^j)$",
+              [
+                "$B_{S_m}^j = \\sum\\limits_{l^j \\in L^j} \\left\\| p_{S_m}(l^j) - p(l^j) \\right\\|$: The **EMD** measures the **non-IID degree** of data distribution in a coalition $S_m$. It compares the label distribution of the coalition with the global distribution",
+                [
+                  "$L^j$: Set of all possible labels for task $j$",
+                  "$p_{S_m}(l^j)$: Distribution of label $ l^j $ in coalition $ S_m $",
+                  "$p(l^j)$ = Global distribution of label $l^j$"
+                ],
+                "$R_{S_m}^j=1 - \\frac{|\\mathbb{D}_{S_m}^*|}{\\sum_{i \\in S_m} |D_i^j|}$: Redundancy of data, ROD (measured via **pHash hashing**).",[
+                  "$\\mathbb{D}_{S_m}^*$: **Non-redundant dataset** of coalition $S_m$",
+                  "$|\\mathbb{D}_{S_m}^*|$: Number of unique data samples in $S_m$",
+                  "$\\sum_{i \\in S_m} |D_i^j|$: Total data samples in $S_m$"
+                ],
+                "$\\alpha^j, \\vartheta^j$ = Weights balancing EMD and RoD contributions."
+              ]
+            ]
+          ]
+        ]
+      ],
+      "**Step 3: VN Decision Making**",
+      [
+        "A VN $i$ in coalition $S_m$ evaluates three cases:",
+        [
+          "**Case 1 (No Better Coalition):**",
+          [
+            "If no $S_{m'} \\in SQ_i$ improves $V_{\\mathbb{S}}^j$, VN $i$ stays in $S_m$."
+          ],
+          "**Case 2 (Single Better Coalition):**",
+          [
+            "If only one $S_{m'}$ increases $V_{\\mathbb{S}}^j$, VN $i$ switches to $S_{m'}$."
+          ],
+          "**Case 3 (Multiple Better Coalitions):**",
+          [
+            "If multiple coalitions improve $V_{\\mathbb{S}}^j$, VN $i$ joins the one maximizing:",
+            [
+              "$S_{m'} = \\argmax\\limits_{S_{m'} \\in S_{\\text{temp}}} \\left( \\sum_{i \\in \\mathbb{I}} V_i^j \\right).$"
+            ]
+          ]
+        ]
+      ]
+    ]
+  ],
+  "doi": "10.1109/TITS.2023.3336823",
+  "id": "hui2023rcfl",
+  "bibtex": "@article{hui2023rcfl, title={RCFL: Redundancy-aware collaborative federated learning in vehicular networks}, author={Hui, Yilong and Hu, Jie and Cheng, Nan and Zhao, Gaosheng and Chen, Rui and Luan, Tom H and Aldubaikhy, Khalid}, journal={IEEE Transactions on Intelligent Transportation Systems}, volume={25}, number={6}, pages={5539--5553}, year={2023}, publisher={IEEE}}"
+}
