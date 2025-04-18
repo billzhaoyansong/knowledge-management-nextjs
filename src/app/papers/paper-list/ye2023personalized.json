@@ -21,6 +21,7 @@
   "systemModel": [
     "Motivations & Objectives",
     [
+      "https://chat.deepseek.com/a/chat/s/efe0b35a-d5e0-4023-8182-b68d945672c1",
       "**Motivations**",
       [
         "**Data Heterogeneity**: Traditional FL methods struggle with diverse data distributions across clients, leading to suboptimal global models.",

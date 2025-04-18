@@ -13,7 +13,9 @@
     "federated learning",
     "grouping",
     "social network",
-    "edge computing"
+    "edge computing",
+    "collaboration",
+    "coalition"
   ],
   "summaries": [
     "in the FL social network, propose __a socially-aware framework for edge networks__ in which [1] devices are clustered by considering edge betweenness, social similarity, and physical distance, and [2] loss function is minimized by optimizing clustering, resource allocation, and relative local accuracy",
@@ -21,7 +23,61 @@
     "in this framework, an optimization problem is formulated for minimizing the customized loss function by optimizing clustering, resource allocation, and relative local accuracy",
     "the problem is decomposed into 3 sub-problems which are solved iteratively"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Privacy Leakage in FL**: Centralized aggregation servers in FL can infer sensitive information from local model updates, compromising privacy.",
+        "**Resource Constraints**: High device density in 6G networks demands efficient communication resource allocation for FL.",
+        "**Robustness Issues**: Centralized servers are vulnerable to physical damage or cyberattacks, disrupting FL processes.",
+        "**Channel Uncertainties**: Wireless FL performance degrades due to packet error rates (PER) and signal-to-interference-plus-noise ratio (SINR)."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Privacy Preservation**: Enhance privacy by decentralizing aggregation via socially-aware clustering.",
+        "**Resource Efficiency**: Optimize communication resource allocation to support massive device participation.",
+        "**Robustness**: Ensure FL continuity by distributing aggregation across multiple cluster heads",
+        "**Performance Optimization**: Minimize the global FL loss function by jointly optimizing clustering, resource allocation, and local accuracy."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$\\overline{\\mathcal{N}}$: Set of all devices (total $\\overline{N}$).",
+      [
+        "$\\theta_n$: Relative local accuracy of device $n$ (lower $\\theta_n$ implies higher local accuracy)."
+      ],
+      "$\\mathcal{M}$: Set of cluster heads (total $M$). ",
+      [
+        "$x_n^m$: Binary clustering variable (1 if device $n$ is assigned to cluster $m$).  ",
+        "$y_{n,m}^r$: Binary resource allocation variable (1 if resource block $r$ is assigned to device $n$ in cluster $m$)."
+      ],
+      "$\\mathcal{G} = (\\mathcal{D}, \\mathcal{E}, \\mathcal{S})$: Social graph with vertices $\\mathcal{D}$, edges $\\mathcal{E}$, and weights $\\mathcal{S}$. ",
+      [
+        "the weight of edges $\\mathcal{S}$ actually represents the social distance and euclidean between the two adjacent devices",
+        "$\\Gamma_{n,m}$: Social similarity between device $n$ and cluster head $m$.  ",
+        "$\\Upsilon_{n,m}$: Edge betweenness centrality for device $n$ and cluster head $m$.  ",
+        "$\\gamma_{n,m}$: Binary social closeness indicator (1 if devices $n$ and $m$ are socially connected).",
+        "$\\Lambda_{n,m}$: Euclidean distance between devices $n$ and $m$.  "
+      ]
+    ],
+    "Workflow",
+    [
+      "**Cluster Formation**<ol>",
+      [
+        "Compute social matrix $\\Omega_{n,m} = \\frac{s_{n,m}}{\\Lambda_{n,m}}$ (social distance normalized by physical distance).",
+        "Select cluster heads with high $\\Omega_{n,m}$ (high social dissimilarity, low Euclidean distance)."
+      ],
+      "**Federated Learning Process**:",
+      [
+        "**Local Training**: Devices train models for $I_{\\text{local}}$ iterations (local updates $\\omega_n$).",
+        "**Sub-Global Aggregation**: Cluster heads aggregate local models ($\\omega_s$) via D2D communication.",
+        "**Global Aggregation**: Cluster heads exchange sub-global models to compute global model ($\\omega_g$).",
+        "**Iterations**: Multiple sub-global rounds (e.g., 1, 3, 6) before global aggregation to balance accuracy and communication cost."
+      ]
+    ]
+  ],
   "motivation": [
     "In conventional FL, a malicious aggregation server can use devices local learning models for inferring their private information, thus causing privacy leakage",
     "FL will generally suffer from high convergence time if the number of end devices increases under wireless resources constraints.",
@@ -30,7 +86,40 @@
   "questions": [
     "solve the centralized server problem in conventional FL, more specifically the problems of malicious aggregation server, external attack, physical damage, communication efficiency"
   ],
-  "techniques": [],
+  "techniques": [
+    "Socially-Aware Clustering",
+    [
+      "**Cluster Head Selection**<ol>",
+      [
+        "Computate Social Matrix: $\\Omega_{n,m} = \\frac{s_{n,m}}{\\Lambda_{n,m}}, \\quad \\text{where} \\quad s_{n,m} = 0.5 \\Gamma_{n,m} + 0.5 \\Upsilon_{n,m}$<ol>",
+        [
+          "Social Similarity ($\\Gamma_{n,m}= \\sum_{t \\in \\mathcal{N}_C^{n,m}} \\frac{1}{d_t}, $)",
+          [
+            "$\\mathcal{N}_C^{n,m}$ is the set of common neighbors of devices $n$ and $m$",
+            "$d_t$ is the degree of device $t$. "
+          ],
+          "Edge Betweenness Centrality ($\\Upsilon_{n,m} = \\frac{\\sum_{n,m \\in \\mathcal{N}} \\zeta_{n,m|e}}{\\binom{N-1}{2}}.$)",
+          "Physical Distance ($\\Lambda_{n,m} = \\sqrt{(x_n - x_m)^2 + (y_n - y_m)^2}.$)"
+        ],
+        "Rank devices by their **maximum $\\Omega_{n,m}$** values across all pairs.",
+        "Top-$M$ devices become cluster heads."
+      ],
+      "**Cluster Formation via Matching Theory**",
+      [
+        "Devices (seek to join clusters) and cluster heads (seek to recruit devices).",
+        "for device $n$, the preference to join cluster $m$",
+        [
+          "$\\mathcal{U}_n(m) = (1 + \\theta_n)e_{n,m}$ (combines local accuracy and PER)"
+        ],
+        "**Algorithm**: One-to-many matching game (Theorem 2)",
+        [
+          "Devices propose to clusters based on $\\mathcal{U}_n(m)$<ol>",
+          "Cluster heads accept proposals if quota allows, else reject the least preferred devices.",
+          "Iterate until no devices can switch clusters for better utility (stable matching)."
+        ]
+      ]
+    ]
+  ],
   "doi": "10.1109/TNSM.2021.3090446",
   "id": "khan2021socially",
   "bibtex": "@article{khan2021socially, title={Socially-aware-clustering-enabled federated learning for edge networks}, author={Khan, Latif U and Han, Zhu and Niyato, Dusit and Hong, Choong Seon}, journal={IEEE Transactions on Network and Service Management}, volume={18}, number={3}, pages={2641--2658}, year={2021}, publisher={IEEE}}"

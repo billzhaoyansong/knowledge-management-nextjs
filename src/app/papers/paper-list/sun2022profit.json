@@ -1,0 +1,100 @@
+{
+  "title": "A Profit-Maximizing Data Marketplace with Differentially Private Federated Learning under Price Competition",
+  "type": "technical",
+  "authors": [
+    "Peng Sun",
+    "Liantao Wu",
+    "Zhibo Wang",
+    "Jinfei Liu",
+    "Juan Luo",
+    "Wenqiang Jin"
+  ],
+  "year": "2024-09",
+  "labels": [
+    "federated learning",
+    "stackelberg game",
+    "reward"
+  ],
+  "summaries": [
+    "proposes a profit-maximizing data marketplace framework for model requesters by introducing a three-stage Stackelberg game model to **accommodate both price-setting (e.g., institutions) and price-taking (e.g., individuals) data owners**"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Privacy Concerns**: Existing DPFL-based marketplaces overlook data owners with significant market power (e.g., hospitals, banks) who can set prices.  ",
+        "**Market Realism**: Prior works assume a leader-follower model where only the model requester sets prices. This ignores price competition among data owners.  ",
+        "**Profit Maximization**: Model requesters aim to balance utility (model quality) and payments to data owners, necessitating a dynamic pricing framework.",
+        "https://chat.deepseek.com/a/chat/s/050c938b-7b40-4a05-b87a-698c7ca4f39b"
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Maximize Model Requester’s Profit**: Optimize the trade-off between model utility (quality) and payments to data owners.  ",
+        "**Accommodate Heterogeneous Data Owners**: Allow both price-setting (e.g., large institutions) and price-taking (e.g., individuals) data owners to participate.  ",
+        "**Equilibrium Analysis**: Derive a subgame perfect equilibrium (SPE) for the three-stage Stackelberg game."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$1$ model requester",
+      [
+        "A service provider (e.g., pharmaceutical company, fintech firm) seeking to train an ML model via federated learning (FL).",
+        "Objective: Maximize profit by balancing **model utility** (quality) and **payments** to data owners.",[
+           "$ V= \\psi_0 - \\sum_{w \\in \\mathcal{W}} \\frac{1}{x_w} - \\sum_{w \\in \\mathcal{W}^s} p_w^s (x_w^s)^2 - \\sum_{w \\in \\mathcal{W}^t} p_w^t x_w^t $.: Model requester’s profit"
+        ]
+      ],
+      "Data Owners",
+      [
+        "$\\mathcal{W}^s $ : Set of price-setting data owners",
+        [
+          "Large institutions (e.g., hospitals, banks) with market power to **set prices** for their privacy budgets."
+        ],
+        "$\\mathcal{W}^t $ : Set of price-taking data owners",
+        [
+          "Individuals or small entities (e.g., mobile users) who **accept prices** set by the model requester.",
+          "$ x_w^s, x_w^t $ : Privacy budget allocated by price-setting/taking data owner $ w $.  ",
+          "$ p_w^s, p_w^t $ : Price per unit privacy budget set by price-setting data owner $ w $/model requester.",
+          "$\\alpha_w^s, \\alpha_w^t $ : Privacy preference (cost coefficient) of data owner $ w $.",
+          "$ V_w^s=p_w^s (x_w^s)^2 - \\alpha_w^s (x_w^s)^2, V_w^t=p_w^t x_w^t - \\alpha_w^t (x_w^t)^2 $ : Payoff of data owner $ w $ (price-setting or price-taking)."
+        ]
+      ]
+     
+    ],
+    "Workflow",
+    [
+      "**Stage I (Price-Setting Data Owners)**<ol>",
+      [
+        "Each $ w \\in \\mathcal{W}^s $ sets price $ p_w^s $ to maximize payoff $ V_w^s $. "
+      ],
+      "**Stage II (Model Requester)**",
+      [
+        "Decides privacy budgets $ x_w^s $ to buy from $ \\mathcal{W}^s $ and sets prices $ p_w^t $ for $ \\mathcal{W}^t $",
+        "Solves:",
+        [
+          "$\\max_{x^s, p^t} \\left( \\psi_0 - \\sum_{w} \\frac{1}{x_w} - \\sum_{w \\in \\mathcal{W}^s} p_w^s (x_w^s)^2 - \\sum_{w \\in \\mathcal{W}^t} p_w^t x_w^t \\right)$",
+          "subject to model quality constraint $ \\sum_{w} \\frac{1}{x_w} \\leq S $."
+        ]
+      ],
+      "**Stage III (Price-Taking Data Owners)**: ",
+      [
+        "Each $ w \\in \\mathcal{W}^t $ chooses $ x_w^t $ to maximize $ V_w^t $, given $ p_w^t $: ",
+        [
+          "$x_w^{t*} = \\begin{cases} \\eta_{x_w^t} & \\text{if } p_w^t < 2\\alpha_w^t \\eta_{x_w^t} \\\\  \\frac{p_w^t}{2\\alpha_w^t} & \\text{if } p_w^t \\in [2\\alpha_w^t \\eta_{x_w^t}, 2\\alpha_w^t \\epsilon_{x_w^t}] \\\\   \\epsilon_{x_w^t} & \\text{if } p_w^t > 2\\alpha_w^t \\epsilon_{x_w^t}  \\end{cases}$"
+        ]
+      ],
+      "**Federated Learning with DP**",
+      [
+        "**Local Training**: Data owner $ w $ computes stochastic gradient $ g(\\mathcal{B}_w; \\theta) $",
+        "**Gradient Perturbation**: Adds Gaussian noise $ \\mathbf{b}_w \\sim \\mathcal{N}(0, \\sigma_w^2 \\mathbf{I}) $, where $ \\sigma_w^2 = \\frac{2L^2}{B_w^2 \\rho_w}$",
+        "**Global Update**: Server aggregates perturbed gradients: $\\theta^r = \\theta^{r-1} - \\frac{\\eta}{W} \\sum_{w} \\tilde{g}(\\mathcal{B}_w; \\theta^{r-1}).$",
+        "**Convergence**: Model quality depends on $ \\sum_w \\frac{1}{x_w} $; lower sum implies better convergence"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1145/3677127",
+  "id": "sun2022profit",
+  "bibtex": "@inproceedings{sun2022profit, title={A profit-maximizing model marketplace with differentially private federated learning}, author={Sun, Peng and Chen, Xu and Liao, Guocheng and Huang, Jianwei}, booktitle={IEEE INFOCOM 2022-IEEE Conference on Computer Communications}, pages={1439--1448}, year={2022}, organization={IEEE}}"
+}

@@ -23,6 +23,7 @@
   "systemModel": [
     "Problems & Motivations",
     [
+      "https://chat.deepseek.com/a/chat/s/a7d87573-70ce-4793-98cd-544000469ba1",
       "__Problems__",
       [
         "**Non-IID Data Challenges**: Industrial environments exhibit heterogeneous data distributions (feature and label skew), which degrade FL performance.",

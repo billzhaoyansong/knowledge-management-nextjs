@@ -216,7 +216,7 @@ const PaperCard = async ({
             <hr className='my-3' />
 
             {/* row 6 */}
-            <div className="flex-1 h-96 overflow-y-scroll mx-2 space-y-3">
+            {/* <div className="flex-1 h-96 overflow-y-scroll mx-2 space-y-3">
                 {[
                     { 'title': 'systemModel', content: paper.systemModel },
                     { 'title': 'techniques', content: paper.techniques }
@@ -232,7 +232,7 @@ const PaperCard = async ({
                             </div>
                         }
                     )}
-            </div>
+            </div> */}
         </div>
 
     </div>

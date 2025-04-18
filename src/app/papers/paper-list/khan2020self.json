@@ -21,12 +21,140 @@
     "propose a global FL time minimization problem by optimizing local device frequency and allocated resources via enabling clustering in a novel social aware FL system model, multiple diagrams showing the learning time against iterations, resource blocks, devices frequencies are also given",
     "1) select clustering head based on social relationships, 2) clustering devices towards clustering heads, 3) optimize local device frequency and resource allocation"
   ],
-  "systemModel": [],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Centralized Server Failures**: Malfunctioning of centralized servers disrupts federated learning (FL).",
+        "**Resource Constraints**: Some users lack communication resources to access centralized servers."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Minimize Global FL Time**: Optimize resource allocation and device frequencies to reduce FL iteration time.",
+        "**Enable Self-Organizing FL**: **Form one cluster** without a centralized server using social awareness.",
+        "**Energy Efficiency**: Ensure total energy consumption does not exceed $E_{max}$."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$\\mathcal{N}$: Set of devices participating in FL, for device $n$:",
+      [
+        "$\\mathcal{D}_n$: Dataset of device $n$ with size $D_n$",
+        "$\\mathcal{S}_n$: Social relationship vector of device $n$"
+      ]
+    ],
+    "Workflow",
+    [
+      "**Cluster Formation**<ol>",
+      [
+        "Select a central node based on social centrality and computational resources.",
+        "Form clusters using social relationship thresholds ($\\gamma$)."
+      ],
+      "**Local Model Training**",
+      [
+        "Each device computes local model weights $w$ using its dataset $\\mathcal{D}_n$.",
+        "Local loss $J_n(w)$ is minimized iteratively"
+      ],
+      "**Resource Allocation**",
+      [
+        "Before transmission",
+        [
+          "Frequencies $f_n$ assigned.",
+          "RBs allocated"
+        ],
+        "During transmission",
+        [
+          "Devices send updates using assigned RBs."
+        ]
+      ],
+      "**Global Aggregation**",
+      [
+        "Devices send local updates to the central node.",
+        "Central node aggregates updates and broadcasts the global model."
+      ],
+      "**Iterations**",
+      [
+        "Repeat between local training and global aggregation until convergence (fixed $\\epsilon$).",
+        "Each iteration involves:",
+        [
+          "Local computation (time $t_{comp}^n$).",
+          "Transmission (time $t_n$)."
+        ]
+      ]
+    ]
+  ],
   "motivation": [
     "Malfunctioning of a centralized server",
     "access to the centralized server might be restricted by some users due to lack of communication resources"
   ],
-  "techniques": [],
+  "techniques": [
+    "Social-Aware Clustering",
+    [
+      "Central Node Selection",
+      [
+        "Only **one device** (highest social centrality) is chosen as the cluster head.",
+        [
+          "$ n^* = \\argmax_{n \\in \\mathcal{N}} \\sum_{m \\in \\mathcal{N}} s_{n,m}$"
+        ]
+      ],
+      "Cluster Membership",
+      [
+        "Devices join if their social tie to $n^*$ exceeds threshold $\\gamma$",
+        [
+          "$\\mathcal{C}_{n^*} = \\{ m \\in \\mathcal{N} \\mid s_{n^*,m} \\geq \\gamma \\}$"
+        ]
+      ]
+    ],
+    "Resource Allocation During FL Execution",
+    [
+      "**Computational Resource Allocation (CPU Frequencies)**<ol>",
+      [
+        "**Objective**: Minimize local computation time while respecting energy constraints",
+        "**Mechanism**:",
+        [
+          "Each device selects an operating frequency from a discrete set: $f_n \\in \\mathcal{F} = \\{f_{min}, \\ldots, f_{max}\\}$",
+          "The computation time for device $n$ is: $t_{comp}^n = \\frac{q_n y_n}{f_n}$",
+          "Energy consumption per device: $E_n = \\rho_n y_n q_n f_n^2$"
+        ],
+        "**Allocation Strategy**:",
+        [
+          "Devices start with minimum frequency $f_{min}$",
+          "The algorithm iteratively increases frequencies for bottleneck devices"
+        ]
+      ],
+      "**Communication Resource Allocation (Resource Blocks)**<ol>",
+      [
+        "**Objective**: Minimize transmission delays",
+        "**Mechanism**:",
+        [
+          "Achievable data rate: $B_n^r = x_n^r W_n^r \\log(1 + \\Gamma_n^r)$"
+        ],
+        "**Constraints**:",
+        [
+          "$\\sum_{n \\in \\mathcal{N}} x_n^r \\leq 1, \\forall r \\in \\mathcal{R}$",
+          "$\\sum_{r \\in \\mathcal{R}} x_n^r \\leq r_{max}^n, \\forall n \\in \\mathcal{N}$"
+        ]
+      ],
+      "**Joint Optimization Algorithm**",
+      [
+        "**Initial Allocation**:<ol>",
+        [
+          "Assign $f_{min}$ and one RB per device"
+        ],
+        "**Iterative Refinement**:",
+        [
+          "Allocate extra RBs to bottleneck devices",
+          "Increase frequencies for computational bottlenecks"
+        ],
+        "**Termination**:",
+        [
+          "When $T_{global}$ converges or energy budget reached"
+        ]
+      ]
+    ]
+  ],
   "doi": "10.1109/ICOIN48656.2020.9016505",
   "id": "khan2020self",
   "bibtex": "@inproceedings{khan2020self, title={Self organizing federated learning over wireless networks: A socially aware clustering approach}, author={Khan, Latif U and Alsenwi, Madyan and Han, Zhu and Hong, Choong Seon}, booktitle={2020 international conference on information networking (ICOIN)},  pages={453--458}, year={2020}, organization={IEEE}}"

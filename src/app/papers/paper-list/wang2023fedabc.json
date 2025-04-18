@@ -1,0 +1,98 @@
+{
+  "title": "FedABC: Targeting Fair Competition in Personalized Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Dui Wang",
+    "Li Shen",
+    "Yong Luo",
+    "Han Hu",
+    "Kehua Su",
+    "Yonggang Wen",
+    "Dacheng Tao"
+  ],
+  "year": "2023-06",
+  "labels": [
+    "federated learning",
+    "data heterogeneity"
+  ],
+  "summaries": [
+    "propose a personalized federated learning framework **addressing unfair competition in Non-IID data** (e.g., class imbalance and missing positive samples) by adopting a \"one-vs-all\" binary classification strategy with a loss function that integrates under-sampling and hard sample mining to alleviate imbalance issues while enabling class-specific optimization."
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "https://chat.deepseek.com/a/chat/s/f26c5912-8439-400a-b43e-52d788364462",
+      "**Motivations**",
+      [
+        "**Non-IID Data in FL**: Federated Learning (FL) clients often have heterogeneous (Non-IID) data distributions, leading to poor performance for minority classes.",
+        "**Unfair Competition**: Traditional Softmax-based classification enforces competition among classes, suppressing minority classes and exacerbating imbalance issues.",
+        "**Lack of Positive Samples**: Some clients may have no positive samples for certain classes, further degrading model fairness and performance.  "
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Eliminate Unfair Competition**: Decouple class-wise learning to avoid inter-class competition during training.",
+        "**Handle Severe Class Imbalance**: Design loss functions to address imbalanced data and lack of positive samples.",
+        "**Improve Personalization**: Enable clients to focus on their local class distributions while leveraging global knowledge.  "
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$m$ | Number of clients",
+      [
+        "$\\mathcal{D}_i$ | Data distribution of client $i$",
+        "$C_i^p, C_i^n$ | Classes with/without positive samples at client $i$",
+        "$\\bm{\\theta}_i$ | Local model parameters of client $i$ (split into $\\bm{\\theta}_i^f$ for feature extractor, $\\bm{\\theta}_i^h$ for classifier)",
+        "$\\bm{\\theta}_i$ | Local model parameters of client $i$ (split into $\\bm{\\theta}_i^f$ for feature extractor, $\\bm{\\theta}_i^h$ for classifier)"
+      ],
+      "$\\bm{\\theta}$ | Global model parameters (aggregated from clients)"
+    ],
+    "Assumptions",
+    [
+      "Clients have **highly heterogeneous data distributions** (e.g., Dirichlet partitioning).",
+      "Some classes **lack positive samples** ($C_i^n \\neq \\emptyset$) in certain clients.",
+      "Feature extractors can be **shared** across classes, but classifiers are class-specific."
+    ],
+    "Workflow",
+    [
+      "**Initialization**:<ol>",
+      [
+        "Server initializes global model $\\bm{\\theta}^0$ and broadcasts it to all clients."
+      ],
+      "**Local Training (Client-side)**: ",
+      [
+        "**Binary Classification Setup**: For each class $c \\in C$, client $i$ trains a **one-vs-all** binary classifier.",
+        [
+          "Positive samples: Data from class $c$.  ",
+          "Negative samples: Data from other classes."
+        ],
+        "**Loss Computation**:",
+        [
+          "For $c \\in C_i^p$: Use $L_{BCE}^p$ (Equation 5) with under-sampling and hard sample mining.",
+          "For $c \\in C_i^n$: Use $L_{BCE}^n$ (Equation 5) focusing on hard negative samples.  "
+        ],
+        "**Updates**: Clients perform SGD on $\\bm{\\theta}_i$ for $E=5$ epochs.  "
+      ],
+      "**Aggregation (Server-side)**:  ",
+      [
+        "Server computes weighted average of client models:  $\\bm{\\theta}^{t+1} = \\sum_{i=1}^m \\frac{|\\mathcal{S}^i|}{|\\mathcal{S}|} \\bm{\\theta}_i^t $",
+        "Global model $\\bm{\\theta}^{t+1}$ is broadcast to clients for the next round.  "
+      ],
+      "**Iterations**:  ",
+      [
+        "Repeat local training and aggregation for $T=100$ (MNIST) or $T=200$ (CIFAR-10) rounds."
+      ]
+    ],
+    "Weaknesses",
+    [
+      "**Scalability**: Training $C$ binary classifiers per client increases computational overhead for large $C$.",
+      "**Over-Sampling Limitation**: Under-sampling may discard informative majority-class samples.",
+      "**Assumption Dependency**: Relies on Dirichlet data partitioning, which may not capture real-world heterogeneity.",
+      "**Communication Cost**: Transmitting full models (not sparse updates) increases communication overhead. "
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1609/aaai.v37i8.26203",
+  "id": "wang2023fedabc",
+  "bibtex": "@inproceedings{wang2023fedabc, title={FedABC: Targeting fair competition in personalized federated learning}, author={Wang, Dui and Shen, Li and Luo, Yong and Hu, Han and Su, Kehua and Wen, Yonggang and Tao, Dacheng}, booktitle={Proceedings of the AAAI Conference on Artificial Intelligence}, volume={37}, number={8}, pages={10095--10103}, year={2023}}"
+}

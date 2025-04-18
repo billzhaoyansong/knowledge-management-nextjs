@@ -14,7 +14,8 @@
   "year": "2024-03",
   "labels": [
     "coalition",
-    "federated learning"
+    "federated learning",
+    "competition"
   ],
   "summaries": [
     "in conventional FL framework, propose __a coalition formation method__ for the cross-silo scenario in which participants have competition relationships with other participants to __avoid training with competitors while maximizing the overall social benefit__"

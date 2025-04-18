@@ -1,0 +1,105 @@
+{
+  "title": "Federated learning and information sharing between competitors with different training effectiveness",
+  "type": "technical",
+  "authors": [
+    "Jiajun Meng",
+    "Jing Chen",
+    "Dongfang Zhao"
+  ],
+  "year": "2024-11",
+  "labels": [
+    "federated learning",
+    "competition",
+    "collaboration"
+  ],
+  "summaries": [
+    "analyzes the strategic formation of FL among competing firms with heterogeneous data and varying training effectiveness, employing a game-theoretic Hotelling model and equilibrium analysis to determine conditions (initial product quality, data volume, and training effectiveness differences) under which FL collaboration is viable, balancing market expansion benefits against competitive disadvantages."
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "https://chat.deepseek.com/a/chat/s/0cf25c86-d979-4353-95c9-b947cb8d091d",
+      "**Motivations**",
+      [
+        "**Data Privacy & Regulations**: Address challenges in data privacy (e.g., GDPR) and data silos in competitive industries.",
+        "**Training Effectiveness**: Explore how non-IID and heterogeneous data impact FL performance.",
+        "**Market Competition**: Analyze strategic decisions between FL and ML under competitive dynamics, including free-riding risks and unequal benefits.  "
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "Determine conditions (initial product quality, data volume, training effectiveness) for FL formation.",
+        "Analyze how FL adoption affects profits, market demand, and consumer welfare.",
+        "Provide guidance for FL designers/policymakers to incentivize collaboration."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "**Two Competing Firms** (Firm 1 and Firm 2): Symmetric in initial product quality ($v_1 = v_2 = v$) but asymmetric in FL training effectiveness ($\\beta_1 > \\beta_2$).",
+      [
+        "$\\mathcal{D}$: Data volume per firm",
+        "$v_i^{ml}$: Post-ML product quality: $v + \\alpha \\mathcal{D}$",
+        "$v_i^{fl}$: Post-FL product quality: $v + 2\\beta_i \\mathcal{D}$",
+        "$p_i$: Price set by firm $i$",
+        "$\\pi_i$: Profit of firm $i$",
+        "$\\beta_i$: FL training effectiveness for firm $i$ (linear function $g_i(x) = \\beta_i x$)"
+      ],
+      "**Consumers**: Distributed along a Hotelling line $[0, 1]$, choosing between firms or not purchasing.  "
+    ],
+    "Workflow",
+    [
+      "**Stage 1 (FL Formation Decision)**: <ol>",
+      [
+        "Firms decide to adopt FL or ML.  ",
+        "FL forms **only if both firms agree**.",
+        "**Interaction**: No central server; firms share model updates (not raw data)."
+      ],
+      "**Stage 2 (Model Training)**: ",
+      [
+        "**ML**: Each firm trains locally: $v_i^{ml} = v + \\alpha \\mathcal{D}$.",
+        "**FL**: Firms collaborate: ",
+        [
+          "Firm $i$ trains using global model with pooled data ($2\\mathcal{D}$).",
+          "Model updates aggregated iteratively, but effectiveness varies: $v_i^{fl} = v + 2\\beta_i \\mathcal{D}$"
+        ]
+      ],
+      "**Stage 3 (Pricing & Profit Maximization)**: ",
+      [
+        "Firms set prices $p_1, p_2$ simultaneously.",
+        "**Demand**: Determined by indifferent consumer $\\hat{x}$ (Hotelling model).",
+        "**Profit**: $\\pi_i = p_i \\times \\text{market share}$."
+      ],
+      "**Iterations**:",
+      [
+        "Backward induction solves equilibrium (prices → profits → FL/ML choice).",
+        "No explicit FL training iterations; focus is on one-shot strategic decisions.  "
+      ]
+    ]
+  ],
+  "techniques": [
+    "Hotelling Model",
+    [
+      "Consumer utility:",
+      [
+        "$u_1 = v_1 - p_1 - tx, \\quad u_2 = v_2 - p_2 - t(1-x)$"
+      ],
+      "Indifferent consumer",
+      [
+        "$\\hat{x} = \\frac{1}{2} + \\frac{v_1 - v_2 - p_1 + p_2}{2t}$"
+      ]
+    ],
+    "Profit Maximization",
+    [
+      "Under ML: $\\pi_i^{ml} = \\frac{(3t + v_i^{ml} - v_{-i}^{ml})^2}{18t}$",
+      "Under FL: $\\pi_i^{fl} = \\frac{(3t + v_i^{fl} - v_{-i}^{fl})^2}{18t}$"
+    ],
+    "Equilibrium Conditions",
+    [
+      "FL forms if $\\pi_i^{fl} > \\pi_i^{ml}$ for both firms.",
+      "Thresholds depend on $\\mathcal{D}$, $v$, $\\beta_1 - \\beta_2$. "
+    ]
+  ],
+  "doi": "10.1016/j.ject.2024.12.003",
+  "id": "meng2025federated",
+  "bibtex": "@article{meng2025federated, title={Federated learning and information sharing between competitors with different training effectiveness}, author={Meng, Jiajun and Chen, Jing and Zhao, Dongfang}, journal={Journal of Economy and Technology}, volume={3}, pages={1--9}, year={2025}, publisher={Elsevier}}"
+}

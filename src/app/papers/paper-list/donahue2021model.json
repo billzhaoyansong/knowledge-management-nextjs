@@ -9,7 +9,8 @@
   "labels": [
     "federated learning",
     "coalition",
-    "hedonic game"
+    "hedonic game",
+    "collaboration"
   ],
   "summaries": [
     "in the conventional FL framework, study the __grand coalition formation__ for the linear regression task and mean estimation FL tasks in the lens of hedonic game"

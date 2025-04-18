@@ -14,7 +14,9 @@
     "game theory",
     "auction",
     "reward",
-    "survey"
+    "survey",
+    "competition",
+    "free rider"
   ],
   "summaries": [
     "model and analyze the free-rider problem, business competition problem, and long-term collaboration problem, through an auction-based incentive mechanism, a revenue-sharing scheme, and a subgame perfect nash equilibrium in cross-silo FL"

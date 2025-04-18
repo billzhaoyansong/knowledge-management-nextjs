@@ -22,6 +22,7 @@
   "systemModel": [
     "Motivations & Objectives",
     [
+      "https://chat.deepseek.com/a/chat/s/3eafc5b7-9fed-4318-9463-40fc7463f7b0",
       "**Motivations**",
       [
         "**Heterogeneity in Federated Learning (FL)**: Traditional FL treats all clients equally, potentially sacrificing the performance of the majority to accommodate minority clients with low-quality or non-IID data.",

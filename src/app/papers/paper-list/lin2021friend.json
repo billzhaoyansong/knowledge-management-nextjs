@@ -14,15 +14,33 @@
     "federated learning",
     "social network",
     "reward",
-    "stackelberg game"
+    "stackelberg game",
+    "collaboration"
   ],
   "summaries": [
     "in the FL social network, propose __a mechanism to incorporate each client's utility with his friends' resource allocation__ to promote training tasks together with trustworthy friends",
     "first a social graph model is built considering mutual trust and learning task similarity",
-    "then a Stackelberg game based social incentive mechanism with both complete and incomplete information to encourage better personal learning behaviors"
+    "then a Stackelberg game based social incentive mechanism with both complete and incomplete information to encourage better personal learning behaviors",
+    "**after sufficient iterations, a stable group of mutually trusted devices will emerge as consistent participants in the federated training process.**"
   ],
   "systemModel": [
-    "Players:",
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**Trustworthiness in FEL**: Existing FEL frameworks suffer from untrustworthy or low-quality learning parameters due to malicious or inactive learners.",
+        "**Incentive Mechanisms**: Lack of effective incentives leads to selfish behavior among learners, resulting in the \"Tragedy of the Commons.\"",
+        "**Social Attributes**: Previous works ignore the potential of social relationships among edge devices and their users to enhance trust and collaboration."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Trustworthy FEL**: Recruit socially connected edge devices as learning partners to ensure reliability.",
+        "**Efficient FEL**: Optimize resource allocation and learning performance using social-driven incentives.",
+        "**Incentive Design**: Develop mechanisms to encourage high-quality contributions from learners."
+      ]
+    ],
+    "Players & Notations",
     [
       "__Cloud Platform__: responsible for",
       [
@@ -40,20 +58,91 @@
       "__BSs__ (Base stations)",
       "__Edge-AI devices (simply devices)__: $\\mathcal{M}=\\{0,1,...,i,...,M\\}$",
       [
-        "$\\mathcal{M}$ are connected with each other via social links"
+        "$\\mathcal{M}$ are connected with each other via social links performing learning tasks",
+        "$\\mathcal{G}^{EI}$: Social graph model among devices",
+        [
+          "$\\phi_{ij}=I_{ij} \\times J_{ij}$: Social tie between devices $i$ and $j$",
+          [
+            "$J_{ij}$: Mutual trust between devices $i$ and $j$",
+            "$I_{ij}$: Learning task similarity between devices $i$ and $j$"
+          ]
+        ],
+        "$f_i$: CPU cycle frequency (resource contribution) of device $i$",
+        "$p_i$: Unit reward for device $i$",
+        "$U_i^{EI}$: Utility function of device $i$",
+        "$\\delta_i$: Local training accuracy of device $i$",
+        "$T_i^{emp}$: Computation time for device $i$",
+        "$T_i^{com}$: Communication time for device $i$",
+        "$E_i^{emp}$: Energy consumption for computation",
+        "$E_i^{com}$: Energy consumption for communication",
+        "$D_i$: Local dataset of device $i$",
+        "$d_i$: Size of local dataset $D_i$",
+        "$c_i$: CPU cycles required per data sample",
+        "$\\omega$: Normalization factor for training iterations",
+        "$\\mu_i$: Chipset capacitance coefficient",
+        "$\\xi_i$: Weight of social-aware satisfaction",
+        "$\\gamma_i$: Satisfaction degree parameter",
+        "$Q_i$: Quality of Service metric for device $i$",
+        "$\\alpha$: Global model accuracy threshold",
+        "$\\beta_i$: Size of uploaded gradient data",
+        "$H_i$: Wireless channel gain",
+        "$P_i$: Transmission power",
+        "$W$: Communication bandwidth",
+        "$N_0$: Noise power spectral density",
+        "$R_i$: Transmission rate of device $i$"
       ]
     ],
-    "Steps:",
+    "Workflow:",
     [
-      "the service requester publish their tasks to the Cloud Platform<ol>",
-      "devices upload their information to the nearest BS",
-      "BS transmits [1] devices information and [2] BS information to the SDN controller",
-      "SDN controller updates all the information tables",
-      "SDN controller recruits devices based on task matching and social trust relationship",
-      "SDN controller does resource allocation"
+      "**Pre-Training Phase:**<ol>",
+      [
+        "Service requester initializes rewards $p_i$ based on historical data or social tie estimates.",
+        "Devices report capabilities (e.g. $f_{i}^{\\max}, d_i, \\phi_i$) to the nearest BS",
+        "BS transmits [1] devices information and [2] BS information to the SDN controller"
+      ],
+      "**Iterative FL Process**",
+      [
+        "Reward Announcement<ol>",
+        [
+          "The service requester broadcast $p_i$ to devices"
+        ],
+        "Local Training",
+        [
+          "devices compute $f_i^*$ to maximize the utility [Check Followers(Devices)'s Move]"
+        ],
+        "Global Aggregation",
+        "Feedback Loop",
+        [
+          "Adjust $p_i$ based on QoS $Q_i = T_i^{\\max} - T_i^{\\text{com}} - T_i^{\\text{emp}}$. [Check Learer(Service Requester)'s Move]"
+        ]
+      ],
+      "**Termination**: Loop until global accuracy $\\alpha$ is achieved."
+    ],
+    "Weakness",
+    [
+      "**Centralization bottleneck**: The leader (SDN controller) must compute equilibria for all devices, scaling poorly for large $\\mathcal{M}$",
+      "**Privacy leakage from sharing $\\phi_{ij}$.**: Sharing $\\phi_{ij}$ for complete information games risks exposing social graphs.",
+      "**Static social trust assumptions.**: Fixed $\\phi_{ij}, J_{ij}$ ignore dynamic trust evolution."
     ]
   ],
-  "techniques": [],
+  "techniques": [
+    "The Stackelberg Game - Learer(Service Requester)'s Move",
+    [
+      "The service requester announces unit rewards $p_i$ to maximize its utility $U^{SR}$",
+      [
+        "Objective: $\\max_{p} \\sum_{i \\in \\mathcal{M}} \\gamma_i \\ln(1 + Q_i(f_i)) - \\sum_{i \\in \\mathcal{M}} p_i f_i $",
+        "Constraints: $p_i^{\\min} \\leq p_i \\leq p_i^{\\max}$."
+      ]
+    ],
+    "The Stackelberg Game - Followers(Devices)'s Move",
+    [
+      "Each device $i$ optimizes $f_i$ to maximize its utility $U_i^{EI}$",
+      [
+        "Objective: $ \\max_{f_i} p_i f_i + \\underbrace{\\xi_i \\sum_{j \\in \\mathcal{M}} \\phi_{ij} f_i f_j}_{\\text{Social Satisfaction}} - E_i^{\\text{com}} - E_i^{\\text{emp}} $",
+        "Constraints: $0 \\leq f_i \\leq f_i^{\\max}$."
+      ]
+    ]
+  ],
   "doi": "10.1109/TMC.2021.3074816",
   "id": "lin2021friend",
   "bibtex": "@article{lin2021friend, title={Friend-as-learner: Socially-driven trustworthy and efficient wireless federated edge learning}, author={Lin, Xi and Wu, Jun and Li, Jianhua and Zheng, Xi and Li, Gaolei}, journal={IEEE Transactions on Mobile Computing}, volume={22}, number={1}, pages={269--283}, year={2021}, publisher={IEEE}}"

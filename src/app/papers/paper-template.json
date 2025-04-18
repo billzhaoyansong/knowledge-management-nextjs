@@ -1,14 +1,34 @@
 {
   "title": "",
   "type": "technical",
-  "authors": [
-  ],
+  "authors": [],
   "year": "",
   "labels": [
     "federated learning"
   ],
-  "summaries": [""],
-  "systemModel": [],
+  "summaries": [
+    ""
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        ""
+      ],
+      "-",
+      "**Objectives**",
+      [
+        ""
+      ]
+    ],
+    "Players & Notations",
+    [],
+    "Workflow",
+    [
+      "<ol>"
+    ]
+  ],
   "techniques": [],
   "doi": "",
   "id": "",

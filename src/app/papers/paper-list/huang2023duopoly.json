@@ -1,0 +1,137 @@
+{
+  "title": "Duopoly Business Competition in Cross-Silo Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Chao Huang",
+    "Shuqi Ke",
+    "Xin Liu"
+  ],
+  "year": "2023-02",
+  "labels": [
+    "federated learning",
+    "stackelberg game",
+    "competition",
+    "collaboration"
+  ],
+  "summaries": [
+    "to addresses the problem of duopoly business competition in cross-silo FL, propose a three-stage Stackelberg game-theoretic framework combined with revenue-sharing mechanisms (e.g., Shapley Value, linear proportionality) to mitigate profit losses, enhance collaboration, and optimize global/local model performance under heterogeneous customer valuations and privacy costs"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "https://chat.deepseek.com/a/chat/s/8f1305b1-03be-429f-b06e-7d7f0e255f96",
+      "**Motivations**",
+      [
+        "**Business Competition in FL**: Cross-silo FL clients (e.g., hospitals, banks) collaborate to train a global model but compete in selling model-related services (e.g., loan prediction). This dual role complicates collaboration.",
+        "**Impact on Model & Profits**: Competition may reduce profits and harm model quality when privacy costs are high. The paper explores how competition affects global accuracy and profits, and proposes solutions. "
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "**Analyze Competition Impact**: Study how duopoly competition affects global model accuracy and client profits compared to monopoly.",
+        "**Mitigate Negative Effects**: Propose a revenue-sharing framework to enhance collaboration and improve outcomes."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "Two clients (organizations, indexed by $n \\in \\{1,2\\}$)",
+      [
+        "$x_n$: Data contribution of client $n$ for FL training.",
+        "$p_n$: Price charged by client $n$ for services.",
+        "$A_n(x)$: Local model accuracy of client $n$ after fine-tuning.",
+        "$C_n^{\\text{pri}}(x_n) = \\mu_n f_n(x_n)$: Privacy cost for client $n$.",
+        "$W_n(x, p)$: Profit of client $n$ (revenue minus privacy cost).  "
+      ],
+      "Heterogeneous customers (continuum with valuation $\\theta \\in [0, \\theta_{\\max}]$)."
+    ],
+    "Assumptions",
+    [
+      "**Customer Valuation**: Uniform distribution $h(\\theta) = 1/\\theta_{\\max}$.",
+      "**Model Accuracy**: $A^g(x)$ and $A_n(x)$ are concave in $x$.",
+      "**Privacy Cost**: $C_n^{\\text{pri}}(x_n)$ is convex in $x_n$.",
+      "**Local Dominance**: Without loss of generality, $A_1(x) > A_2(x)$.  "
+    ],
+    "Workflow (Three-Stage Game)",
+    [
+      "**Stage I (Data Contribution)**:<ol>",
+      [
+        "Clients choose $x_n \\in [0, D_n]$ for FL training.",
+        "**FL Process**:",
+        [
+          "**Global Iteration**: Clients train locally on $\\mathcal{X}_n \\subseteq \\mathcal{D}_n$; server aggregates updates via FedAvg:",
+          [
+            "$\\omega^r = \\sum_{n} \\frac{x_n}{\\sum_i x_i} \\omega_n^r.$"
+          ],
+          "**Local Fine-Tuning**: Clients refine the global model using all local data $\\mathcal{D}_n$."
+        ]
+      ],
+      "**Stage II (Pricing)**:",
+      [
+        "Clients set prices $p_n$ based on anticipated customer behavior",
+        "**Threshold Competition**: Prices derived from equilibrium thresholds $\\sigma_1^*, \\sigma_2^*$ (Theorem 2). "
+      ],
+      "**Stage III (Customer Purchasing)**:",
+      [
+        "Customers choose services based on $\\theta$ and prices. Market partitions into high/low valuation segments (Theorem 1)."
+      ]
+    ]
+  ],
+  "techniques": [
+    "Three-Stage Stackelberg Game",
+    [
+      "The interactions are modeled as a **hierarchical game** where clients act as leaders (Stages I & II), and customers act as followers (Stage III). Solved via **backward induction**:  ",
+      [
+        "**Stage III (Customer Purchasing Equilibrium)**:  ",
+        [
+          "Customers choose between clients based on utility:  $$\\max_{d_\\theta \\in \\{0,1,2\\}} \\left\\{0, \\theta A_1(x) - p_1, \\theta A_2(x) - p_2\\right\\}.$$  ",
+          [
+            "$d_\\theta$: Purchasing strategy"
+          ],
+          "Market partitions into segments",
+          [
+            "High-valuation customers ($\\theta \\geq \\tilde{\\sigma}$) choose client 1.",
+            "Low-valuation customers ($\\theta \\in [\\sigma_2, \\tilde{\\sigma}]$) choose client 2. ",
+            [
+              "Thresholds: $$\\sigma_n = \\frac{p_n}{A_n(x)}, \\quad \\tilde{\\sigma} = \\frac{p_1 - p_2}{A_1(x) - A_2(x)}.$$"
+            ]
+          ]
+        ],
+        "**Stage II (Pricing Equilibrium)**:",
+        [
+          "Clients optimize prices $p_n$ to maximize profits, anticipating customer behavior.",
+          "Convert pricing to **threshold competition** (Game 1):  ",
+          [
+            "For uniform $\\theta$, equilibrium thresholds (Theorem 2):  $$\\sigma_1^* = \\frac{2(A_1 - A_2)\\theta_{\\max}}{4A_1 - A_2}, \\quad \\sigma_2^* = \\frac{\\sigma_1^*}{2}.$$  ",
+            "Prices derived as $p_n^* = \\sigma_n^* A_n(x)$."
+          ]
+        ],
+        "**Stage I (Data Contribution Equilibrium)**: ",
+        [
+          "Clients choose $x_n$ to maximize profits $W_n(x)$, considering Stages II and III:  $$W_n(x) = R_n(x) - \\mu_n x_n,$$",
+          [
+            "revenue $R_n(x)$ depends on market share (e.g., client 1’s revenue: $R_1(x) = p_1^* \\cdot (1 - H(\\tilde{\\sigma}^*))$)"
+          ],
+          "**Existence of Nash Equilibrium**: Guaranteed under concave $A_n(x)$ and convex $C_n^{\\text{pri}}(x_n)$"
+        ]
+      ]
+    ],
+    "Revenue-Sharing Mechanisms",
+    [
+      "To mitigate competition, clients share revenues based on contribution indices $I_n(x)$. Key mechanisms: ",
+      [
+        "**Egalitarian (EG)**:  $$g_n^{\\text{EG}} = \\frac{1}{2} \\quad \\Rightarrow \\quad W_n^{\\text{share}} = \\frac{1}{2}(R_1 + R_2) - \\mu_n x_n.$$  ",
+        "**Linearly Proportional (LP)**:  $$I_n^{\\text{LP}} = x_n \\quad \\Rightarrow \\quad g_n^{\\text{LP}} = \\frac{x_n}{x_1 + x_2}.$$  ",
+        "**Shapley Value (SV)**:  $$I_n^{\\text{SV}} = \\sum_{S \\subseteq \\mathcal{N} \\setminus \\{n\\}} \\frac{A^g(S \\cup \\{n\\}) - A^g(S)}{\\binom{2-1}{|S|}},$$ where $A^g(S)$ is the global accuracy when only clients in subset $S$ participate. ",
+        "**Leave-One-Out (LOO)**: $$I_n^{\\text{LOO}} = A^g(\\{1,2\\}) - A^g(\\mathcal{N} \\setminus \\{n\\}).$$ "
+      ],
+      "**Impact**",
+      [
+        "Revenue sharing shifts client incentives from competition to collaboration.",
+        "Under LP, clients contribute more data to maximize $g_n^{\\text{LP}}$, improving global accuracy.  "
+      ]
+    ]
+  ],
+  "doi": "10.1109/TNSE.2023.3297880",
+  "id": "huang2023duopoly",
+  "bibtex": "@article{huang2023duopoly, title={Duopoly business competition in cross-silo federated learning}, author={Huang, Chao and Ke, Shuqi and Liu, Xin}, journal={IEEE Transactions on Network Science and Engineering}, volume={11}, number={1}, pages={340--351}, year={2023}, publisher={IEEE}}"
+}
