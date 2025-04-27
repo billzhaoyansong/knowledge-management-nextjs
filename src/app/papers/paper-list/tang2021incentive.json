@@ -10,7 +10,8 @@
         "federated learning",
         "social welfare",
         "reward",
-        "non-cooperative game"
+        "non-cooperative game",
+        "collaboration"
     ],
     "summaries": [
         "in the conventional FL framework, propose __a rewarding mechanism__ when the outcome is a public goods (each client is both data owner and model owner) to achieve [1] faster convergence rate comparing with [1] 'Lagrangian' method",

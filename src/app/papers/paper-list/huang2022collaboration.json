@@ -12,7 +12,8 @@
   "year": "2022-02",
   "labels": [
     "federated learning",
-    "cross-silo"
+    "cross-silo",
+    "collaboration"
   ],
   "summaries": [
     "in the conventional FL framework, propose __a monetary-free incentive driven collaboration strategy__ for participant-centric FL, where selfish and heterogeneous participants are both model owners and data owners",

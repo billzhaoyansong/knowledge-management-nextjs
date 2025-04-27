@@ -1,0 +1,149 @@
+{
+  "title": "MarS-FL: Enabling Competitors to Collaborate in Federated Learning",
+  "type": "technical",
+  "authors": [
+    "Xiaohu Wu",
+    "Han Yu"
+  ],
+  "year": "2022-06",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "competition",
+    "free-rider",
+    "non-cooperative game"
+  ],
+  "summaries": [
+    "to addresses the challenge of competitors in FL fearing market share loss, proposed a framework that uses game theory and market stability metrics (δ-stable markets, $\\kappa$-friendliness) to **bound performance gains** and ensure viable, fair **collaboration without eroding competitiveness**"
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "https://chat.deepseek.com/a/chat/s/e05082ba-c36c-4abf-ac61-217b37e706ac",
+      "**Motivations**",
+      [
+        "**Competitive Markets**: FL participants (FL-PTs) in competitive markets hesitate to collaborate due to fear of losing market share. Existing FL frameworks lack tools to analyze market dynamics and ensure stability",
+        "**Free-Rider Problem**: Market leaders avoid sharing data to prevent competitors from benefiting, hindering FL adoption.",
+        "**Need for Decision Support**: No existing framework quantifies market viability or guides FL-PTs on optimal participation strategies.  "
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "Propose **MarS-FL**, a framework to analyze FL viability in competitive markets. ",
+        "Define **$\\delta$-stable markets** to ensure no FL-PT’s market share drops beyond $\\delta$. ",
+        "Quantify **market friendliness ($\\kappa$)** to measure FL feasibility under given conditions. ",
+        "Model FL-PT interactions as a **non-cooperative game** to derive dominant strategies."
+      ]
+    ],
+    "Players & Notations",
+    [
+      "$n$: number of FL-PTs (firms), for each FL-PT $i$",
+      [
+        "$MS_i$: initial market shares",
+        "$r_i, v_i$: customer loyalty, exit rate",
+        "$P' = (1 + \\theta)P \\sum v_i MS_i P$: Post-FL market size",
+        [
+          "$\\theta$: market growth rate"
+        ],
+        "$d_i = L_i - L_i^f$: Model performance improvement",
+        "$Q_i = \\frac{d_i}{\\sum_j d_j}$: Relative improvement (allocated by FL designer)"
+      ]
+    ],
+    "Assumptions",
+    [
+      "**Contribution-Performance Link**: Committing more data ($x_i$) reduces local loss $L_i^f$ (Assumption 1).",
+      "**Linear Service Quality**: $S_i' = \\alpha \\cdot d_i$, where $\\alpha > 0$.",
+      "**Market Share Dynamics**: Post-FL shares depend on loyalty ($r_i$), switching ($1 r_i v_i$), and new customers ($\\theta$). "
+    ],
+    "Workflow",
+    [
+      "**Pre-FL Viability Analysis**<ol>",
+      [
+        "Compute minimum relative improvement $Q_{i}^{\\min}$ and market friendness $\\kappa$",
+        [
+          "$Q_{i}^{\\min} = \\max\\left(\\frac{(MS_i - \\delta) - \\hat{r}_i}{f_o} ,0 \\right)$",
+          [
+            "$MS_i$: initial market share",
+            "$\\delta$: stability threshold (maximum allowable market share loss)",
+            "$\\hat{r}_i$: proportin of loyal customers ",
+            "$f_o$: propotion of \"vacillating customers\"(switching or new customers) in the market"
+          ],
+          "$\\kappa = 1 - \\sum Q_i^{min}$: Market friendliness (higher $\\kappa$ = more FL-friendly)"
+        ],
+        "**if** $\\kappa \\in [0,1]$ (FL is viable), proceed to training",
+        "**else**, FL is abandoned or renegoriated"
+      ],
+      "**Initialization**",
+      [
+        "Centralized: Server initializes global model $w^0$.",
+        "Decentralized: Each FL-PT initializes local model $w_i^0$."
+      ],
+      "**Training Rounds (Iterative)**",
+      [
+        "**Centralized FL**: ",
+        [
+          "**Step 1**: Server sends global model $w^t$ to all FL-PTs.",
+          "**Step 2**: FL-PT $i$ trains locally using $x_i$ data, computes gradient $\\nabla w_i^t$.  ",
+          "**Step 3**: FL-PT uploads $w_i^t = w^t \\eta \\nabla w_i^t$. ",
+          "**Step 4**: Server aggregates updates via FedAvg: $ w^{t+1} = \\sum_{i=1}^n \\frac{x_i}{\\sum_j x_j} w_i^t $ "
+        ],
+        "**Decentralized FL**:  ",
+        [
+          "FL-PTs exchange gradients with partners.",
+          "Each aggregates updates locally: $w_i^t = \\text{Aggregate}(w_i^{t-1}, \\{\\nabla w_j^t\\}_{j \\in \\text{partners}})$.  "
+        ]
+      ],
+      "**Post-Training Market Dynamics**:  ",
+      [
+        "Compute new market shares $MS_i'$ using:  $ MS_i' = \\frac{r_i MS_i + Q_i \\left( \\sum_j (1 r_j v_j) MS_j + \\theta \\right)}{1 + \\theta \\sum_j v_j MS_j} $",
+        [
+          "$Q_i^{\\text{current}} = \\frac{d_i}{\\sum_{j=1}^n d_j} \\quad \\text{(ensures } \\sum Q_i^{\\text{current}} = 1\\text{)}$",
+          [
+            "$d_i = L_i - L_i^f$",
+            [
+              "$L_i$: Loss of FL-PT $i$’s model **without** FL.",
+              "$L_i^f$: Loss of FL-PT $i$’s model **after** FL training."
+            ]
+          ]
+        ],
+        "Check $\\delta$-stability: $MS_i' \\geq MS_i - \\delta$. "
+      ],
+      "**Adjust Allocations**:",
+      [
+        "If unstable (i.e. $MS_i' < MS_i - \\delta$), reallocate relative model performance improvements $Q_i = \\max(Q_i^{\\min}, Q_i^{\\text{current}})$ to enforce stability"
+      ]
+    ],
+    "Limitations",[
+      "**No Contribution Costs**: The model ignores computational/communication costs of contributing data, assuming market share is the sole incentive.",
+      "**Fixed Market Parameters**: Loyalty ($r_i$), exit rates ($v_i$), and growth ($\\theta$) are static, though real markets are dynamic."
+    ]
+  ],
+  "techniques": [
+    "Non-Cooperative Game",
+    [
+      "**Players**: $n$ FL-PTs (firms) in a competitive market.",
+      "**Strategy Space**: Each FL-PT $i$ chooses $x_i \\in [0, D_i]$, where $D_i$ is its total local data. ",
+      [
+        "$x_i$: Amount of data committed to FL training."
+      ],
+      "**Objective**: Maximize post-FL market share $MS_i'$",
+      "**Key Insight**: Contributing all local data ($x_i = D_i$) is the **dominant strategy** for every FL-PT.",
+      [
+        "**Why?**",
+        [
+          "By Assumption 1, $d_i$ (model improvement) increases with $x_i$",
+          "Higher $d_i$ $\\rightarrow$ Higher $Q_i$ $\\rightarrow$ Higher $MS_i'$.",
+          "Even if other FL-PTs contribute more, $Q_i$ depends on the *relative* improvement $d_i / \\sum_j d_j$. Contributing more data ensures $Q_i$ is maximized for FL-PT $i$, regardless of others' actions. "
+        ]
+      ],
+      "**Implications of the Equilibrium**",
+      [
+        "**Free-Rider Mitigation**: Full participation ensures no FL-PT can free-ride, as withholding data would reduce their own $Q_i$ and market share.",
+        "**Market Stability**: The equilibrium feeds into the framework's pre-FL viability analysis (e.g., $Q_i^{\\min}$, $\\kappa$) to ensure $\\delta$-stable markets. "
+      ]
+    ]
+  ],
+  "doi": "10.1109/TBDATA.2022.3186991",
+  "id": "wu2022mars",
+  "bibtex": "@article{wu2022mars, title={MarS-FL: Enabling competitors to collaborate in federated learning}, author={Wu, Xiaohu and Yu, Han}, journal={IEEE Transactions on Big Data}, year={2022}, publisher={IEEE}}"
+}

@@ -15,7 +15,8 @@
     "federated learning",
     "personalination",
     "client selection",
-    "coalition"
+    "coalition",
+    "collaboration"
   ],
   "summaries": [
     "in the conventional FL, propose __a protocol enabling personalization/coalition with domain-relevant clients__, which are identified with the SV"

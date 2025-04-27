@@ -39,7 +39,7 @@
         ol ul,
         ol ol,
         ul ol {
-            @apply pl-6;
+            @apply pl-6 text-sm;
         }
 
         ul > li{
