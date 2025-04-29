@@ -32,6 +32,11 @@
             pre{
                 @apply text-xs;
             }
+            
+            li:has(hr),
+            li:has(img){
+                @apply list-none;
+            }
         }
 
 
