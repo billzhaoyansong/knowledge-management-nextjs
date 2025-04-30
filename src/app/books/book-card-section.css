@@ -37,6 +37,10 @@
             li:has(img){
                 @apply list-none;
             }
+
+            hr{
+                @apply my-2;
+            }
         }
 
 
@@ -93,6 +97,10 @@
 
         table td ul {
             @apply pl-6;
+        }
+
+        table {
+            @apply mx-3 my-3;
         }
     }
 }

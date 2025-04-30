@@ -8,6 +8,7 @@ import remarkParse from "remark-parse";
 import rehypeStringify from 'rehype-stringify'
 import remarkRehype from "remark-rehype";
 import remarkMath from 'remark-math'
+import remarkGfm from 'remark-gfm'
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
@@ -25,6 +26,7 @@ import BookCardSectionContent2x2 from "./book-card-section-content-2x2";
 
 export const unifiedProcessor = unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkMath)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
