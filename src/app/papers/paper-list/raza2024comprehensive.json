@@ -1,0 +1,420 @@
+{
+  "title": "A Comprehensive Review of Recommender Systems: Transitioning from Theory to Practice",
+  "type": "survey",
+  "authors": [
+    "ShainaRaza",
+    "MizanurRahman",
+    "SafiullahKamawal",
+    "ArminToroghi",
+    "AnanyaRaval",
+    "FarshadNavah",
+    "AmirmohammadKazemeini"
+  ],
+  "year": "2024-07",
+  "labels": [
+    "recommender systems"
+  ],
+  "summaries": [
+    ""
+  ],
+  "systemModel": [
+    "Challenges & Notation",
+    [
+      "**Domain-Specific Challenges**",
+      [
+        "**E-commerce**: Real-time personalization, managing vast data and seasonal trends, and balancing diversity with relevance.",
+        "..."
+      ],
+      "-",
+      "**Notation**",
+      [
+        "$\\hat{r}_{ui} = f(u, i; \\Theta)$: the mathematical representation of a recommender system is a function $f$",
+        [
+          "$\\hat{r}_{ui}$: the prediction of the utility of an item $i$ for a user $u$",
+          "$\\Theta$: the parameters of the model, learned from the data"
+        ]
+      ],
+      "-",
+      "**RS Systems**",
+      [
+        "Foundamental RS Systems",
+        [
+          "Types",
+          [
+            "Content-Based Filtering (CBF) <ol>",
+            [
+              "input: **feature vectors of items**",
+              "suggest items to a user based on (1) the attributes of the items, and (2) a profile of the user’s preferences"
+            ],
+            "Collaborative Filtering (CF)",
+            [
+              "input: **user-item matrix**",
+              "predict the preferences of a user based on the preferences of similar other users"
+            ],
+            "Hybrid Approaches"
+          ],
+          "Disadvantages",
+          [
+            "**Traditional RS primarily use linear methods:**",
+            [
+              "Linear models used in CBF: (1) TF-IDF + Cosine Similarity; (2) Linear Regression",
+              "other models used in CBF: (1) Decision Trees (using hierachical splits); (2) Naive Bayes (using probablistic model)",
+              "Linear models used in CF: (1) User-based CF; (2) Item-based CF; (3) Matrix Factorization;",
+              "other models used in CF: (1) Clustering; (2) Association Rules"
+            ]
+          ]
+        ]
+      ]
+    ],
+    "RS Framework",
+    [
+      "![](/papers/raza2024comprehensive/RS_Framework.png)",
+      "Workflow",
+      [
+        "**Data Acquisition**<ol>",
+        [
+          "*User Interactions*: Collect explicit feedback (e.g., ratings, reviews) and implicit feedback (e.g., clicks, dwell time, purchases).",
+          "*Item Metadata*: Extract attributes like product descriptions, genres, or categories.",
+          "*Contextual Data*: Capture time, location, device type, or session context.",
+          "*External Sources*: Integrate social media activity, knowledge graphs, or third-party APIs."
+        ],
+        "**Data Storage & Preparation**",
+        [
+          "*Cleaning*: Handle missing values, duplicates, or outliers",
+          "*Transformation*: Normalize/standardize features, encode categorical variables (e.g., one-hot encoding).",
+          "*Feature Engineering*: Create derived features (e.g., user engagement scores, item popularity trends).",
+          "*Data Splitting*: Partition into training, validation, and test sets."
+        ],
+        "**Model Training**",
+        [
+          "Algorithm Selection:",
+          [
+            "**Collaborative Filtering (CF)**: User/item similarity-based models (e.g., matrix factorization).",
+            "**Content-Based Filtering (CBF)**: Leverage item attributes (e.g., TF-IDF for text).",
+            "**Hybrid Models**: Combine CF and CBF (e.g., Wide & Deep Learning).",
+            "**Deep Learning**: Neural networks (e.g., NCF, GNNs, Transformers)."
+          ],
+          "Hyperparameter Tuning: Optimize learning rates, regularization, or network architecture.",
+          "Validation: Use metrics like RMSE (for ratings) or AUC (for rankings)."
+        ],
+        "**Candidate Generation & Ranking**",
+        [
+          "*Candidate Generation*: Retrieve a broad set of items using fast methods (e.g., approximate nearest neighbors)",
+          "**Ranking**: ",
+          [
+            "Refine candidates using more complex models (e.g., deep learning) to prioritize relevance.",
+            "**Incorporate diversity, novelty, or business rules** (e.g., promoting new releases)."
+          ]
+        ],
+        "**Evaluation & Validation**",
+        [
+          "Offline Metrics:",
+          [
+            "Accuracy: Precision, Recall, NDCG.",
+            "Diversity: Coverage, Serendipity."
+          ],
+          "Online Testing:",
+          [
+            "A/B testing to measure user engagement (e.g., **click-through rate (CTR)**, conversion rates)."
+          ]
+        ],
+        "**Deployment**",
+        [
+          "APIs & Scalability: Deploy models as microservices (e.g., REST APIs) to handle real-time requests.",
+          "Latency Optimization: Use caching, model pruning, or quantization for speed.",
+          "Monitoring: Track performance metrics (e.g., response time, error rates)."
+        ],
+        "**Monitoring & Maintenance**",
+        [
+          "Data Drift Detection: Identify shifts in user behavior (e.g., trending items).",
+          "Model Retraining: Periodically update models with fresh data (e.g., daily/weekly batches).",
+          "Bias Mitigation: Monitor fairness (e.g., demographic parity in recommendations)."
+        ],
+        "**Feedback Loop**",
+        [
+          "Implicit Feedback: Track clicks, skips, or session duration.",
+          "Reinforcement Learning: Adjust recommendations based on real-time rewards (e.g., user engagement).",
+          "Ethical Safeguards: Prevent feedback loops from amplifying biases (e.g., filter bubbles)."
+        ]
+      ]
+    ]
+  ],
+  "techniques": [
+    "Content-Based Filtering (CBF)",
+    [
+      "Philosophy",
+      [
+        "CBF recommends items by matching **item attributes** (e.g., text, genres, tags) to a **user profile** derived from their historical interactions, without dependence on other users' data"
+      ],
+      "**Models**",
+      [
+        "**Vector Space Model**",
+        [
+          "**Item Representation**: Represent items as feature vectors (e.g., TF-IDF for text, embeddings for images).:<ol>",
+          [
+            " e.g. there are three movies with their feature vector:",
+            [
+              "Inception: $\\phi(1)=[0.5, 0.3, 0.7]$",
+              "Interstellar: $\\phi(2)=[0.6, 0.8, 0.1]$",
+              "Titanic: $\\phi(3)=[0.1, 0.9, 0.0]$"
+            ]
+          ],
+          "**User Profile**: Aggregate features of items the user has interacted with (e.g., average vector of liked items).",
+          [
+            "e.g. the user $u$ liked Inception and Interstellar, $u$'s user profile:",
+            [
+              "$\\theta(u)=\\frac{[0.5, 0.3, 0.7] + [0.6, 0.8, 0.1]}{2}=[0.55,0.55,0.4]$"
+            ]
+          ],
+          "**Similarity Calculation**: Compute similarity between the user profile and candidate items.",
+          [
+            "$\\text{sim}(u, i) = \\frac{\\theta(u) \\cdot \\phi(i)}{\\|\\theta(u)\\| \\cdot \\|\\phi(i)\\|}$",
+            [
+              "$\\text{sim}(u, 3) = \\frac{\\theta(u) \\cdot \\phi(3)}{\\|\\theta(u)\\| \\cdot \\|\\phi(3)\\|}$"
+            ]
+          ],
+          "**Utility**",
+          [
+            "$\\hat{r}_{ui}=\\theta(u)^\\intercal \\phi(i)$",
+            [
+              "$\\phi(i)$: the feature vector",
+              "$\\theta(u)$: the user preference vector"
+            ]
+          ]
+        ],
+        "**Probabilistic Model**",
+        "**Decision Tree**"
+      ],
+      "-",
+      "**Neural Network-based** Automatic Feature Extraction & Data Pattern Learning",
+      [
+        "analyze user interactions and item features across different modalities, including textual (such as reviews [87], citations [88], and news [89]), streaming (like music [77]), and image data [90]"
+      ],
+      "-",
+      "Advantages",
+      [
+        "**Cold-Start Resilience**: Works for new users/items with no interaction history.",
+        "**Transparency**: Recommendations are explainable via item features.",
+        "**No Dependency on Other Users**: Suitable for niche or personalized domains."
+      ],
+      "Limitations",
+      [
+        "**Over-Specialization**: May recommend only similar items (e.g., only sci-fi movies).",
+        "**Feature Engineering**: Requires rich, structured item metadata.",
+        "**Limited Serendipity**: Struggles to recommend novel/unexpected items."
+      ]
+    ],
+    "Collaborative Filtering (CF)",
+    [
+      "Philosophy",
+      [
+        "CF predicts the preferences of a user based on the preferences of similar other users"
+      ],
+      "-",
+      "**Types of CF**",
+      [
+        "**Memory-Based CF**<ol>",
+        [
+          "**User-Based CF**",
+          [
+            "Recommends items to a user based on the preferences of similar users.",
+            "Example: If Users A and B both liked Items X and Y, and User A also liked Item Z, recommend Z to User B.",
+            [
+              "Step 1: User-Item Matrix",
+              [
+                "User A rating for item 1, 2, 3: $[5, 3, ?]$, Mean of A: $(5 + 3)/2 = 4$",
+                "User B rating for item 1, 2, 3: $[4, 2, 5]$, Mean of B: $(4 + 2 + 5)/3 ≈ 3.67$"
+              ],
+              "Step 2: Calculate Similarity (Pearson Correlation)",
+              [
+                "Similarity(A, B): $2.0 / 3.05 ≈ 0.66$",
+                [
+                  "Numerator: $(5-4)(4-3.67) + (3-4)(2-3.67) = 0.33 + 1.67 = 2.0$",
+                  "Denominator: $\\sqrt{(1^2 + (-1)^2)} \\cdot \\sqrt{(0.33^2 + (-1.67)^2 + 1.33^2)} ≈ 1.41 \\cdot 2.16 ≈ 3.05$ "
+                ]
+              ],
+              "Step 3: Predict Rating for Item3 (User A)",
+              [
+                "Use weighted average of User B's rating",
+                [
+                  "$\\hat{r}_{A,\\text{Item3}} = \\bar{r}_A + \\frac{\\text{sim}(A,B) \\cdot (r_{B,\\text{Item3}} - \\bar{r}_B)}{\\text{sim}(A,B)}$",
+                  "$\\hat{r}_{A,\\text{Item3}} = 4 + 0.66 \\cdot (5 - 3.67) ≈ 4 + 0.88 ≈ \\boxed{4.88}$"
+                ]
+              ]
+            ]
+          ],
+          "**Item-Based CF**",
+          [
+            "Recommends items similar to items a user has liked historically",
+            "Example: If users who liked Item X also liked Item Z, recommend Z to users who liked X.",
+            [
+              "Step 1: User-Item Matrix",
+              [
+                "User A rating for item 1, 2, 3: $[5, 3, 4]$",
+                "User B rating for item 1, 2, 3: $[4, 2, 5]$",
+                "User C rating for item 1, 2, 3: $[2, 4, ?]$"
+              ],
+              "Step 2: Calculate Item Similarities",
+              [
+                "Item1 vs. Item3: $ \\text{sim}(\\text{Item1}, \\text{Item3}) = \\frac{(5 \\cdot 4) + (4 \\cdot 5)}{\\sqrt{5^2 + 4^2} \\cdot \\sqrt{4^2 + 5^2}} = \\frac{40}{\\sqrt{41} \\cdot \\sqrt{41}} = \\frac{40}{41} \\approx 0.976 $",
+                "Item2 vs. Item3: $ \\text{sim}(\\text{Item2}, \\text{Item3}) = \\frac{(3 \\cdot 4) + (2 \\cdot 5)}{\\sqrt{3^2 + 2^2} \\cdot \\sqrt{4^2 + 5^2}} = \\frac{22}{\\sqrt{13} \\cdot \\sqrt{41}} \\approx 0.952 $"
+              ],
+              "Step 3: Predict Missing Rating",
+              [
+                "$ \\hat{r}_{C,\\text{Item3}} = \\frac{\\sum_{j \\in \\text{rated items}} \\text{sim}(\\text{Item3}, j) \\cdot r_{Cj}}{\\sum_{j \\in \\text{rated items}} |\\text{sim}(\\text{Item3}, j)|} = \\frac{(0.976 \\cdot 2) + (0.952 \\cdot 4)}{0.976 + 0.952} = \\frac{1.952 + 3.808}{1.928} \\approx \\frac{5.76}{1.928} \\approx \\boxed{2.99} $"
+              ]
+            ]
+          ]
+        ],
+        "**Model-Based CF**",
+        [
+          "Uses ML models to uncover latent patterns in user-item interactions",
+          "The most prominent approach is **Matrix Factorization**",
+          [
+            "Decomposes the user-item interaction matrix $R$ into two lower-dimensional matrices:",
+            [
+              "$ \\hat{R} = U^\\top I $",
+              [
+                "$U \\in \\mathbb{R}^{k \\times m}$: user latent factors",
+                "$I \\in \\mathbb{R}^{k \\times n}$: item latent factors",
+                [
+                  "$k$ being the number of latent dimensions"
+                ]
+              ]
+            ],
+            "The objective is to minimize the reconstruction error",
+            [
+              "$ \\min_{U,I} \\sum_{(u,i) \\in D} (r_{ui} - U_u^\\top I_i)^2 + \\lambda (\\|U\\|^2 + \\|I\\|^2) $",
+              [
+                "$\\lambda$: a regularization term to prevent overfitting"
+              ]
+            ],
+            "Example",
+            [
+              "Step 1: User-Item Matrix",
+              [
+                "User A rating for item 1, 2, 3: $[5, 3, ?]$",
+                "User B rating for item 1, 2, 3: $[4, ?, 5]$"
+              ],
+              "Step 2: Factorize into Latent Matrices",
+              [
+                "Assume $k=2$ latent factors:",
+                [
+                  "User Matrix $U= \\begin{bmatrix} 0.5 & 1.0 \\\\ 1.0 & 0.5 \\end{bmatrix}$",
+                  "Item Matrix $I = \\begin{bmatrix} 1.0 & 0.5 \\\\ 0.5 & 1.0 \\\\ 0.8 & 0.3 \\end{bmatrix}$"
+                ]
+              ],
+              "Step 3: Predict Missing Ratings",
+              [
+                "$ \\hat{r}_{X,\\text{Item3}} = U_X \\cdot I_3 = [0.5 \\quad 1.0] \\cdot [0.8 \\quad 0.3]^\\top = \\boxed{0.7} $",
+                "$ \\hat{r}_{Y,\\text{Item2}} = U_Y \\cdot I_2 = [1.0 \\quad 0.5] \\cdot [0.5 \\quad 1.0]^\\top = \\boxed{1.0} $"
+              ]
+            ]
+          ]
+        ],
+        "**Neural CF (NCF)**",
+        [
+          "Integrates deep learning to model non-linear user-item interactions.",
+          "Combines Generalized Matrix Factorization (GMF) and Multi-Layer Perceptrons (MLP)",
+          [
+            "$ \\hat{r}_{ui} = \\sigma(\\mathbf{h}^\\top (\\mathbf{p}_u \\odot \\mathbf{q}_i) + \\text{MLP}(\\mathbf{p}_u \\oplus \\mathbf{q}_i)) $",
+            [
+              "$\\mathbf{p}_u, \\mathbf{q}_i$: user/item embeddings",
+              "$\\odot,\\oplus$: element-wise product, concatenation"
+            ]
+          ]
+        ],
+        "**Graph Neural Networks (GNNs)**",
+        [
+          "Models user-item interactions as a bipartite graph, propagating embeddings through graph convolutions.",
+          "e.g. **LightGCN** simplifies GNNs by removing non-linear transformations",
+          [
+            "$ \\mathbf{e}_u^{(l+1)} = \\sum_{i \\in \\mathcal{N}(u)} \\frac{1}{\\sqrt{|\\mathcal{N}(u)|}\\sqrt{|\\mathcal{N}(i)|}} \\mathbf{e}_i^{(l)} $",
+            [
+              "$\\mathbf{e}_u^{(l)}$: the embedding of user $u$ at layer $l$",
+              "$\\mathcal{N}(u)$: neighbors of $u$"
+            ]
+          ]
+        ]
+      ],
+      "-",
+      "Challenges in CF",
+      [
+        "**Cold-Start Problem**: New users/items lack sufficient interaction data, making recommendations unreliable.",
+        "**Scalability**: Computationally expensive for large datasets due to $O(mn)$ complexity for $m$ users and $n$ items.",
+        "**Sparsity**: Real-world user-item matrices are highly sparse (e.g., 99% empty in MovieLens), reducing prediction accuracy.",
+        "**Dynamic Preferences**: User interests evolve over time, requiring continuous model updates."
+      ]
+    ],
+    "Hybrid Approaches",
+    [
+      "Philosophy",
+      [
+        "Hybrid approaches combine **collaborative filtering (CF)** and **content-based filtering (CBF)** (or other methods) to leverage their strengths and mitigate weaknesses."
+      ],
+      "-",
+      "Strategies",
+      [
+        "Weighted Hybrid",
+        [
+          "Combine predictions from CF and CBF using a weighted sum",
+          [
+            "$ \\hat{r}_{ui} = \\alpha \\cdot \\hat{r}_{\\text{CF}} + \\beta \\cdot \\hat{r}_{\\text{CBF}} $"
+          ]
+        ],
+        "Meta-Level Hybrid",
+        [
+          "Train a model (e.g., neural network) to learn optimal combinations: ",
+          [
+            "e.g. **Wide & Deep Learning**",
+            [
+              "$ \\hat{r}_{ui} = \\sigma(\\mathbf{w}_{\\text{wide}}^\\top \\mathbf{x}_{\\text{CF}} + \\mathbf{w}_{\\text{deep}}^\\top \\phi(\\mathbf{x}_{\\text{CBF}})) $",
+              [
+                "`Wide`: Memorizes CF patterns (e.g., 'users who bought X also bought Y'). ",
+                "`Deep`: Generalizes using content features (e.g., text embeddings)."
+              ]
+            ]
+          ]
+        ]
+      ],
+      "-",
+      "Challenges",
+      [
+        "**Complexity**: Integration requires careful tuning (e.g., $\\alpha/\\beta$ weights).",
+        "**Computational Cost**: Real-time hybrid systems demand scalable infrastructure.",
+        "**Explainability**: Harder to interpret than single-method systems."
+      ]
+    ],
+    "Multi-Layer Perceptrons (MLPs) in Recommender Systems",
+    [
+      "Philosophy",
+      [
+        "To model non-linear relationships between users and items"
+      ],
+      "-",
+      "Use Cases",
+      [
+        "Neural Collaborative Filtering (NCF)",
+        [
+          "**Goal**: Replace inner product (linear) in matrix factorization with MLP (non-linear).",
+          "**Architecture**: $ \\hat{r}_{ui} = \\text{MLP}(\\mathbf{e}_u \\oplus \\mathbf{e}_i) $"
+        ],
+        "Deep Factorization Machines (DFM)",
+        [
+          "$ \\hat{r}_{ui} = \\text{FM}(\\mathbf{x}) + \\text{MLP}(\\mathbf{x}) $"
+        ]
+      ],
+      "-",
+      "Challenges",
+      [
+        "risk of overfitting",
+        "lack of spatial invariance",
+        "issues with vanishing or exploding gradients",
+        "explainability"
+      ]
+    ]
+  ],
+  "doi": "",
+  "id": "raza2024comprehensive",
+  "bibtex": "@article{raza2024comprehensive, title={A comprehensive review of recommender systems: Transitioning from theory to practice}, author={Raza, Shaina and Rahman, Mizanur and Kamawal, Safiullah and Toroghi, Armin and Raval, Ananya and Navah, Farshad and Kazemeini, Amirmohammad}, journal={arXiv preprint arXiv:2407.13699}, year={2024}}"
+}

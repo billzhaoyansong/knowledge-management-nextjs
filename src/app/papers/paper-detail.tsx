@@ -53,7 +53,7 @@ export default function PaperDetail(
                                             <div className="mx-3 w-full">
                                                 <h3 className="font-semibold capitalize text-yellow-700 text-3xl">{v.title}</h3>
 
-                                                {generateContents(v.title, v.content, ['text-xl'], ['2xl:basis-1/4 xl:basis-1/2 md:basis-full'])}
+                                                {generateContents(v.title, v.content, ['text-xl'], ['4xl:basis-1/4 xl:basis-1/2 md:basis-full'])}
                                             </div>
                                         </div>
                                     }
