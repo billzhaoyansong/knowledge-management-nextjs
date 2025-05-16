@@ -1,0 +1,207 @@
+{
+  "title": "Click-through rate prediction in online advertising: A literature review",
+  "type": "survey",
+  "authors": [
+    "Yanwu Yang",
+    "Panyu Zhai"
+  ],
+  "year": "2021-07",
+  "labels": [
+    "recommender systems"
+  ],
+  "summaries": [
+    ""
+  ],
+  "systemModel": [
+    "Problem Formation",
+    [
+      "**Definition of CTR Prediction Problem**",
+      [
+        "Given a set of triples $\\langle u_i, x_i, y_i \\rangle, i=1,2,...,N$, where",
+        [
+          "$u_i, x_i$: user and advertisement in the $i$th instance",
+          "$y_i \\in \\{0, 1\\}$: $y_i=1$ indicates $u_i$ clicks on $x_i$; otherwise $y_i=0$"
+        ],
+        "predict the probability $p = f(u_j, x_j)$ that user $u_j$ clicks on ad $x_j$ in the $j$th instance by minimizing the cross-entropy loss:",
+        [
+          "$L = \\frac{1}{N}\\sum_{i=1}^{N}\\left[y_i \\times \\log p_i + (1-y_i) \\times \\log(1-p_i)\\right]$"
+        ]
+      ],
+      "-",
+      "**Features**",
+      [
+        "features can be categorized into five classes",
+        [
+          "**Advertising features**: ad ID; advertiser ID; campaign ID; creative ID; ad keyword; title; body; URL domain; type of ad; ad display position; advertiser network; conversion id; ad group; ad size; ad length; ad width; etc",
+          "**User features**: gender;age;region;user ID;user agent;IP;accept cookies;etc.",
+          "**Context features**: city;carrier;time;network speed;device brand;device type;OS;OS name;OS version;etc",
+          "**Query features**: query category;query keywords;query term;average query length;etc",
+          "**Publisher features**: publisher ID;publisher network;site;section;URL;page referrer;etc"
+        ],
+        "notes:",
+        [
+          "IDs (ad ID, user ID, etc) are meaningless, but they (1) enable personalization and (2) capture latent (hidden) relationships in data that are not observable directly in raw features."
+        ]
+      ],
+      "-",
+      "**Evaluation Metrics**",
+      [
+        "precision; recall;  F1-score;  accuracy;  area under the curve of receiver operating characteristic (AUC-ROC);  area under the curve of precision/recall (AUC-PR);  relative improvement (RelaImpr);  Logloss;  mean square error (MSE);  root means squared error (RMSE);  relative information gain (RIG) and field-level calibration errors"
+      ]
+    ],
+    "State-of-the-Art CTR Prediction Models ",
+    [
+      "**1. Multivariate Statistical Models**",
+      [
+        "**Logistic Regression (LR)**<ol>",
+        [
+          "$p = \\sigma(\\mathbf{w}^T \\mathbf{x} + b)$",
+          [
+            "$\\sigma$: sigmoid function; $\\mathbf{w}$: weights; $\\mathbf{x}$: input features"
+          ],
+          "**Pros**: Simple, interpretable.; **Cons**: Ignores feature interactions; **Applications**: use as baseline or incorporate with other methods"
+        ],
+        "**Degree-2 Polynomial (Poly2)**",
+        [
+          "$ \\Phi_{\\text{Poly2}} = w_0 + \\sum_{i=1}^n w_i x_i + \\sum_{i=1}^n \\sum_{j=i+1}^n w_{h(i,j)} x_i x_j $",
+          "**Pros**: Captures pairwise interactions; **Cons**: Computationally heavy, struggles with sparsity."
+        ],
+        "**Other Traditional Classification Models**",
+        [
+          "e.g., linear regression, Poisson regression, decision tree and support vector machines",
+          "these models are underperformed in the sparse problem because they **fail to capture feature interactions** which are **essential for CTR prediction**"
+        ]
+      ],
+      "-",
+      "**2. Factorization Machines (FMs)-Based Models**",
+      [
+        "**Factorization Machines (FMs)**<ol>",
+        [
+          "$\\Phi_{\\text{FM}} = w_0 + \\sum_{i=1}^n w_i x_i + \\sum_{i=1}^n \\sum_{j=i+1}^n \\langle \\mathbf{v}_i, \\mathbf{v}_j \\rangle x_i x_j$",
+          [
+            "$\\mathbf{v}_i$: embedding vector for feature $i$"
+          ],
+          "FMs differ from Poly2 in handling interaction terms, that is",
+          [
+            "for each feature interaction $x_i x_j$, FMs factorize the associated parameter, while Poly2 simply assigns a parameter "
+          ],
+          "**Pros**: Handles sparsity via embeddings",
+          "**Cons**: Limited to second-order interactions; *Fail to capture the fact that a feature might behave differently when interacting with various features from multiple fields (leading to FFM).*"
+        ],
+        "**Field-aware FM (FFM)**",
+        [
+          "$\\Phi_{\\text{FFM}} = w_0 + \\sum_{i=1}^n w_i x_i + \\sum_{i=1}^n \\sum_{j=i+1}^n \\langle \\mathbf{v}_{i,F_j}, \\mathbf{v}_{j,F_i} \\rangle x_i x_j$",
+          [
+            "$F_i$: field of feature $i$"
+          ],
+          "Compared to FMs, FFMs increase the number of parameters in each feature interaction",
+          "**Pros**: Field-specific embeddings",
+          "**Cons**: *High memory usage due to the significantly increasing number of parameters*"
+        ],
+        "**Field-weighted FM (FwFM)**",
+        [
+          "$\\Phi_{\\text{FwFM}} = w_0 + \\sum_{i=1}^n w_i x_i + \\sum_{i=1}^n \\sum_{j=i+1}^n r_{F(i),F(j)} \\langle \\mathbf{v}_i, \\mathbf{v}_j \\rangle x_i x_j$",
+          [
+            "$r_{F(i),F(j)}$ = field-pair weight"
+          ],
+          "**Pros**: Balances performance and complexity; FwFMs can outperform LR, Poly2 and FMs, and achieve comparable performance with FFMs in AUC, while with fewer parameters to be estimated"
+        ]
+      ],
+      "-",
+      "**3. Deep Learning Models**",
+      [
+        "**Long Short-Term Memory (LSTM)**<ol>",
+        [
+          "Definition",
+          [
+            "LSTMs are RNNs designed to model **sequential data** (e.g., user click histories) by capturing long-term dependencies.",
+            [
+              "**Input $x_t$**: Features at step $t$ (e.g., ad ID, user action, timestamp).",
+              "**Sequence Example**:",
+              [
+                "$t=1$: User views Ad #123.",
+                "$t=2$: User clicks Ad #456",
+                "$t=3$: Predict CTR for Ad #789 using $h_3$"
+              ],
+              "**CTR Prediction**",
+              [
+                "$p_{\\text{click}} = \\sigma(W_p \\cdot h_T + b_p)$",
+                [
+                  "$h_T$: Final hidden state after processing the sequence."
+                ]
+              ]
+            ]
+          ],
+          "LSTM Cell Structure",
+          [
+            "![](/papers/yang2022click/lstm.jpg)",
+            "For a time step $t$ with input $x_t$ and previous states $h_{t-1}$, $c_{t-1}$:",
+            [
+              "**Input Gate ($i_t=\\sigma(W_i \\cdot x_t + U_i \\cdot h_{t-1} + b_i)$)**: Controls what new information is stored.",
+              "**Forget Gate ($f_t=\\sigma(W_f \\cdot x_t + U_f \\cdot h_{t-1} + b_f)$)**: Decides what to discard from the cell state.",
+              "**Output Gate ($o_t=\\sigma(W_o \\cdot x_t + U_o \\cdot h_{t-1} + b_o)$)**: Determines what to output as the hidden state.",
+              "**Cell State ($c_t=f_t \\odot c_{t-1} + i_t \\odot g_t$)**: Long-term memory carrier.",
+              [
+                "Candidate Cell State ($g_t = \\tanh(W_g \\cdot x_t + U_g \\cdot h_{t-1} + b_g)$)"
+              ],
+              "**Hidden State ($h_t= o_t \\odot \\tanh(c_t)$)**: Short-term memory passed to the next step."
+            ]
+          ]
+        ],
+        "**Convolutional Neural Networks (CNNs)**",
+        [
+          "**1. Core Idea**",
+          [
+            "**Local Receptive Fields**: CNNs apply filters (kernels) to small regions of the input to detect localized patterns.",
+            "**Parameter Sharing**: Filters are reused across the input, reducing computational cost.",
+            " **Hierarchy**: Stacked layers learn low-level → high-level features (e.g., pairwise → multi-way interactions)."
+          ],
+          "**2. Architecture for CTR Prediction**",
+          [
+            "**Input Layer**<ol>",
+            [
+              "Categorical features (e.g., Ad ID, User ID) are converted into **embeddings**",
+              [
+                "Embeddings are dense, low-dimensional vectors that represent categorical variables (e.g., user IDs, ad IDs) in a continuous space."
+              ],
+              "Example: A user with 5 features → 5 embedding vectors → stacked into a 2D matrix"
+            ],
+            "**Convolutional Layer**",
+            [
+              "Applies filters to sliding windows of the embedding matrix",
+              "$z_{i,j} = \\sum_{m=0}^{k_h-1} \\sum_{n=0}^{k_w-1} W_{m,n} \\cdot x_{i+m,j+n} + b $"
+            ],
+            "**Activation**",
+            [
+              "ReLU or Tanh applied to outputs (e.g., $ a_{i,j} = \\text{ReLU}(z_{i,j}) $)"
+            ],
+            "**Pooling Layer**",
+            [
+              "Reduces dimensionality while retaining key features",
+              "$p_{i,j} = \\max(a_{i \\times s : (i+1) \\times s, \\, j \\times s : (j+1) \\times s})$"
+            ],
+            "**Flatten + Dense Layers**",
+            [
+              "Flatten pooled outputs → Feed into DNN for final CTR prediction."
+            ]
+          ],
+          "**3. Limitations**",
+          [
+            "**Order Sensitivity**: Performance depends on feature arrangement in the input matrix.",[
+              "Methods to determin order of features:",[
+                "Domain Knowledge",
+                "Clustering and Correlation",
+                "Automated Methods: hyperparamter optimization / RL"
+              ]
+            ],
+            "**Hyperparameter Tuning**: Embedding size, filter sizes, strides, and pooling strategies require careful design."
+          ]
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "",
+  "id": "",
+  "bibtex": "@article{yang2022click,title={Click-through rate prediction in online advertising: A literature review},author={Yang, Yanwu and Zhai, Panyu},journal={Information Processing \\& Management},volume={59},number={2},pages={102853},year={2022},publisher={Elsevier}}"
+}

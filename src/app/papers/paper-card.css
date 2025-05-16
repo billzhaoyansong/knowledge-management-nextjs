@@ -26,7 +26,11 @@
         ol.depth-5,
         ol.depth-6
         {
-            @apply text-sm;
+            @apply text-sm pl-9;
+
+            * > li {
+                @apply list-outside;
+            }
         }
 
         ul.depth-1>li{
@@ -75,6 +79,14 @@
 
         li:has(ol:first-child) {
             @apply list-none;
+        }
+
+        li:has(p img) {
+            @apply list-none !important;
+        }
+
+        li img{
+            max-height: 300px;
         }
 
         p {

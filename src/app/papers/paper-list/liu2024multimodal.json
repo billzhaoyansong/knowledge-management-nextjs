@@ -1,0 +1,116 @@
+{
+  "title": "Multimodal Recommender Systems: A Survey",
+  "type": "survey",
+  "authors": [
+    "Qidong Liu",
+    "Jiaxi Hu",
+    "Yutian Xiao",
+    "Xiangyu Zhao",
+    "Jingtong Gao",
+    "Wanyu Wang",
+    "Qing Li",
+    "Jiliang Tang"
+  ],
+  "year": "2023-06",
+  "labels": [
+    "recommender systems",
+    "multimodal"
+  ],
+  "summaries": [
+    "This survey categorizes Multimodal Recommender Systems (MRS) into four technical pillars: **Modality Encoder**, **Feature Interaction**, **Feature Enhancement**, and **Model Optimization**"
+  ],
+  "systemModel": [
+    "Technical Pillors",
+    [
+      "![](/papers/liu2024multimodal/framework.jpg)",
+      "**1. Modality Encoder**",
+      [
+        "**Philosophy**: Convert raw multimodal data (e.g., images, text) into dense representations using specialized encoders.",
+        "**Techniques**",
+        [
+          "**Visual Encoders**",
+          [
+            "**Categories**: CNN (e.g., VGG), ResNet, Transformer (e.g., ViT).",
+            "**Advantages**: Leverage pre-trained models for high-quality feature extraction.",
+            "**Shortcomings**: High computational cost; potential overfitting due to large parameter sizes."
+          ],
+          "**Textual Encoders**",
+          [
+            "**Categories**: Word2Vec, RNN, CNN, Sentence-Transformer, BERT.",
+            "**Advantages**: Capture semantic information; BERT enables contextual understanding.",
+            "**Shortcomings**: Text preprocessing complexity; scalability issues with long sequences."
+          ],
+          "**Other Modalities**",
+          [
+            "Use pre-published features (e.g., acoustic/video data converted to text/visual formats)."
+          ]
+        ]
+      ],
+      "-",
+      "**2. Feature Interaction**",
+      [
+        "![](/papers/liu2024multimodal/feature_interaction.jpg)",
+        "**Philosophy**: Integrate multimodal features by aligning, fusing, or filtering them to model user-item relationships.",
+        "**Techniques**",
+        [
+          "**Bridge** (User-item/Item-item Graphs, Knowledge Graphs): <ol>",
+          [
+            "**Advantages**: Capture inter-relationships (e.g., MMGCN, MKGAT).",
+            "**Shortcomings**: Graph construction complexity; scalability issues with large datasets."
+          ],
+          "**Fusion** (Coarse/Fine-grained Attention, Combined Methods)",
+          [
+            "**Advantages**: Flexible weighting of modalities (e.g., MARIO, NOVA)",
+            "**Shortcomings**: Attention mechanisms may introduce noise; irreversible fusion damages original features."
+          ],
+          "**Filtration** (Denoising via Graphs/Image Processing)",
+          [
+            "**Advantages**: Improve robustness (e.g., GRCN, MM-Rec)",
+            "**Shortcomings**: Requires domain-specific noise detection strategies"
+          ]
+        ]
+      ],
+      "-",
+      "![](/papers/liu2024multimodal/feature_enhence_optimization.jpg)",
+      "**3. Feature Enhancement**",
+      [
+        "**Philosophy**: Enhance feature quality by disentangling or aligning representations to handle sparsity and noise.",
+        "**Techniques**",
+        [
+          "**Disentangled Representation Learning (DRL)**:<ol>",
+          [
+            "**Advantages**: Separate modality-specific and common features (e.g., DMRL).",
+            "**Shortcomings**: Requires labeled factor-level data; training instability."
+          ],
+          "**Contrastive Learning (CL)**",
+          [
+            "**Advantages**: Align modalities via data augmentation (e.g., MMGCL)",
+            "**Shortcomings**: Sensitive to negative sampling; computationally intensive"
+          ]
+        ]
+      ],
+      "-",
+      "**4. Model Optimization**",
+      [
+        "**Philosophy**: Balance performance and computational efficiency during training.",
+        "Techniques",
+        [
+          "**End-to-End Training**<ol>",
+          [
+            "**Advantages**: Jointly optimize encoders and recommendation models.",
+            "**Shortcomings**: High resource demands; risk of overfitting."
+          ],
+          "**Two-Step Training**",
+          [
+            "**Advantages**: Efficient pre-training of encoders (e.g., PMGT). ",
+            "**Shortcomings**: Task-specific adaptation challenges; potential modality-task misalignment"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1145/3695461",
+  "id": "liu2024multimodal",
+  "bibtex": "@article{liu2024multimodal, title={Multimodal recommender systems: A survey}, author={Liu, Qidong and Hu, Jiaxi and Xiao, Yutian and Zhao, Xiangyu and Gao, Jingtong and Wang, Wanyu and Li, Qing and Tang, Jiliang}, journal={ACM Computing Surveys}, volume={57}, number={2}, pages={1--17}, year={2024}, publisher={ACM New York, NY}}"
+}

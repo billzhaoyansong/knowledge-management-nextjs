@@ -1,0 +1,88 @@
+{
+  "title": "Federated Learning in Competitive EV Charging Market",
+  "type": "technical",
+  "authors": [
+    "Chenxi Sun",
+    "Chao Huang",
+    "Biying Shou",
+    "Jianwei Huang"
+  ],
+  "year": "2023-10",
+  "labels": [
+    "federated learning",
+    "collaboration",
+    "competition",
+    "game theory"
+  ],
+  "summaries": [
+    "investigates how FL impacts price competition between 2 electric vehicle (EV) charging stations, revealing that **while FL improves service quality, it can reduce profits by intensifying price competition** when stations’ data distributions are moderately dissimilar. Using a game-theoretic model and real-world data, the study shows that **FL adoption hinges on balancing data heterogeneity, QoS gains, and competitive dynamics**."
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "**FL's Potential**: Federated Learning (FL) can enhance Quality of Service (QoS) for EV charging stations by leveraging shared model training without data sharing.",
+        "**Unaddressed Impact**: Existing studies focus on FL algorithms but neglect its impact on price competition and profits in competitive markets.",
+        "**Practical Relevance**: FL adoption may unintentionally reduce profits due to intensified price competition, necessitating a game-theoretic analysis.  "
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "Model strategic interactions between charging stations and EV owners in a competitive market. ",
+        "Analyze how FL collaboration affects QoS, pricing strategies, and profits.",
+        "Determine **conditions under which stations choose to participate** in FL. "
+      ]
+    ],
+    "Players & Notations",
+    [
+      "**Market Structure**: Duopoly with two charging stations ($\\mathcal{I} = \\{A, B\\}$).",
+      [
+        "$p_i$: Charging price of station $i$",
+        "$r_i$: FL participation strategy of station $i$, $r_i = 1$ (participate), $0$ (opt-out)"
+      ]
+    ],
+    "Workflow",
+    [
+      "**Stage I (FL Participation Game)**<ol>",
+      [
+        "Stations decide $r_i \\in \\{0,1\\}$. FL collaboration requires $r_A = r_B = 1$.",
+        [
+          "QoS: $q_i(\\bm{r}) = \\begin{cases} \\overline{q_i}, \\quad \\text{if } r_A = r_B = 1 \\\\ \\underline{q_i}, \\quad \\text{otherwise} \\end{cases}$"
+        ]
+      ],
+      "**Stage II (Price Competition)**",
+      [
+        "Stations set prices $p_i$ based on QoS ($q_i(\\bm{r})$)",
+        "Equilibrium prices depend on QoS differences (Theorem 2)"
+      ],
+      "**Stage III (EV Selection)**",
+      [
+        "EVs choose stations $s_x = \\{\\emptyset, A, B\\}$",
+        "Utility of the EV: $U_x(\\bm{p},\\bm{r}) = \\begin{cases} 0 , \\quad \\text{if } s_x = \\emptyset \\\\ w_l q_i(\\bm{r}) - w_p p_i - x, \\quad \\text{if } s_x = A \\\\  w_l q_i(\\bm{r}) - w_p p_i - (1-x), \\quad \\text{if } s_x = B  \\end{cases}$",
+        [
+          "$w_l, w_p$: Weights for QoS, price",
+          "Assume there is a continuum of EVs distributed along a line characterized by $[0,1]$, and $A, B$ reside at $x=0$ and $x=1$"
+        ]
+      ]
+    ],
+    "Conclusion",
+    [
+      "FL reduces QoS differences, intensifying price competition",
+      "**Conditions under which the FL Collaboration can happen**",
+      [
+        "Moderate data heterogeneity (neither too similar nor too dissimilar)<ol>",
+        [
+          "Too dissimilar: FL provides limited QoS gains due to extreme non-IID data",
+          "Too similar: FL homogenizes QoS, leading to intense price competition that outweighs QoS benefits."
+        ],
+        "Sufficient QoS improvement to offset competition-driven profit loss",
+        "Low FL participation cost"
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/ISGTEUROPE56780.2023.10407634",
+  "id": "sun2023federated",
+  "bibtex": "@inproceedings{sun2023federated, title={Federated learning in competitive ev charging market}, author={Sun, Chenxi and Huang, Chao and Shou, Biying and Huang, Jianwei}, booktitle={2023 IEEE PES Innovative Smart Grid Technologies Europe (ISGT EUROPE)}, pages={1--5}, year={2023}, organization={IEEE}}"
+}

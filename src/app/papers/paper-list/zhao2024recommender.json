@@ -1,0 +1,110 @@
+{
+  "title": "Recommender Systems in the Era of Large Language Models (LLMs)",
+  "type": "survey",
+  "authors": [
+    "Zihuai Zhao",
+    "Wenqi Fan",
+    "Jiatong Li",
+    "Yunqing Liu",
+    "Xiaowei Mei",
+    "Yiqi Wang"
+  ],
+  "year": "2023-08",
+  "labels": [
+    "recommender systems"
+  ],
+  "summaries": [
+    "This survey paper explores the integration of **Large Language Models (LLMs)** into **Recommender Systems (RecSys)** by categorizing LLM-empowered RecSys into three paradigms: **pre-training**, **fine-tuning**, and **prompting**"
+  ],
+  "systemModel": [
+    "Objectives",
+    [
+      "This survey paper explores the integration of **Large Language Models (LLMs)** into **Recommender Systems (RecSys)** to address limitations of traditional Deep Neural Networks (DNNs), such as poor textual understanding, limited generalization, and reasoning capabilities. The authors categorize LLM-empowered RecSys into three paradigms: **pre-training**, **fine-tuning**, and **prompting**, and discuss future challenges."
+    ],
+    "Key Techniques",
+    [
+      "**1. Pre-training Paradigm**",
+      [
+        "![](/papers/zhao2024recommender/pre_training.gif)",
+        "**Philosophy**: Train LLMs on large corpora to learn general language patterns, then adapt to RecSys.",
+        "**Methods**",
+        [
+          "**Masked Language Modeling (MLM)**: Predict masked tokens in bidirectional contexts.",
+          "**Next Token Prediction (NTP)**: Autoregressive prediction for language generation.",
+          "**Multi-task Modeling (e.g., P5)**: Unify recommendation tasks into text generation."
+        ],
+        "*Advantages*: (1) Captures broad linguistic knowledge; (2)Supports diverse recommendation tasks.",
+        "_Shortcomings_: (1) Computationally expensive. (2) May lack domain-specific nuances without fine-tuning."
+      ],
+      "**2. Fine-tuning Paradigm**",
+      [
+        "![](/papers/zhao2024recommender/fine-tuning.gif)",
+        "**Full-Model Fine-tuning**<ol>",
+        [
+          "**Philosophy**: Update all parameters of a pre-trained LLM on task-specific data.",
+          "*Advantages*: Tailors models closely to recommendation tasks.",
+          "_Shortcomings_: Risk of overfitting and bias introduction"
+        ],
+        "**Parameter-Efficient Fine-tuning (PEFT)**",
+        [
+          "**Philosophy**: Update minimal parameters (e.g., adapters, LoRA)",
+          "*Advantages*: Reduces computational load",
+          "_Shortcomings_: (1) May underperform full fine-tuning; (2) Requires careful adapter design"
+        ]
+      ],
+      "**3. Prompting Paradigm**",
+      [
+        "![](/papers/zhao2024recommender/prompt.gif)",
+        "![](/papers/zhao2024recommender/prompt-table.gif)",
+        "**prompt**: a text template that can be applied to the input of LLMs. (e.g. *“The relation between _ and _ is _.”)*",
+        "**Prompting**",
+        [
+          "**Conventional Prompting**<ol>",
+          [
+            "**Philosophy**: Use natural language prompts without parameter updates",
+            "_Advantages_: Simple, no training data required.",
+            "_Shortcomings_: Limited by prompt design quality; Struggles with complex tasks"
+          ],
+          "**In-Context Learning (ICL)**",
+          [
+            "![](/papers/zhao2024recommender/ICL.gif)",
+            "**Philosophy**: Provide task examples in prompts (few-shot/zero-shot)",
+            "*Advantages*: Effective for few-shot learning; Flexible across tasks",
+            "_Shortcomings_: Performance drops in zero-shot settings; Dependent on demonstration quality"
+          ],
+          "**Chain-of-Thought (CoT) Prompting**",
+          [
+            "**Philosophy**: Guide LLMs through step-by-step reasoning.",
+            "_Advantages_: Enhances complex reasoning (e.g., multi-step recommendations).",
+            "_Shortcomings_: (1) Requires manual reasoning step design. (2) Increases response length."
+          ]
+        ],
+        "**Prompt Tuning**",
+        [
+          "**Hard Prompt Tuning**<ol>",
+          [
+            "**Philosophy**: Optimize discrete text prompts via trial-and-error.",
+            "_Advantages_: Interpretable and human-readable.",
+            "_Shortcomings_: Labor-intensive; Limited by vocabulary space"
+          ],
+          "**Soft Prompt Tuning**",
+          [
+            "**Philosophy**: Optimize continuous prompt embeddings",
+            "_Advantages_: Flexible, better performance potential.",
+            "_Shortcomings_: Less interpretable; Requires gradient access"
+          ]
+        ],
+        "**Instruction Tuning**",
+        [
+          "**Philosophy**: Fine-tune LLMs on diverse tasks with instructions.",
+          "_Advantages_: Improves zero-shot generalization.",
+          "_Shortcomings_: Requires large instruction datasets.; complex training setup"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1109/TKDE.2024.3392335",
+  "id": "zhao2024recommender",
+  "bibtex": "@article{zhao2024recommender, title={Recommender systems in the era of large language models (llms)}, author={Zhao, Zihuai and Fan, Wenqi and Li, Jiatong and Liu, Yunqing and Mei, Xiaowei and Wang, Yiqi and Wen, Zhen and Wang, Fei and Zhao, Xiangyu and Tang, Jiliang and others}, journal={IEEE Transactions on Knowledge and Data Engineering}, year={2024}, publisher={IEEE}}"
+}

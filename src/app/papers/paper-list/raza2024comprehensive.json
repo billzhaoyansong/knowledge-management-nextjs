@@ -12,7 +12,8 @@
   ],
   "year": "2024-07",
   "labels": [
-    "recommender systems"
+    "recommender systems",
+    "survey"
   ],
   "summaries": [
     ""
@@ -411,6 +412,66 @@
         "lack of spatial invariance",
         "issues with vanishing or exploding gradients",
         "explainability"
+      ]
+    ],
+    "Sequential and Session-based Recommender Systems",
+    [
+      "Philosophy",
+      [
+        "**Sequential Models**:",
+        [
+          "Capture **long-term patterns** in user behavior (e.g., entire interaction history).",
+          [
+            "$i_{\\text{next}} = f(\\text{history}(u))$",
+            [
+              "$i_{\\text{next}}$: next recommended item",
+              "$\\text{history}(u)$: user $u$'s interaction sequence"
+            ]
+          ],
+          "Use **RNNs, Transformers, or attention mechanisms** to model item transitions."
+        ],
+        "**Session-Based Models**:",
+        [
+          "Focus on **short-term intent** within a single session (e.g., 30-minute browsing).",
+          [
+            "$i_{\\text{session-next}} = g(s_{\\text{current}})$",
+            [
+              "$i_\\text{session-next}$: the imminent session recommendation",
+              "$s_{\\text{current}}$: the ongoing session interactions",
+              "$g$: predicting the next item considering the session’s context"
+            ]
+          ],
+          "Prioritize **real-time updates** and **local context** (e.g., recent clicks)."
+        ]
+      ]
+    ],
+    "Multimodal Recommender Systems",
+    [
+      "Multimodal recommender systems integrate **diverse data types (text, images, audio, video)** to enhance recommendation quality by capturing richer user preferences and item characteristics.",
+      "Design Philosophy",
+      [
+        "**Feature Fusion**: Combine embeddings from different modalities (e.g., text + images).",
+        "**Attention Mechanisms**: Prioritize relevant modalities or features.",
+        "**Knowledge Graphs**: Leverage structured relationships between entities.",
+        "**Transfer Learning**: Share knowledge across modalities or domains."
+      ]
+    ],
+    "LLM-based Recommender Systems",[
+      "Design Philosophies",[
+        "Pre-training & Fine-tuning:<ol>",[
+          "**Pre-trained LLMs** (e.g., BERT, GPT) are fine-tuned on domain-specific data (e.g., product reviews) to align with recommendation tasks."
+        ],
+        "Textual Feature Integration:",[
+          "Encode text (reviews, item descriptions) into dense vectors for collaborative filtering or hybrid models.",
+          "Example: DeepCoNN [87] processes reviews with CNNs to augment user/item embeddings."
+        ],
+        "Prompt Engineering:",
+        [
+          "Use prompts to guide LLMs in generating recommendations or explanations (e.g., Prompt4NR)"
+        ],
+        "Multi-Task Learning:",[
+          "Jointly optimize recommendation accuracy and auxiliary tasks (e.g., review generation, sentiment analysis)."
+        ]
       ]
     ]
   ],

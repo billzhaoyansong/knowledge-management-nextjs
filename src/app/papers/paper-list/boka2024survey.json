@@ -1,0 +1,90 @@
+{
+  "title": "A survey of sequential recommendation systems: Techniques, evaluation, and future directions",
+  "type": "technical",
+  "authors": [
+    "Tesfaye Fenta Boka",
+    "Zhendong Niu",
+    "Rama Bastola Neupane"
+  ],
+  "year": "2024-06",
+  "labels": [
+    "recommender systems"
+  ],
+  "summaries": [
+    "This survey categorizes Sequential Recomender Systems techniques, discusses evaluation methodologies, and outlines future research directions."
+  ],
+  "systemModel": [
+    "Motivations & Objectives",
+    [
+      "**Motivations**",
+      [
+        "Sequential Recommendation Systems (SRS) model users' evolving preferences by leveraging temporal interaction sequences (e.g., clicks, purchases)."
+      ],
+      "-",
+      "**Objectives**",
+      [
+        "This survey categorizes SRS techniques, discusses evaluation methodologies, and outlines future research directions."
+      ]
+    ],
+    "Key Techniques",
+    [
+      "**1. Traditional Approaches**",
+      [
+        "**Markov Chain Models**: Predict next interaction via transition probabilities between items (e.g., $P(i_{t+1} | i_t)$).",
+        [
+          "_Advantages_: (1) Simple and computationally efficient; (2) Effective for short-term sequential patterns (e.g., session-based recommendations)",
+          "_Shortcomings_: (1) Assumes the next item depends only on the previous interaction (Markov property), ignoring long-term dependencies; (2) Struggles with sparse data; (3) Fails to model collective dependencies (e.g., user-item relationships)"
+        ],
+        "**Matrix Factorization with Sequence Modeling**: Combines matrix factorization (MF, e.g., decomposing user-item matrices into latent factors) with sequence-aware methods (e.g., Fossil, iALS, Markov Chains).",
+        [
+          "_Advantages_: (1) Handles implicit feedback (e.g., clicks, views) better than explicit ratings; (2) Captures latent user/item preferences and temporal transitions",
+          "_Shortcomings_: (1) Limited ability to model complex temporal dynamics (e.g., evolving user interests); (2) Scalability issues with large datasets due to matrix operations."
+        ]
+      ],
+      "**2. Neural Network-Based Approaches**",
+      [
+        "**RNNs (GRU, LSTM)**: Process sequences step-by-step, maintaining hidden states to model temporal dependencies (**GRU4Rec** uses GRUs for session-based recommendations)",
+        [
+          "_Advantages_: (1) Naturally suited for sequential data (e.g., user interaction histories); (2) Variants like LSTM mitigate vanishing gradient problems ",
+          "_Shortcomings_: (1) Struggle with very long sequences (limited long-term memory).; (2) Prone to overfitting noisy short-term patterns (e.g., coincidental item co-occurrence)"
+        ],
+        "**CNNs (Caser)**: Treats user interaction sequences as \"images\" (time $\\times$ latent space) and applies convolutional filters (e.g. **Caser** uses horizontal/vertical filters to capture local/global patterns)",
+        [
+          "_Advantages_: (1) Captures local sequential patterns without strict order assumptions; (2) Parallelizable for faster training compared to RNNs.",
+          "_Shortcomings_: (1) Limited ability to model long-range dependencies (filter size constraints) (2) Less interpretable than attention-based models."
+        ],
+        "**Attention Models (BERT4Rec, SASRec)**: Uses self-attention to dynamically weight interactions (e.g., $\\text{Attention}(Q, K, V) = \\text{softmax}(\\frac{QK^T}{\\sqrt{d}})V$)",
+        [
+          "Example: **SASRec** leverages multi-head self-attention for bidirectional context.",
+          "_Advantages_: (1) Captures long-term dependencies and item relationships.; (2) Enables interpretability",
+          "_Shortcomings_: (1) Computationally expensive for very long sequences; (2) equires large datasets to avoid overfitting"
+        ],
+        "**Graph-Based Models (GNNs)**: Models user-item interactions as graphs (nodes = items/users, edges = interactions)",
+        [
+          "Example: **TIDA-GCN** uses time-interval-aware graph convolutions.",
+          "_Advantages_: (1) Provides explainability through graph structures (e.g., path-based recommendations). (2) Captures complex relationships (e.g., user-user influence, item bundles)",
+          "_Shortcomings_: (1) Scalability issues with dynamic graphs (e.g., real-time updates). (2) Requires careful preprocessing to construct meaningful graphs."
+        ],
+        "**Contrastive Learning (ContraRec)**: Trains models to distinguish positive (user-item) pairs from negative ones via contrastive loss.",
+        [
+          "**ContraRec** unifies context-target and context-context contrastive tasks. ",
+          "_Advantages_: (1) Improves embedding quality by leveraging self-supervised signals; (2) Robust to noisy interaction data",
+          "_Shortcomings_: (1) Sensitive to negative sampling strategies (poor sampling degrades performance); (2) Requires careful hyperparameter tuning (e.g., temperature in loss functions)"
+        ]
+      ],
+      "**3. Hybrid Approaches**",
+      [
+        "Combines multiple techniques (e.g., RNN + Attention, GNN + MF)",
+        [
+          "e.g. **LSRec** integrates LSTM and Transformer encoders for dynamic interest modeling",
+          "_Advantages_: (1) Mitigates individual model limitations (e.g., RNNs for sequences + Attention for long-term dependencies); (2) Enhances accuracy by leveraging complementary strengths",
+          "_Shortcomings_: (1) Increased complexity in training and deployment"
+        ]
+      ]
+    ]
+  ],
+  "techniques": [],
+  "doi": "10.1016/j.is.2024.102427",
+  "id": "boka2024survey",
+  "bibtex": "@article{boka2024survey, title={A survey of sequential recommendation systems: Techniques, evaluation, and future directions}, author={Boka, Tesfaye Fenta and Niu, Zhendong and Neupane, Rama Bastola}, journal={Information Systems}, pages={102427}, year={2024}, publisher={Elsevier}}"
+}
