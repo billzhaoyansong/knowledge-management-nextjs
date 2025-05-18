@@ -48,7 +48,7 @@ export default function RootLayout({
           </div>
 
           {/* rightside content */}
-          <div className="flex-1 w-64">
+          <div className="flex-1 w-64 overflow-y-scroll">
             {children}
           </div>
         </div>
