@@ -1,3 +1,5 @@
+"use client"
+
 import BookCardSectionContent1x1 from "./book-card-section-content-1x1";
 import BookCardSectionContent1x2 from "./book-card-section-content-1x2";
 import BookCardSectionContent2x1 from "./book-card-section-content-2x1";

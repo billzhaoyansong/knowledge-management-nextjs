@@ -9,4 +9,8 @@
     li:has(> img) {
         @apply list-none !important;
     }
+
+    /* img:not(+ul){
+        @apply 
+    } */
 }
