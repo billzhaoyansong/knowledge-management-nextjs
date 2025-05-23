@@ -34,7 +34,8 @@
             }
             
             li:has(hr),
-            li:has(>img)
+            li:has(>img),
+            li:has(>details)
             {
                 @apply list-none;
             }
