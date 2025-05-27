@@ -15,7 +15,10 @@ export default function Books() {
 
     return <PageLayout title="Books">
         <div className="flex flex-row flex-wrap py-3 px-3">
-            {_booksTitles.map(t => <BookCard key={t} title={t}></BookCard>)}
+            {_booksTitles.sort((a, b) => a.localeCompare(b, undefined, {
+                numeric: true,
+                sensitivity: 'base'
+            })).map(t => <BookCard key={t} title={t}></BookCard>)}
         </div>
     </PageLayout>
 }
