@@ -79,7 +79,7 @@
 
         ul li,
         ol li {
-            @apply no-underline hover:cursor-default !important;
+            @apply no-underline hover:cursor-default list-outside ml-6 !important;
         }
 
         ol > li {
