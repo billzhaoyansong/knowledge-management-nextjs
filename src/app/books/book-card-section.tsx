@@ -11,6 +11,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
+import rehypeMermaid from 'rehype-mermaid'
 
 import './book-card-section.css'
 
@@ -23,11 +24,18 @@ export const unifiedProcessor = unified()
     .use(rehypeKatex)
     .use(rehypeHighlight)
     .use(rehypeStringify)
+    .use(rehypeMermaid, {
+        // The default strategy is 'inline-svg'
+        // strategy: 'img-png'
+        // strategy: 'img-svg'
+        // strategy: 'inline-svg'
+        // strategy: 'pre-mermaid'
+    })
 
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/github-dark.min.css'
 import BookCardContent from "./book-card-content";
-import Modal from "../components/Modal";
+import Modal from "../components/modal";
 
 export type SubSection = {
     subSectionTitle: string;
