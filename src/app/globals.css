@@ -21,6 +21,7 @@ body {
 }
 
 @layer components {
+  /* Navigation Components */
   .nav-btn {
     @apply flex flex-row items-center border-b border-gray-600 py-5 space-x-6 w-full hover:text-white hover:underline decoration-solid focus:text-white focus:underline text-gray-400 rounded;
   }
@@ -30,14 +31,222 @@ body {
   }
 
   .nav-menu {
-    @apply flex flex-col justify-items-start items-center border-b border-gray-600 w-full
+    @apply flex flex-col justify-items-start items-center border-b border-gray-600 w-full;
   }
 
   .nav-menu-title {
-    @apply text-gray-400 flex space-x-6 items-center w-full py-5
+    @apply text-gray-400 flex space-x-6 items-center w-full py-5;
   }
 
   .nav-menu-item {
-    @apply flex justify-items-start items-center hover:text-white focus:underline focus:text-white hover:underline decoration-solid text-gray-400 rounded px-16 py-2 w-full md:w-52
+    @apply flex justify-items-start items-center hover:text-white focus:underline focus:text-white hover:underline decoration-solid text-gray-400 rounded px-16 py-2 w-full md:w-52;
+  }
+
+  /* Book Card Components */
+  .book-card {
+    ul li {
+      @apply list-disc list-inside underline hover:cursor-pointer;
+    }
+  }
+
+  /* Book Content Components */
+  .book-content {
+    @apply text-base;
+
+    .book-subsection {
+      @apply px-6 py-6 border bg-yellow-50 rounded-lg mx-3 my-2;
+
+      h1 {
+        @apply text-2xl pb-1 text-yellow-700;
+      }
+
+      h2 {
+        @apply pt-3 table relative ml-2 mb-[-12px] font-bold text-xl px-3 bg-yellow-50;
+      }
+
+      h2+table,
+      h2+ul,
+      h2+ol {
+        @apply border border-gray-700 pt-3 pb-2 px-2;
+      }
+
+      li>p {
+        @apply inline;
+      }
+
+      pre {
+        @apply text-xs;
+      }
+
+      li:has(hr),
+      li:has(>img),
+      li:has(>details) {
+        @apply list-none;
+      }
+
+      hr {
+        @apply my-2;
+      }
+    }
+
+    /* Nested list styles for book content */
+    ul ul,
+    ol ul,
+    ol ol,
+    ul ol {
+      @apply pl-6 text-sm;
+    }
+
+    ul > li {
+      @apply list-disc;
+    }
+
+    ul ul > li {
+      @apply list-[circle];
+    }
+
+    ul ul ul li {
+      @apply list-[square];
+    }
+
+    ul ul ul ul li {
+      @apply list-[circle];
+    }
+
+    ul ul ul ul ul ul li {
+      @apply list-disc;
+    }
+
+    ul ul ul ul ul ul ul ul li {
+      @apply list-[circle];
+    }
+
+    ul li,
+    ol li {
+      @apply no-underline hover:cursor-default list-outside ml-6;
+    }
+
+    ol > li {
+      @apply list-decimal;
+    }
+
+    a {
+      @apply underline;
+    }
+
+    table th,
+    table td {
+      @apply border text-sm text-left align-top;
+    }
+
+    table td ul {
+      @apply pl-6;
+    }
+
+    table {
+      @apply mx-3 my-3;
+    }
+  }
+
+  /* Paper Card and Detail Components */
+  .paper-card,
+  .paper-detail {
+    ul:not(.depth-1),
+    ol:not(.depth-1) {
+      @apply pl-6;
+    }
+
+    ul > li {
+      @apply list-[square] list-inside;
+    }
+
+    /* Depth-based styling */
+    ul.depth-2,
+    ul.depth-3,
+    ul.depth-4,
+    ul.depth-5,
+    ul.depth-6,
+    ol.depth-2,
+    ol.depth-3,
+    ol.depth-4,
+    ol.depth-5,
+    ol.depth-6 {
+      @apply text-sm pl-9;
+
+      * > li {
+        @apply list-outside;
+      }
+    }
+
+    /* List markers by depth */
+    ul.depth-1 > li { @apply list-disc; }
+    ul.depth-2 > li { @apply list-[circle]; }
+    ul.depth-3 > li { @apply list-[square]; }
+    ul.depth-4 > li { @apply list-[circle]; }
+    ul.depth-5 > li { @apply list-disc; }
+    ul.depth-6 > li { @apply list-[circle]; }
+
+    /* Custom ordered list counters */
+    ol {
+      counter-reset: list;
+    }
+
+    ol > li {
+      list-style: none;
+    }
+
+    ol > li:before {
+      content: "(" counter(list, numeric) ") ";
+      counter-increment: list;
+    }
+
+    ol > li > ol > li:before {
+      content: "(" counter(list, lower-alpha) ") ";
+      counter-increment: list;
+    }
+
+    /* Special list item handling */
+    li:has(ol:first-child),
+    li:has(p img) {
+      @apply list-none;
+    }
+
+    li img {
+      max-height: 300px;
+    }
+
+    p {
+      @apply inline;
+    }
+
+    a {
+      @apply underline text-blue-600;
+    }
+
+    hr {
+      margin: 0.5rem 0;
+    }
+  }
+
+  /* Page-specific components */
+  .book-page {
+    li {
+      @apply list-disc list-inside underline hover:cursor-pointer;
+    }
+
+    li:has(> img) {
+      @apply list-none;
+    }
+  }
+
+  /* Filter components */
+  .filter-section {
+    .label-btn::first-letter {
+      font-size: 1rem;
+    }
+
+    .label-btn:hover {
+      @apply font-bold;
+    }
   }
 }

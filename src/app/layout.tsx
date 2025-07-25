@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Quicksand } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import NavBar from "./components/nav-bar";
+import NavBar from "@/components/nav-bar";
+import { ErrorBoundary } from "@/components/error";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,30 +27,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const isActive = (path: string) => {
-
-    const currentPath = new URL(window.location.href).pathname
-
-    console.log(currentPath)
-    return currentPath === path ? 'text-white' : 'text-gray-400';
-  };
 
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
-      >
-        <div className={`flex flex-row ${quicksand.className}  h-screen`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${quicksand.className}`}>
+      <body className="antialiased bg-gray-50">
+        <div className="flex min-h-screen">
+          {/* Sidebar */}
+          <aside className="flex-shrink-0">
+            <ErrorBoundary>
+              <NavBar />
+            </ErrorBoundary>
+          </aside>
 
-          {/* leftside navbar */}
-          <div className="flex-initial h-full">
-            <NavBar />
-          </div>
-
-          {/* rightside content */}
-          <div className="flex-1 w-64 overflow-y-scroll">
-            {children}
-          </div>
+          {/* Main content area */}
+          <main className="flex-1 overflow-auto">
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
+          </main>
         </div>
       </body>
     </html>

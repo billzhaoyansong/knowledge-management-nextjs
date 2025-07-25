@@ -5,9 +5,9 @@
 import fs from 'fs';
 import path from 'path';
 import PaperCard from './paper-card';
-import { redirect } from 'next/navigation'
-import Filter from './filter';
-import PageLayout from '../components/page-layout';
+import PaperFilter from '@/components/paper-filter';
+import PageLayout from '@/components/page-layout';
+import { Paper, PaperSchema } from '@/types';
 
 export default async function Papers({
     searchParams,
@@ -16,7 +16,7 @@ export default async function Papers({
 }) {
 
     // papers to show on screen
-    const _papersToShow = []
+    const _papersToShow: Paper[] = []
 
     // labels to show on screen
     const _labelsToShow = new Set<string>()
@@ -34,42 +34,48 @@ export default async function Papers({
     const _orderBy: string = !params.orderBy ?
         "" : typeof params.orderBy === 'string' ?
             params.orderBy :
-            params.orderBy[0];
+            params.orderBy[0] || "";
 
     // preprocess searchtext from params; if meet multiple searchtext params, get the first
     const _searchText: string = !params.searchText ?
         "" : typeof params.searchText === 'string' ?
             params.searchText :
-            params.searchText[0];
+            params.searchText[0] || "";
 
     // read paper json file names on server disk
     const _papersDiskPath = path.join(process.cwd(), 'src', 'app', 'papers', 'paper-list'); // Specify your directory  
     const _papersFilenames = fs.readdirSync(_papersDiskPath); // Read files in the directory    
 
     // filter papers by filtering labels given in the url
-    for (let paper of _papersFilenames) {
+    for (const paper of _papersFilenames) {
         const paperPath = path.join(process.cwd(), 'src', 'app', 'papers', 'paper-list', paper); // Specify your directory  
 
         const jsonData = await fs.promises.readFile(paperPath, 'utf-8');
-        const data = JSON.parse(jsonData);
-
-        if (!Object.hasOwn(data, 'labels') || !Object.hasOwn(data, 'title') || !Object.hasOwn(data, 'authors') || !Object.hasOwn(data, 'summaries'))
-            continue
+        const rawData = JSON.parse(jsonData);
+        
+        // Validate and parse paper data with Zod
+        const parseResult = PaperSchema.safeParse(rawData);
+        if (!parseResult.success) {
+            console.warn(`Invalid paper data in ${paper}:`, parseResult.error);
+            continue;
+        }
+        
+        const data = parseResult.data;
 
         if (_searchText !== "") {
             const _lowerText = _searchText.toLowerCase()
 
             if (!(data.title.toLowerCase().includes(_lowerText) ||
-                data.summaries[0].toLowerCase().includes(_lowerText) ||
+                (data.summaries[0] && data.summaries[0].toLowerCase().includes(_lowerText)) ||
                 data.authors.some((l: string) => l.toLowerCase().includes(_lowerText))))
                 continue
         }
 
         // skip if not all filtering labels are shown in local labels
-        if (_filterLabels.size > 0 && (_filterLabels.intersection(new Set(data['labels']))).size < _filterLabels.size)
+        if (_filterLabels.size > 0 && (_filterLabels.intersection(new Set(data.labels))).size < _filterLabels.size)
             continue
 
-        data['labels'].forEach((label: string) => {
+        data.labels.forEach((label: string) => {
             _labelsToShow.add(label);
         });
 
@@ -87,20 +93,19 @@ export default async function Papers({
     )
 
     return <PageLayout title='Papers'>
-        <div className='flex flex-row'>
+        <div className="mb-4">
+            <span className='text-sm text-gray-600'>Showing {_papersToShow.length} papers</span>
+        </div>
+        
+        <PaperFilter 
+            orderBy={_orderBy} 
+            searchText={_searchText} 
+            filterLabels={_filterLabels} 
+            labelsToShow={_labelsToShow} 
+        />
 
-            {/* left filters */}
-            <div className="w-64 pl-9 pr-6 mt-6 h-screen border-r">
-
-                <span className='text-xs italic'>showing {_papersToShow.length} papers</span>
-
-                <Filter orderBy={_orderBy} searchText={_searchText} filterLabels={_filterLabels} labelsToShow={_labelsToShow} />
-            </div>
-
-            {/* right paper cards */}
-            <div className="px-9 mt-6 flex-1 flex flex-row flex-wrap">
-                {_papersToShow.map(p => <PaperCard key={p.id} paper={p}></PaperCard>)}
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {_papersToShow.map(p => <PaperCard key={p.id} paper={p} />)}
         </div>
     </PageLayout>
 }

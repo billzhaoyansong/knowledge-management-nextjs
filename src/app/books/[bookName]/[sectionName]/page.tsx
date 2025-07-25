@@ -1,7 +1,6 @@
 
 import Layout from './layout'
 import BookCardContent from "../../book-card-content"
-import './page.css'
 
 
 export default async function Page({
@@ -11,9 +10,11 @@ export default async function Page({
 }) {
 
 
-    let { bookName, sectionName } = await params
+    const { bookName, sectionName } = await params
 
     return <Layout>
-        <BookCardContent title={bookName} section={sectionName} />
+        <div className="book-page">
+            <BookCardContent title={bookName} section={sectionName} />
+        </div>
     </Layout>
 }

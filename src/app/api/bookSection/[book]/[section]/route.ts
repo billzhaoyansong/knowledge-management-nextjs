@@ -21,7 +21,7 @@ export async function GET(
 
     const _contents = []
 
-    for (let cTitle of _contentTitles) {
+    for (const cTitle of _contentTitles) {
         const paperPath = path.join(process.cwd(), 'src', 'app', 'books', 'book-list', book, section, cTitle); // Specify your directory  
 
         const mdContent = await fs.promises.readFile(paperPath, 'utf-8');

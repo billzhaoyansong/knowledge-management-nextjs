@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs"
-import PageLayout from "../components/page-layout";
+import PageLayout from "@/components/page-layout";
 import BookCard from "./book-card";
 
 export default function Books() {

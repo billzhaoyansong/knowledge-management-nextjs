@@ -1,7 +1,6 @@
 import path from "path";
 import fs from 'fs';
 
-import './book-card.css'
 import BookCardSection from "./book-card-section";
 
 export default function BookCard({

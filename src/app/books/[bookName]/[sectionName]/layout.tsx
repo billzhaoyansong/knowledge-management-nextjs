@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Quicksand } from "next/font/google";
-import Link from "next/link";
+import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,7 +11,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const quicksand = Quicksand({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Bill Zhao Yansong's Knowledge Management Site",

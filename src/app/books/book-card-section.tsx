@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -12,8 +12,6 @@ import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
 import rehypeMermaid from 'rehype-mermaid'
-
-import './book-card-section.css'
 
 export const unifiedProcessor = unified()
     .use(remarkParse)
@@ -35,12 +33,11 @@ export const unifiedProcessor = unified()
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/github-dark.min.css'
 import BookCardContent from "./book-card-content";
-import Modal from "../components/modal";
+import Modal from "@/components/modal";
+import { SubSection } from '@/types';
 
-export type SubSection = {
-    subSectionTitle: string;
-    content: string;
-}
+// Re-export for backward compatibility
+export type { SubSection };
 
 
 export default function BookCardSection({

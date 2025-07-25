@@ -3,8 +3,6 @@
 import { redirect } from "next/navigation"
 import { useState } from "react"
 
-import './filter.css'
-
 const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
     orderBy: string,
     searchText: string,
@@ -16,7 +14,7 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
 
     function updateOrderBy(newOrderByValue: string) {
 
-        let params = []
+        const params = []
 
         params.push(`orderBy=${newOrderByValue}`)
 
@@ -31,7 +29,7 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
 
     function updateSearchText() {
 
-        let params = []
+        const params = []
 
         if (!(_searchText === ""))
             params.push(`searchText=${_searchText}`)
@@ -47,7 +45,7 @@ const Filter = ({ orderBy, searchText, filterLabels, labelsToShow }: {
 
     function updateFilterLabels(label: string) {
 
-        let params = []
+        const params = []
 
         if (!(orderBy === ""))
             params.push(`orderBy=${orderBy}`)

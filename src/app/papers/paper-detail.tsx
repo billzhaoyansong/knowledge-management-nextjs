@@ -1,13 +1,15 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import Modal from "../components/modal";
-import { generateHtmlListElement, PaperContent, unifiedProcessor, generateContents } from "./paper-card";
+import { useState } from "react";
+import Modal from "@/components/modal";
+import { PaperContent, generateContents } from "./paper-card";
+import { Icon } from "@/components/ui";
+import { ErrorBoundary } from "@/components/error";
 import React from "react";
 
 // import './paper-detail.css'
 import 'katex/dist/katex.min.css'
-import PdfViewer from "../components/pdf-viewer";
+import PdfViewer from "@/components/pdf-viewer";
 
 
 export default function PaperDetail(
@@ -23,9 +25,7 @@ export default function PaperDetail(
 
     return <>
         <button onClick={() => setIsOpen(true)}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
+            <Icon name="zoom-in" size="sm" />
         </button>
         <Modal isOpen={isOpen}
             onClose={() => { setIsOpen(false) }}
@@ -49,7 +49,7 @@ export default function PaperDetail(
                             ]
                                 .map(
                                     (v) => {
-                                        return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className={`bg-yellow-50 w-full flex ${view === 'detail-only' ? 'flex-row' : ''}`}>
+                                        return v.content && v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className={`bg-yellow-50 w-full flex ${view === 'detail-only' ? 'flex-row' : ''}`}>
                                             <div className="mx-3 w-full">
                                                 <h3 className="font-semibold capitalize text-yellow-700 text-3xl">{v.title}</h3>
 
@@ -62,9 +62,11 @@ export default function PaperDetail(
                         </div>
 
                         {/* ============= right original PDF */}
-                        <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
-                            containerClassName={`bg-yellow-100 border border-slate-500 ${view === "detail-only" ? "hidden" : "basis-1/2"}`}
-                            containerStyle={{ height: '90%' }} />
+                        <ErrorBoundary>
+                            <PdfViewer url={`/papers/${paperContent.id}/article.pdf`}
+                                containerClassName={`bg-yellow-100 border border-slate-500 ${view === "detail-only" ? "hidden" : "basis-1/2"}`}
+                                containerStyle={{ height: '90%' }} />
+                        </ErrorBoundary>
 
                     </div>
                 </div>

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@wojtekmaj/react-hooks": "^2.0.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "highlight.js": "^11.11.1",
     "mermaid": "^11.6.0",
     "mermaid-isomorphic": "^3.0.4",
@@ -26,16 +28,21 @@
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.1",
-    "unified": "^11.0.5"
+    "tailwind-merge": "^3.3.1",
+    "unified": "^11.0.5",
+    "zod": "^4.0.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.31.0",
     "eslint-config-next": "^15.4.3",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"

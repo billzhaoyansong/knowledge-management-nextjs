@@ -1,16 +1,17 @@
 import PaperDetail from './paper-detail';
 import { unified } from 'unified';
+import { AuthorList } from '@/components/patterns/author-list';
 import remarkParse from 'remark-parse';
 import remarkMath from 'remark-math';
 import remarkRehype from 'remark-rehype';
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify'
-import CopyIcon from '../components/copy-icon';
+import CopyIcon from '@/components/copy-icon';
 import React from 'react';
-import { isArray, isString } from '../utils/typeChecker';
-
-import './paper-card.css'
+import { isArray, isString } from '@/utils/typeChecker';
+import { Paper } from '@/types';
+import { Card, CardContent, Badge } from '@/components/ui';
 
 
 export const unifiedProcessor = unified()
@@ -21,31 +22,21 @@ export const unifiedProcessor = unified()
     .use(rehypeKatex)
     .use(rehypeStringify)
 
-const abbrevName = function (fullname: string) {
-    var split_names = fullname.trim().split(" ");
-    let short_name = ""
+// Moved to AuthorList component - can be removed
+// const abbrevName = function (fullname: string) {
+//     const split_names = fullname.trim().split(" ");
+//     let short_name = ""
 
-    for (let i = 0; i < split_names.length - 1; i++) {
-        short_name += split_names[i].charAt(0) + ". "
-    }
+//     for (let i = 0; i < split_names.length - 1; i++) {
+//         short_name += split_names[i]?.charAt(0) + ". "
+//     }
 
-    return short_name + split_names[split_names.length - 1];
-};
+//     return short_name + (split_names[split_names.length - 1] || "");
+// };
 
-export interface PaperContent {
-    "title": string;
-    "type": string,
-    "authors": string[];
-    "year": string;
-    "editing": boolean;
-    "labels": string[];
-    "abstract": string;
-    "summaries": any[];
-    "systemModel": any[];
-    "techniques": any[];
-    "doi": string;
-    "id": string;
-    "bibtex": string;
+// Extended paper interface for UI components (includes editing state)
+export interface PaperContent extends Paper {
+    editing?: boolean;
 }
 
 /**
@@ -55,7 +46,7 @@ export interface PaperContent {
      * @param depth at what depth of this current array
      * @returns 
      */
-export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
+export function generateHtmlListElement(arr: Array<unknown>, ulClassNames: Array<string> = [], depth: number = 0): React.ReactElement {
 
     // for empty 'arr', simply ignore
     if (arr.length === 0) return <></>
@@ -65,7 +56,7 @@ export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<str
         throw new Error(`error format: ${arr[0]}`)
 
     // initialize the array of element children
-    let children = []
+    const children = []
 
     // iterate over elements of 'arr'
     for (let i = 0; i < arr.length; i++) {
@@ -83,7 +74,7 @@ export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<str
             if (i + 1 >= arr.length || isString(arr[i + 1])) {
 
                 const _lineContent = unifiedProcessor
-                    .processSync(arr[i].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
+                    .processSync(String(arr[i]).replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
 
                 children.push(<li dangerouslySetInnerHTML={{ __html: _lineContent.toString() }}></li>)
             }
@@ -97,12 +88,12 @@ export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<str
             if (i - 1 >= 0 && isString(arr[i - 1])) {
 
                 const _prevLineContent = unifiedProcessor
-                    .processSync(arr[i - 1].toString().replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
+                    .processSync(String(arr[i - 1]).replaceAll("<ol>", "").replaceAll("<step-ol>", ""));
 
-                children.push(<li ><span dangerouslySetInnerHTML={{ __html: _prevLineContent.toString() }}></span>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
+                children.push(<li ><span dangerouslySetInnerHTML={{ __html: _prevLineContent.toString() }}></span>{isArray(arr[i]) ? generateHtmlListElement(arr[i] as Array<unknown>, ulClassNames, depth + 1) : null}</li>)
             }
             else
-                children.push(<li>{generateHtmlListElement(arr[i], ulClassNames, depth + 1)}</li>)
+                children.push(<li>{isArray(arr[i]) ? generateHtmlListElement(arr[i] as Array<unknown>, ulClassNames, depth + 1) : null}</li>)
         }
         else {
             throw new Error(`unknown data structure: ${arr}`)
@@ -121,7 +112,7 @@ export function generateHtmlListElement(arr: Array<any>, ulClassNames: Array<str
 }
 
 export function generateContents(title: string,
-    arr: Array<any>,
+    arr: Array<unknown>,
     sectionTitleClassNames: Array<string> = ["text-xl"],
     sectionClassNames: Array<string> = ["w-full"],
     ulClassNames: Array<string> = [],
@@ -129,12 +120,12 @@ export function generateContents(title: string,
 
     // for summaries, list all the contents directly
     if (title === 'summary')
-        return generateHtmlListElement(arr)
+        return generateHtmlListElement(arr as Array<unknown>)
 
     // for others, handle separately
 
     // initialize the array of element children
-    let children = []
+    const children = []
 
     let i = 0;
     while (i + 1 < arr.length) {
@@ -142,9 +133,9 @@ export function generateContents(title: string,
         // <div className="h-0.5 w-10 bg-black mt-1"></div> 
         children.push(<div className={`pt-6  ${sectionClassNames}`}>
             <div className="border border-gray-700 my-3 mx-3">
-                <h4 className={`table mt-[-20px] ml-2 mb-2 font-bold px-3 bg-yellow-50 ${sectionTitleClassNames}`}>{arr[i]}</h4>
+                <h4 className={`table mt-[-20px] ml-2 mb-2 font-bold px-3 bg-yellow-50 ${sectionTitleClassNames}`}>{String(arr[i])}</h4>
                 <div className="px-2 py-1">
-                    {generateHtmlListElement(arr[i + 1], ulClassNames, depth + 1)}
+                    {isArray(arr[i + 1]) ? generateHtmlListElement(arr[i + 1] as Array<unknown>, ulClassNames, depth + 1) : null}
                 </div>
             </div></div>)
 
@@ -165,77 +156,58 @@ const PaperCard = async ({
     const _1stLineContent = paper.summaries && paper.summaries.length > 0 && typeof paper.summaries[0] === 'string' ? await unifiedProcessor
         .process(paper.summaries[0]) : "";
 
-    return <div className="2xl:basis-1/4 xl:basis-1/2 md:basis-full">
-        <div className="paper-card h-fit px-3 py-6 mx-1 my-1 border border-1 rounded rounded-lg border-black">
+    return (
+        <Card className="h-fit hover:shadow-md transition-shadow">
+            <CardContent>
+                {/* Title and type */}
+                <h4 className="text-slate-700 text-lg font-medium mb-2">
+                    {paper.type && (
+                        <Badge variant="secondary" className="mr-2 text-xs">
+                            {paper.type}
+                        </Badge>
+                    )}
+                    {paper.title}
+                </h4>
 
-            {/* row 1 */}
-            <h4 className="text-slate-500 text-md capitalize">{paper.type && `[${paper.type}] `}{paper.title}</h4>
+                {/* Authors */}
+                <AuthorList 
+                    authors={paper.authors} 
+                    showAbbreviated={true}
+                    showIcons={true}
+                    className="mb-3"
+                    maxDisplay={5}
+                />
 
-            {/* row 2 */}
-            <div className="flex flex-row flex-wrap pt-1 text-slate-400">
-                {paper.authors.map(a =>
-                    <div key={a} className="flex flex-row space-x-1 mx-1 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-
-                        <div className='relative group flex text-center'>
-                            <span className="text-xs">{abbrevName(a)}</span>
-                            <div className='absolute left-10 -top-10 z-10 transform -translate-x-1/2 mt-2 w-max p-2 text-xs text-white bg-black rounded-md shadow-lg opacity-0 group-hover:opacity-80 transition-opacity duration-200 ease-in-out'>{a}</div>
-                        </div>
-                    </div>)}
-            </div>
-
-            {/* row 3 */}
-            <div className="flex flex-row justify-between">
-                <span>{paper.year}</span>
-                <div className="flex flex-row space-x-1">
-                    <CopyIcon content={paper.bibtex} />
-                    {/* <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                        </svg>
-                    </button> */}
-                    <PaperDetail paperContent={paper} />
+                {/* Year and actions */}
+                <div className="flex justify-between items-center mb-3">
+                    <span className="text-sm text-gray-600">{paper.year}</span>
+                    <div className="flex items-center space-x-2">
+                        <CopyIcon content={paper.bibtex || ""} />
+                        <PaperDetail paperContent={paper} />
+                    </div>
                 </div>
 
-                {/* <span>(citation: {paper.citationCount})</span> */}
-            </div>
+                {/* Summary */}
+                {_1stLineContent && (
+                    <div className="text-sm text-gray-700 mb-3">
+                        <div dangerouslySetInnerHTML={{ __html: _1stLineContent.toString() }} />
+                    </div>
+                )}
 
-            {/* row 4 */}
-            <div className="pt-2">
-                <div dangerouslySetInnerHTML={{ __html: _1stLineContent.toString() }}></div>
-                {/* {paper.summaries[0]} */}
-            </div>
+                {/* Labels */}
+                <div className="flex flex-wrap gap-1 mb-3">
+                    {paper.labels.map(label => (
+                        <Badge key={label} variant="outline" size="sm">
+                            {label}
+                        </Badge>
+                    ))}
+                </div>
 
-            {/* row 5 */}
-            <div className="flex flex-row flex-wrap pt-2">
-                {paper.labels.map(l => <span key={l} className="border border-1 px-2 mx-1 mt-1 rounded-lg text-xs">{l}</span>)}
-            </div>
-
-            <hr className='my-3' />
-
-            {/* row 6 */}
-            {/* <div className="flex-1 h-96 overflow-y-scroll mx-2 space-y-3">
-                {[
-                    { 'title': 'systemModel', content: paper.systemModel },
-                    { 'title': 'techniques', content: paper.techniques }
-                ]
-                    .map(
-                        (v) => {
-                            return v.content.length > 0 && v.content[0] !== "" && <div key={v.title} className={`bg-yellow-50 w-full flex flex-row`}>
-                                <div className="mx-3 w-full">
-                                    <h3 className="font-semibold capitalize text-yellow-700 text-lg">{v.title}</h3>
-
-                                    {generateContents(v.title, v.content, ['text-md'])}
-                                </div>
-                            </div>
-                        }
-                    )}
-            </div> */}
-        </div>
-
-    </div>
+                {/* Additional details section (commented out for now) */}
+                {/* Future: Add expandable sections for system model and techniques */}
+            </CardContent>
+        </Card>
+    )
 }
 
 export default PaperCard
