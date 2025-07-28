@@ -1,0 +1,83 @@
+{
+    "kind": "collectionType",
+    "collectionName": "sections",
+    "info": {
+        "singularName": "section",
+        "pluralName": "sections",
+        "displayName": "Section",
+        "description": "Hierarchical sections within books containing markdown content"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "slug": {
+            "type": "string",
+            "required": true
+        },
+        "content": {
+            "type": "richtext",
+            "required": false
+        },
+        "markdownContent": {
+            "type": "text",
+            "required": false
+        },
+        "order": {
+            "type": "integer",
+            "default": 0
+        },
+        "depth": {
+            "type": "integer",
+            "default": 0,
+            "min": 0,
+            "max": 10
+        },
+        "path": {
+            "type": "string",
+            "required": true
+        },
+        "book": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::book.book",
+            "inversedBy": "sections"
+        },
+        "parentSection": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::section.section",
+            "inversedBy": "childSections"
+        },
+        "childSections": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::section.section",
+            "mappedBy": "parentSection"
+        },
+        "images": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
+            "allowedTypes": ["images"]
+        },
+        "attachments": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
+            "allowedTypes": ["files"]
+        },
+        "tags": {
+            "type": "json"
+        },
+        "isContainer": {
+            "type": "boolean",
+            "default": false
+        }
+    }
+}

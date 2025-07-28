@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(npm audit:*)",
-      "Bash(npm update:*)"
+      "Bash(npm update:*)",
+      "Bash(npm run build:*)",
+      "Bash(mv:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint)",
+      "Bash(timeout 10 npm run dev)",
+      "Bash(rm:*)",
+      "Bash(npm ls:*)",
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(npm outdated)"
     ],
     "deny": []
   }

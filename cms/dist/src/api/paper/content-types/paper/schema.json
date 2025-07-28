@@ -1,0 +1,81 @@
+{
+    "kind": "collectionType",
+    "collectionName": "papers",
+    "info": {
+        "singularName": "paper",
+        "pluralName": "papers",
+        "displayName": "Paper",
+        "description": "Research papers with metadata, summaries, and analyses"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "unique": true
+        },
+        "type": {
+            "type": "enumeration",
+            "enum": ["technical", "survey", "position", "short"],
+            "default": "technical"
+        },
+        "authors": {
+            "type": "json",
+            "required": true
+        },
+        "year": {
+            "type": "string",
+            "required": true
+        },
+        "labels": {
+            "type": "json"
+        },
+        "summaries": {
+            "type": "json"
+        },
+        "systemModel": {
+            "type": "json"
+        },
+        "techniques": {
+            "type": "json"
+        },
+        "doi": {
+            "type": "string",
+            "unique": true
+        },
+        "bibtex": {
+            "type": "text"
+        },
+        "slug": {
+            "type": "string",
+            "required": true,
+            "unique": true
+        },
+        "pdf": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": ["files"]
+        },
+        "images": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
+            "allowedTypes": ["images"]
+        },
+        "analysisFile": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": ["files"]
+        },
+        "category": {
+            "type": "json",
+            "required": false,
+            "description": "Paper category and subcategory structure: {category: string, subcategory: string}"
+        }
+    }
+}
