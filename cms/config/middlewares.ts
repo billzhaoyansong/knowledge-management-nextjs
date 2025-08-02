@@ -1,4 +1,5 @@
 import path from 'path';
+import os from 'os';
 
 export default [
   'strapi::logger',
@@ -11,7 +12,7 @@ export default [
     name: 'strapi::body',
     config: {
       formidable: {
-        uploadDir: path.join(__dirname, '../tmp'),
+        uploadDir: os.tmpdir(), // Use system temp directory with better Windows handling
         maxFileSize: 100 * 1024 * 1024, // 100MB
         keepExtensions: true
       }

@@ -21,6 +21,7 @@ export const BookSchema = z.object({
   name: z.string(),
   title: z.string(),
   sections: z.array(BookSectionSchema),
+  order: z.number(),
   description: z.string().optional(),
   author: z.string().optional(),
   tags: z.array(z.string()).optional(),

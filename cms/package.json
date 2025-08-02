@@ -13,7 +13,12 @@
     "migrate:papers:dry": "node scripts/migrate-papers.js --dry-run",
     "migrate:papers:verbose": "node scripts/migrate-papers.js --verbose",
     "migrate:papers:safe": "node scripts/migrate-papers.js --verbose --skip-large-files",
-    "migrate:papers:force": "node scripts/migrate-papers.js --verbose --force"
+    "migrate:papers:force": "node scripts/migrate-papers.js --verbose --force",
+    "migrate:books": "node scripts/migrate-books.js",
+    "migrate:books:dry": "node scripts/migrate-books.js --dry-run",
+    "migrate:books:verbose": "node scripts/migrate-books.js --verbose",
+    "migrate:books:safe": "node scripts/migrate-books.js --verbose --skip-large-files",
+    "migrate:books:force": "node scripts/migrate-books.js --verbose --force"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "^5.19.0",

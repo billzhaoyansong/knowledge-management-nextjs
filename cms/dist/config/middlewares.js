@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
+const os_1 = __importDefault(require("os"));
 exports.default = [
     'strapi::logger',
     'strapi::errors',
@@ -15,7 +15,7 @@ exports.default = [
         name: 'strapi::body',
         config: {
             formidable: {
-                uploadDir: path_1.default.join(__dirname, '../tmp'),
+                uploadDir: os_1.default.tmpdir(), // Use system temp directory with better Windows handling
                 maxFileSize: 100 * 1024 * 1024, // 100MB
                 keepExtensions: true
             }

@@ -2,16 +2,10 @@ export default ({ env }) => ({
   upload: {
     config: {
       sizeLimit: 100 * 1024 * 1024, // 100MB in bytes
-      breakpoints: {
-        xlarge: 1920,
-        large: 1000,
-        medium: 750,
-        small: 500,
-        xsmall: 64
-      },
-      // Disable image optimization to prevent Windows temp file issues
+      // Completely disable image processing to prevent Windows EPERM errors
       sizeOptimization: false,
       responsive: false,
+      breakpoints: {},
     },
   },
 });

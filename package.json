@@ -5,13 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:production": "node scripts/build-cache-warmer.js && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "warm-cache": "node scripts/build-cache-warmer.js"
   },
   "dependencies": {
     "@wojtekmaj/react-hooks": "^2.0.1",
+    "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.1",
     "highlight.js": "^11.11.1",
     "mermaid": "^11.6.0",
     "mermaid-isomorphic": "^3.0.4",

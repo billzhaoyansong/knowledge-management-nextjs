@@ -127,3 +127,126 @@ You can modify the script behavior by:
 - Updating category mappings in `categorizeFromLabels()` method
 - Changing Strapi URL via `STRAPI_URL` environment variable
 - Adding custom field mappings in `migratePaper()` method
+
+---
+
+## Book Migration
+
+### Prerequisites
+
+Same as paper migration:
+1. Install dependencies: `npm install`
+2. Start Strapi: `npm run develop`  
+3. Create API token with "Full access" permissions
+4. Set environment variable: `export STRAPI_TOKEN="your-token-here"`
+
+### Running the Book Migration
+
+#### Dry Run (Recommended First)
+Test the migration without making any changes:
+```bash
+npm run migrate:books:dry
+```
+
+#### Verbose Mode
+See detailed logs during migration:
+```bash
+npm run migrate:books:verbose
+```
+
+#### Full Migration
+Run the actual migration:
+```bash
+npm run migrate:books
+```
+
+#### Safe Mode (Skip Large Files)
+Skip files larger than 10MB to avoid connection issues:
+```bash
+npm run migrate:books:safe
+```
+
+#### Force Mode
+Re-migrate all books, even if they already exist (creates duplicates):
+```bash
+npm run migrate:books:force
+```
+
+### What the Book Script Does
+
+1. **Parses Book Structure**:
+   - Scans numbered book directories in `src/app/books/book-list/`
+   - Example: `96. Hands-On ML/1. ML Landscape/1.1 Main Challenges.md`
+   - Creates hierarchical relationships (books → chapters → sections)
+
+2. **Handles Hierarchy**:
+   - Books: Top-level containers (e.g., "96. Hands-On ML")
+   - Chapters: Directory sections (e.g., "1. ML Landscape")  
+   - Sections: Markdown files (e.g., "1.1 Main Challenges.md")
+   - Maintains parent-child relationships and depth levels
+
+3. **Processes Content**:
+   - Extracts titles from markdown headers or filenames
+   - Stores markdown content in `markdownContent` field
+   - Generates slugs and paths for navigation
+   - Sets proper ordering and depth hierarchy
+
+4. **Uploads Media Files**:
+   - Finds matching images in `public/books/[BookName]/[ChapterName]/`
+   - Associates images with relevant sections
+   - Supports various formats: .png, .jpg, .avif, .webp, .gif
+
+5. **Creates Strapi Entries**:
+   - Creates Book entries first
+   - Creates Section entries with proper hierarchy
+   - Links sections to books and parent sections
+   - Sets published status
+
+### Migration Statistics
+
+The script provides comprehensive reporting:
+- Books and sections processed/successful/failed
+- Hierarchy depth and relationship counts  
+- Media upload statistics
+- Detailed error logs for troubleshooting
+
+### Troubleshooting
+
+**Book Migration Specific Issues**:
+
+1. **Hierarchy Errors**: Check directory structure matches expected pattern
+2. **Missing Images**: Verify `public/books/` directory structure matches book names
+3. **Markdown Parsing**: Ensure markdown files have proper headers
+4. **Relationship Errors**: Check Strapi content types are properly configured
+
+**Common Issues** (same as paper migration):
+- Missing token, connection failed, file upload errors
+- Use safe mode for large files, dry-run for testing
+- Script is idempotent - safely re-runnable
+
+### Book Structure Requirements
+
+Expected directory structure:
+```
+src/app/books/book-list/
+├── 95. Practical Recommender Systems/
+│   ├── 1. Introductions/
+│   │   ├── 1.1 Recommendations.md
+│   │   └── 1.2 Recommender Systems.md
+│   └── 2. The Big Picture/
+│       └── 1.1 Core Concepts.md
+└── 96. Hands-On ML/
+    ├── 0. ML Landscape - Types of ML Systems/
+    └── 1. ML Landscape - Challenges/
+```
+
+Corresponding media structure:
+```
+public/books/
+├── Practical Recommender Systems/
+│   ├── 1. Introductions/
+│   │   └── diagrams.png
+└── Hands-On ML/
+    ├── 0. ML Landscape/
+    └── 1. ML Landscape/
+```
